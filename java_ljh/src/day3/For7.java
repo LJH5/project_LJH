@@ -37,9 +37,9 @@ public class For7 {
 		gcd = 1;
 		
 		for(i = 1; i <= num1; i++) {    				
-			if(num1 % i ==0) {
+			if(num1 % i == 0) {
 				for(j = 1; j <= num2; j++) {			
-					if(num2 % j ==0 && i == j) {
+					if(num2 % j == 0 && i == j) {
 						gcd = j;	
 					}
 				}		
