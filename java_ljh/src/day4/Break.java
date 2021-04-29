@@ -12,7 +12,7 @@ public class Break {
 			break; //if문 없이 break가 나오면 반복문을 쓴 의미가 없어진다.
 		}
 		
-		for(i=1; ; i+=1) {
+		for(i=1; ; i += 1) {
 			System.out.print(i + " ");
 			if(i == 5) {
 				break;
