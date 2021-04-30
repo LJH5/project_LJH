@@ -30,6 +30,12 @@ public class Array2 {
 		System.out.print(arr2[2] + " ");
 		System.out.print(arr2[3] + " ");
 		System.out.print(arr2[4] + " ");
+		
+		for(int i=0; i<arr2.length; i += 1) { //배열.length는 배열의 길이 자동 계산
+			arr2[i] = i+1;
+			System.out.print(arr2[i] + " ");
+		}
+		System.out.println();
 	}
 
 }
