@@ -1,0 +1,25 @@
+package day6;
+
+import java.util.Scanner;
+
+public class Enum1 {
+
+	public static void main(String[] args) {
+		//열거형 사용 x, 요일 출력
+		int today;
+		System.out.println("요일을 입력하세요(1:월, 2:화, 3:수, 4:목, 5:금, 6:토, 7:일) : ");
+		Scanner sc = new Scanner(System.in);
+		today = sc.nextInt();
+		switch(today) {
+		case 1: System.out.println("월요일입니다.");	break;
+		case 2: System.out.println("화요일입니다.");	break;
+		case 3: System.out.println("수요일입니다.");	break;
+		case 4: System.out.println("목요일입니다.");	break;
+		case 5: System.out.println("금요일입니다.");	break;
+		case 6: System.out.println("토요일입니다.");	break;
+		case 7: System.out.println("일요일입니다.");	break;
+		}
+		sc.close();
+	}
+
+}
