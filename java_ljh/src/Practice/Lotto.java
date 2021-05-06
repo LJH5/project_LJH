@@ -15,24 +15,26 @@ public class Lotto {
 		int min=1, max=45;
 		
 		init(user, min, max);
-				
+	
 		printArray(user);
+		System.out.println();
 		
+		//콘솔창에서 당첨번호를 입력 후 배열에 저장
 		Scanner sc = new Scanner(System.in);
-		System.out.print("당첨 번호를 입력하세요: ");
+		System.out.print("당첨번호 6개를 입력하세요: ");
 		for(int i=0; i<lotto.length; i+=1) {
 			lotto[i] = sc.nextInt();
 		}
 		
-		System.out.print("보너스 번호를 입력하세요: ");
+		//콘솔창에서 보너스번호를 입력 후 변수에 저장
+		System.out.print("보너스번호를 입력하세요: ");
 		bonus = sc.nextInt();
 		
 		printRank(user, lotto, bonus);
 		sc.close();
 	}
 
-	
-	//중복 확인
+	//중복 확인 메소드
 	public static boolean contains(int []arr,int cnt, int num) {
 		if(arr.length < cnt) {  
 			cnt=arr.length;
@@ -45,19 +47,19 @@ public class Lotto {
 		return false;
 	}
 	
-	
-	//로또번호(1~45) 랜덤으로 생성 및 저장
+	//로또번호(1~45) 랜덤으로 생성 및 저장 메소드
 	public static void init(int []arr, int min, int max) { 
+		//min과 max 입력 순서 조정
 		if(min>max) {
-			int tmp = min;
+			int tmp=min;
 			min=max;
 			max=min;
 		}
-		//중복제거
+		//랜덤한 숫자 생성
 		int cnt=0;
 		while(cnt<arr.length) {
 			int r = (int)(Math.random() * (max - min + 1) + min);
-					
+			//중복제거
 			if(!contains(arr, cnt, r)) {
 				arr[cnt]=r;
 				cnt+=1;
@@ -65,41 +67,44 @@ public class Lotto {
 		}
 	}
 	
-	//같은 수가 몇개있는지 알려주는 
+	//같은 수가 몇개있는지 알려주는 메소드
 	public static int getSameCount(int []arr1, int []arr2) {
 		int cnt=0;
-		for(int i=0; i<arr1.length; i+=1) {
-			if(arr1[i]==arr2[i]) {
+		for(int tmp : arr1) {
+			if(contains(arr2,arr2.length,tmp)) {
 				cnt+=1;
 			}
 		}
 		return cnt;
 	}
 	
+	//배열을 출력하는 메소드
 	public static void printArray(int []arr) {
 		for(int i=0; i<arr.length; i+=1) {
 			System.out.print(arr[i] + " ");
 		}
 	}
 	
+	//배열이 입력되면 몇등인지 알려주는 메소드, 단, 꽝은 0으로 표현 
 	public static int rank(int []user, int []lotto, int bonus) {
 		int cnt = getSameCount(user, lotto);
-		int rank=0;
+		int res=0;
 		switch(cnt) {
-		case 6: rank=1; break;
-		case 5: rank= contains(user, user.length, bonus)?2:3; break;
-		case 4: rank=4; break;
-		case 3: rank=5; break;
+		case 6: res=1;	break;
+		case 5: res=contains(user, user.length, bonus) ? 2 : 3;	break;
+		case 4: res=4;	break;
+		case 3: res=5;	break;
 		
 		}
-		return rank;
+		return res;
 	}
 	
+	//등수를 출력하는 메소드
 	public static void printRank(int []user, int []lotto, int bonus	) {
-		int rank = rank(user,lotto,bonus);
-		switch(rank) {
+		int res = rank(user,lotto,bonus);
+		switch(res) {
 		case 1, 2, 3, 4, 5:
-			System.out.println(rank + "등입니다.");
+			System.out.println(res + "등입니다.");
 			break;
 		default:
 			System.out.println("꽝입니다.");
