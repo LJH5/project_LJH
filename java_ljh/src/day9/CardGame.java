@@ -14,26 +14,27 @@ public class CardGame {
 		 */
 		
 		int []arr=new int[] {1,2,3,4,5,6,7};
-		
-		System.out.println("포커: " + poker(arr));
-		
-		System.out.println("트리플: " + triple(arr));
-		
-		System.out.println("원페어: " + onePair(arr));
-		
-		System.out.print("투페어: ");
-		int []res = twoPair(arr);
-		if(res == null) {
-			System.out.println(0);
-		}else {
-			for(int tmp : res) {
-			System.out.println(tmp + " ");
+		int result;
+		int [] resultArr;
+		if((result=poker(arr))!=0){
+			System.out.println("포커: " + poker(arr));
+		}else if((result=fullHouse(arr))!=0) {
+			System.out.println("풀하우스: " + fullHouse(arr));
+		}else if((result=straight(arr))!=0) {
+			System.out.println("스트레이트: " + straight(arr));
+		}else if((result=triple(arr))!=0) {
+			System.out.println("트리플: " + triple(arr));
+		}else if((resultArr=twoPair(arr))!=null) {
+			for(int tmp : resultArr) {
+				System.out.println(tmp + " ");
 			}
+			System.out.print("투페어: ");
+		}else if((result=onePair(arr))!=0) {
+			System.out.println("원페어: " + onePair(arr));
+		}else {
+			System.out.println("버그인가?");
 		}
-		
-		System.out.println("풀하우스: " + fullHouse(arr));
-		
-		System.out.println("스트레이트: " + straight(arr));
+				
 	}
 	
 	/* 포커를 확인할 수 있는 메소드를 정리해보세요,
