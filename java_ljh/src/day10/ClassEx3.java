@@ -12,6 +12,9 @@ public class ClassEx3 {
 		
 		pt2.move(4, 5);
 		pt2.print();
+		
+		Point pt3 =new Point(1,2);
+		pt3.print(); 
 	}
 
 }

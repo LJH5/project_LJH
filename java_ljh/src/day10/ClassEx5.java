@@ -1,5 +1,7 @@
 package day10;
 
+import java.util.Scanner;
+
 public class ClassEx5 {
 
 	public static void main(String[] args) {
@@ -14,6 +16,11 @@ public class ClassEx5 {
 		c1.setR(5);
 		
 		c1.print();
+		
+		//new를 이용하려 객체를 만들고 만들어진 객체의 멤버변수를 Scanner(System.in) 생성자를 이용하여 초기화
+		Scanner sc = new Scanner(System.in);
+		int x = sc.nextInt();
+		sc.close();
 	}
 
 }

@@ -41,5 +41,11 @@ public class Point {
 	public void setY(int y) {
 		this.y = y;
 	}
+	//초기 x,y 좌표가 x1,y1이 주어지면 주어진 x,y좌표로 멤버변수를 초기화하는 생성자
+	public Point(int x1, int y1) {	//Point 클래스의 생성자를 만듦
+		x=x1;
+		y=y1;
+	}
 	
+	public Point() {} //Point 클래스의 기본생성자를 만듦
 }
