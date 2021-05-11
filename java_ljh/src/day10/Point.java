@@ -48,4 +48,10 @@ public class Point {
 	}
 	
 	public Point() {} //Point 클래스의 기본생성자를 만듦
+	
+	//복사 생성자
+	public Point(Point pt) {
+		x=pt.x;
+		y=pt.y; 
+	}
 }

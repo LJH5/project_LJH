@@ -13,7 +13,13 @@ public class ClassEx6 {
 		Point rd = new Point(20, 0);
 		Rect r3 = new Rect(lu,rd);
 		r3.Print();
-		lu.setX(-10); //점을 수정했더니 사각형의 점 위치가 같이 수정되는 문제가 발생
+		lu.setX(-10); //점을 수정했더니 사각형의 점 위치가 같이 수정되는 문제가 발생 => 복사 생성자를 이용하여 해결
+		r3.Print();
+		
+		r3.move(-20, 0);
+		r3.Print();
+		
+		r3.resize(10, 10);
 		r3.Print();
 	}
 
