@@ -22,10 +22,15 @@ public class MethodOverloadingTest {
 
 class Point2{
 	private int x, y;
-	public Point2() {}
+	public Point2() {
+		this(0,0); 
+	}
 	public Point2(int x, int y){
 		this.x=x;
 		this.y=y;
+	}
+	public Point2(Point2 pt) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+		this(pt.x, pt.y);
 	}
 	public void print() {
 		System.out.println("(" + x + ", " + y + ")");
