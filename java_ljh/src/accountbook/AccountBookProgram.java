@@ -30,7 +30,7 @@ class AccountBookProgram {
 	
 				//가계부 생성
 				Item tmpabp = new Item(type, date, paymentType, category, cost, contents);
-				book.intsert(tmpabp);			
+				book.insert(tmpabp);			
 	}
 	
 	
@@ -88,7 +88,7 @@ class AccountBookProgram {
 	 * 메소드명: printItemListSimple
 	 */
 	public void printItemListSimple() {
-		book.printItemListSimple();
+		book.printItemSimple();
 	}
 	
 	/* 기능	 : 확인할 내역 번호를 입력받아 상세히 출력하는 메소드
