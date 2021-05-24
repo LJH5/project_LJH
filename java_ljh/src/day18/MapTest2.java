@@ -30,16 +30,17 @@ public class MapTest2 {
 				System.out.print("아이디: ");
 				id=sc.next();
 				
-				if(map.containsKey(id)) {
+				if(!map.containsKey(id)) {
+					System.out.print("비밀번호: ");
+					pw=sc.next();
+					map.put(id, pw);
+					System.out.println("회원가입성공");
+					
+				}else {
 					System.out.println("이미 가입된 회원입니다");
-					return;
 				}
+				break;
 				
-				System.out.print("비밀번호: ");
-				pw=sc.next();
-				
-				map.put(id, pw);
-				System.out.println("회원가입성공");
 			
 			}
 			
