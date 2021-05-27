@@ -1,0 +1,41 @@
+--학생 테이블
+create table student(
+st_num varchar(10) not null,
+st_id varchar(15) not null unique,
+st_res_num varchar(14) not null unique,
+st_pw varchar(255) not null,
+st_dep varchar(20) not null default '컴퓨터공학',
+st_name varchar(30) not null,
+primary key(st_num)
+);
+
+--교수 테이블
+create table professor(
+pr_num varchar(11) not null,
+pr_id varchar(15) not null unique,
+pr_pw varchar(255) not null,
+pr_name varchar(30) not null,
+pr_dep varchar(20) not null,
+pr_res_num varchar(14) not null unique,
+primary key(pr_num)
+);
+
+--강의 테이블
+create table class(
+cl_code varchar(10) not null,
+cl_title varchar(30) not null,
+cl_max_count int not null default 5,
+cl_point int not null default 0,
+cl_schedule varchar(40) not null,
+cl_pr_num varchar(11),
+primary key(cl_code),
+foreign key(cl_pr_num) references professor(pr_num)
+on update cascade
+);
+
+--수강 테이블 
+create table course(
+co_num int not null,
+co_st_num varchar(10),
+
+
