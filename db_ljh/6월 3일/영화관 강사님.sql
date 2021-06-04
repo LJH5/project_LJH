@@ -22,7 +22,7 @@ CREATE TABLE if not exists `theater` (
     primary key(th_branch)
 );
 
-CREATE TABLE if not exists `screen_rom` (
+CREATE TABLE if not exists `screen_room` (
 	`sr_num`	int	NOT NULL,
 	`sr_th_branch`	varchar(50)	NOT NULL,
 	`sr_name`	varchar(10)	NOT NULL,
