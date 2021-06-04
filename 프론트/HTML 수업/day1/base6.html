@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입력 기본 예제</title>
+</head>
+<body>
+    <!-- form 태그
+        - 서버로 데이터를 보내기 위해서는 서버창에 원하는 정보를 입력해서 전송해야 한다 
+        - from 태그 안에 입력창들을 배치, 입력창이 from 태그 밖에 있으면 입력은 가능해도 데이터 전송은 불가능
+        - 절대 혼자 사용 불가능, 입력할 수 있는 태그와 같이사용
+
+        - 속성
+            - action: 데이터를 보낼 URL, 입력하지 않으면 현재 URL
+            - enctype: 데이터의 인코딩 타입, 첨부파일을 보낼 시 설정
+            - mathod: get | post 로 데이터 전달 방식, 입력하지 않으면 get
+                - get은 URL에 보낼 데이터 정보는 전달하는 방식으로 다른 사용자가 전송되는 데이터 정보를 확인할 수 있다. 전송하명 URL의 ? 뒤에 있는 부분이 전송되는 데이터 정보
+                    예)?변수명1=값&변수명2=값
+                - post는 header에 데이터를 실어 전달하는 방식으로 다른 사용자는 전송되는 데이터 정보를 확인할 수 없다.
+    --> 
+
+    <!-- input 태그: 인라인 태그, 단일 태그
+        - 정보를 입력할 수 있는 태크, type 속성을 변경하여 다양한 종류의 입력창을 만들 수 있다
+        
+        - 속성
+            - type
+                - text: 문자열을 입력받음
+                - password: 문자열을 입력하면 *로 표현
+                - button, reset, submit은 버튼 이름을  value를 통해 지정
+                    - button: 버튼, button 태그로 대체 가능
+                    - reset: from 태그 안에 있는 모든 input 태그의 값을 초기화 시킴, button 태그로 대체 가능
+                    - submit: 서버로 데이터 전송, button 태그로 대체 가능 
+                - checkbox: 요소를 여러개 선택 가능한 경우, 항목이 같은 chcekbox는 동일한 name으로 지정
+                - radiobox: 요소 중 무조건 1개만 선택 가능한 경우
+            
+            - value: 값을 지정하는 속성
+            - name: 데이터를 전송할 때 변수명에 해당, 증복O
+            - id: 요소들을 구분할 수 있는 고유한 이름, 중복X
+            - checked: checkbox나 radiobox에 먼저 선택되게 하고 싶은 요소가 있는 경우 사용
+            - readonly: 읽기 전용, 값을 수정할 수 없음, 데이터 전송 가능
+            - disabled: 사용하지 못하게 막음, 선택 자체가 불가능, 데이터 전송 불가능
+            - placeholder: 입력창에 대한 안내문구로 클릭하면 지워짐
+    -->
+
+        <form action="base5.html" method="GET">
+            <input type="text" name="id" value="abc123" readonly> <br>
+            <input type="password" name="pw" value="abc123" disabled> <br>
+            <input type="password" name="pw2" placeholder="비밀번호 확인"> <br>
+            <input type="password" name="pw3" value="비밀번호 확인"> <br>
+            <input type="button" value="일반 버튼">
+            <input type="reset" value="초기화 버튼">
+            <input type="submit" value="전송 버튼">
+            <div>좋아하는 중국집 음식을 선택하세요</div>
+            <label>
+                <input type="checkbox" name="food" value="짜장" checked> 짜장
+            </label>
+            <label>
+                <input type="checkbox" name="food" value="짬뽕"> 짬뽕
+            </label>
+            <input type="checkbox" name="food" value="탕수육" id="food3">
+            <label for="food3">탕수육</label>
+            <input type="checkbox" name="food" value="깐풍기" id="food4">
+            <label for="food4">깐풍기</label>
+        </form>
+</body>
+</html>
