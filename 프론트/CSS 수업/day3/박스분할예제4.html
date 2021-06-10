@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스 분할 예제4</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: white;
+        }
+        .box{
+            width: 500px;
+            height: 800px;
+            margin: auto;
+        }
+        .header , .footer{
+            height: 100px;
+            background: red;
+            line-height: 100px;
+            margin: 10px 0;
+        }
+        .nav, .aside{
+            width: calc((100% - 20px) / 3);
+            height: 500px;
+            line-height: 500px;
+            background: orange;
+            float: left;
+        }
+        .section{
+            width: calc((100% - 20px) / 3);
+            height: 500px;
+            float: left;
+            background-color: wheat;
+            margin-left: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .section-header{
+            height: 90px;
+            background: yellow;
+            margin: 10px 0;
+            line-height: 90px;
+
+        }
+        
+        .section-article{
+            height: 250px;
+            background: green;
+            margin-bottom: 10px;
+            line-height: 250px;
+        }
+        .section-footer{
+            height: 90px;
+            background: blue;
+            line-height: 90px;
+        }
+        .aside{
+            background: navy;
+            float: right;
+        }
+        .middle::after{
+            clear: both;
+            content: '';
+            display: block;
+        }
+        .footer{
+            background: purple;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="header">&lt;header&gt;</div>
+        <div class="middle">
+            <div class="nav">&lt;nav&gt;</div>
+            <div class="section">&lt;section&gt;
+                <div class="section-header">&lt;header&gt;</div>
+                <div class="section-article">&lt;article&gt;</div>
+                <div class="section-footer">&lt;footer&gt;</div>
+            </div>
+            <div class="aside">&lt;aside&gt;</div>
+        </div>
+        <div class="footer">&lt;footer&gt;</div>
+    </div>
+</body>
+</html>
