@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list 예제2</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .nav{
+            width: 200px;
+            float: left;
+            background: lemonchiffon;
+        }
+        body::after{
+            clear: both;
+            content: '';
+            display: block;
+        }
+        .nav ul{
+            list-style: none;
+        }
+        .nav li{
+            border: 1px solid black;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+        }
+        .nav li:first-child, 
+        .nav li:nth-child(2){
+            border-bottom: none;
+        }
+        .nav a{
+            display: block;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul class="menu">
+            <li><a href="#1">메뉴1</a></li>
+            <li><a href="#2">메뉴2</a></li>
+            <li><a href="#3">메뉴3</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
