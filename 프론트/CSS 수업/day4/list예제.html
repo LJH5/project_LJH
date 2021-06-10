@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list 예제</title>
+    <style>
+        /* 메뉴는 꼭 리스트 태그를 이용하지 않아도 되지만
+           일반적으로 메뉴는 상위메뉴, 하위메뉴로 구성되어 있기 때문에 리스트 태그로 많이 작업함 */
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul.menu{
+            list-style: none;
+        }
+        ul.menu::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .menu>li{
+            width: calc(100% / 3);
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            float: left;
+            border: 2px solid red;
+            box-sizing: border-box;
+        }
+        .menu>li:nth-child(1),
+        .menu>li:nth-child(2){
+            border-right: none;
+        }
+        .menu>li>a{
+            display: block;
+            height: 100%;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <ul class="menu">
+        <li><a href="#1">메뉴1</a></li>
+        <li><a href="#2">메뉴2</a></li>
+        <li><a href="#3">메뉴3</a></li>
+    </ul>
+</body>
+</html>
