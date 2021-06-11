@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반응형 예제</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .menu{
+            list-style: none;
+        }
+        .menu::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .menu>li{
+            width: calc(100% / 3);
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            float: left;
+            border: 2px solid red;
+            box-sizing: border-box;
+        }
+        .menu>li:first-child,
+        .menu>li:nth-child(2){
+            border-right: none;
+        }
+        .menu>li>a{
+            display: block;
+            height: 100%;
+            text-decoration: none;
+            color: black;
+        }
+        .ham-menu>.fa-bars{
+            display: none;
+        }
+        @media screen and (max-width: 640px) {
+            .ham-menu{
+            height: 50px;
+            position: relative;
+            border: 2px solid red;
+            }
+            .ham-menu>.fa-bars{
+                display: block;
+                width: 50px;
+                height: 50px;
+                border: 2px solid red;
+                position: absolute;
+                top: -2px;
+                right: -2px;
+                cursor: pointer;
+                font-size: 35px;
+                text-align: center;
+                line-height: 50px;
+            }
+            .ham-menu>.fa-bars:hover{
+                border-color: royalblue;
+            }
+            .menu{
+                width: 100px;
+                height: 600px;
+            }
+            .menu>li{
+                width: 100%;
+                height: calc(100% / 3);
+                line-height: 200px;
+                border-top: none;  
+            }
+            .menu>li:first-child,
+            .menu>li:nth-child(2){
+            border-right: 2px solid red;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 강사님은 <nav class="nav">로 둘다 묶고,  <i class="fas fa-bars ham-menu"> 로 사용  -->
+    <nav class="ham-menu">
+        <i class="fas fa-bars"></i>
+    </nav>
+    <nav>
+        <ul class="menu">
+            <li><a href="#1">메뉴1</a></li>
+            <li><a href="#2">메뉴2</a></li>
+            <li><a href="#3">메뉴3</a></li>
+        </ul>
+    </nav>
+
+</body>
+</html>
