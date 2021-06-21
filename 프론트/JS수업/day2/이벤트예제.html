@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 예제</title>
+</head>
+<body>
+    <script>
+        /* 이벤트: 화면에서 발생하는 동작
+            - 종류
+                - 마우스 이벤트
+                    - click, dbclick, mouseover, mouseout, mousedown, mouseup, mousemove 등
+                - 키 이벤트
+                    - keydown, keyup, keypress 등
+                - 폼 이벤트
+                    - focus, blur, change, submit, reset, select 등
+                - 기타
+                    - load, abort, resize, scroll 등
+            - 이벤트 연결
+                - on을 이용
+                - 태그에 이벤트를 추가
+                    <button onclick="실행문;">버튼</button>
+                - JS에서 이벤트를 등록
+                    - 기본 이벤트 모델
+                        요소.on이벤트명 = function(){
+                            실행문;
+                        }
+                   - 표준 이벤트 모델
+				        요소.addEventListener('이벤트명',function(){
+					        실행문;
+				        });
+                    - 기본 이벤트 모델과 표준 이벤트 모델의 차이점
+                        - 기본 이벤트 모델은 동일한 이벤트에 대해 등록된 이벤트가 여러개이어도
+                        하나만 실행
+                        - 표준 이벤트 모델은 동일한 이벤트에 대해 등록된 이벤트가 여러개이면 
+                        여러개를 실행
+        */
+        function sum(num){
+            var res = 0;
+            for(var i=1; i<=num; i++){
+                res += i;
+            }
+            alert(res);
+        }
+        var btn = document.write()
+    </script>
+    <button onclick="sum(10);">버튼</button>
+    <button id="btn2">클릭</button>
+</body>
+</html>
