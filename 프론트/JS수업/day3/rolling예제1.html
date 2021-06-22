@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>롤링 예제1</title>
+    <script src="../JS/jquery.min.js"></script>
+    <script>
+        // 가로100px, 세로 100px의 상자가 1초마다 10px 씩 오른쪽으로 이동하도록 작성해보세요. 단 상자의 움직임은 부드러워야 함
+        // 주의: 이동시간이 간격보다 긴 경우 움직임이 꼬일 수 있다. animate 시간 < setInterval 간격
+        $(function(){
+            var i=10;
+            setInterval(function(){
+                $('.box').animate({left: i+'px'}, 800);
+                i+=10;
+            },1000);   
+        });
+    </script>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>

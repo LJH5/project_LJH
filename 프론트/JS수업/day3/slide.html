@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slide 예제</title>
+    <script src="../JS/jquery.min.js"></script>
+    <script>
+        $(function(){
+            /*
+            - slideUp(speed, callback);
+            - slideDown(speed,callback);
+            - slideToggle(speed, callback);
+            */
+            $('#btn1').click(function(){
+                $('.box1').stop().slideUp(3000);
+            });
+            $('#btn2').click(function(){
+                $('.box1').stop().slideDown(3000);
+            });
+            $('#btn3').click(function(){
+                $('.box1').stop().slideToggle();
+            });
+        });
+    </script>
+</head>
+<body>
+    <button id="btn1">up</button>
+    <button id="btn2">down</button>
+    <button id="btn3">toggle</button>
+    <div class="box1" style="background: yellow; height: 100px;"></div>
+    <div class="box2" style="background: red; height: 100px;"></div>
+</body>
+</html>
