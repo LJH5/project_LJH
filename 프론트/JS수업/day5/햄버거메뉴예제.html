@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>햄버거 메뉴 예제</title>
+    <script src="../JS/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <script>
+        $(function(){
+            $('.ham').click(function(){
+                
+                $(".menu-box").stop().animate({'margin-left':'0px'},1000);
+            })
+            $('.x').click(function(){
+                $(".menu-box").stop().animate({'margin-left':'-200px'},1000);
+            })
+        })
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            color: #000;
+            text-decoration: none;
+            list-style: none;
+        }
+        body{
+            padding: 10px;
+        }
+        .bar{
+            height: 50px;
+            background: yellow;
+            position: relative;
+        }
+        .ham{
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            right: 0;
+            top: 0;
+            font-size: 30px;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid yellow;
+            box-sizing: border-box;
+            cursor: pointer;
+            background: yellow;
+        }
+        .ham:hover{
+            border-color: red;
+        }
+        .container{
+            margin-top: 5px;
+            height: 400px;
+            overflow: hidden;
+            background-color: cadetblue;
+        }
+        .menu-box{
+            width: 200px;
+            height: 400px;
+            background: gray;
+            position: relative;
+            margin-left: -200px;
+        }
+        .x{
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            right: 0;
+            top: 0;
+            font-size: 20px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid gray;
+            box-sizing: border-box;
+            cursor: pointer;
+            background: gray;
+           
+        }
+        .x:hover{
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="bar">
+        <button class="ham"><i class="fas fa-bars"></i></button>
+    </div>
+    <div class="container">
+        <div class="menu-box">
+            <button class="x"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+</body>
+</html>
