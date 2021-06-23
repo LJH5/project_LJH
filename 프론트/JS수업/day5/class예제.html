@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class 예제</title>
+    <script src="../JS/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('.menu a').click(function(e){
+                e.preventDefault(); //기본 이벤트를 막아줌, a의 위치 이동 이벤트를 막음
+                $('.menu a').removeClass('color')
+                $(this).addClass('color');
+                
+            })
+        })
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            color: #000;
+            text-decoration: none;
+            list-style: none;
+        }
+        .menu{
+            border: 1px solid black;
+            display: flex;
+        }
+        .menu>li{
+            width: 100%;
+            border-right: 1px solid black;
+        }
+        .menu>li>a{
+            display: block;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .menu>li:last-child{
+            border-right: none;
+        }
+        .color{
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu-box">
+        <ul class="menu">
+            <li><a href="#">메뉴1</a></li>
+            <li><a href="#">메뉴2</a></li>
+            <li><a href="#">메뉴3</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
