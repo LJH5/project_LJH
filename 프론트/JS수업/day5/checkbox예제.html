@@ -12,7 +12,15 @@
             $('input[name=hobby]').click(function(){
                 var value = $(this).val();
                 var index = arr.indexOf(value);
-
+                // 선택한 항목이 있으면(체크를 해제하면)
+                if(index >= 0){
+                    arr.splice(index,1);
+                // 선택한 항목이 없으면(체크 하면)
+                }else{
+                    arr.push(value);
+                }
+                // join은 배열의 값을 문자열로 붙임
+                $('.view-box').text(arr.join(','));
             })
         })
     </script>
