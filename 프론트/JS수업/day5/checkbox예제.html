@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/jquery.min.js"></script>
+    <script>
+        var arr=[];
+        $(function(){
+            $('input[name=hobby]').click(function(){
+                var value = $(this).val();
+                var index = arr.indexOf(value);
+
+            })
+        })
+    </script>
+    <style>
+        .view-box{
+            min-height: 20px;
+            border: 1px solid black;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="view-box"></div>
+    <label>
+        <input type="checkbox" name="hobby" value=" 농구">농구
+    </label>
+    <label>
+        <input type="checkbox" name="hobby" value=" 야구">야구
+    </label>
+    <label>
+        <input type="checkbox" name="hobby" value=" 축구">축구
+    </label>
+    
+</body>
+</html>
