@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('.main-add-btn').click(function(){
+                var num = $('.q-main-box').last().find('.main-title').text();
+                num = num.substr(2);
+                num = parseInt(num);
+                var str = 
+                '<div class="q-main-box">'+
+                    '<div class="main-title">질문'+ ++num +'</div>'+
+                    '<button class="sub-add-btn">서브질문추가</button>'+
+                    '<div class="q-sub-box">'+
+                        '<div class="sub-title">질문'+ num +'-1</div>'+
+                        '<input type="text" class="sub-input">'+
+                    '</div>'+
+                '</div>';
+                $('.q-box').append(str);
+                addEventSubBtnClick($('.add-sub-btn'));
+                $(this).parent().append(str);
+                })
+                addEventSubBtnClick($('.add-sub-btn'));
+            })
+            function addEventSubBtnClick(obj){
+                obj.click(function(){
+                var mainNum = $(this).siblings('.q-sub-box').last().find('.sub-title').text();
+                var index = mainNum.indexOf('-');   // '-'의 자리값를 가져움
+                var num = mainNum.substr(index+1);  // '-'의 뒷부분을 가져옴
+                num = parseInt(num);
+                mainNum = mainnNum.substr(0,index+1); // '-'까지 가져옴
+                var str = 
+                '<div class="q-sub-box">'+
+                    '<div class="sub-title">'+ mainNum + ++num +'</div>'+
+                    '<input type="text" class="sub-input">'+
+                ' </div>';
+                $(this).parent().append(str);
+            })
+            }
+        })
+    </script>
+    <style>
+        .q-box, .q-main-box{
+            position: relative;
+        }
+        .main-add-btn{
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 2;
+        }
+        .sub-add-btn{
+            position: absolute;
+            top: 40px;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="q-box">
+        <button class="main-add-btn">메인질문추가</button>
+        <div class="q-main-box">
+            <div class="main-title">질문1</div>
+            <button class="sub-add-btn">서브질문추가</button>
+            <div class="q-sub-box">
+                <div class="sub-title">질문1-1</div>
+                <input type="text" class="sub-input">
+            </div>
+        </div>    
+    </div>
+
+</body>
+</html>

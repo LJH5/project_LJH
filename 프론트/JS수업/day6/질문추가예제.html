@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/jquery.min.js"></script>
+    <script>
+        $(function(){
+            // 강사님은 필터를 이용하여 하는 방법도 사용
+            var i = 2;
+            $('.add-btn').click(function(){ 
+                var str = 
+                '<div class="question-box">'+
+                    '<div class="question-box" id="q1">질문'+i+'</div>'+
+                    '<input type="text" class="question">'+
+                '</div>';     
+                $('.container').append(str);
+                i+=1;
+            })
+        })
+    </script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            color: #000;
+            text-decoration: none;
+            list-style: none;
+        }
+        .container{
+            margin: 10px;
+        }
+        .add-btn{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        .question-box{
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question-box">
+            <div class="question-num">질문1</div>
+            <input type="text" class="question">
+        </div>    
+    </div>
+    <div class="add-btn">질문추가</div>
+    <!-- 아이디는 (_)나 카멜표기법을 사용하는 것이 좋다  id="add_btn" 또는 id=addBtn-->
+</body>
+</html>
