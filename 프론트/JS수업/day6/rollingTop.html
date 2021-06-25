@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/jquery.min.js"></script>
+    <script>
+        $(function(){
+            
+            id=startInterval();   
+            
+            /*
+            hover(function(){
+
+            })
+            - 마우스를 요소위에 댔을 때와 벗어났을 때 같은 함수를 실행
+                hovar(funtion(){
+                    // 마우스를 요소 위에 댔을 때 
+                },funtion(){
+                    // 마우스가 요소 위에서 벗어났을 때 
+                })
+            */
+            $('ul').hover(function(){
+                clearInterval(id);
+            },function(){
+                id = startInterval();
+            }) 
+        })
+        /*
+        - removeAttr('속성명'): 해당 속성값을 삭제
+        - removeProp('속성명'): 해당 속성값을 삭제
+        */
+        function startInterval(){       
+            var id = setInterval(function(){
+                if(!$('ul li').first().is(':animated')){
+                    $('ul li').first().animate({'margin-top':'-50px'}, 1000, function(){
+                        $(this).detach().appendTo('ul').removeAttr('style');
+                    })
+                }
+            }, 1500);
+            return id;
+        }
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+        ul{
+            height: 50px;
+            overflow: hidden;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="../JS/jquery.min.js"></script>
+<style>
+    .view-box{
+        height: 50px;
+    }
+    .view-box .box{
+        width: 100px;
+        height: 40px;
+        border: 2px solid black;
+        text-align: center;
+        line-height: 40px;
+        margin-right: 20px;
+        float: left;
+    }
+</style>
+<body>
+    <div class="view-box">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <label>
+        <input type="checkbox" name="hobby" value="축구">축구
+    </label>
+    <label>
+        <input type="checkbox" name="hobby" value="야구">야구
+    </label>
+    <label>
+        <input type="checkbox" name="hobby" value="농구">농구
+    </label>
+    <label>
+        <input type="checkbox" name="hobby" value="볼링">볼링
+    </label>
+    <label>
+        <input type="checkbox" name="hobby" value="독서">독서
+    </label>
+
+    <script>
+        var arr=[];
+        $(function(){
+            var count =0;
+            $('input[name=hobby]').click(function(){
+                console.log(count)
+                var value = $(this).val();
+                var index = arr.indexOf(value);
+                if(index >= 0){
+                    arr.splice(index,1);
+                }else{
+                    if(arr.length < 3){
+                        arr.push(value);
+                    }
+                    else{
+                        $(this).prop('checked',false);
+                        alert('3개까지 가능');
+                        return;
+
+                    }
+                }              
+                console.log(arr)
+                $('.view-box .box').each(function(i){
+                    var val = typeof arr[i] == 'undefined' ?  '' : arr[i];
+                    $('.view-box .box').eq(i).text(val);
+                    
+                })
+            })
+        })
+    </script>
+</body>
+</html>
