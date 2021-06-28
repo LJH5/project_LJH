@@ -15,16 +15,38 @@
             list-style: none;
             text-decoration: none;
         }
-        .box{
-            width: 400px;
-            margin: 20px 0 0 20px;
-        }
         .menu-box{
-            width: 400px;
             height: 50px;
+            margin: 0 40px;
             position: relative;
-            border: 1px solid black;
-
+        }
+        .menu-container-box{
+            height: 50px;
+            width: 100%;
+            overflow: hidden;
+            border: 2px solid black;
+            box-sizing: border-box;
+        }
+        .menu{
+            width: calc(100% / 3);
+            height: 50px;
+            float: left;
+        }
+        .menu-wrap-box{
+            width: 300%;
+            height: 50px;
+        }
+        .menu .menu-list{
+            width: 25%;
+            height: 50px;
+            float: left;
+            border-right: 2px solid black;
+            box-sizing: border-box;
+            line-height: 50px;
+            text-align: center;
+        }
+        .menu .menu-list:nth-child(4n){
+            border-right: none;
         }
         .prev-btn, .next-btn{
             width: 30px;
@@ -42,91 +64,141 @@
         .next-btn{
             left: auto;
             right: 0;
-            margin-left: 0;
             margin-right: -15px;
-        }
-        .menu-box .menu{
-            display: flex;
-        }
-        .menu-box li{
-            width: 100%;
-            height: 50px;
-            text-align: center;
-            line-height: 50px;
-            border-right: 1px solid black;
-        }
-        .menu-link{
-            display: block;
-            width: 100%;
-            height: 50px;
-        }
-        .menu-box li:last-child{
-            border-right: none;
-        }
-
-        .contents{
-            width: 400px;
-            height: 200px;
-            background-color: violet;
-            margin-top: 10px;
         }
         .selected{
             background: tomato;
         }
+        .after::after{
+            display: block;
+            clear: both;
+            content: '';
+        }
+        .container{
+            margin: 10px 40px;
+        }
+        .container div{
+            height: 100px;
+            background: green;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-    <div class="box">
-        <div class="menu-box">
-            <div class="btn-box">
-                <div class="prev-btn"><i class="fas fa-chevron-left"></i></div>
-                <div class="next-btn"><i class="fas fa-chevron-right"></i></div>
-            </div>
-            <ul class="menu">
-                <li class="menu-list selected" data="first" data-target="#contents1">
-                    <a href="#" class="menu-link">메뉴1</a>
-                </li>
-                <li class="menu-list" data-target="#contents2">
-                    <a href="#" class="menu-link">메뉴2</a>
-                </li>
-                <li class="menu-list" data-target="#contents3">
-                    <a href="#" class="menu-link">메뉴3</a>
-                </li>
-                <li class="menu-list" data="last" data-target="#contents4">
-                    <a href="#" class="menu-link">메뉴4</a>
-                </li>   
-            </ul>
+    <div class="menu-box">
+        <div class="btn-box">
+            <div class="prev-btn"><i class="fas fa-chevron-left"></i></div>
+            <div class="next-btn"><i class="fas fa-chevron-right"></i></div>
         </div>
+        <div class="menu-container-box">
+            <div class="menu-wrap-box after">
+                <ul class="menu">
+                    <li class="menu-list selected" data-target=".contents1">
+                        <a href="#" class="menu-link">메뉴1</a>
+                    </li>
+                    <li class="menu-list" data-target=".contents2">
+                        <a href="#" class="menu-link">메뉴2</a>
+                    </li>
+                    <li class="menu-list" data-target=".contents3">
+                        <a href="#" class="menu-link">메뉴3</a>
+                    </li>
+                    <li class="menu-list" data-target=".contents4">
+                        <a href="#" class="menu-link">메뉴4</a>
+                    </li>   
+                </ul>
+                <ul class="menu">
+                    <li class="menu-list" data-target=".contents5">
+                        <a href="#" class="menu-link">메뉴5</a>
+                    </li>
+                    <li class="menu-list" data-target=".contents6">
+                        <a href="#" class="menu-link">메뉴6</a>
+                    </li>
+                    <li class="menu-list" data-target=".contents7">
+                        <a href="#" class="menu-link">메뉴7</a>
+                    </li>
+                    <li class="menu-list" data-target=".contents8">
+                        <a href="#" class="menu-link">메뉴8</a>
+                    </li>   
+                </ul>
+                <ul class="menu">
+                    <li class="menu-list" data-target=".contents9">
+                        <a href="#" class="menu-link">메뉴9</a>
+                    </li>
+                    <li class="menu-list" data-target=".contents10">
+                        <a href="#" class="menu-link">메뉴10</a>
+                    </li>
+                    <li class="menu-list" data-target=".contents11">
+                        <a href="#" class="menu-link">메뉴11</a>
+                    </li>
+                    <li class="menu-list" data-target=".contents12">
+                        <a href="#" class="menu-link">메뉴12</a>
+                    </li>   
+                </ul>
+            </div>
+        </div>
+    </div>
         <div class="container">
-            <div class="contents" id="contents1">1</div>
-            <div class="contents" id="contents2">2</div>
-            <div class="contents" id="contents3">3</div>
-            <div class="contents" id="contents4">4</div>
+            <div class="contents1">1</div>
+            <div class="contents2">2</div>
+            <div class="contents3">3</div>
+            <div class="contents4">4</div>
+            <div class="contents5">5</div>
+            <div class="contents6">6</div>
+            <div class="contents7">7</div>
+            <div class="contents8">8</div>
+            <div class="contents9">9</div>
+            <div class="contents10">10</div>
+            <div class="contents11">11</div>
+            <div class="contents12">12</div>
         </div>
     </div>
     <script>
-       $(function(){
-			$('.next-btn').click(function(){
-				if($('.selected').attr('data') != 'last')
-					$('.selected').removeClass('selected')
-						.next().addClass('selected').click();
-			});
-			$('.prev-btn').click(function(){
-				if($('.selected').attr('data') != 'first')
-					$('.selected').removeClass('selected')
-						.prev().addClass('selected').click();
-			});
-			$('.menu-list').click(function(){
-				$('.menu-list').removeClass('selected');
-				$(this).addClass('selected');
-				var target = $(this).attr('data-target');
-				$('.contents').hide();
-				$(target).show();
-			})
-			$('#contents2').hide();
-			$('#contents3').hide();
-			$('#contents4').hide();
-		})
+        $(function(){
+            $('.btn-box .next-btn').click(function(){
+                var selected = $('.selected');
+                if(selected.next().length == 0){
+                    if(selected.parent().next().length == 0){
+                        return;
+                    }
+                    var ml = $('.menu-wrap-box').css('margin-left');
+                    ml = parseFloat(ml);
+                    var width = $('.menu').first().width();
+                    ml=ml-width;
+                    $('.menu-wrap-box').animate({'margin-left':ml+'px'},500);
+                    selected.parent().next().children('.menu-list').first().addClass('selected');
+                    selected.removeClass('selected');
+                }else{
+                    $('.selected').removeClass('selected').next().addClass('selected');
+                }
+                $('.selected').click();
+            });
+            $('.btn-box .prev-btn').click(function(){
+                var selected = $('.selected');
+                if(selected.prev().length == 0){
+                    if(selected.parent().prev().length == 0){
+                        return;
+                    }
+                    var ml = $('.menu-wrap-box').css('margin-left');
+                    ml = parseFloat(ml);
+                    var width = $('.menu').first().width();
+                    ml=ml+width;
+                    $('.menu-wrap-box').animate({'margin-left':ml+'px'},500);
+                    selected.parent().prev().children('.menu-list').last().addClass('selected');
+                    selected.removeClass('selected');
+                }else{
+                    $('.selected').removeClass('selected').prev().addClass('selected');
+                }
+                $('.selected').click();
+            });
+            $('.menu-list').click(function(){
+                $('.menu-list').removeClass('selected');
+                $(this).addClass('selected');
+                var target = $(this).attr('data-target');
+                $('.container div').hide();
+                $(target).show();
+            });
+            $('.menu-list').eq(0).click();
+        });
     </script>
 </body>
 </html>
