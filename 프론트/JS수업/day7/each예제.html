@@ -48,7 +48,6 @@
         $(function(){
             var count =0;
             $('input[name=hobby]').click(function(){
-                console.log(count)
                 var value = $(this).val();
                 var index = arr.indexOf(value);
                 if(index >= 0){
@@ -64,7 +63,6 @@
 
                     }
                 }              
-                console.log(arr)
                 $('.view-box .box').each(function(i){
                     var val = typeof arr[i] == 'undefined' ?  '' : arr[i];
                     $('.view-box .box').eq(i).text(val);

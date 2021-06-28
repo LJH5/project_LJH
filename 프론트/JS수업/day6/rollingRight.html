@@ -11,23 +11,14 @@
 	<script>
 		var id;
 		$(function(){
-			// id = rollingRight('.box1','li',800,1000);
+			//id = rollingRight('.box1','li',800,1000);
 			id = rolling('right','.box1','li',0,800,1000);
-
-			$('.container').hover(function(){
-                clearInterval(id);
-            },function(){
-                id = rollingRight('.box1','li',800,1000);
-            })
-
-			$('.prev-btn').click(function(){
+			$('.view-box').hover(function(){
+				clearInterval(id);
+			},function(){
 				id = rollingRight('.box1','li',800,1000);
 			})
-			$('.next-btn').click(function(){
-				id = rollingLeft('.box1','li',800,1000);
-			})
-		})
-		
+		})	
 	</script>
 	<style>
 		.cotainer{
