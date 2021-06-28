@@ -9,7 +9,26 @@
     <script src="../JS/jquery.min.js"></script>
     <script>
         $(function(){
-
+            $('.next-btn').click(function(){
+                if($('.selected').attr('data') != 'last'){
+                    $('.selected').removeClass('selected').next().addClass('selected').click();
+                };
+            })
+            $('.prev-btn').click(function(){
+                if($('.selected').attr('data') != 'first'){
+                    $('.selected').removeClass('selected').prev().addClass('selected').click();
+                };
+            })
+            $('.menu-list').click(function(){
+                $('.menu-list').removeClass('selected');
+                $(this).addClass('selected');
+                var target = $(this).attr('data-target');
+				$('.contents').hide();
+				$(target).show();
+            })
+            $('#contents2').hide();
+            $('#contents3').hide();
+            $('#contents4').hide();
         })
     </script>
     <style>
@@ -24,24 +43,27 @@
             margin: 0 20px;
             position: relative;
         }
-        .menu{
+        .menu-box{
             border: 1px solid black;
+            height: 50px;
+        }
+        .menu{
             display: flex;
     
         }
         .menu-list{
             width: 100%;
             height: 50px;
-            text-align: center;
-            line-height: 50px;
             border-right: 1px solid black;
-        }
-        .menu-list>a{
-            width: 100%;
-            height: 50px;
         }
         .menu-list:last-child{
             border-right: none;
+        }
+        .menu-link{
+            display: block;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
         }
         .prev-btn{
             width: 30px;
@@ -54,7 +76,8 @@
             text-align: center;
             position: absolute;
             top: 9px;
-            left: -15px;
+            left: 0px;
+            margin-left: -15px;
         }
         .next-btn{
             width: 30px;
@@ -72,13 +95,10 @@
         .selected{
             background: yellow;
         }
-        .container{
-            margin: 0 20px;
-        }
         .contents{
             height: 300px;
             background: grey;
-            margin-top: 10px;
+            margin: 10px 20px 0 20px;
         }
     </style>
 </head>
@@ -86,10 +106,10 @@
     <div class="box">
         <div class="menu-box">
             <ul class="menu">
-                <li class="menu-list"><a href="#" class="menu-link selected">메뉴1</a></li>
-                <li class="menu-list"><a href="#" class="menu-link">메뉴2</a></li>
-                <li class="menu-list"><a href="#" class="menu-link">메뉴3</a></li>
-                <li class="menu-list"><a href="#" class="menu-link">메뉴4</a></li>
+                <li class="menu-list selected" data="first" data-target="#contents1"><a href="#" class="menu-link">메뉴1</a></li>
+                <li class="menu-list" data-target="#contents2"><a href="#" class="menu-link">메뉴2</a></li>
+                <li class="menu-list" data-target="#contents3"><a href="#" class="menu-link">메뉴3</a></li>
+                <li class="menu-list" data="last" data-target="#contents4"><a href="#" class="menu-link">메뉴4</a></li>
             </ul>
         </div>
         <div class="btn-box">
@@ -99,9 +119,9 @@
     </div>
     <div class="container">
         <div class="contents" id="contents1">1</div>
-        <div class="contents" id="contents1">2</div>
-        <div class="contents" id="contents1">3</div>
-        <div class="contents" id="contents1">4</div>
+        <div class="contents" id="contents2">2</div>
+        <div class="contents" id="contents3">3</div>
+        <div class="contents" id="contents4">4</div>
     </div>
 </body>
 </html>
