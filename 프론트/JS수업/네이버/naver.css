@@ -186,7 +186,6 @@ a { text-decoration: none; color: #000;}
 .left-box{
     width: 750px; 
     height: 100%; 
-    border: 1px solid red; 
     float: left;
     box-sizing: border-box;
 }
@@ -266,6 +265,73 @@ a { text-decoration: none; color: #000;}
 }
 .left2-3>.row>.col{
     height: 65px; width: 100%;
+}
+
+/* 왼쪽 메뉴 박스 */
+.left3{
+    margin-top: 20px;
+}
+.left3 .menu-box{
+    height: 50px;
+    position: relative;
+}
+.left3 .menu-box .view-box{
+    height: 50px;
+    border: 1px solid black;
+    width: 100%;
+    overflow: hidden;
+}
+.left3 .view-box .menu-wrap-box{
+    width: 400%;
+}
+.left3 .view-box .menu{
+    width: 25%;
+    float: left;
+
+}
+.left3 .view-box .menu .menu-list{
+    width: calc(100% / 8);
+    height: 50px;
+    float: left;
+    line-height: 50px;
+    text-align: center;
+    box-sizing: border-box;
+    border-right: 1px solid black;
+}
+.left3 .view-box .menu .menu-list a{
+    display: block;
+}
+.left3 .view-box .menu .menu-list:nth-child(8n){
+    border-right: none;
+}
+
+.left3 .btn-box .prev-btn, .left3 .btn-box .next-btn{
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 30px;
+    position: absolute;
+    top: 9px;
+    left: -15px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.left3 .btn-box .next-btn{
+    left: auto;
+    right: 0;
+    margin-right: -15px;
+}
+
+.left3 .menu-box .container div{
+    width: 750px;
+    height: 400px;
+    background: green;
+    margin-top: 10px;
+}
+.left3 .selected{
+    background: greenyellow;
 }
 .bar{
     background-color: #dae1e6;
@@ -465,6 +531,8 @@ a { text-decoration: none; color: #000;}
 .menu .green-menu-list::after,
 .menu .black-menu-list::after,
 .menu .btn-box1::after,
-.menu .btn-box2::after{ 
+.menu .btn-box2::after,
+.left3 .view-box::after,
+.left3 .view-box .menu::after{ 
     content: ''; display: block; clear: both;
 }
