@@ -766,6 +766,18 @@
                 var target = $(this).attr('data-target');
                 $('.left3 .container div').hide();
                 $(target).show();
+				//첫번째 메뉴를 선택하면 이전 버튼 안보이게
+				if(target =='.contents1'){
+					$('.left3 .btn-box .prev-btn').hide()
+				}else{
+					$('.left3 .btn-box .prev-btn').show()
+				}
+				//마지막 메뉴를 선택하면 다음 버튼 안보이게
+				if(target =='.contents27'){
+					$('.left3 .btn-box .next-btn').hide()
+				}else{
+					$('.left3 .btn-box .next-btn').show()
+				}
             });
             $('.left3 .menu-list').eq(0).click();
 		})

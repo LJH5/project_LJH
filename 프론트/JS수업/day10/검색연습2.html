@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/jquery.min.js"></script>
+    <script>
+        $(function(){
+           $('#search-btn').click(function(){
+               var value = $('#data').val();
+               var valueArr = value.split(',')
+               $('.container .box').removeClass('selected')
+               for(tmp of valueArr){
+                   tmp = parseInt(tmp);
+                    if(isNaN(tmp) || tmp > 5 || tmp < 1){
+                       console.log('잘못된 숫자입니다')
+                       continue;
+                    }
+                    // 태두리 변경
+                    // 방법1: eq()
+                    $('.container1 .box').eq(tmp-1).addClass('selected');
+                    // 방법2: 
+                    $('.container2 .box.box'+tmp).addClass('selected');
+    
+                    // 다중 선택 시 아래 코드 사용 불가
+                    // $('.container1').children().eq(value-1).click();
+                    // $('.container2 .box.box'+value).click();                    
+                }
+            })
+             $('.box').click(function(){
+                 $(this).siblings().removeClass('selected')
+                 $(this).addClass('selected')
+             })
+
+        })
+    </script>
+    <style>
+        *{
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+            color: #000;
+        }
+        .container{
+            margin-top: 10px;
+        }
+        .container::after{
+            clear: both;
+            display: block;
+            content: '';
+        }
+        .box{
+            margin-right: 10px;
+            margin-bottom: 10px;
+            width: 100px;
+            height: 100px;
+            border: 2px solid black;
+            box-sizing: border-box;
+            float: left;
+            text-align: center;
+            line-height: 100px;
+            cursor: pointer;
+        }
+        .box a{
+            display: block;
+        }
+        .selected{
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-box">
+        <input type="text" id="data">
+        <button id="search-btn">찾기</button>
+    </div>
+    <div class="container container1">
+        <div class="box"><a href="#">1</a></div>
+        <div class="box"><a href="#">2</a></div>
+        <div class="box"><a href="#">3</a></div>
+        <div class="box"><a href="#">4</a></div>
+        <div class="box"><a href="#">5</a></div>
+    </div>
+
+    <div class="container container2">
+        <div class="box box1"><a href="#">1</a></div>
+        <div class="box box2"><a href="#">2</a></div>
+        <div class="box box3"><a href="#">3</a></div>
+        <div class="box box4"><a href="#">4</a></div>
+        <div class="box box5"><a href="#">5</a></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습1</title>
+    <script src="../JS/jquery.min.js"></script>
+    <script>
+        // 잘못된 부분을 찾으세요. 
+        $(function(){
+            $('#btn1').click(function(){
+                alert('버튼1 클릭')
+            
+            $('#btn2').click(function(){
+                alert('버튼2 클릭')
+            }) //닫기 괄호의 위치를 잘못둠, 버튼1 클릭 이벤트 안에 버튼2 클릭 이벤트가 들어가 있음
+            })
+        })
+    </script>
+</head>
+<body>
+    <button id="btn1">버튼1</button>
+    <button id="btn2">버튼2</button>
+</body>
+</html>
