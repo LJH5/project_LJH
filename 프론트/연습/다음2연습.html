@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다음2</title>
+    <script src="../JS수업/JS/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('.menu2 li').click(function(e){
+                if(!$(this).hasClass('selected')){
+                    e.preventDefault();
+                }
+                var index = $(this).index();
+                if(index == 0){
+                    $('.menu2 .point-box').children().first().addClass('selected');
+                }else{
+                    $('.menu2 .point-box').children().removeClass('selected');
+                }
+                $('.menu2 li').removeClass('selected');
+                $(this).addClass('selected')
+            })
+            $('.menu2 .point-box').click(function(e){
+                if($(this).parent().hasClass('selected')){
+                    e.stopPropagation();
+                }
+                if($(this).find('.selected').next().length != 0){
+                    $(this).find('.selected').removeClass('selected').next().addClass('selected');
+                }else{
+                    $(this).find('.selected').removeClass('selected');
+                    $(this).children().first().addClass('selected');
+                }
+            })
+        })
+    </script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            color: #000;
+            list-style: none;
+            text-decoration: none;
+        }
+        .menu::after,
+        .menu li::after{
+            display: block;
+            clear: both;
+            content: '';
+        }
+        .menu li{
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            float: left;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        .menu li a{
+            float: left;
+            height: 100%;
+        }
+        .selected a{
+            color: blue;
+            text-decoration: underline;
+        }
+        .point{
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: gray;
+            float: left;
+            position: relative;
+            top: calc(50% - 2.5px);
+            margin-right: 5px;
+        }
+        .point-box{
+            margin-left: 5px;
+        }
+        .point-box .selected{
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <ul class="menu menu2">
+        <li class="selected">
+            <a href="http://www.daum.net">뉴스</a>
+            <a href="" class="point-box">
+                <span class="point selected"></span>
+                <span class="point"></span>
+                <span class="point"></span>
+            </a>
+        </li>
+        <li><a href="http://www.daum.net">연예</a></li>
+        <li><a href="http://www.daum.net">스포츠</a></li>
+        <li><a href="http://www.daum.net">영화</a></li>
+        <li><a href="http://www.daum.net">자동차</a></li>
+        <li><a href="http://www.daum.net">부동산</a></li>
+    </ul>
+
+</body>
+</html>
