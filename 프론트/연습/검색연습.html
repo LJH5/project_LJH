@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색연습</title>
+    <script src="../JS수업/JS/jquery.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-decoration: none;
+            color: #000;
+        }
+        #search{
+            margin: 10px;
+        }
+        .menu{
+            width: 500px;
+            margin: 10px;
+        }
+        .menu::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .box{
+            width: calc((100% - 50px) / 5);
+            height: 100px;
+            border: 2px solid black;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 100px;
+            float: left;
+            margin-right: 10px;
+        }
+        .selected{
+            border-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="search"> <button id="search-btn">찾기</button>
+    <ul class="menu menu1">
+        <li class="box">1</li>
+        <li class="box">2</li>
+        <li class="box">3</li>
+        <li class="box">4</li>
+        <li class="box">5</li>
+    </ul>
+    <ul class="menu menu2">
+        <li class="box box1">1</li>
+        <li class="box box2">2</li>
+        <li class="box box3">3</li>
+        <li class="box box4">4</li>
+        <li class="box box5">5</li>
+    </ul>
+
+    <script>
+        $(function(){
+            $('#search-btn').click(function(){
+                var value = $('#search').val();
+                var valueArr = value.split(',');
+                $('.menu .box').removeClass('selected');
+                for(tmp of valueArr){
+                    tmp = parseInt(tmp)
+                    if(isNaN(tmp) || tmp>5 || tmp < 1){
+                        continue;
+                    }
+                    $('.menu1 .box').eq(tmp-1).addClass('selected');
+                    $('.menu2 .box.box'+tmp).addClass('selected');
+                }
+            });
+
+            $('.box').click(function(){
+                $(this).siblings().removeClass('selected');
+                $(this).addClass('selected');
+            });
+        });
+    </script>
+</body>
+</html>

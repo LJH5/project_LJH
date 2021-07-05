@@ -1,0 +1,336 @@
+@charset "UTF-8";
+*{
+    margin: 0;
+    padding: 0;
+}
+ol,ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+.after::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.container{
+    width: 1190px;
+    margin: 0 auto;
+}
+.main1{
+    background-color: red;
+    height: 49px;
+}
+.main2{
+    height: 160px;
+    position: relative;
+}
+.main2>.main2-logo{
+    background-color: black;
+    width: 222px;
+    height: 52px;
+    position: absolute;
+    left: 0;
+    top: calc(50% - 26px);
+
+}
+.main2-search{
+    width: 586px;
+    height: 56px;
+    border: 2px solid #19ce60;
+    position: absolute;
+    left: 268px;
+    top: calc(50% - 28px);
+
+}
+.main2 .search-input{
+    display: block; 
+    padding: 14px 15px; 
+    width: 444px; 
+    height: 24px; 
+    line-height: 24px;
+    border: none;
+    font-size: 24px;
+}
+.main2 .search-input:focus{
+    outline: none;
+    border: none;
+}
+.main2 .search-button{
+    width: 56px;
+    height: 56px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: none;
+    background-color: #19ce60;
+    border-radius: 0;    
+}
+.main3{
+    min-width: 1190px;
+    height: 52px;
+    border-top: 1px solid #e4e8eb;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.main3 .main3-bar{
+    width: 1190px;
+    height: 100%;
+    background-color: blue;
+    margin: 0 auto;
+}
+.main4{
+    height:2000px;
+    padding: 20px 30px;
+}
+.main4>.main4-inner{
+    height: 100%;
+}
+.main4 .main4-left-box{
+    width: 750px;
+    height: 100%;
+    float: left;
+}
+.main4 .ad{
+    height: 135px;
+    background-color: green;
+    margin-bottom: 12px;
+
+}
+.main4 .news{
+    height: 367px;
+    background-color: brown;
+}
+.main4 .news-main{
+    height: 49px;
+    background-color: chocolate;
+}
+.main4 .news-stand{
+    height: 56px;
+}
+.main4 .news-newspaper{
+    height: 262px;
+    border: 1px solid #dae1e6;
+    box-sizing: border-box;
+    position: relative;
+}
+.bar{
+    background: #dadae1e6;
+}
+.main4 .s-line1{
+    position: absolute;
+    top: 65px;
+    right: 0;
+    left: 0;
+    height: 1px;
+}
+.main4 .s-line2{
+    position: absolute;
+    top: 130px;
+    right: 0;
+    left: 0;
+    height: 1px;
+}
+.main4 .s-line3{
+    position: absolute;
+    top: 195px;
+    right: 0;
+    left: 0;
+    height: 1px;
+}
+.main4 .v-line1{
+    position: absolute;
+    left: 124px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+}
+.main4 .v-line2{
+    position: absolute;
+    left: 248px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+}
+.main4 .v-line3{
+    position: absolute;
+    left: 372px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+}
+.main4 .v-line4{
+    position: absolute;
+    left: 496px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+}
+.main4 .v-line5{
+    position: absolute;
+    left: 620px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+}
+.news-newspaper>.row{
+    display: flex;
+}
+.news-newspaper>.row>.col{
+    height: 65px;
+    width: 100%;
+}
+.news-newspaper>.row>.col>.col1{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+.news-newspaper>.row>.col>.col2{
+    width: 100%;
+    height: 100%;
+    background-color: #f7f9fa;
+    display: none;
+}
+.news-newspaper>.row>.col:hover .col1{
+    display: none;
+}
+.news-newspaper>.row>.col:hover .col2{
+    display: block;
+}
+.main4-right-box{
+    width: 350px;
+    height: 100%;
+    float: right;
+}
+.main4-right-box>.account{
+    height: 135px;
+    background-color: #f7f9fa;
+    padding: 16px 16px 12px 17px;
+    border: 1px solid #dae1e6;
+    box-sizing: border-box;
+   
+}
+.account .account-title{
+    color: #505050;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+.account .account-login-box{
+    height: 48px;
+    background-color: #19ce60;
+    text-align: center;
+    line-height: 48px;
+    font-size: 20px;
+    
+}
+.account .account-login-link{
+    color: white;
+}
+.account .account-sub-box{
+    margin: 14px 4px 0 8px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 13px;
+    color: #505050;
+    box-sizing: border-box;
+}
+.account .account-sub-box .find-pw-link::before{
+    content: '';	display: inline-block;
+    width: 2px; height: 2px; border-radius: 50%;
+    background-color: #505050; position: relative; margin-right: 5px;
+    top: -5px;
+}
+.account .account-sub-box .find-id-link:hover,
+.account .account-sub-box .find-pw-link:hover,
+.account .account-sub-box .sign-in-link:hover {
+    text-decoration: underline;
+}
+.account .account-sub-box .sign-in-link{
+    float: right;
+}
+.main4-right-box .timeline{
+    height: 49px;
+    padding: 10px;
+    margin-top: 10px;
+    position: relative;
+    border: 1px solid #dae1e6;
+    box-sizing: border-box;
+}
+.main4-right-box .timeline .button-box{
+    position: absolute;
+    top: 11px;
+    right: 10px;
+}
+.main4-right-box .timeline .button-box .prev-btn,
+.main4-right-box .timeline .button-box .next-btn{
+    float: left;
+    text-align: center;
+    line-height: 22px;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #e3e8eb;
+    cursor: pointer;
+}
+.main4-right-box .timeline .button-box .prev-btn:hover,
+.main4-right-box .timeline .button-box .next-btn:hover{
+    background: #f7f9fa;
+}
+.main4-right-box .timeline .timeline-wrap{
+    width: 270px;
+    height: 47px;
+    box-sizing: border-box
+}
+.main4-right-box .timeline .view-box{
+    height: 29px; 
+    width: 270px; 
+    overflow: hidden;
+}
+.main4-right-box .timeline .view-box .menu{
+    width: calc(270px * 6);
+}
+.main4-right-box .timeline .menu-list{
+    width: 270px; 
+    height: 29px; 
+    line-height: 29px; 
+	float: left;
+}
+.main4-right-box .ad-banner{
+    height: 200px;
+    margin-top: 10px;
+    background-color: violet;
+}
+.main4-right-box .shop-container{
+    margin-top: 15px;
+    height: 1539px;
+    background-color: aqua;
+    box-sizing: border-box;
+}
+.shop-container .shop-top-box{
+    height: 44px;
+    background-color: red;
+}
+.shop-container .shop-box{
+    height: 1495px;
+    background-color: orange;
+}
+.shop-box .mall-box{
+    height: 70px;
+    background-color: yellow;
+}
+.shop-box .goods-box{
+    height: 886px;
+    background-color: green;
+}
+.shop-box .news-box{
+    height: 262px;
+    background-color: blue;
+}
+.shop-box .ad-box{
+    height: 274px;
+    background-color: purple;
+}
+.main5{
+    background-color: blue;
+    height: 423px;
+}
