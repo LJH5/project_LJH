@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴 호버</title>
+    <script src="../JS/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('.box .main li').mouseenter(function(){
+                $(this).children().show();
+            });
+            $('.box .main li').mouseleave(function(){
+                $(this).children().hide();
+            });
+        });
+    </script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            color: #000;
+            list-style: none;
+            text-decoration: none;
+        }
+        .box .main{
+            border: 1px solid black;
+            display: flex;
+        }
+        .box .main li{
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            float: left;
+            border-right: 1px solid black;
+            box-sizing: border-box;
+        }
+        .box .main .menu3{
+            border-right: none;
+        }
+        .box .main .sub{
+            width: 100%;
+            height: 100px;
+            border: 1px solid black;
+            display: none;
+            position: relative;
+            top: -1px;
+            left: -1px;
+            border-top: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="main">
+            <li class="menu1">메뉴1
+                <div class="sub">서브메뉴1-1</div>
+                <div class="sub">서브메뉴1-2</div>
+            </li>
+            <li class="menu2">메뉴2
+                <div class="sub">서브메뉴2-1</div>
+                <div class="sub">서브메뉴2-1</div>
+            </li>
+            <li class="menu3">메뉴3
+                <div class="sub">서브메뉴3-1</div>
+                <div class="sub">서브메뉴3-2</div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

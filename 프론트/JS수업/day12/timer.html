@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/jquery.min.js"></script>
+    <script>
+        var hour=0;
+        var minute=0;
+        var second=0;
+        var millisecond=0;
+        var timer;
+        $(function(){
+            $(document).on('click','.btn-box .start-btn',function(){
+                $(this).hide();
+                $('.btn-box .stop-btn').show();
+                timer = setInterval(function(){
+                    millisecond++
+                    hour = minute == 60? ++hour : hour;
+                    minute = minute == 60? 0: minute;
+                    minute = second == 60? ++minute : minute;
+                    second = second == 60? 0 : second;
+                    second = millisecond == 100? ++second : second;
+                    millisecond = millisecond == 100? 0 : millisecond;
+                    $('.time-box').text(getTime(hour,minute,second,millisecond))
+                },10);
+            })
+            $(document).on('click','.btn-box .stop-btn',function(){
+                clearInterval(timer);
+                $(this).hide();
+                $('.btn-box .start-btn').show();
+            })
+            $('.btn-box .record-btn').on('click',function(){
+                var str = 
+                '<div class="record">'+
+                    getTime(hour,minute,second,millisecond)+ 
+                '</div>';
+                $('.record-box').append(str);
+
+            })
+            $('.btn-box .clear-btn').on('click',function(){
+				hour=0; minute=0; second=0; millisecond=0;
+				$('.time-box').text( getTime(hour,minute,second,millisecond));
+				$('.stop-btn').click();
+				$('.record-box').empty();
+            })
+           
+        })
+        
+        function addZero(num){
+            return num < 10 ? '0' + num : num;
+        }
+        function getTime(hour,minute,second,millisecond){
+            return addZero(hour)+':'+addZero(minute) + ':' + addZero(second) + '.' +addZero(millisecond);
+        }
+        
+    </script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            color: #000;
+        }
+        .timer{
+            width: 300px;
+            margin: 30px;
+        }
+        .timer .time-box{
+            height: 100px;
+            border: 1px solid black;
+            margin-bottom: 10px;
+            text-align: center;
+            line-height: 100px;
+            font-size: 50px;
+        }
+        .btn-box{
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .btn-box button{
+            width: 100%;
+            height: 50px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .btn-box .stop-btn{
+            display: none;
+        }
+        .btn-box button:last-child{
+            margin-right: 0;
+        }
+        .record-box{
+            min-height: 100px;
+            border: 1px solid black;
+            font-size: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer">
+        <div class="time-box">00:00:00.00</div>
+        <div class="btn-box">
+            <button class="start-btn">시작</button>
+            <button class="stop-btn">중지</button>
+            <button class="clear-btn">초기화</button>
+            <button class="record-btn">기록</button>
+        </div>
+        <div class="record-box">
+            <div class="record"></div>
+        </div>
+    </div>
+</body>
+</html>
