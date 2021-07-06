@@ -23,6 +23,18 @@ public class MemberServiceImp implements MemberService {
 		if(dbUser == null || !dbUser.getPw().equals(user.getPw())) {
 			return null;
 		}
-		return null;
+		return dbUser;
+	}
+
+	@Override
+	public boolean signup(MemberVO user) {
+		// 이미 가입된 아이디가 있으면 false를 리턴
+		if(user == null || memberDao.getMember(user.getId())!=null) {
+			return false;
+		}else {
+			// 없으면 회원가입 진행후 true를 리턴
+			memberDao.signup(user);
+			return true;
+		}
 	}
 }
