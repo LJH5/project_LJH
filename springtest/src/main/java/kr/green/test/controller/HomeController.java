@@ -1,4 +1,4 @@
-package kr.green.tset;
+package kr.green.test.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
