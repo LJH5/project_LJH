@@ -12,7 +12,8 @@
 </head>
 <body>
 <div class="container">
-  <h2>게시판</h2>            
+  <h2>게시판</h2>  
+  <c:if test="${list.size() != 0 }">         
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -38,6 +39,10 @@
 	    </c:forEach>
     </tbody>
   </table>
+  </c:if> 
+  <c:if test="${list.size == 0}">
+  	<h1>게시글이 존재하지 않습니다</h1>
+  </c:if>
   <a href="<%=request.getContextPath()%>/board/register"><button class="btn btn-outline-success">글쓰기</button></a>
 </div>
 </body>
