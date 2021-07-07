@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.spring.service.MemberService;
+import kr.green.spring.vo.BoardVO;
 import kr.green.spring.vo.MemberVO;
 
 @Controller
@@ -57,4 +58,15 @@ public class HomeController {
 		}
 		return mv;
 	}
+	@RequestMapping(value="/member/mypage", method = RequestMethod.GET)
+	public ModelAndView mypage(ModelAndView mv, String id) {
+		// sysout으로 틈틈히 변수가 잘 전달 되는지 확인하자
+		// 서비스에게 아이디를 주면서 회원정보를 가져오라고 시킴
+		MemberVO user = memberService.getMember(id);
+		// 가져온 회원 정보를 화면에 전달
+		mv.addObject("user",user);
+		mv.setViewName("/member/mypage");
+		return mv;
+	}
 }
+
