@@ -68,5 +68,11 @@ public class BoardController {
 		mv.setViewName("redirect:/board/detail");
 		return mv;
 	}
-	
+	@RequestMapping(value="/board/delete", method=RequestMethod.GET)
+	public ModelAndView boardDelete(ModelAndView mv, Integer num) {
+		// 서비스에게 삭제 지시
+		boardService.deleteBoard(num);
+		mv.setViewName("redirect:/board/list");
+		return mv;
+	}
 }

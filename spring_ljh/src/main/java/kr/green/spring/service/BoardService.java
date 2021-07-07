@@ -16,4 +16,6 @@ public interface BoardService {
 
 	int updateBoard(BoardVO board);
 
+	int deleteBoard(Integer num);  // update문을 이용해서 값이 있음
+
 }
