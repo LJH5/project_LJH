@@ -19,7 +19,7 @@ public class BoardController {
 	public ModelAndView boardlist(ModelAndView mv) {
 		// 서비스에게 모든 게시글을 가져오라고 시킴
 		ArrayList<BoardVO> list = boardService.getBoardList();
-		//화면에 모든 게시글을 전송
+		// 화면에 모든 게시글을 전송
 		mv.addObject("list",list);
 		if(list != null) {
 			for(BoardVO tmp : list) {
@@ -27,6 +27,15 @@ public class BoardController {
 			}
 		}
 		mv.setViewName("board/list");
+		return mv;
+	}
+	@RequestMapping(value="/board/detail")
+	public ModelAndView boardDetail(ModelAndView mv, Integer num) { // int는 null값을 다룰 수 없어서 Integer사용
+		// 서비스에게 번호를 주면서 게시글을 가져오라고 시킴
+		BoardVO board = boardService.getBoard(num);
+		// 가져온 게시글을 화면에 전달, 이름은 board로 
+		mv.addObject("board",board);
+		mv.setViewName("board/detail");
 		return mv;
 	}
 }
