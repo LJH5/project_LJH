@@ -39,6 +39,9 @@ public class BoardServiceImp implements BoardService {
 
 	@Override
 	public void insertBoard(BoardVO board) {
+		if(board == null) {
+			return;
+		}
 		boardDao.insertBoard(board);
 	}
 }
