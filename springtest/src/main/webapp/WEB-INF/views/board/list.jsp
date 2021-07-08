@@ -35,7 +35,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<a href="<%=request.getContextPath()%>/board/register"><button class="btn btn-outline-danger">글쓰기</button></a>
+		<a href="<%=request.getContextPath()%>/board/register"><button class="btn btn-outline-success">글쓰기</button></a>
 		<!-- <img src="<%=request.getContextPath()%>/resource/img/cat.jpg"> 이미지 넣기 -->
 	</div>
 </body>
