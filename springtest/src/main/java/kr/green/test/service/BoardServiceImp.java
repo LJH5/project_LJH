@@ -9,14 +9,12 @@ import kr.green.test.dao.BoardDAO;
 import kr.green.test.vo.BoardVO;
 
 @Service
-public class BoardServiceImp implements BoardService{
+public class BoardServiceImp implements BoardService {
 	@Autowired
 	BoardDAO boardDao;
-	
+
 	@Override
 	public ArrayList<BoardVO> getBoardList() {
-		
 		return boardDao.getBoardList();
 	}
-
 }

@@ -1,4 +1,4 @@
-package kr.green.test.vo;
+package kr.green.spring.vo;
 
 import lombok.Data;
 

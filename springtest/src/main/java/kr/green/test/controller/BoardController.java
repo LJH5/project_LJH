@@ -10,23 +10,21 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.green.test.service.BoardService;
 import kr.green.test.vo.BoardVO;
 
+
+
 @Controller
+@RequestMapping(value="/board/*")
 public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	@RequestMapping(value="/board/list")
-	public ModelAndView boardlist(ModelAndView mv) {
+	@RequestMapping(value="/list")
+	public ModelAndView list(ModelAndView mv) {
 		ArrayList<BoardVO> list = boardService.getBoardList();
-		mv.addObject("list",list);
+		System.out.println(list);
+		mv.addObject("list", list);
 		mv.setViewName("board/list");
 		return mv;
 	}
 	
-	@RequestMapping(value="/board/detail")
-	public ModelAndView boardDetail(ModelAndView mv) {
-		
-		mv.setViewName("board/detail");
-		return mv;
-	}
 }
