@@ -65,7 +65,14 @@ public class HomeController {
 		MemberVO user = memberService.getMember(id);
 		// 가져온 회원 정보를 화면에 전달
 		mv.addObject("user",user);
-		mv.setViewName("/member/mypage");
+		mv.setViewName("member/mypage");
+		return mv;
+	}
+	@RequestMapping(value="/member/mypage", method = RequestMethod.POST)
+	public ModelAndView mypagePost(ModelAndView mv, MemberVO user) {
+		// 서비스에게 회원 정보를 주면서 수정하라고 시킴
+		memberService.updateMember(user);
+		mv.setViewName("redirect:/member/mypage");
 		return mv;
 	}
 }
