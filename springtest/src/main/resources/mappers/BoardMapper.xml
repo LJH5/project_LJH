@@ -21,4 +21,9 @@
 		insert into board(title, writer, contents) 
 			values(#{board.title}, #{board.writer}, #{board.contents})
 	</insert>
+	<update id="deleteBoard">
+		update board set
+			valid= 'I'
+		where num=#{board.num}
+	</update>
 </mapper>
