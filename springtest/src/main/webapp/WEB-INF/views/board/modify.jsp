@@ -31,7 +31,6 @@
 			<textarea class="form-control" name="contents" rows="10">${board.contents}</textarea>
 		</div>
 		<input type="hidden" name="num" value="${board.num}">
-		<input type="hidden" name="views" value="${board.views}">
 		<button type="submit" class="btn btn-outline-danger">등록</button>
 	</form>
 </body>

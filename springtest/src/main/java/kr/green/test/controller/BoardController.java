@@ -20,20 +20,21 @@ public class BoardController {
 	BoardService boardService;
 
 	@RequestMapping(value = "/list")
-	public ModelAndView list(ModelAndView mv) {
+	public ModelAndView list(ModelAndView mv, String msg) {
 		ArrayList<BoardVO> list = boardService.getBoardList();
 		System.out.println(list);
 		mv.addObject("list", list);
+		mv.addObject("msg", msg);
 		mv.setViewName("board/list");
 		return mv;
 	}
 
 	@RequestMapping(value = "/detail")
-	public ModelAndView detail(ModelAndView mv, Integer num) {
+	public ModelAndView detail(ModelAndView mv, Integer num, String msg) {
 		boardService.updateViews(num);
 		BoardVO board = boardService.getBoard(num);
-		log.info(board);
 		mv.addObject("board", board);
+		mv.addObject("msg", msg);
 		mv.setViewName("board/detail");
 		return mv;
 	}
@@ -52,7 +53,7 @@ public class BoardController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "modify", method = RequestMethod.GET)
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public ModelAndView modifyGet(ModelAndView mv, Integer num) {
 		BoardVO board = boardService.getBoard(num);
 		mv.addObject("board", board);
@@ -60,17 +61,26 @@ public class BoardController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "modify", method = RequestMethod.POST)
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public ModelAndView modifyPost(ModelAndView mv, BoardVO board) {
+		log.info("/board/modify:POST: " + board);
+		int res = boardService.updateBoard(board);
+		String msg = res != 0? board.getNum()+"번 게시글이 수정되었습니다." : "없는 게시글입니다."; 
 		boardService.updateBoard(board);
-		mv.setViewName("redirect:/board/list");
+		mv.setViewName("redirect:/board/detail");
+		mv.addObject("num",board.getNum());
 		return mv;
 	}
 	
-	@RequestMapping(value = "delete")
-	public ModelAndView delete(ModelAndView mv, Integer num) {
-		log.info(num);
-		boardService.deleteBoard(num);
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public ModelAndView deletePost(ModelAndView mv, Integer num) {
+		log.info("/board/delete: " + num);
+		int res = boardService.deleteBoard(num);
+		if(res!=0) {
+			mv.addObject("msg",num+"번째 글을 삭제했습니다.");
+		}else {
+			mv.addObject("msg", "게시글이 없거나 이미 삭제되었습니다.");
+		}
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}

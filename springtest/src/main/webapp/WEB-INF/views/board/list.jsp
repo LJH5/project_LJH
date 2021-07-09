@@ -37,6 +37,19 @@
 		</table>
 		<a href="<%=request.getContextPath()%>/board/register"><button class="btn btn-outline-success">글쓰기</button></a>
 		<!-- <img src="<%=request.getContextPath()%>/resource/img/cat.jpg"> 이미지 넣기 -->
+		<script type="text/javascript">
+			$(function(){
+				var msg='${msg}';
+				printMsg(msg);
+				history.replaceState({},null,null);
+			})
+			function printMsg(msg){
+				if(msg == '' || history.state){
+					return;
+				}
+				alert(msg);
+			}
+		</script>
 	</div>
 </body>
 </html>
