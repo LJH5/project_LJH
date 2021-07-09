@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.test.pagination.Criteria;
+import kr.green.test.pagination.PageMaker;
 import kr.green.test.service.BoardService;
 import kr.green.test.vo.BoardVO;
 import lombok.extern.log4j.Log4j;
@@ -20,7 +22,12 @@ public class BoardController {
 	BoardService boardService;
 
 	@RequestMapping(value = "/list")
-	public ModelAndView list(ModelAndView mv, String msg) {
+	public ModelAndView list(ModelAndView mv, String msg, Criteria cri) {
+		log.info(cri);
+		PageMaker pm = new PageMaker();
+		cri.setPerPageNum(2); //페이지당 게시글의 개수 2개
+		pm.setCriteria(cri);
+		pm.setDisplayPageNum(2); //보여줄 페이지 개수 2개
 		ArrayList<BoardVO> list = boardService.getBoardList();
 		System.out.println(list);
 		mv.addObject("list", list);
