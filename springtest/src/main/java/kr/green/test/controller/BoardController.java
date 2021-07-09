@@ -28,6 +28,10 @@ public class BoardController {
 		cri.setPerPageNum(2); //페이지당 게시글의 개수 2개
 		pm.setCriteria(cri);
 		pm.setDisplayPageNum(2); //보여줄 페이지 개수 2개
+		int totalCount = boardService.getTotalCount(cri);
+		pm.setTotalCount(totalCount);
+		pm.calcData();
+		log.info(pm);
 		ArrayList<BoardVO> list = boardService.getBoardList();
 		System.out.println(list);
 		mv.addObject("list", list);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.green.test.pagination.Criteria;
 import kr.green.test.vo.BoardVO;
 
 public interface BoardDAO {
@@ -15,5 +16,7 @@ public interface BoardDAO {
 	int updateBoard(@Param("board")BoardVO board);
 
 	void insertBoard(@Param("board")BoardVO board);
+
+	int getTotalCount(@Param("cri")Criteria cri);
 
 }
