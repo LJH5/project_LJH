@@ -16,7 +16,7 @@
 	<h2>게시판</h2>
 	<div class="form-group">
 		<label>제목</label>
-		<input type="text" class="form-control" name="title" value="<c:out value="${pm.criteria.search}"/>" readonly>
+		<input type="text" class="form-control" name="title" value="<c:out value="${board.title}"/>" readonly>
 	</div>
 	<div class="form-group">
 		<label>작성자</label>
