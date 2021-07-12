@@ -9,7 +9,7 @@ import kr.green.test.vo.BoardVO;
 
 public interface BoardDAO {
 
-	ArrayList<BoardVO> getBoardList();
+	ArrayList<BoardVO> getBoardList(@Param("cri")Criteria cri);
 
 	BoardVO getBoard(@Param("num")Integer num);
 

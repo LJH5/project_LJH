@@ -7,7 +7,7 @@ import kr.green.test.vo.BoardVO;
 
 public interface BoardService {
 
-	ArrayList<BoardVO> getBoardList();
+	ArrayList<BoardVO> getBoardList(Criteria cri);
 
 	BoardVO getBoard(Integer num);
 
