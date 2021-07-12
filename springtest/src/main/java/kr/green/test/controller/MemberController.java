@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.test.service.MemberService;
 
@@ -12,9 +14,9 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
-	@RequestMapping(value="/test")
-	public String test(Model model) {
-		System.out.println(memberService.getEmail("abc123"));
-		return "home";
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public ModelAndView home(ModelAndView mv) {
+		mv.setViewName("home");
+		return mv;
 	}
 }
