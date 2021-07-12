@@ -21,12 +21,12 @@
 		insert into board(title, writer, contents) 
 			values(#{board.title}, #{board.writer}, #{board.contents})
 	</insert>
-	 <select id="listPage" resultType="kr.green.spring.dao.Board">
+	 <select id="listPage" resultType="kr.green.test.vo.BoardVO">
 		select * from board 
 			order by number desc
 			limit #{pageStart}, #{perPageNum}
 	</select>
-    <select id="countBoard">
+    <select id="countBoard" resultType="kr.green.test.vo.BoardVO">
 		select count(number) from board
 	</select>
 </mapper>
