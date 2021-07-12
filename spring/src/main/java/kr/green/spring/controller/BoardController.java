@@ -94,8 +94,10 @@ public class BoardController {
 		mv.addObject("num", board.getNum());
 		mv.setViewName("redirect:/board/detail");
 		MemberVO user = memberService.getMember(request);
-		if(user.getId().equals(board.getWriter())) {
+		if(!user.getId().equals(board.getWriter())) {
 			mv.setViewName("redirect:/board/list");
+		}else{
+			boardService.updateBoard(board);
 		}
 		return mv;
 	}
