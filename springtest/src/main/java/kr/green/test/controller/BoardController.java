@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.green.test.pagination.*;
-import kr.green.test.service.*;
-import kr.green.test.vo.*;
+import kr.green.test.pagination.Criteria;
+import kr.green.test.pagination.PageMaker;
+import kr.green.test.service.BoardService;
+import kr.green.test.service.MemberService;
+import kr.green.test.vo.BoardVO;
+import kr.green.test.vo.MemberVO;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -91,14 +94,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public ModelAndView deletePost(ModelAndView mv, Integer num) {
+	public ModelAndView deletePost(ModelAndView mv, Integer num, HttpServletRequest r) {
 		log.info("/board/delete: " + num);
-		int res = boardService.deleteBoard(num);
-		if(res!=0) {
+		MemberVO user = memberService.getMember(r);
+		int res = boardService.deleteBoard(num, user);
+		if(res!=0 && res != 1) 
 			mv.addObject("msg",num+"번째 글을 삭제했습니다.");
-		}else {
+		else if(res == 1)
+			mv.addObject("msg","권한이 없습니다.");
+		else
 			mv.addObject("msg", "게시글이 없거나 이미 삭제되었습니다.");
-		}
+		
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
