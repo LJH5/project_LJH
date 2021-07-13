@@ -2,16 +2,17 @@ package kr.green.test.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.green.test.pagination.Criteria;
-import kr.green.test.pagination.PageMaker;
-import kr.green.test.service.BoardService;
-import kr.green.test.vo.BoardVO;
+import kr.green.test.pagination.*;
+import kr.green.test.service.*;
+import kr.green.test.vo.*;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -20,6 +21,8 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	@Autowired
 	BoardService boardService;
+	@Autowired
+	MemberService memberService;
 
 	@RequestMapping(value = "/list")
 	public ModelAndView list(ModelAndView mv, String msg, Criteria cri) {
@@ -54,28 +57,37 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView registerPost(ModelAndView mv, BoardVO board) {
-		boardService.insertBoard(board);
+	public ModelAndView registerPost(ModelAndView mv, BoardVO board, HttpServletRequest r) {
+		MemberVO user = memberService.getMember(r);
+		boardService.insertBoard(board, user);
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public ModelAndView modifyGet(ModelAndView mv, Integer num) {
+	public ModelAndView modifyGet(ModelAndView mv, Integer num, HttpServletRequest r) {
 		BoardVO board = boardService.getBoard(num);
 		mv.addObject("board", board);
 		mv.setViewName("board/modify");
+		MemberVO user = memberService.getMember(r);
+		if(board == null || !board.getWriter().equals(user.getId())) {
+			mv.setViewName("redirect:/board/list");
+		}
 		return mv;
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public ModelAndView modifyPost(ModelAndView mv, BoardVO board) {
-		log.info("/board/modify:POST: " + board);
+	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest r) {
 		int res = boardService.updateBoard(board);
 		String msg = res != 0? board.getNum()+"번 게시글이 수정되었습니다." : "없는 게시글입니다."; 
-		boardService.updateBoard(board);
 		mv.setViewName("redirect:/board/detail");
 		mv.addObject("num",board.getNum());
+		MemberVO user = memberService.getMember(r);
+		if(board == null || !board.getWriter().equals(user.getId())) {
+			mv.setViewName("redirect:/board/list");
+		}else {
+			boardService.updateBoard(board);
+		}
 		return mv;
 	}
 	
