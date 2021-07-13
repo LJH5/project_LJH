@@ -1,6 +1,7 @@
 package kr.green.test.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.green.test.dao.MemberDAO;
@@ -11,6 +12,8 @@ public class MemberServiceImp implements MemberService {
 
 	@Autowired
     MemberDAO memberDao;
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
     
     @Override
     public String getEmail(String id) {
@@ -23,7 +26,7 @@ public class MemberServiceImp implements MemberService {
 			return null;
 		}
 		MemberVO dbUser = memberDao.getMember(user.getId());
-		if(dbUser == null || !dbUser.getPw().equals(user.getPw())) {
+		if(dbUser == null || !passwordEncoder.matches(user.getPw(), dbUser.getPw())) {
 			return null;
 		}
 		return dbUser;
@@ -34,6 +37,8 @@ public class MemberServiceImp implements MemberService {
 		if(user == null || memberDao.getMember(user.getId()) != null) {
 			return false;
 		}
+		String encPw = passwordEncoder.encode(user.getPw());
+		user.setPw(encPw);
 		memberDao.signup(user);
 		return true;
 	}
