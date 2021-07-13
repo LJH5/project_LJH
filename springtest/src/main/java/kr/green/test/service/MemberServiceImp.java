@@ -17,14 +17,15 @@ public class MemberServiceImp implements MemberService {
     
 	@Override
 	public MemberVO signin(MemberVO user) {
-		if(user == null || user.getId() == null) {
+		if(user == null || user.getId() == null || user.getId().trim().length()==0 || user.getPw() == null || user.getPw().trim().length()==0) {
 			return null;
 		}
 		MemberVO dbUser = memberDao.getMember(user.getId());
-		if(dbUser == null || !passwordEncoder.matches(user.getPw(), dbUser.getPw())) {
+		if(dbUser == null) 
 			return null;
-		}
-		return dbUser;
+		if(passwordEncoder.matches(user.getPw(), dbUser.getPw()))
+			return dbUser;
+		return null;
 	}
 
 	@Override
@@ -33,9 +34,10 @@ public class MemberServiceImp implements MemberService {
 			return;
 
 		// 필수 항목 체크
-		if (user.getId() == null || user.getId().trim().length() == 0 || user.getPw() == null
-				|| user.getPw().trim().length() == 0 || user.getName() == null || user.getName().trim().length() == 0
-				|| user.getEmail() == null || user.getEmail().trim().length() == 0)
+		if (user.getId() == null || user.getId().trim().length() == 0 || 
+			user.getPw() == null || user.getPw().trim().length() == 0 || 
+			user.getName() == null || user.getName().trim().length() == 0 || 
+			user.getEmail() == null || user.getEmail().trim().length() == 0)
 			return;
 		// 정규표현식 체크해야 하는데 나중에 할 예정
 
