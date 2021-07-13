@@ -2,6 +2,7 @@ package kr.green.test.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,42 +15,34 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public ModelAndView home(ModelAndView mv) {
-		mv.setViewName("home");
-		return mv;
-	}
-	@RequestMapping(value = "/signin", method = RequestMethod.GET)
+	
+	@GetMapping(value = "/signin")
 	public ModelAndView signinGet(ModelAndView mv) {
-		mv.setViewName("signin");
+		mv.setViewName("member/signin");
 		return mv;
 	}
-	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	@PostMapping(value = "/signin")
 	public ModelAndView signinPost(ModelAndView mv, MemberVO user) {
-		MemberVO dbUser = memberService.signin(user);
-		if(dbUser != null) {
-			mv.setViewName("redirect:/test");
+		MemberVO loginUser = memberService.signin(user);
+		if(loginUser != null) {
+			mv.setViewName("redirect:/");
 		}
 		else {
 			mv.setViewName("redirect:/signin");
 		}
-		mv.addObject("user",dbUser);
+		mv.addObject("user",loginUser);
 		return mv;
 	}
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public ModelAndView signupGet(ModelAndView mv) {
-		mv.setViewName("signup");
+	
+	@GetMapping(value = "/signup")
+	public ModelAndView signupGet(ModelAndView mv) { 
+		mv.setViewName("member/signup");
 		return mv;
 	}
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	@PostMapping(value = "/signup")
 	public ModelAndView signupPost(ModelAndView mv, MemberVO user) {
-		boolean isSignup = memberService.signup(user);
-		if(isSignup) {
-			mv.setViewName("redirect:/test");
-		}
-		else {
-			mv.setViewName("redirect:/signup");
-		}
+		memberService.signup(user);
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 }

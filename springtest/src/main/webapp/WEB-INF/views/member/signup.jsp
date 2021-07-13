@@ -43,6 +43,36 @@
 	</div>
 	<button class="btn btn-outline-success col-12">회원가입</button>
 </form>
-
+<script type="text/javascript">
+	$(function(){
+		$('form').sumit(function() {
+			var id = $('[name=id]').val();
+			var pw = $('[name=pw]').val();
+			var pw2 = $('[name=pw2]').val();
+			var name = $('[name=name]').val();
+			var email = $('[name=email]').val();
+			if(id.trim() == ''){
+				alert('아이디를 입력하세요.')
+				return false;
+			}
+			if(pw.trim() == ''){
+				alert('비밀번호를 입력하세요.')
+				return false;
+			}
+			if(pw != pw2){
+				alert('비밀번호가 일치하지 않습니다.')
+				return false;
+			}
+			if(name.trim() == ''){
+				alert('이름을 입력하세요.')
+				return false;
+			}
+			if(email.trim() == ''){
+				alert('이메일을 입력하세요.')
+				return false;
+			}
+		})
+	})
+</script>
 </body>
 </html>

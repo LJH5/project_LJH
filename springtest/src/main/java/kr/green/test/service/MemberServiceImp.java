@@ -15,11 +15,6 @@ public class MemberServiceImp implements MemberService {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
     
-    @Override
-    public String getEmail(String id) {
-        return memberDao.getEmail(id);
-    }
-
 	@Override
 	public MemberVO signin(MemberVO user) {
 		if(user == null || user.getId() == null) {
@@ -33,13 +28,21 @@ public class MemberServiceImp implements MemberService {
 	}
 
 	@Override
-	public boolean signup(MemberVO user) {
-		if(user == null || memberDao.getMember(user.getId()) != null) {
-			return false;
-		}
-		String encPw = passwordEncoder.encode(user.getPw());
-		user.setPw(encPw);
-		memberDao.signup(user);
-		return true;
+	public void signup(MemberVO user) {
+		if (user == null)
+			return;
+
+		// 필수 항목 체크
+		if (user.getId() == null || user.getId().trim().length() == 0 || user.getPw() == null
+				|| user.getPw().trim().length() == 0 || user.getName() == null || user.getName().trim().length() == 0
+				|| user.getEmail() == null || user.getEmail().trim().length() == 0)
+			return;
+		// 정규표현식 체크해야 하는데 나중에 할 예정
+
+		// 암호화
+		String ePw = passwordEncoder.encode(user.getPw());
+		user.setPw(ePw);
+		// 회원가입
+		memberDao.insertMember(user);
 	}
 }
