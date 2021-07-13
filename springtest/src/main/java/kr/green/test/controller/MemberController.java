@@ -28,12 +28,28 @@ public class MemberController {
 	public ModelAndView signinPost(ModelAndView mv, MemberVO user) {
 		MemberVO dbUser = memberService.signin(user);
 		if(dbUser != null) {
-			mv.setViewName("redirect:/");
+			mv.setViewName("redirect:/test");
 		}
 		else {
 			mv.setViewName("redirect:/signin");
 		}
 		mv.addObject("user",dbUser);
+		return mv;
+	}
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public ModelAndView signupGet(ModelAndView mv) {
+		mv.setViewName("signup");
+		return mv;
+	}
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public ModelAndView signupPost(ModelAndView mv, MemberVO user) {
+		boolean isSignup = memberService.signup(user);
+		if(isSignup) {
+			mv.setViewName("redirect:/test");
+		}
+		else {
+			mv.setViewName("redirect:/signup");
+		}
 		return mv;
 	}
 }

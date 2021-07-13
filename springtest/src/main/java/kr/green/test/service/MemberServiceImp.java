@@ -28,4 +28,13 @@ public class MemberServiceImp implements MemberService {
 		}
 		return dbUser;
 	}
+
+	@Override
+	public boolean signup(MemberVO user) {
+		if(user == null || memberDao.getMember(user.getId()) != null) {
+			return false;
+		}
+		memberDao.signup(user);
+		return true;
+	}
 }
