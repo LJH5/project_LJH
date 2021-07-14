@@ -28,7 +28,7 @@
 	      <a class="nav-link" href="<%=request.getContextPath()%>/signout">로그아웃</a>
 	    </li>
 	    <li class="nav-item">
-	      <a class="nav-link" href="<%=request.getContextPath()%>/board/mypage">마이페이지</a>
+	      <a class="nav-link" href="<%=request.getContextPath()%>/member/mypage">마이페이지</a>
 	    </li>
    	</c:if>
   </ul>
