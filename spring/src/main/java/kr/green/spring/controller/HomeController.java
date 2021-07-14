@@ -21,15 +21,15 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(ModelAndView mv) {
-		mv.setViewName("home");
+		mv.setViewName("/template/main/home");
 		return mv;
 	}
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public ModelAndView signinGet(ModelAndView mv) {
-		mv.setViewName("signin");
+		mv.setViewName("/template/member/signin");
 		return mv;
 	}
-	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	@RequestMapping(value = "signin", method = RequestMethod.POST)
 	public ModelAndView signinPost(ModelAndView mv,MemberVO user) {
 		//서비스에게 아이디와 비밀번호를 전달하면, 해당 정보가 DB에 있으면
 		//회원 정보를 없으면 null을 반환
@@ -49,7 +49,7 @@ public class HomeController {
 	}
 	@RequestMapping(value="/signup", method = RequestMethod.GET)
 	public ModelAndView signupGet(ModelAndView mv) {
-		mv.setViewName("signup");
+		mv.setViewName("/template/member/signup");
 		return mv;
 	}
 	@RequestMapping(value="/signup", method = RequestMethod.POST)
@@ -71,7 +71,7 @@ public class HomeController {
 		//MemberVO user = memberService.getMember(id);
 		//가져온 회원 정보를 화면에 전달, 세션에 있는 user의 정보를 가져옴
 		//mv.addObject("user", user);
-		mv.setViewName("member/mypage");
+		mv.setViewName("/template/member/mypage");
 		return mv;
 	}
 	@RequestMapping(value="/member/mypage", method = RequestMethod.POST)
