@@ -4,12 +4,16 @@
 <!doctype html>
 <html>
 <head>
-
+<style>
+	.navbar{
+		margin-bottom: 10px;
+	}	
+</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand -->
-  <a class="navbar-brand" href="<%=request.getContextPath()%>/">Logo</a>
+  <a class="navbar-brand" href="<%=request.getContextPath()%>/">메인</a>
 
   <!-- Links -->
   <ul class="navbar-nav">

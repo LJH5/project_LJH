@@ -31,9 +31,17 @@
 		<label>내용</label>
 		<textarea class="form-control" neme="contents" readonly>${board.contents}</textarea>
 	</div>
-	<a href="<%=request.getContextPath()%>/board/modify?num=${board.num}"><button class="btn btn-outline-success">수정</button></a>
-	<a href="<%=request.getContextPath()%>/board/delete?num=${board.num}"><button class="btn btn-outline-success">삭제</button></a>
+	<c:if test="${file != null}">
+		<div class="form-group">
+			<label>첨부파일</label>
+			<a href="<%=request.getContextPath()%>/board/download?fileName=${file.name}" class="form-control">${file.ori_name}</a>
+		</div>
+	</c:if>
 	<a href="<%=request.getContextPath()%>/board/list"><button class="btn btn-outline-success">목록</button></a>
+	<c:if test="${board != null && user.id eq board.writer}">
+		<a href="<%=request.getContextPath()%>/board/modify?num=${board.num}"><button class="btn btn-outline-success">수정</button></a>
+		<a href="<%=request.getContextPath()%>/board/delete?num=${board.num}"><button class="btn btn-outline-danger">삭제</button></a>
+	</c:if>
 </div>
 </c:if>
 <c:if test="${board ==null}">
