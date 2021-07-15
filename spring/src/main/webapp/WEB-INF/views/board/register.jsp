@@ -27,9 +27,9 @@
 <script type="text/javascript">
 	$(function(){
 	    $(document).on('change','input[name=file]',function(){	
-			var val = $(this).val();
+			var val = $(this).val(); //text 아님, 파일의 이름을 가져옴
 			var str = '<input type="file" class="form-control" name="file" data=""/>';	
-			var length = $('input[name=file]').length;
+			var length = $('input[name=file]').length; // length 길이 아님 개수임
 			var data = $(this).attr('data');
 			if(val == ''){
 				$(this).remove();
