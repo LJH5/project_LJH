@@ -18,11 +18,32 @@
 		<textarea class="form-control" rows="10" name="contents"></textarea>
 	</div>
 	<!-- 파일 다운로드 기능 -->
-	 <div class="form-group">
+	 <div class="form-group files">
         <label>파일</label>
-        <input type="file" class="form-control" name="file"/>
+        <input type="file" class="form-control" name="file" data=""/>
     </div>
 	<button type="submit" class="btn btn-outline-success">등록</button>
 </form>
+<script type="text/javascript">
+	$(function(){
+	    $(document).on('change','input[name=file]',function(){	
+			var val = $(this).val();
+			var str = '<input type="file" class="form-control" name="file" data=""/>';	
+			var length = $('input[name=file]').length;
+			var data = $(this).attr('data');
+			if(val == ''){
+				$(this).remove();
+				if(length == 3 && $('input[name=file]').last().val() != ''){
+					$('.files').append(str);				
+				}
+			}else{
+				if( length < 3 && data == '' ){
+					$('.files').append(str);
+				}
+				$(this).attr('data',val);
+			}
+		})
+	})
+</script>
 </body>
 </html>

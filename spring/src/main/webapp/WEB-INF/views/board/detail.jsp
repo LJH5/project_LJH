@@ -31,10 +31,12 @@
 		<label>내용</label>
 		<textarea class="form-control" neme="contents" readonly>${board.contents}</textarea>
 	</div>
-	<c:if test="${file != null}">
+	<c:if test="${fileList.size() != 0}">
 		<div class="form-group">
 			<label>첨부파일</label>
-			<a href="<%=request.getContextPath()%>/board/download?fileName=${file.name}" class="form-control">${file.ori_name}</a>
+			<c:forEach items="${fileList}" var="file">
+				<a href="<%=request.getContextPath()%>/board/download?fileName=${file.name}" class="form-control mb-2">${file.ori_name}</a>
+			</c:forEach>
 		</div>
 	</c:if>
 	<a href="<%=request.getContextPath()%>/board/list"><button class="btn btn-outline-success">목록</button></a>
