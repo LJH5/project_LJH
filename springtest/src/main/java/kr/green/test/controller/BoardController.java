@@ -121,5 +121,11 @@ public class BoardController {
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
-	
+	@ResponseBody
+	@RequestMapping("download")
+	public ResponseEntity<byte[]> downloadFile(String fileName)throws Exception{
+	    InputStream in = null;
+	    ResponseEntity<byte[]> entity = boardService.downloadFile(fileName);
+	    return entity;
+	}
 }
