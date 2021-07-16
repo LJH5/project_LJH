@@ -1,0 +1,10 @@
+파일 첨부 기능
+의존성 추가 -> bean 등록(용량추가)-> form태그에 enctype="multipart/form-data" 추가
+-> from태그 안에 input 추가 -> boardServiceImp에 uploadPath 지정 -> utils 패키지 생성
+-> uploadFileUtils 클래스 생성 -> boardController registerPost의 매개변수에  MultipartFile[] files추가
+-> boardService.insertBoard(board, user, files); -> boardService에  MultipartFile[] files추가
+-> boardServiceImp insertBoard에  MultipartFile[] files추가 -> Mapper insertBoard에 useGeneratedKeys, parameterType, keyProperty 추가
+-> boardServiceImp insertBoard에 조건추가 후 반복문 사용 ->예외처리 -> FileVO 생성
+-> boardServiceImp insertBoard에 조건추가 ->Mapper에 insertFile 추가
+
+게시글 상세에서 첨부파일 확인 및 클릭시 다운로드 기능
