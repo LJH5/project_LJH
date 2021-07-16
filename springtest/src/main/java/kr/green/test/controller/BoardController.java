@@ -1,13 +1,16 @@
 package kr.green.test.controller;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,6 +19,7 @@ import kr.green.test.pagination.PageMaker;
 import kr.green.test.service.BoardService;
 import kr.green.test.service.MemberService;
 import kr.green.test.vo.BoardVO;
+import kr.green.test.vo.FileVO;
 import kr.green.test.vo.MemberVO;
 import lombok.extern.log4j.Log4j;
 
@@ -49,6 +53,10 @@ public class BoardController {
 		BoardVO board = boardService.getBoard(num);
 		mv.addObject("board", board);
 		mv.addObject("msg", msg);
+		
+		ArrayList<FileVO> fileList = boardService.getFileVOList(num);
+		mv.addObject("fileList", fileList);
+		
 		mv.setViewName("/template/board/detail");
 		return mv;
 	}
@@ -113,5 +121,5 @@ public class BoardController {
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
-
+	
 }

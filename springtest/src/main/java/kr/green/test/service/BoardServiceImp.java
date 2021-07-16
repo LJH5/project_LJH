@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -120,4 +121,12 @@ public class BoardServiceImp implements BoardService {
 			}
 		}
 	}
+
+	@Override
+	public ArrayList<FileVO> getFileVOList(Integer num) {
+		if(num == null)
+			return null;
+		return boardDao.getFileVOList(num);
+	}
+
 }
