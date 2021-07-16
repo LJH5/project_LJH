@@ -56,7 +56,7 @@ public class BoardController {
 		
 		ArrayList<FileVO> fileList = boardService.getFileVOList(num);
 		mv.addObject("fileList", fileList);
-		
+		log.info(fileList);
 		mv.setViewName("/template/board/detail");
 		return mv;
 	}
