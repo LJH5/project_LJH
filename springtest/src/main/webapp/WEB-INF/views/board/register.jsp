@@ -4,18 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>게시글 등록</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<title>게시글 등록</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<form class="container" method="post" action="<%=request.getContextPath()%>/board/register">
+	<form class="container" method="post" action="<%=request.getContextPath()%>/board/register" enctype="multipart/form-data">
 		<h1>게시글 등록</h1>
 		<div class="form-group">
 			<label>제목</label> <input type="text" class="form-control"
@@ -24,6 +20,12 @@
 		<div class="form-group">
 			<label>내용</label>
 			<textarea class="form-control" name="contents" rows="10"></textarea>
+		</div>
+		<div class="form-group">
+			<label>첨부파일</label>
+			<input type="file" class="form-control" name="files">
+			<input type="file" class="form-control" name="files">
+			<input type="file" class="form-control" name="files">
 		</div>
 		<button type="submit" class="btn btn-outline-danger">등록</button>
 		<a href="<%=request.getContextPath() %>/board/list"><button type="button" class="btn btn-outline-success">목록</button></a>
