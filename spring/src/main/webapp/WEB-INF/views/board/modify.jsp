@@ -24,9 +24,12 @@
 	<div class="form-group files">
 		<label>첨부파일</label>
 		<c:forEach items="${fileList}" var="file">
-			<div class="form-control">${file.ori_name}<button type="button" class="del-btn">X</button></div>
+			<div class="form-control attach">
+				<span>${file.ori_name}</span><button type="button" class="del-btn">X</button>
+				<input type="hidden" name="fileNum" value="${file.num}">
+			</div>
 		</c:forEach>
-		<c:if test="${fileList != null && fileList.size()<3}">
+		<c:if test="${fileList == null || fileList.size() < 3}">
 			<input type="file" class="form-control" name="file" data=""/>
 		</c:if>
 	</div>
@@ -39,20 +42,21 @@
 			$('.del-btn').click(function(){
 				var str = '<input type="file" class="form-control" name="file" data=""/>';
 				$(this).parent().remove();
-				if($('input[name=file]').length == 3)
+				if($('.attach').length == 2)
 					$('.files').append(str)
 			})
-		 	$(document).on('change','input[name=file]',function(){	
-				var val = $(this).val(); //text 아님, 파일의 이름을 가져옴
-				var str = '<input type="file" class="form-control" name="file" data=""/>';	
-				var length = $('input[name=file]').length; // length 길이 아님 개수임
+		 	$(document).on('change','input[name=file]',function(){
+				var val = $(this).val();
+				var str = '<input type="file" class="form-control" name="file" data=""/>';
+				var length = $('input[name=file]').length + $('.attach').length;
 				var data = $(this).attr('data');
 				if(val == ''){
 					$(this).remove();
-					if(length == 3 && $('input[name=file]').last().val() != ''){
-						$('.files').append(str);				
+					if(length == 3 && $('input[name=file]').last().val() != '' ){
+						$('.files').append(str);
 					}
-				}else{
+				}
+				else{
 					if( length < 3 && data == '' ){
 						$('.files').append(str);
 					}
