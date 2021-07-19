@@ -89,7 +89,21 @@ public class BoardServiceImp implements BoardService {
 			return -1;
 		}
 		// 기존 정보가 넘어오지 않는 첨부파일 삭제
-		
+		// 기존 첨부파일 가져옴
+		ArrayList<FileVO> dbFilelist = boardDao.getFileVOList(dbBoard.getNum());
+		// 화면에서 가져온 첨부파일을 배열에서 리스트로 변경(리스트에서 제공하는 contains를 이용하기 위해서)
+		ArrayList<Integer> arrayFilenums = new ArrayList<Integer>();
+		if(filenums != null) {
+			for(int tmp : filenums) {
+				arrayFilenums.add(tmp);
+			}
+		}
+		//기존 첨부파일 중에서 화면에서 가져온 첨부파일에 번호가 없으면 해당 첨부파일 삭제
+		for(FileVO tmp : dbFilelist) {
+			if(!arrayFilenums.contains(tmp.getNum())) {
+				deleteFile(tmp);
+			}
+		}
 		// 새로운 첨부파일 추가
 		if(files != null && files.length != 0) {
 			for(MultipartFile file : files) {
