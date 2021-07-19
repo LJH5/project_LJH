@@ -4,7 +4,8 @@
 <!doctype html>
 <html>
 <head>
-
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
 <body>
 <form class="container" method="post" action="<%=request.getContextPath()%>/board/modify" enctype="multipart/form-data">
@@ -19,7 +20,7 @@
 	</div>
 	<div class="form-group">
 		<label>내용</label>
-		<textarea class="form-control" rows="10" name="contents">${board.contents}</textarea>
+		<textarea id="summernote" name="contents">${board.contents}</textarea>
 	</div>
 	<div class="form-group files">
 		<label>첨부파일</label>
@@ -38,31 +39,36 @@
 	<button type="submit" class="btn btn-outline-success">등록</button>
 </form>
 <script type="text/javascript">
-		$(function(){
-			$('.del-btn').click(function(){
-				var str = '<input type="file" class="form-control" name="file" data=""/>';
-				$(this).parent().remove();
-				if($('.attach').length == 2)
-					$('.files').append(str)
-			})
-		 	$(document).on('change','input[name=file]',function(){
-				var val = $(this).val();
-				var str = '<input type="file" class="form-control" name="file" data=""/>';
-				var length = $('input[name=file]').length + $('.attach').length;
-				var data = $(this).attr('data');
-				if(val == ''){
-					$(this).remove();
-					if(length == 3 && $('input[name=file]').last().val() != '' ){
-						$('.files').append(str);
-					}
+	$(function(){
+		$('.del-btn').click(function(){
+			var str = '<input type="file" class="form-control" name="file" data=""/>';
+			$(this).parent().remove();
+			if($('.attach').length == 2)
+				$('.files').append(str)
+		})
+	 	$(document).on('change','input[name=file]',function(){
+			var val = $(this).val();
+			var str = '<input type="file" class="form-control" name="file" data=""/>';
+			var length = $('input[name=file]').length + $('.attach').length;
+			var data = $(this).attr('data');
+			if(val == ''){
+				$(this).remove();
+				if(length == 3 && $('input[name=file]').last().val() != '' ){
+					$('.files').append(str);
 				}
-				else{
-					if( length < 3 && data == '' ){
-						$('.files').append(str);
-					}
-					$(this).attr('data',val);
+			}
+			else{
+				if( length < 3 && data == '' ){
+					$('.files').append(str);
 				}
-			})
+				$(this).attr('data',val);
+			}
+		})
+		$('#summernote').summernote({
+        	placeholder: '내용을 작성하세요.',
+        	tabsize: 2,
+        	height: 400
+      	});
 	})
 	
 </script>
