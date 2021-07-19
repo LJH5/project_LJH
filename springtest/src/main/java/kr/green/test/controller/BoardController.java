@@ -76,7 +76,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public ModelAndView modifyGet(ModelAndView mv, Integer num, HttpServletRequest r) {
+	public ModelAndView modifyGet(ModelAndView mv, Integer num, HttpServletRequest r, MultipartFile[] files) {
 		BoardVO board = boardService.getBoard(num);
 		mv.addObject("board", board);
 		mv.setViewName("/template/board/modify");
@@ -84,13 +84,17 @@ public class BoardController {
 		if(board == null || !board.getWriter().equals(user.getId())) {
 			mv.setViewName("redirect:/board/list");
 		}
+		//첨부파일 가져오기
+		ArrayList<FileVO> fileList = boardService.getFileVOList(num);
+		//화면에 첨부파일 전송
+		mv.addObject("fileList", fileList);
 		return mv;
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest r) {
+	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest r, MultipartFile[] files, Integer[] filenums) {
 		MemberVO user = memberService.getMember(r);
-		int res = boardService.updateBoard(board, user);
+		int res = boardService.updateBoard(board, user, files, filenums);
 		String msg=""; 
 		mv.setViewName("redirect:/board/detail");
 		if(res == 1)
@@ -108,7 +112,6 @@ public class BoardController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public ModelAndView deletePost(ModelAndView mv, Integer num, HttpServletRequest r) {
-		log.info("/board/delete: " + num);
 		MemberVO user = memberService.getMember(r);
 		int res = boardService.deleteBoard(num, user);
 		if(res == 1) 
@@ -122,10 +125,8 @@ public class BoardController {
 		return mv;
 	}
 	@ResponseBody
-	@RequestMapping("download")
+	@RequestMapping("/download")
 	public ResponseEntity<byte[]> downloadFile(String fileName)throws Exception{
-	    InputStream in = null;
-	    ResponseEntity<byte[]> entity = boardService.downloadFile(fileName);
-	    return entity;
+		return boardService.downloadFile(fileName);
 	}
 }

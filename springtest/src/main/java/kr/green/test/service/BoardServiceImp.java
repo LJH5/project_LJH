@@ -23,7 +23,7 @@ import kr.green.test.vo.MemberVO;
 public class BoardServiceImp implements BoardService {
 	@Autowired
 	BoardDAO boardDao;
-	private String uploadPath ="E:\\JAVA_LJH\\uploadfiles";
+	private String uploadPath ="C:\\Users\\sigma\\Desktop\\JAVA_LJH\\uploadfiles";
 
 	@Override
 	public ArrayList<BoardVO> getBoardList(Criteria cri) {
@@ -77,17 +77,26 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	@Override
-	public int updateBoard(BoardVO board, MemberVO user) {
-		if (board == null) {
+	public int updateBoard(BoardVO board, MemberVO user, MultipartFile[] files, Integer[] filenums) {
+		if (board == null || board.getNum() <= 0) {
 			return 0;
 		}
 		if(user == null) {
 			return -1;
 		}
 		BoardVO dbBoard = boardDao.getBoard(board.getNum());
-		if(!user.getId().equals(dbBoard.getWriter())) {
+		if(dbBoard==null || !user.getId().equals(dbBoard.getWriter())) {
 			return -1;
 		}
+		// 기존 정보가 넘어오지 않는 첨부파일 삭제
+		
+		// 새로운 첨부파일 추가
+		if(files != null && files.length != 0) {
+			for(MultipartFile file : files) {
+				insertFile(file, board.getNum());
+			}
+		}
+		
 		dbBoard.setContents(board.getContents());
 		dbBoard.setTitle(board.getTitle());
 		return boardDao.updateBoard(dbBoard);
@@ -111,19 +120,6 @@ public class BoardServiceImp implements BoardService {
 	public int getTotalCount(Criteria cri) {
 		
 		return boardDao.getTotalCount(cri);
-	}
-	
-	private void insertFileVO(MultipartFile file, int num) {
-		if(file != null && file.getOriginalFilename().length() != 0) {
-			try {
-				String filename = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
-				FileVO fileVo = new FileVO(num, filename, file.getOriginalFilename());
-				boardDao.insertFile(fileVo);
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("첨부파일 업로드 중 예외 발생");
-			}
-		}
 	}
 
 	@Override
@@ -155,5 +151,30 @@ public class BoardServiceImp implements BoardService {
 		    }
 		    return entity;
 	}
+	private void deleteFile(FileVO file) {
+		//서버에 있는 파일을 삭제
+		File f = new File(uploadPath + file.getName());
+		if(f.exists()) {
+			f.delete();
+		}
+		//DB에 첨부파일 정보를 삭제 처리
+		boardDao.deleteFile(file.getNum());
+	}
+	private void insertFile(MultipartFile file, int num) {
+		if(file != null && file.getOriginalFilename().length() != 0) {
+			try {
+				//첨부파일을 업로드 한 후 경로를 반환해서 ori_name에 저장
+				String name = UploadFileUtils.uploadFile(uploadPath, 
+						file.getOriginalFilename(), file.getBytes());
+				//첨부파일 객체 생성
+				FileVO fvo = new FileVO(num,name,file.getOriginalFilename());
+				//DB에 첨부파일 정보 추가
+				boardDao.insertFile(fvo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 
 }
