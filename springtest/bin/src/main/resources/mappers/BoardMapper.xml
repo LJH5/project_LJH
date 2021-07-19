@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.green.test.dao.BoardDAO">
+	<select id="getBoardList" resultType="kr.green.test.vo.BoardVO">
+		select * from board
+		where valid = 'I'
+		<if test="cri.type != 1 and cri.type != 2">
+			and (contents like concat('%',#{cri.search},'%')
+			or title like concat('%',#{cri.search},'%')
+			or writer like concat('%',#{cri.search},'%'))
+		</if>
+		<if test="cri.type == 1">
+			and (contents like concat('%',#{cri.search},'%')
+			or title like concat('%',#{cri.search},'%'))
+		</if>
+		<if test="cri.type == 2">
+			and writer like concat('%',#{cri.search},'%')
+		</if>
+		order by num desc
+		limit #{cri.pageStart},#{cri.perPageNum}
+	</select>
+	<select id="getBoard" resultType="kr.green.test.vo.BoardVO">
+		select * from board where valid = 'I' and num = #{num}
+	</select>
+	<update id="updateBoard">
+		update board set
+		title=#{board.title},
+		contents=#{board.contents},
+		views=#{board.views},
+		valid=#{board.valid}
+		where num=#{board.num}
+	</update>
+	<insert id="insertBoard" useGeneratedKeys="true" parameterType="kr.green.test.vo.BoardVO" keyProperty="board.num">
+		insert into board(title, writer, contents)
+		values(#{board.title}, #{board.writer}, #{board.contents})
+	</insert>
+	<select id="listPage" resultType="kr.green.test.vo.BoardVO">
+		select * from board
+		order by number desc
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	<select id="getTotalCount" resultType="int">
+		select count(*) from board where valid = 'I'
+		<if test="cri.type != 1 and cri.type != 2">
+			and (contents like concat('%',#{cri.search},'%')
+			or title like concat('%',#{cri.search},'%')
+			or writer like concat('%',#{cri.search},'%'))
+		</if>
+		<if test="cri.type == 1">
+			and (contents like concat('%',#{cri.search},'%')
+			or title like concat('%',#{cri.search},'%'))
+		</if>
+		<if test="cri.type == 2">
+			and writer like concat('%',#{cri.search},'%')
+		</if>
+	</select>
+	<insert id="insertFile">
+		insert into file(board, name, ori_name)
+		values(#{file.board},#{file.name},#{file.ori_name})
+	</insert>
+	<select id="getFileVOList" resultType="kr.green.test.vo.FileVO">
+		select * from file where state = 'I' and board = #{num}
+	</select>
+</mapper>
