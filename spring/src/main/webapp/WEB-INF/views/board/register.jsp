@@ -44,11 +44,11 @@
 				$(this).attr('data',val);
 			}
 		})
-	      $('#summernote').summernote({
-	        placeholder: '내용을 작성하세요.',
-	        tabsize: 2,
-	        height: 400
-	      });
+     	$('#summernote').summernote({
+        	placeholder: '내용을 작성하세요.',
+        	tabsize: 2,
+        	height: 400
+      	});
 	})
 </script>
 </body>
