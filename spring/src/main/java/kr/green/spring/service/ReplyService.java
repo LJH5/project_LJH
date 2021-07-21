@@ -7,10 +7,10 @@ import kr.green.spring.vo.ReplyVO;
 
 public interface ReplyService {
 
-void insertReply(ReplyVO reply);
-
-ArrayList<ReplyVO> getReplyList(Integer num, Criteria cri);
-
-int getTotalCount(Integer num);
+	void insertReply(ReplyVO reply);
+	
+	ArrayList<ReplyVO> getReplyList(Integer num, Criteria cri);
+	
+	int getTotalCount(Integer num);
 
 }

@@ -48,13 +48,9 @@
 		<div class="contents">
 			<div class="reply-list">
 			</div>
-			<ul class="pagination">
-			    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-			    <li class="page-item"><a class="page-link" href="#">1</a></li>
-			    <li class="page-item"><a class="page-link" href="#">2</a></li>
-			    <li class="page-item"><a class="page-link" href="#">3</a></li>
-			    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-			  </ul>
+			<ul class="pagination justify-content-center">
+			   
+			</ul>
 			<div class="reply-box form-group">
 				<textarea class="reply-input form-control mb-2"></textarea>
 				<button type="button" class="reply-btn btn btn-outline-success">등록</button>
@@ -76,69 +72,63 @@
 </c:if>
 <script type="text/javascript">
 $(function(){
-	$('.re-btn').click(function(){
-		// 추천 버튼이면 state를 1로, 비추천이면 -1로 
-		var state = $(this).hasClass('up') ? 1 : -1;
-		var num = '<c:out value="${board.num}"/>'
-		var obj = $(this);
+	$('.reply-btn').click(function(){
+		var rp_bd_num = '${board.num}';
+		var rp_me_id = '${user.id}';
+		var rp_content = $('.reply-input').val();
+		
+		if(rp_me_id == ''){
+			alert('댓글을 달려면 로그인하세요.');
+			return ;
+		}
+		
+		var data = {
+				'rp_bd_num' : rp_bd_num, 
+				'rp_me_id'  : rp_me_id, 
+				'rp_content': rp_content};
 		$.ajax({
-			type: 'get',
-			url: '<%=request.getContextPath()%>/board/recommend/' + state + '/'+ num,
-			dataType: "json",
-			success: function(res, status, xhr){
-				var str = '';
-				var str2 ='';
-				if(state == 1)
-					str2='추천';
-				else
-					str2= '비추천';
-				
-				if(res.result == 0)
-					str='취소 되었습니다.';
-				else if(res.result == 1)
-					str='을 했습니다.';
-				else
-					str ='추천/비추천은 회원만 가능합니다.';
-				if(res.result != -1){
-					alert(str2 + str);					
-				}else{
-					alert(str);
-				}
-			
-				if(res.result == 1){
-					$('.re-btn').removeClass('btn-success').addClass('.btn-outline-success');
-					obj.removeClass('.btn-outline-success').addClass('.btn-success');
-				}else if(res.result == 0){
-					obj.removeClass('btn-success').addClass('.btn-outline-success');
+			type:'post',
+			url : '<%=request.getContextPath()%>/reply/ins',
+			data: JSON.stringify(data),
+			contentType : "application/json; charset=utf-8",
+			success : function(result, status, xhr){
+				if(result == 'ok'){
+					alert('댓글 등록이 완료 되었습니다.');
+					readReply('${board.num}',1);
 				}
 			},
-			error: function(xhr, status, e){
+			error : function(xhr, status, e){
 				
 			}
+			
 		})
 	})
+	readReply('${board.num}',1);
 })
 $(function(){
 	$('.reply-btn').click(function(){
 		var rp_bd_num = '${board.num}';
 		var rp_me_id = '${user.id}';
 		var rp_content = $('.reply_input').val();
-		
+		console.log(rp_bd_num);
+		console.log(rp_bd_num);
+		console.log(rp_bd_num);
 		if(rp_me_id == ''){
 			alert('댓글을 달려면 로그인하세요')
 			return;
 		}
 		
-		var data = {'rp_bd_num': rp_bd_num, 'rp_me_id': rp_me_id, 'rp_content':rp_content}
+		var data = {'rp_bd_num': rp_bd_num, 'rp_me_id': rp_me_id, 'rp_content': rp_content};
 		$.ajax({
 			type: 'post',
 			url: '<%=request.getContextPath()%>/reply/ins',
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			success: function(result, status, xhr){
-				if(result == 'ok')
+				if(result == 'ok'){
 					alert('등록 완료')
-					readReply('${board.num}',1);
+					readReply('${board.num}',1);					
+				}
 			},
 			error: function(xhr, status, e){
 				
@@ -155,8 +145,8 @@ function readReply(rp_bd_num, page){
 		dataType: "json",
 		success: function(result, status, xhr){
 			var list = result['list'];
-			var str='';
-			for(i=0;i<list.length; i++){
+			var str = '';
+			for(i = 0; i<list.length; i++){
 				str += 
 				'<div class="form-group">'+
 					'<label>'+list[i].rp_me_id+'</label>'+
@@ -164,6 +154,23 @@ function readReply(rp_bd_num, page){
 				'</div>';			
 			}
 			$('.reply-list').html(str);
+			var pm = result['pm'];
+			var pmStr = '';
+			if(pm['prev']){
+				pmStr += '<li class="page-item" data="'+(pm['startPage']-1)+'"><a class="page-link" href="javascript:void(0);">이전</a></li>';
+			}
+			
+		 	for(i = pm['startPage']; i<=pm['endPage']; i++){
+		 		var active = '';
+		 		if(i == pm['criteria']['page'])
+		 			active='active';
+		 		pmStr += '<li class="page-item '+active+'" data="'+i+'"><a class="page-link" href="javascript:void(0);">'+i+'</a></li>';
+		 	}
+		 	
+		    if(pm['next']){
+				pmStr += '<li class="page-item" data="'+(pm['endPage']+1)+'"><a class="page-link" href="javascript:void(0);">다음</a></li>';
+			}
+		    $('.pagination').html(pmStr);
 		},
 		error: function(xhr, status, e){
 			

@@ -5,7 +5,7 @@
 <mapper namespace="kr.green.spring.dao.ReplyDAO">
 	<insert id="insertReply">
 		insert into reply(rp_bd_num, rp_me_id, rp_content)
-			values(#{reply.rp_bd_num},#{reply.rp_me_id},#{reply.rp_content})
+			values(#{reply.rp_bd_num},#{reply.rp_me_id},#{reply.rp_content} )
 	</insert>
 	<select id="getReplyList" resultType="kr.green.spring.vo.ReplyVO">
 		select * from reply 
