@@ -20,6 +20,7 @@
 		<label>아이디</label>
 		<input type="text" class="form-control" name="id">
 	</div>
+		<button id="dupCheck" type="button" class="input-group-append btn btn-outline-success">아이디 중복 확인</button>
 	<div class="form-group">
 		<label>비밀번호</label>
 		<input type="password" class="form-control" name="pw" id="pw">
@@ -47,6 +48,23 @@
 </form>
 <script type="text/javascript">
 	$(function(){
+		$('#dupCheck').click(funtion(){
+			var id = $('[name=id]').val();
+			$.ajax({
+				type: 'get',
+				url: '<%=request.getContextPath()%>/member/idcheck' + id,
+				success: function(result, status, xhr){
+					if(result == 'POSSIBLE'){
+						alert('가능')
+					}else{
+						alert('불가능')
+					}
+				},
+				error: function(xhr, status, e){
+					
+				}
+			})
+		})
 	    $("#signup").validate({
 	        rules: {  //규칙
 	            id: {	// 네임이 id
@@ -89,7 +107,7 @@
 	            },
 	            name: {
 	                required : "필수 정보입니다.",
-	                minlength : "최소 {0}글자이상이어야 합니다"
+	                minlength : "최소 {0}글자이상이어야 합니다."
 	            },
 	            email: {
 	                required : "필수 정보입니다.",

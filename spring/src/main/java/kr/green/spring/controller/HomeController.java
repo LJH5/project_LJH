@@ -1,18 +1,20 @@
 package kr.green.spring.controller;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.spring.service.MemberService;
 import kr.green.spring.vo.MemberVO;
-import lombok.Data;
 
 @Controller
 public class HomeController {
@@ -94,5 +96,24 @@ public class HomeController {
 		request.getSession().removeAttribute("user");
 		mv.setViewName("redirect:/");
 		return mv;
+	}
+	@ResponseBody
+	@GetMapping(value="/member/idcheck/{id}")
+	public String memberIDcheckPost(@PathVariable("id") String id) {
+		MemberVO user = memberService.getMember(id);
+		String res = user != null ? "IMPOSSIBLE" : "POSSIBLE";
+		return res;
+	}
+	//@RestController = @Controller + @ResponsBody
+	//@ResponsBody: 서버에서 전송하는 데이터가 화면이 아닌 테이터 자체가 된다
+
+	@ResponseBody
+	@PostMapping(value="/member/signin")
+	public String memberSigninPost(@RequestBody MemberVO user, HttpServletRequest r) {
+		MemberVO dbUser =  memberService.signin(user);
+		if(dbUser != null) {
+			r.getSession().setAttribute("user", dbUser);
+		}
+		return dbUser != null ? "success" : "fail";
 	}
 }

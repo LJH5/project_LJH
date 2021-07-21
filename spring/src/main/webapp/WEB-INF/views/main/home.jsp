@@ -8,6 +8,9 @@
 	
 </head>
 <body>
+<button id="btn">클릭</button>
+<script type="text/javascript">
 
+</script>
 </body>
 </html>
