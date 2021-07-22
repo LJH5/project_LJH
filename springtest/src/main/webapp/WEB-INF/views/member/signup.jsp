@@ -14,6 +14,7 @@
 		<label>아이디</label>
 		<input type="text" class="form-control" name="id">
 	</div>
+		<button type="button" id="dupBtn" class="btn btn-outline-success col-12">아이디 중복 검사</button>
 	<div class="form-group">
 		<label>비밀번호</label>
 		<input type="password" class="form-control" name="pw">
@@ -40,35 +41,55 @@
 	<button class="btn btn-outline-success col-12">회원가입</button>
 </form>
 <script type="text/javascript">
-	$(function(){
-		$('form').sumit(function() {
-			var id = $('[name=id]').val();
-			var pw = $('[name=pw]').val();
-			var pw2 = $('[name=pw2]').val();
-			var name = $('[name=name]').val();
-			var email = $('[name=email]').val();
-			if(id.trim() == ''){
-				alert('아이디를 입력하세요.')
-				return false;
-			}
-			if(pw.trim() == ''){
-				alert('비밀번호를 입력하세요.')
-				return false;
-			}
-			if(pw != pw2){
-				alert('비밀번호가 일치하지 않습니다.')
-				return false;
-			}
-			if(name.trim() == ''){
-				alert('이름을 입력하세요.')
-				return false;
-			}
-			if(email.trim() == ''){
-				alert('이메일을 입력하세요.')
-				return false;
+$(function(){
+	$('#dupBtn').click(function(){
+		var id = $('[name=id]').val();
+		if(id == ''){
+			alert('아이디를 입력하세요.');
+			return;
+		}
+		$.ajax({
+			type:'get',
+			url : '<%=request.getContextPath()%>/member/idCheck/'+ id,
+			success : function(result, status, xhr){
+				if(result == 'POSSIBLE')
+					alert('사용 가능한 아이디입니다.');
+				else
+					alert('사용 불가능한 아이디입니다.');
+			},
+			error : function(xhr, status, e){
+				console.log('에러 발생');
 			}
 		})
 	})
+	$('form').submit(function(){
+		var id = $('[name=id]').val();
+		var pw = $('[name=pw]').val();
+		var pw2= $('[name=pw2]').val();
+		var name = $('[name=name]').val();
+		var email= $('[name=email]').val();
+		if(id.trim() == ''){
+			alert('아이디를 입력하세요.');
+			return false;
+		}
+		if(pw.trim() == ''){
+			alert('비밀번호를 입력하세요.');
+			return false;
+		}
+		if(pw != pw2){
+			alert('비밀번호가 일치하지 않습니다.');
+			return false;
+		}
+		if(name.trim() == ''){
+			alert('이름을 입력하세요.');
+			return false;
+		}
+		if(email.trim() == ''){
+			alert('이메일을 입력하세요.');
+			return false;
+		}
+	})
+})
 </script>
 </body>
 </html>
