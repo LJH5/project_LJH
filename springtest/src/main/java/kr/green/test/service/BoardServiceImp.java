@@ -18,6 +18,7 @@ import kr.green.test.utils.UploadFileUtils;
 import kr.green.test.vo.BoardVO;
 import kr.green.test.vo.FileVO;
 import kr.green.test.vo.MemberVO;
+import kr.green.test.vo.RecommendVO;
 
 @Service
 public class BoardServiceImp implements BoardService {
@@ -189,6 +190,28 @@ public class BoardServiceImp implements BoardService {
 			}
 		}
 	}
-	
+
+	@Override
+	public String recommend(MemberVO user, int board, int state) {
+		if(user == null)
+			return "GUEST";
+		RecommendVO rvo = boardDao.getRecommend(board, user.getId());
+		System.out.println(rvo);
+		if(rvo == null) {
+			//boardDao.insertRecommend(board, user.getId(), state);
+			return state == 1 ? "UP" : "DOWN";
+		}
+		state = state == rvo.getState() ? 0 : state;
+		rvo.setState(state);
+		//boardDao.updateRecommend(rvo);
+		return state == 0 ? "CANCEL" : (state == 1 ? "UP" : "DOWN");
+	}
+
+	@Override
+	public RecommendVO getRecommend(Integer num, MemberVO user) {
+		if(num == null || user == null)
+			return null;
+		return boardDao.getRecommend(num, user.getId());
+	}	
 
 }

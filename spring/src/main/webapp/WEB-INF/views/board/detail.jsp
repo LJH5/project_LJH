@@ -72,38 +72,52 @@
 </c:if>
 <script type="text/javascript">
 $(function(){
-	$('.reply-btn').click(function(){
-		var rp_bd_num = '${board.num}';
-		var rp_me_id = '${user.id}';
-		var rp_content = $('.reply-input').val();
-		
-		if(rp_me_id == ''){
-			alert('댓글을 달려면 로그인하세요.');
-			return ;
-		}
-		
-		var data = {
-				'rp_bd_num' : rp_bd_num, 
-				'rp_me_id'  : rp_me_id, 
-				'rp_content': rp_content};
+	$('.re-btn').click(function(){
+		//추천 버튼이면 state를 1로, 비추 버튼이면 state를 -1로
+		var state = $(this).hasClass('up') ? 1 : -1;
+		var num = '<c:out value="${board.num}"/>'
+		var obj = $(this);
 		$.ajax({
-			type:'post',
-			url : '<%=request.getContextPath()%>/reply/ins',
-			data: JSON.stringify(data),
-			contentType : "application/json; charset=utf-8",
-			success : function(result, status, xhr){
-				if(result == 'ok'){
-					alert('댓글 등록이 완료 되었습니다.');
-					readReply('${board.num}',1);
+			type: 'get',
+			url : '<%=request.getContextPath()%>/board/recommend/' + state + '/' + num,
+			dataType : "json",
+			success : function(res, status, xhr){
+				var str = '';
+				var str2 = '';
+				if(state == 1)
+					str2 = '추천';
+				else
+					str2 = '비추천';
+				
+				if(res.result == 0)
+					str = '이 취소되었습니다.';
+				else if(res.result == 1)
+					str = '을 했습니다.'
+				else
+					str = '추천/비추천은 회원만 가능합니다..'
+				
+				if(res.result != -1){
+					alert(str2+str);
+				}else{
+					alert(str);
 				}
+					
+				if(res.result == 1){
+					$('.re-btn').removeClass('btn-success').addClass('btn-outline-success');
+					obj.removeClass('btn-outline-success').addClass('btn-success');
+				}else if(res.result == 0){
+					obj.removeClass('btn-success').addClass('btn-outline-success');
+				}
+				
+				
+				
 			},
 			error : function(xhr, status, e){
 				
 			}
-			
 		})
+		
 	})
-	readReply('${board.num}',1);
 })
 $(function(){
 	$('.reply-btn').click(function(){
@@ -141,7 +155,7 @@ $(function(){
 		readReply('${board.num}', page);
 	})
 	$(document).on('click', '.del-btn', function(){
-		var rp_num $(this).attr('data');
+		var rp_num = $(this).attr('data');
 		$.ajax({
 			type: 'post',
 			url: '<%=request.getContextPath()%>/reply/del',
