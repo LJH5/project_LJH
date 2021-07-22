@@ -110,9 +110,7 @@ $(function(){
 		var rp_bd_num = '${board.num}';
 		var rp_me_id = '${user.id}';
 		var rp_content = $('.reply_input').val();
-		console.log(rp_bd_num);
-		console.log(rp_bd_num);
-		console.log(rp_bd_num);
+		
 		if(rp_me_id == ''){
 			alert('댓글을 달려면 로그인하세요')
 			return;
@@ -126,8 +124,9 @@ $(function(){
 			contentType: "application/json; charset=utf-8",
 			success: function(result, status, xhr){
 				if(result == 'ok'){
-					alert('등록 완료')
-					readReply('${board.num}',1);					
+					alert('등록 완료');
+					readReply('${board.num}',1);	
+					$('.reply-input').val();
 				}
 			},
 			error: function(xhr, status, e){
@@ -137,6 +136,57 @@ $(function(){
 		
 	})
 	readReply('${board.num}',1);
+	$(document).on('click', '.pagenation .page-item', function(){
+		var page = $(this).attr('data');
+		readReply('${board.num}', page);
+	})
+	$(document).on('click', '.del-btn', function(){
+		var rp_num $(this).attr('data');
+		$.ajax({
+			type: 'post',
+			url: '<%=request.getContextPath()%>/reply/del',
+			data: JSON.stringify({'rp_num': rp_num}),
+			contentType: "application/json; charset=utf-8",
+			success: function(result, status, xhr){
+				
+			},
+			error: function(xhr, status, e){
+				
+			}
+		})
+	})
+	$(document).on('click', '.mod-btn', function(){
+		var content = $(this).parent().prev().children().last().text(); //기존의 댓글 내용
+		var rp_num = $(this).attr('data');
+		var str = 
+			'<div class="reply-box form-group">'+
+				'<textarea class="reply-mod-input form-control mb-2">'+content+'</textarea>'+
+				'<button type="button" class="reply-mod-btn btn btn-outline-success" data="'+rp_num+'">등록</button>'+
+			'</div>';
+		$(this).parent().hide(); // 수정 삭제 버튼 감추기
+		$(this).parent().prev().children().last().hide(); // 내용감추기
+		$(this).parent().prev().append(str);
+		
+	})
+	$(document).on('click', '.reply-mod-btn', function(){
+		var rp_content = $(this).prev().val();
+		var rp_num = $(this).attr('data');
+		$.ajax({
+			type: 'post',
+			url: '<%=request.getContextPath()%>/reply/mod',
+			data: JSON.stringify({'rp_num': rp_num, 'rp_content': rp_content}),
+			contentType: "application/json; charset=utf-8",
+			success: function(result, status, xhr){
+				//page번호에 맞게 새로고침
+				var page = $('.pagination .active').find('a').text();
+				readReply('${board.num}',page)
+			},
+			error: function(xhr, status, e){
+				
+			}
+		})
+	});
+	
 })
 function readReply(rp_bd_num, page){
 	$.ajax({
@@ -148,10 +198,16 @@ function readReply(rp_bd_num, page){
 			var str = '';
 			for(i = 0; i<list.length; i++){
 				str += 
-				'<div class="form-group">'+
-					'<label>'+list[i].rp_me_id+'</label>'+
-					'<div class="form-control">'+list[i].rp_content+'</div>'+
-				'</div>';			
+					'<div class="form-group">'+
+						'<label>'+list[i].rp_me_id+'</label>'+
+						'<div class="form-control">'+list[i].rp_content+'</div>'+
+					'</div>';	
+				if('${user.id}' == list[i].rp_me_id){
+					str += '<div>';
+					str += '<button class="btn btn-outline-danger del-btn" data="'+list[i].rp_num+'">삭제</button>';
+					str += '<button class="btn btn-outline-danger mod-btn" data="'+list[i].rp_num+'">수정</button>';					
+					str += '</div>'
+				}
 			}
 			$('.reply-list').html(str);
 			var pm = result['pm'];
