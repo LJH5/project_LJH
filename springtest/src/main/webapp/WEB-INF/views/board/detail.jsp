@@ -96,7 +96,8 @@
 	var rp_bd_num = '${board.num}';
 	//프로젝트명
 	var contextPath = '<%=request.getContextPath()%>';
-	
+	//아이디
+	var id = ${'user.id'};
 	$(function(){
 		var msg = '${msg}';
 		printMsg(msg);
@@ -142,12 +143,16 @@
 	})
 	$(function(){
 		
-		replyService.list(contextPath, rp_bd_num);
+		replyService.list(contextPath, rp_bd_num, id);
 		
 		$('.reply-btn').click(function(){
 			var rp_bd_num = '${board.num}';
 			var rp_content = $('.reply-input').val();
 			var rp_me_id = '${user.id}';
+			console.log(rp_bd_num);
+			console.log(rp_content);
+			console.log(rp_me_id);
+			
 			if(rp_me_id == ''){
 				alert('로그인 하세요.');
 				return;
@@ -163,7 +168,21 @@
 		$(document).on('click', '.pagination .page-item', function(){
 			var page = $(this).attr('data');
 			//console.log(page);
-			replySevice.list(contextPath, pr_bd_num, page);
+			replySevice.list(contextPath, pr_bd_num, page, id);
+		})
+		$(document).on('click', '.mod-btn', function(){
+			//console.log('수정');
+			var contentObj = $(this).parent().prev().children().last()
+			var str = 
+				'<div class="reply-mod-box form-group">'+
+					'<textarea class="reply-input form-control mb-2" >'+contentObj.text()+'</textarea>'+
+					'<button type="button" class="reply-mod-btn btn btn-outline-success">등록</button>'+
+				'</div>';
+				
+			contentObj.after(str).remove();
+			
+			$(this).parent().remove();
+			replySevice.list(contextPath, pr_bd_num, page, id);
 		})
 	})
 	
