@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.green.test.pagination.Criteria;
+import kr.green.test.pagination.PageMaker;
 import kr.green.test.service.ReplyService;
 import kr.green.test.vo.ReplyVO;
 import lombok.AllArgsConstructor;
@@ -32,9 +33,13 @@ public class ReplyController {
 		//System.out.println(page);
 		Criteria cri = new Criteria(page, 3);
 		//3은 한 페이지당 댓글 수
+		int totalCount = replyService.getTotalCount(rp_bd_num);
+		PageMaker pm = new PageMaker(rp_bd_num, 3, cri);
+		//System.out.println(pm);
 		ArrayList<ReplyVO> list = replyService.getReplyList(rp_bd_num, cri);
 		//System.out.println(list); 
 		map.put("replyList", list); //xml로 온다
+		map.put("pm", pm);
 		return map;
 	}
 }

@@ -70,8 +70,8 @@
 		<div class="reply form-group">
 			<label>댓글</label>
 			<div class="contents">
-				<div class="reply-list"></div>
-				<ul class="pagination justify-content-center"></ul>
+				<div class="reply-list form-group"></div>
+				<ul class="pagination justify-content-center"> </ul>
 				<div class="reply-box form-group">
 					<textarea class="reply-input form-control mb-2" ></textarea>
 					<button type="button" class="reply-btn btn btn-outline-success">등록</button>
@@ -91,6 +91,12 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+	//전역변수
+	//게시글 번호
+	var rp_bd_num = '${board.num}';
+	//프로젝트명
+	var contextPath = '<%=request.getContextPath()%>';
+	
 	$(function(){
 		var msg = '${msg}';
 		printMsg(msg);
@@ -135,11 +141,13 @@
 		})
 	})
 	$(function(){
+		
+		replyService.list(contextPath, rp_bd_num);
+		
 		$('.reply-btn').click(function(){
 			var rp_bd_num = '${board.num}';
 			var rp_content = $('.reply-input').val();
 			var rp_me_id = '${user.id}';
-			console.log(rp_me_id);
 			if(rp_me_id == ''){
 				alert('로그인 하세요.');
 				return;
@@ -149,10 +157,17 @@
 					'rp_content': rp_content,
 					'rp_me_id'  : rp_me_id
 			};
-			var contextPath = '<%=request.getContextPath()%>';
+			
 			replyService.insert(contextPath, data);
 		})
+		$(document).on('click', '.pagination .page-item', function(){
+			var page = $(this).attr('data');
+			//console.log(page);
+			replySevice.list(contextPath, pr_bd_num, page);
+		})
 	})
+	
+	
 	</script>	
 </body>
 </html>
