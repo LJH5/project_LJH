@@ -123,8 +123,8 @@ $(function(){
 	$('.reply-btn').click(function(){
 		var rp_bd_num = '${board.num}';
 		var rp_me_id = '${user.id}';
-		var rp_content = $('.reply_input').val();
-		
+		var rp_content = $('.reply-input').val();
+		console.log('내용:' + rp_content);
 		if(rp_me_id == ''){
 			alert('댓글을 달려면 로그인하세요')
 			return;

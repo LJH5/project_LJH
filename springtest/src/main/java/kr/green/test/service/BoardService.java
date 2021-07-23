@@ -32,7 +32,7 @@ public interface BoardService {
 
 	ResponseEntity<byte[]> downloadFile(String fileName) throws IOException;
 
-	String recommend(MemberVO user, int board, int state);
+	String recommend(int board, int state, MemberVO user);
 
 	RecommendVO getRecommend(Integer num, MemberVO user);
 

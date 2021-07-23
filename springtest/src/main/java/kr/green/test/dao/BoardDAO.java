@@ -29,9 +29,8 @@ public interface BoardDAO {
 
 	RecommendVO getRecommend(@Param("board")int board, @Param("id")String id);
 
-	void insertRecommend(@Param("board")int board, @Param("id")String id, @Param("state")int state);
+	void insertRecommend(@Param("board")int board, @Param("id") String id, @Param("state")int state);
 
 	void updateRecommend(@Param("rvo")RecommendVO rvo);
-
 
 }

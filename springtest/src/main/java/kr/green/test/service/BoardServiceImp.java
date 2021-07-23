@@ -192,19 +192,19 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	@Override
-	public String recommend(MemberVO user, int board, int state) {
+	public String recommend(int board, int state, MemberVO user) {
 		if(user == null)
 			return "GUEST";
-		RecommendVO rvo = boardDao.getRecommend(board, user.getId());
-		System.out.println(rvo);
+		RecommendVO rvo = boardDao.getRecommend(board,user.getId());
+		
 		if(rvo == null) {
-			//boardDao.insertRecommend(board, user.getId(), state);
+			boardDao.insertRecommend(board, user.getId(), state);
 			return state == 1 ? "UP" : "DOWN";
 		}
 		state = state == rvo.getState() ? 0 : state;
 		rvo.setState(state);
-		//boardDao.updateRecommend(rvo);
-		return state == 0 ? "CANCEL" : (state == 1 ? "UP" : "DOWN");
+		boardDao.updateRecommend(rvo);
+		return state == 0 ? "CANCEL": (state == 1 ? "UP" : "DOWN");
 	}
 
 	@Override
@@ -212,6 +212,5 @@ public class BoardServiceImp implements BoardService {
 		if(num == null || user == null)
 			return null;
 		return boardDao.getRecommend(num, user.getId());
-	}	
-
+	}
 }

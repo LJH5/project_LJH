@@ -136,9 +136,12 @@ public class BoardController {
 		return boardService.downloadFile(fileName);
 	}
 	@ResponseBody
-	@GetMapping("/recommend/{state}/{board}")
-	public String boardRecommend(@PathVariable("board") int board, @PathVariable("state") int state, HttpServletRequest r) {
+	@GetMapping("/recommend/{board}/{state}")
+	public String boardRecommend(
+			@PathVariable("board") int board,
+			@PathVariable("state") int state,
+			HttpServletRequest r){
 		MemberVO user = memberService.getMember(r);
-	    return boardService.recommend(user, board, state);
+		return boardService.recommend(board,state,user);
 	}
 }
