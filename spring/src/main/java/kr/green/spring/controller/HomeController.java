@@ -1,8 +1,11 @@
 package kr.green.spring.controller;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,8 @@ import kr.green.spring.vo.MemberVO;
 public class HomeController {
 	@Autowired
     MemberService memberService;
+	@Autowired
+	private JavaMailSender mailSender;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(ModelAndView mv) {
@@ -116,4 +121,35 @@ public class HomeController {
 		}
 		return dbUser != null ? "success" : "fail";
 	}
+	//@GetMapping("/mail/test")
+	@GetMapping("/find/pw")
+		public ModelAndView mailTestGet(ModelAndView mv) {
+		mv.setViewName("/template/main/findpw");
+		return mv;
+	}
+	//@PostMapping("/mail/test")
+	@ResponseBody
+	@GetMapping("/find/pw")
+	public ModelAndView mailTestPost(ModelAndView mv, String title, String content, String email) {
+	//System.out.println(title);
+	//System.out.println(content);
+	//System.out.println(email);
+		 try {
+		        MimeMessage message = mailSender.createMimeMessage();
+		        MimeMessageHelper messageHelper 
+		            = new MimeMessageHelper(message, true, "UTF-8");
+
+		        messageHelper.setFrom("sigma6317@gmail.com");  // 보내는사람 생략하거나 하면 정상작동을 안함
+		        messageHelper.setTo(email);      // 받는사람 이메일
+		        messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+		        messageHelper.setText(content);  // 메일 내용
+		        //messageHelper.setText("","<h1>제목</h1>");
+		        mailSender.send(message);
+		    } catch(Exception e){
+		        System.out.println(e);
+		    }
+	mv.setViewName("/template/main/mail");
+	return mv;
+}
+	
 }
