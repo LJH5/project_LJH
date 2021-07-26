@@ -35,7 +35,7 @@ var replyService = (function(){
 						if(reply['rp_me_id'] == id){
 							str += 
 							'<div>'+
-								'<button type = "button" class="btn btn-outline-success mod-btn">수정</button>'+
+								'<button type = "button" class="btn btn-outline-success mod-btn" data="'+reply['rp_num']+'">수정</button>'+
 							'</div>';
 						}
 				}
@@ -60,9 +60,29 @@ var replyService = (function(){
 			}
 		})
 	}
+	function modify(contextPath, data, page){ //data에는 rp_content, rp_me_id,   rp_bd_num을 끼워서 넣어준다
+		// {}: 객체 => ajax는 객체를 필요로 한다
+		$.ajax({
+			type:'post',
+			url : contextPath + '/reply/mod',
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			success: function(res){
+				//console.log('성공');
+				if(res == 'SUCCESS'){
+					alert('댓글이 수정되었습니다.');
+					//replyService.list(contextPath, data['rp_bd_num'], page, data['rp_me_id']); replyService 안으로 들어와서 replyService 안써도 됨
+					list(contextPath, data['rp_bd_num'], page, data['rp_me_id']);
+				}else{
+					alert('댓글을 수정할 수 없습니다.');
+				}
+			}
+		})
+	}
 	return { 
 		name : '서비스',
 		insert : insert,
-		list : list
+		list : list,
+		modify: modify
 	}
 })();

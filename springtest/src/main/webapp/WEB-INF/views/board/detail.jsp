@@ -91,102 +91,118 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	//전역변수
-	//게시글 번호
-	var rp_bd_num = '${board.num}';
-	//프로젝트명
-	var contextPath = '<%=request.getContextPath()%>';
-	//아이디
-	var id = ${'user.id'};
-	$(function(){
-		var msg = '${msg}';
-		printMsg(msg);
-		history.replaceState({},null,null);
-	})
-	function printMsg(msg){
-		if(msg == '' || history.state){
-			return ;
+		//전역변수
+		//게시글 번호
+		var rp_bd_num = '${board.num}';
+		//프로젝트명
+		var contextPath = '<%=request.getContextPath()%>';
+		//아이디
+		var id = ${'user.id'};
+		$(function(){
+			var msg = '${msg}';
+			printMsg(msg);
+			history.replaceState({},null,null);
+		})
+		function printMsg(msg){
+			if(msg == '' || history.state){
+				return ;
+			}
+			alert(msg);
 		}
-		alert(msg);
-	}
-	$(function(){
-		$('.recommend-btn').click(function(e){
-			e.preventDefault();
-			var board = '${board.num}';
-			var state = $(this).hasClass('up') ? 1 : -1;
-			$.ajax({
-				type:'get',
-				url : '<%=request.getContextPath()%>/board/recommend/'+board +'/' +state,
-				success : function(result, status, xhr){
-					$('.recommend-btn i').removeClass('fas').addClass('far');
-					if(result == 'UP'){
-						alert('해당 게시글을 추천했습니다.');
-						$('.recommend-btn.up i').addClass('fas');
-					}else if(result == 'DOWN'){
-						alert('해당 게시글을 비추천했습니다.');
-						$('.recommend-btn.down i').addClass('fas');
-					}else if(result == 'GUEST'){
-						alert('추천/비추천을 하려면 로그인을 하세요.');
-					}else if(result == 'CANCEL'){
-						if(state == 1){
-							alert('추천을 취소했습니다.')
-						}else{
-							alert('비추천을 취소했습니다.');
+		$(function(){
+			$('.recommend-btn').click(function(e){
+				e.preventDefault();
+				var board = '${board.num}';
+				var state = $(this).hasClass('up') ? 1 : -1;
+				$.ajax({
+					type:'get',
+					url : '<%=request.getContextPath()%>/board/recommend/'+board +'/' +state,
+					success : function(result, status, xhr){
+						$('.recommend-btn i').removeClass('fas').addClass('far');
+						if(result == 'UP'){
+							alert('해당 게시글을 추천했습니다.');
+							$('.recommend-btn.up i').addClass('fas');
+						}else if(result == 'DOWN'){
+							alert('해당 게시글을 비추천했습니다.');
+							$('.recommend-btn.down i').addClass('fas');
+						}else if(result == 'GUEST'){
+							alert('추천/비추천을 하려면 로그인을 하세요.');
+						}else if(result == 'CANCEL'){
+							if(state == 1){
+								alert('추천을 취소했습니다.')
+							}else{
+								alert('비추천을 취소했습니다.');
+							}
 						}
+					},
+					error : function(xhr, status, e){
+						console.log('에러 발생');
 					}
-				},
-				error : function(xhr, status, e){
-					console.log('에러 발생');
-				}
+				})
 			})
 		})
-	})
-	$(function(){
-		
-		replyService.list(contextPath, rp_bd_num, id);
-		
-		$('.reply-btn').click(function(){
-			var rp_bd_num = '${board.num}';
-			var rp_content = $('.reply-input').val();
-			var rp_me_id = '${user.id}';
-			console.log(rp_bd_num);
-			console.log(rp_content);
-			console.log(rp_me_id);
+		$(function(){
 			
-			if(rp_me_id == ''){
-				alert('로그인 하세요.');
-				return;
-			}
-			var data = {
-					'rp_bd_num' : rp_bd_num,
-					'rp_content': rp_content,
-					'rp_me_id'  : rp_me_id
-			};
+			replyService.list(contextPath, rp_bd_num, 1, id);
 			
-			replyService.insert(contextPath, data);
-		})
-		$(document).on('click', '.pagination .page-item', function(){
-			var page = $(this).attr('data');
-			//console.log(page);
-			replySevice.list(contextPath, pr_bd_num, page, id);
-		})
-		$(document).on('click', '.mod-btn', function(){
-			//console.log('수정');
-			var contentObj = $(this).parent().prev().children().last()
-			var str = 
-				'<div class="reply-mod-box form-group">'+
-					'<textarea class="reply-input form-control mb-2" >'+contentObj.text()+'</textarea>'+
-					'<button type="button" class="reply-mod-btn btn btn-outline-success">등록</button>'+
-				'</div>';
+			$('.reply-btn').click(function(){
+				var rp_bd_num = '${board.num}';
+				var rp_content = $('.reply-input').val();
+				var rp_me_id = '${user.id}';
+				console.log(rp_bd_num);
+				console.log(rp_content);
+				console.log(rp_me_id);
 				
-			contentObj.after(str).remove();
-			
-			$(this).parent().remove();
-			replySevice.list(contextPath, pr_bd_num, page, id);
+				if(rp_me_id == ''){
+					alert('로그인 하세요.');
+					return;
+				}
+				var data = {
+						'rp_bd_num' : rp_bd_num,
+						'rp_content': rp_content,
+						'rp_me_id'  : rp_me_id
+				};
+				
+				replyService.insert(contextPath, data);
+			})
+			$(document).on('click', '.pagination .page-item', function(){
+				var page = $(this).attr('data');
+				//console.log(page);
+				replySevice.list(contextPath, pr_bd_num, page, id);
+			})
+			$(document).on('click', '.mod-btn', function(){
+				//console.log('수정');
+				var contentObj = $(this).parent().prev().children().last()
+				var rp_num = $(this).attr('data');
+				var str = 
+					'<div class="reply-mod-box form-group">'+
+						'<textarea class="reply-input form-control mb-2" >'+contentObj.text()+'</textarea>'+
+						'<button type="button" class="reply-mod-btn btn btn-outline-success" data="'+rp_num+'">등록</button>'+
+					'</div>';
+					
+				contentObj.after(str).remove();
+				
+				$(this).parent().remove();
+				replySevice.list(contextPath, pr_bd_num, page, id);
+			})
+			$(document).on('click', '.reply-mod-btn', function(){
+				//console.log('등록버튼 클릭');
+				var rp_content = $(this).siblings('.reply-input').val(); //val을 사용할 수 있는 태그: textarea, input, select
+				//console.log(rp_content);
+				var rp_num = $(this).attr('data');
+				//console.log(rp_num);
+				var data = {
+						rp_content: rp_content,
+						rp_num: rp_num,
+						rp_me_id: id, //전역 변수
+						rp_bd_num: rp_bd_num //전역 변수
+				};
+				//console.log(data);
+				var page = $('.pagination .active a').text();
+				//console.log(page);
+				replyService.modify(contextPath, data, page);
+			})
 		})
-	})
-	
-	
 	</script>	
 </body>
 </html>

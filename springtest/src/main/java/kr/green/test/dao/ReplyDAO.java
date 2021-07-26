@@ -15,4 +15,8 @@ public interface ReplyDAO {
 
 	int getTotalCount(@Param("rp_bd_num")int rp_bd_num);
 
+	ReplyVO getReply(@Param("rp_num")int rp_num);
+
+	int updateReply(@Param("reply")ReplyVO dbReply); // 매퍼에서 Param 안에 있는 변수명을 사용하기 때문에 꼭 같지 않아도 된다
+
 }

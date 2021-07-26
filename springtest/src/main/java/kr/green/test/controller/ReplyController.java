@@ -42,4 +42,15 @@ public class ReplyController {
 		map.put("pm", pm);
 		return map;
 	}
+	/* 기본 틀을 만들고 404 에러가 안 뜨는지 확인
+	 * @PostMapping("/reply/mod")
+	public String replyModPost() {
+		return "";
+	}
+	*/
+	@PostMapping("/reply/mod")
+	public String replyModPost(@RequestBody ReplyVO reply) {
+		//System.out.println(reply);
+		return replyService.updateReply(reply);
+	}
 }
