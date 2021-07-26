@@ -47,7 +47,7 @@ public class ReplyServiceImp implements ReplyService {
 
 	@Override
 	public String deleteReply(ReplyVO reply) {
-		if(reply == null || reply.getRp_num() <= 0 || reply.getRp_me_id() == null || reply.getRp_content().length() == 0)
+		if(reply == null || reply.getRp_num() <= 0 || reply.getRp_me_id() == null || reply.getRp_me_id().length() == 0) //reply.getRp_content().length() == 0 라고 해서 널포인트참조 예외발생 detail애서 rp_content는 넘겨주지 않음 
 			return "FAIL";
 		ReplyVO dbReply = replyDao.getReply(reply.getRp_num()); 
 		//System.out.println(dbReply);

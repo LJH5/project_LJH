@@ -4,22 +4,22 @@
 <!doctype html>
 <html>
 <head>
-	
+	<title>마이 페이지</title>
 </head>
 <body>
 
 <form class="container" method="post" action="<%=request.getContextPath()%>/member/mypage">
-	<h1>회원가입</h1>
+	<h1>마이페이지</h1>
 	<div class="form-group">
 		<label>아이디</label>
 		<input type="text" class="form-control" name="id" value="${user.id}" readonly>
 	</div>
 	<div class="form-group">
-		<label>비밀번호</label>
+		<label>새　비밀번호</label>
 		<input type="password" class="form-control" name="pw">
 	</div>
 	<div class="form-group">
-		<label>비밀번호 확인</label>
+		<label>새　비밀번호 확인</label>
 		<input type="password" class="form-control" name="pw2">
 	</div>
 	<div class="form-group">
@@ -41,7 +41,7 @@
 </form>
 <script type="text/javascript">
 	$(function(){
-		$('form').sumit(function() {
+		$('form').submit(function() {
 			var id = $('[name=id]').val();
 			var pw = $('[name=pw]').val();
 			var pw2 = $('[name=pw2]').val();

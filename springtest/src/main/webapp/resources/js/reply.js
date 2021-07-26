@@ -91,7 +91,7 @@ var replyService = (function(){
 				//console.log('성공');
 				if(res == 'SUCCESS'){
 					alert('댓글이 삭제되었습니다.');
-					replySevice.list(data['rp_bd_num'], page, data['rp_me_id']);
+					list(contextPath,data['rp_bd_num'], page, data['rp_me_id']); //replySrvice e빼먹어서 오타 & contextPath 안 넣음
 				}else{
 					alert('댓글을 삭제할 수 없습니다.');
 				}

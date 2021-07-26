@@ -97,7 +97,7 @@
 		//프로젝트명
 		var contextPath = '<%=request.getContextPath()%>';
 		//아이디
-		var id = ${'user.id'};
+		var id = '${user.id}';
 		$(function(){
 			var msg = '${msg}';
 			printMsg(msg);
@@ -149,9 +149,9 @@
 				var rp_bd_num = '${board.num}';
 				var rp_content = $('.reply-input').val();
 				var rp_me_id = '${user.id}';
-				console.log(rp_bd_num);
-				console.log(rp_content);
-				console.log(rp_me_id);
+				//console.log(rp_bd_num);
+				//console.log(rp_content);
+				//console.log(rp_me_id);
 				
 				if(rp_me_id == ''){
 					alert('로그인 하세요.');
@@ -183,12 +183,12 @@
 				contentObj.after(str).remove();
 				
 				$(this).parent().remove();
-				replySevice.list(contextPath, pr_bd_num, page, id);
+				// replySevice.list(contextPath, pr_bd_num, page, id); 이부분 때문에 replyService가 정의 되지 않았다는 에러 발생
 			})
 			$(document).on('click', '.reply-mod-btn', function(){
 				//console.log('등록버튼 클릭');
 				var rp_content = $(this).siblings('.reply-input').val(); //val을 사용할 수 있는 태그: textarea, input, select
-				//console.log(rp_content);
+				//console.log('내용은'+rp_content);
 				var rp_num = $(this).attr('data');
 				//console.log(rp_num);
 				var data = {
@@ -202,7 +202,7 @@
 				//console.log(page);
 				replyService.modify(contextPath, data, page);
 			})
-			$(document).on('click', 'del-btn', function(){
+			$(document).on('click', '.del-btn', function(){
 				//console.log('삭제버튼 클릭');
 				var rp_me_id = id;
 				var rp_num = $(this).attr('data');
