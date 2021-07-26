@@ -77,9 +77,6 @@
 		update recommend set state = #{rvo.state}
 			where id = #{rvo.id} and board = #{rvo.board}
 	</update>
-	<select id="getMemberByEmail" resultType="kr.green.spring.vo.BoardVO">
-		select * from member where email = #{email};
-	</select>
 </mapper>
 
 
