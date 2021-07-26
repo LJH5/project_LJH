@@ -202,6 +202,19 @@
 				//console.log(page);
 				replyService.modify(contextPath, data, page);
 			})
+			$(document).on('click', 'del-btn', function(){
+				//console.log('삭제버튼 클릭');
+				var rp_me_id = id;
+				var rp_num = $(this).attr('data');
+				var data = {
+						rp_me_id: rp_me_id,
+						rp_num: rp_num,
+						rp_bd_num: rp_bd_num
+					}
+				//console.log(data);
+				var page = $('.pagination .active a').text();
+				replyService.deleteReply(contextPath, data, page);				
+			})
 		})
 	</script>	
 </body>

@@ -36,6 +36,7 @@ var replyService = (function(){
 							str += 
 							'<div>'+
 								'<button type = "button" class="btn btn-outline-success mod-btn" data="'+reply['rp_num']+'">수정</button>'+
+								'<button type = "button" class="btn btn-outline-danger del-btn" data="'+reply['rp_num']+'">삭제</button>'+
 							'</div>';
 						}
 				}
@@ -60,7 +61,7 @@ var replyService = (function(){
 			}
 		})
 	}
-	function modify(contextPath, data, page){ //data에는 rp_content, rp_me_id,   rp_bd_num을 끼워서 넣어준다
+	function modify(contextPath, data, page){ //data에는 rp_content, rp_me_id, rp_num의 값이 이미 들어가 있고 detail.jsp에서 rp_bd_num을 끼워 넣어준다
 		// {}: 객체 => ajax는 객체를 필요로 한다
 		$.ajax({
 			type:'post',
@@ -79,10 +80,29 @@ var replyService = (function(){
 			}
 		})
 	}
+	//delete는 예약어라서 사용하면 오류발생
+	function deleteReply(contextPath, data, page){ 
+		$.ajax({
+			type:'post',
+			url : contextPath + '/reply/del',
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			success: function(res){
+				//console.log('성공');
+				if(res == 'SUCCESS'){
+					alert('댓글이 삭제되었습니다.');
+					replySevice.list(data['rp_bd_num'], page, data['rp_me_id']);
+				}else{
+					alert('댓글을 삭제할 수 없습니다.');
+				}
+			}
+		})
+	}
 	return { 
 		name : '서비스',
 		insert : insert,
 		list : list,
-		modify: modify
+		modify: modify,
+		deleteReply: deleteReply
 	}
 })();
