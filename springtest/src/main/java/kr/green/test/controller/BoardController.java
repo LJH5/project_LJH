@@ -1,5 +1,6 @@
 package kr.green.test.controller;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,7 +63,7 @@ public class BoardController {
 		MemberVO user = memberService.getMember(r);
 		RecommendVO rvo = boardService.getRecommend(num, user);
 		mv.addObject("rvo", rvo);
-		
+		//System.out.println(rvo);
 		mv.setViewName("/template/board/detail");
 		return mv;
 	}
@@ -137,10 +138,7 @@ public class BoardController {
 	}
 	@ResponseBody
 	@GetMapping("/recommend/{board}/{state}")
-	public String boardRecommend(
-			@PathVariable("board") int board,
-			@PathVariable("state") int state,
-			HttpServletRequest r){
+	public String boardRecommend(@PathVariable("board") int board, @PathVariable("state") int state, HttpServletRequest r){
 		MemberVO user = memberService.getMember(r);
 		return boardService.recommend(board,state,user);
 	}
