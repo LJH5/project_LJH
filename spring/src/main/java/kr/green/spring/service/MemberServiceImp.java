@@ -1,5 +1,7 @@
  package kr.green.spring.service;
  
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,5 +92,11 @@ public class MemberServiceImp implements MemberService {
 		}
 		return (MemberVO)request.getSession().getAttribute("user");
 	}
+
+	@Override
+	public ArrayList<MemberVO> getMemberByEmail(String email) {
+		if(email == null)
+			return null;
+		return memberDao.getMemberByEmail(email);	}
 }
 

@@ -1,5 +1,8 @@
 package kr.green.spring.controller;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
@@ -121,35 +124,94 @@ public class HomeController {
 		}
 		return dbUser != null ? "success" : "fail";
 	}
-	//@GetMapping("/mail/test")
 	@GetMapping("/find/pw")
-		public ModelAndView mailTestGet(ModelAndView mv) {
+	public ModelAndView findPwGet(ModelAndView mv) {
 		mv.setViewName("/template/main/findpw");
 		return mv;
 	}
-	//@PostMapping("/mail/test")
 	@ResponseBody
-	@GetMapping("/find/pw")
-	public ModelAndView mailTestPost(ModelAndView mv, String title, String content, String email) {
-	//System.out.println(title);
-	//System.out.println(content);
-	//System.out.println(email);
-		 try {
-		        MimeMessage message = mailSender.createMimeMessage();
-		        MimeMessageHelper messageHelper 
-		            = new MimeMessageHelper(message, true, "UTF-8");
+	@GetMapping("/find/pw/{id}")
+	public String findPwGet(@PathVariable("id") String id) {
+		//System.out.println(id);
+		MemberVO user = memberService.getMember(id);
+		if(user == null)
+			return "FAIL";
+		
+		try {
+	        MimeMessage message = mailSender.createMimeMessage();
+	        MimeMessageHelper messageHelper 
+	            = new MimeMessageHelper(message, true, "UTF-8");
 
-		        messageHelper.setFrom("sigma6317@gmail.com");  // 보내는사람 생략하거나 하면 정상작동을 안함
-		        messageHelper.setTo(email);      // 받는사람 이메일
-		        messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-		        messageHelper.setText(content);  // 메일 내용
-		        //messageHelper.setText("","<h1>제목</h1>");
-		        mailSender.send(message);
-		    } catch(Exception e){
-		        System.out.println(e);
-		    }
-	mv.setViewName("/template/main/mail");
+	        //임시 비밀번호 발급
+	        String newPw = newPw();
+	        //새 비밀번호를 DB에 저장
+	        user.setPw(newPw);
+	        memberService.updateMember(user);
+	        messageHelper.setFrom("sigma6317@gmail.com");  // 보내는사람 생략하거나 하면 정상작동을 안함
+	        messageHelper.setTo(user.getEmail());      // 받는사람 이메일
+	        messageHelper.setSubject("임시 비밀번호를 발급합니다."); // 메일제목은 생략이 가능하다
+	        messageHelper.setText("","발급된 임시 비밀번호는 <b>"+ newPw +"</b>입니다.");  // 메일 내용
+	        
+	        mailSender.send(message);
+	        return "SUCCESS";
+	    } catch(Exception e){
+	        System.out.println(e);
+	    }
+		return "FAIL";
+	}
+	//8자리의 숫자 또는 영어 대소문자로 된 임시 비밀번호
+	private String newPw() {
+		//랜덤숫자: 0~9 => 문자열: 0~9
+		//랜덤숫자: 10~35 => 문자열: a~z
+		//랜덤숫자: 36~61 => 문자열: A~Z
+		//12 => c
+		
+		String pw = "";
+		int max = 61, min = 0;
+		for(int i=0; i<8; i++) {
+			int r = (int)(Math.random()*(max-min+1))+min;
+			if(r<9) {
+				pw+=r;
+			}else if(r<=35) {
+				pw+=(char)('a'+(r-10));
+			}else {
+				pw+=(char)('A'+(r-36));
+			}
+		}
+		return pw;
+	}
+	@GetMapping("/find/id")
+	public ModelAndView findIdGet(ModelAndView mv) {
+		mv.setViewName("/template/main/findid");
 	return mv;
-}
-	
+	}
+	@ResponseBody
+	@PostMapping("/find/id")
+	public String findIdPost(String email) {
+		//System.out.println(email);
+		ArrayList<MemberVO> userList = memberService.getMemberByEmail(email);
+		if(userList == null || userList.size() == 0)
+			return "FAIL";
+		try {
+			ArrayList<String> idList = new ArrayList<String>();
+			for(MemberVO user : userList) {
+				idList.add(user.getId());
+			}
+			System.out.println(idList);
+	        MimeMessage message = mailSender.createMimeMessage();
+	        MimeMessageHelper messageHelper 
+	            = new MimeMessageHelper(message, true, "UTF-8");
+
+	        messageHelper.setFrom("이메일");  // 보내는사람 생략하거나 하면 정상작동을 안함
+	        messageHelper.setTo("이메일");      // 받는사람 이메일
+	        messageHelper.setSubject("가입된 아이디입니다."); // 메일제목은 생략이 가능하다
+	        messageHelper.setText("","가입된 아이디는 <b>"+ idList.toString() +"</b>입니다.");  // 메일 내용
+	        
+	        //mailSender.send(message);
+	        return "SUCCESS";
+	    } catch(Exception e){
+	        System.out.println(e);
+	    }
+		return "FAIL";
+	}
 }
