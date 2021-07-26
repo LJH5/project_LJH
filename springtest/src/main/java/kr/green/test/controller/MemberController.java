@@ -48,7 +48,6 @@ public class MemberController {
 		else
 			mv.setViewName("redirect:/signin");
 		mv.addObject("user",loginUser);
-		System.out.println(loginUser);
 		return mv;
 	}
 	@GetMapping(value="/member/mypage")
@@ -70,7 +69,7 @@ public class MemberController {
 		mv.setViewName("redirect:/member/mypage");
 		return mv;
 	}
-	@GetMapping(value="/member/signout")
+	@GetMapping(value="/signout")
 	public ModelAndView memberSignoutGet(ModelAndView mv, HttpServletRequest r) {
 		r.getSession().removeAttribute("user");
 		mv.setViewName("redirect:/");
