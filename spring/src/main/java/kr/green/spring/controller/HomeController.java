@@ -1,10 +1,12 @@
 package kr.green.spring.controller;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import kr.green.spring.service.MemberService;
 import kr.green.spring.vo.MemberVO;
@@ -41,6 +44,7 @@ public class HomeController {
 	}
 	@RequestMapping(value = "signin", method = RequestMethod.POST)
 	public ModelAndView signinPost(ModelAndView mv,MemberVO user) {
+		System.out.println(user);
 		//서비스에게 아이디와 비밀번호를 전달하면, 해당 정보가 DB에 있으면
 		//회원 정보를 없으면 null을 반환
 		//작업이 다 끝난 후 URI가 /signin인 곳으로 넘어감
@@ -100,8 +104,19 @@ public class HomeController {
 		return mv;
 	}
 	@RequestMapping(value="/signout", method = RequestMethod.GET)
-	public ModelAndView signoutGet(ModelAndView mv, HttpServletRequest request) {
-		request.getSession().removeAttribute("user");
+	public ModelAndView signoutGet(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
+		MemberVO user = (MemberVO)request.getSession().getAttribute("user");
+		if(user != null) {
+			request.getSession().removeAttribute("user");
+			request.getSession().invalidate();
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			if(loginCookie != null) {
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(0);
+				response.addCookie(loginCookie);
+				memberService.keeplogin(user.getId(), "none", new Date());
+			}
+		}
 		mv.setViewName("redirect:/");
 		return mv;
 	}
