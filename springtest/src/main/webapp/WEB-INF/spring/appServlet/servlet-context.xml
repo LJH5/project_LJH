@@ -69,4 +69,5 @@
 	<beans:bean id="uploadPath" class="java.lang.String">
 	    <beans:constructor-arg value="C:\\Users\\sigma\\Desktop\\JAVA_LJH\\uploadfiles"></beans:constructor-arg>
 	</beans:bean>
+	
 </beans:beans>

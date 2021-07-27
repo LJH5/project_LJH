@@ -21,4 +21,6 @@ public interface MemberService {
 	public void keepLogin(String id, String session_id, Date session_limit);
 
 	public MemberVO checkLoginBefore(String session_id);
+
+	public String findPw(String id);
 }
