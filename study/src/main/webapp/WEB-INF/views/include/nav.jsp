@@ -15,15 +15,17 @@
   
   <!-- Links -->
   <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="<%=request.getContextPath()%>/member/signup">회원가입</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="<%=request.getContextPath()%>/member/signin">로그인</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link 3</a>
-    </li>
+	<c:if test="${user == null}">
+		<li class="nav-item">
+			<a class="nav-link" href="<%=request.getContextPath()%>/member/signup">회원가입</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="<%=request.getContextPath()%>/member/signin">로그인</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Link 3</a>
+		</li>
+	 </c:if>
   </ul>
 </nav>
 </body>

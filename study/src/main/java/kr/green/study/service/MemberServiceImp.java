@@ -28,7 +28,7 @@ public class MemberServiceImp implements MemberService{
 			return false;
 		//비밀번호 유효성 검사
 		String pwRegex = "^[a-zA-Z0-9!@#]{8,16}$";
-		if(user.getPw() == null || Pattern.matches(pwRegex, user.getPw()))
+		if(user.getPw() == null || !Pattern.matches(pwRegex, user.getPw()))
 			return false;
 		//이메일 유효성 검사 xx@yy.zz 또는 xx@yy.zz.cc
 		String emailRegex = "\\w+@\\w+\\.\\w+(\\.\\w+)?";
@@ -45,5 +45,24 @@ public class MemberServiceImp implements MemberService{
 		user.setPw(encPw);
 		memberDao.insertMember(user);
 		return true;
+	}
+
+	@Override
+	public MemberVO signin(MemberVO user) {
+		//System.out.println(user);
+		if(user == null || user.getId() == null)
+			return null;
+		//System.out.println(1);
+		MemberVO dbUser = memberDao.selectUser(user.getId());
+		// 잘못된 ID, 회원이 아님
+		if(dbUser == null)
+			return null;
+		//System.out.println(2);
+		if(user.getPw() == null || !passwordEncoder.matches(user.getPw(), dbUser.getPw()))
+			return null;
+		//System.out.println(3);
+		// 자동 로그인 기능을 위해서 
+		dbUser.setUseCookie(user.getUseCookie());
+		return dbUser;
 	}
 }
