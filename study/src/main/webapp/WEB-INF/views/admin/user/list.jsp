@@ -12,7 +12,7 @@
 		<thead>
 			<tr>
 				<th>
-					<a href="<%=request.getContextPath()%>/admin/user/list?sortType=id&sort=${pm.criteria.sort}">
+					<a href="<%=request.getContextPath()%>/admin/user/list?sortType=id&sort=${pm.criteria.notsort}">
 						<span>아이디</span>
 						<c:if test="${pm.criteria.sortType == 'id' && pm.criteria.sort == 'asc' }">
 							<i class="fas fa-sort-up"></i>

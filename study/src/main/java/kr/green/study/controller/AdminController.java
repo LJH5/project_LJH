@@ -26,14 +26,17 @@ public class AdminController {
 	MemberService memberService;
 	
 	@GetMapping("/user/list")
-	public ModelAndView testGet(ModelAndView mv, HttpServletRequest request, Criteria cri) {
+	public ModelAndView userListGet(ModelAndView mv, HttpServletRequest request, Criteria cri) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		cri.setPerPageNum(2);
 		ArrayList<MemberVO> list = memberService.getMemberList(user, cri);
 		//System.out.println(pm);
 		int totalCount = memberService.getTotalCount(user);
 		PageMaker pm = new PageMaker(totalCount, 1, cri);
+		
 		mv.addObject("list", list);
+		mv.addObject("pm", pm);
+		
 		mv.setViewName("/template/admin/user/list");
 		return mv;
 	}
