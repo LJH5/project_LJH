@@ -8,13 +8,9 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	${user}
-</h1>
 
-<P>  The time on the server is ${serverTime}. </P>
-<div class="container">                                       
-  <div class="spinner-border text-dark"></div>
-</div>
+	<div class="container">                                       
+	  <div class="spinner-border text-dark"></div>
+	</div>
 </body>
 </html>

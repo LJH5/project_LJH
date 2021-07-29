@@ -10,7 +10,7 @@
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="#">
-    <img src="bird.jpg" alt="logo" style="width:40px;">
+  	<!-- <img src="bird.jpg" alt="logo" style="width:40px;"> -->
   </a>
   
   <!-- Links -->
@@ -24,6 +24,11 @@
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="#">Link 3</a>
+		</li>
+	 </c:if>
+	 <c:if test="${user != null}">
+		<li class="nav-item">
+			<a class="nav-link" href="<%=request.getContextPath()%>/member/signout">로그아웃</a>
 		</li>
 	 </c:if>
   </ul>
