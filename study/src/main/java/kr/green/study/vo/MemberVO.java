@@ -11,4 +11,14 @@ public class MemberVO {
 	private String name;
 	private String authority;
 	private Boolean useCookie;
+	public String getAuthorityStr() {
+		if(authority.equals("USER"))
+			return "회원";
+		if(authority.equals("ADMIN"))
+			return "관리자";
+		if(authority.equals("SUPER ADMIN"))
+			return "최고 관리자";
+		
+		return "";
+	}
 }
