@@ -126,4 +126,17 @@ public class MemberServiceImp implements MemberService{
 			return null;
 		return memberDao.selectUserList(user.getAuthority());
 	}
+
+	@Override
+	public boolean updateAuthority(MemberVO user, MemberVO loginuser) {
+		if(user == null || loginuser == null)
+			return false;
+		if(loginuser.compareAuthority(user) <= 0)
+			return false;
+		MemberVO dbUser = memberDao.selectUser(user.getId());
+		//System.out.println(dbUser);
+		dbUser.setAuthority(user.getAuthority());
+		memberDao.updateUser(dbUser);
+		return true;
+	}
 }

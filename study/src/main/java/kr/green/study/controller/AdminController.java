@@ -6,7 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.study.service.MemberService;
@@ -27,5 +30,11 @@ public class AdminController {
 		mv.addObject("list", list);
 		mv.setViewName("/template/admin/user/list");
 		return mv;
+	}
+	@ResponseBody
+	@PostMapping("/user/mod")
+	public String userModPost(@RequestBody MemberVO user, HttpServletRequest request) {
+		MemberVO loginuser = memberService.getMemberByRequest(request);
+		return memberService.updateAuthority(user, loginuser) ? "OK" : "FAIL";	
 	}
 }
