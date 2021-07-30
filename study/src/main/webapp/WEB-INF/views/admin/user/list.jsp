@@ -12,7 +12,7 @@
 		<thead>
 			<tr>
 				<th>
-					<a href="<%=request.getContextPath()%>/admin/user/list?sortType=id&sort=${pm.criteria.notsort}">
+					<a href="<%=request.getContextPath()%>/admin/user/list?sortType=id&sort=${pm.criteria.notSort}">
 						<span>아이디</span>
 						<c:if test="${pm.criteria.sortType == 'id' && pm.criteria.sort == 'asc' }">
 							<i class="fas fa-sort-up"></i>
@@ -58,7 +58,7 @@
 		    <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/admin/user/list?page=${pm.startPage -1}&sortType=${pm.criteria.sortType}&sort=${pm.criteria.sort}">이전</a></li>
 	 	</c:if>
 	
-	 	<c:forEach begin="${startPage}" end="${pm.endPage}" var="index">
+	 	<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="index">
 		    <li class="page-item <c:if test="${pm.criteria.page == index}">active</c:if>"><a class="page-link" href="<%=request.getContextPath()%>/admin/user/list?page=${index}&sortType=${pm.criteria.sortType}&sort=${pm.criteria.sort}">${index}</a></li>
 	 	</c:forEach>
 	    <c:if test="${pm.next}">
