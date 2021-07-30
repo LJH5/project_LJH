@@ -88,7 +88,7 @@ public class MemberServiceImp implements MemberService{
 		if(user == null)
 			return ;
 		HttpSession session = request.getSession();
-		session.removeAttribute("usr");
+		session.removeAttribute("user");
 		session.invalidate();
 		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 		if(loginCookie == null)

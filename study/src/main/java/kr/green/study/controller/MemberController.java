@@ -46,7 +46,7 @@ public class MemberController {
 	public ModelAndView memberSigninPost(ModelAndView mv, MemberVO user) {
 		//System.out.println(user);
 		MemberVO loginUser = memberService.signin(user);
-		System.out.println(loginUser);
+		//System.out.println(loginUser);
 		if(loginUser != null)
 			mv.setViewName("redirect:/");
 		else
