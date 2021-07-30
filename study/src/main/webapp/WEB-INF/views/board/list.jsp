@@ -23,14 +23,14 @@
 		      <tr>
 		        <td>${board.num}</td>
 		        <td>
-		        	<a href="#">
+		        	<a href="<%=request.getContextPath()%>/board/detail?num=${board.num}">
 		        	<c:if test="${board.groupOrd != 0}">┕답변: </c:if>
 		        		${board.title}
 	        		</a>
         		</td>
 		        <td>${board.writer}</td>
 		        <td>${board.dateTime}</td>
-		        <td>${board.view}</td>
+		        <td>${board.views}</td>
 		      </tr>
 	    	</c:forEach>
 	    </tbody>
