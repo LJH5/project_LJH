@@ -11,4 +11,15 @@
 		select * from board
 			where num = #{num}
 	</select>
+	<insert id="insertBoard">
+		insert into
+			board(title, contents, writer, oriNo, groupOrd)
+			select #{board.title}, #{board.contents}, #{board.writer}, 
+			<if test="board.oriNo != 0">
+				#{board.oriNo}, max(oriNo)+1 from board where oriNo = #{board.orino}
+			</if>
+			<if test="board.oriNo == 0">
+				max(num)+1, 0 from board
+			</if>
+	</insert>
 </mapper>
