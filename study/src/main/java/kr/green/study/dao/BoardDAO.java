@@ -8,4 +8,6 @@ public interface BoardDAO {
 
 	ArrayList<BoardVO> selectBoardList();
 
+	BoardVO selectBoard(Integer num);
+
 }
