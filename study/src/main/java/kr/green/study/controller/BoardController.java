@@ -75,4 +75,27 @@ public class BoardController {
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
+	@GetMapping("/modify")
+	public ModelAndView modifyGet(ModelAndView mv, Integer num) {
+		//System.out.println(num);
+		BoardVO board = boardService.getBoard(num);
+		mv.addObject("board", board);
+		mv.setViewName("/template/board/modify");
+		return mv;
+	}
+	@PostMapping("/modify")
+	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest request) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		boardService.updateBoard(board, user);
+		mv.addObject("num", board.getNum());
+		mv.setViewName("redirect:/board/detail");
+		return mv;
+	}
+	@GetMapping("/delete")
+	public ModelAndView deleteGet(ModelAndView mv, Integer num, HttpServletRequest request) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		boardService.deleteBoard(num ,user);
+		mv.setViewName("/template/board/list");
+		return mv;
+	}
 }
