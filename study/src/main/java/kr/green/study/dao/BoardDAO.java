@@ -30,7 +30,7 @@ public interface BoardDAO {
 
 	void deleteFile(int num);
 
-	ArrayList<Integer> selectNumFileList(int num);
+	ArrayList<Integer> selectFileNumList(int num);
 
 	FileVO selectFile(Integer tmp);
 

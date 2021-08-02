@@ -83,7 +83,7 @@ public class NoticeBoardController {
 		return mv;
 	}
 	@PostMapping("/modify")
-	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest request, MultipartFile[] fileList, Integer [] fileNumList) {
+	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest request, MultipartFile[] fileList, Integer [] fileNumList) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
 		boardService.updateBoard(board, user, fileList, fileNumList);
 		mv.addObject("num", board.getNum());

@@ -40,7 +40,7 @@
 				<li class="page-item"><a class="page-link"
 					href="<%= request.getContextPath() %>/board${type}/list?page=${pm.startPage-1}">이전</a></li>
 			</c:if>
-			<c:forEach begin="${pm.stertPage}" end="${pm.endPage}" var="index">
+			<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="index">
 				<c:choose>
 					<c:when test="${pm.criteria.page == index}">
 						<li class="page-item"><a class="page-link"
@@ -57,11 +57,14 @@
 					href="<%= request.getContextPath() %>/board${type}/list?page=${pm.endPage+1}">다음</a></li>
 			</c:if>
 		</ul>
-		<!-- 타입이 공지이고 관리자이거나 타입이 공지사항이 아니면 글쓰기 버튼이 보여야함 -->
-		<c:if test="${user != null}"></c:if>
-			<a href="<%=request.getContextPath()%>/board${type}/register">
-				<button class="btn btn-outline-success">글쓰기</button>
-			</a>
+		<c:if test="${user != null}">
+			<!-- 타입이 공지이고 관리자이거나 타입이 공지사항이 아니면 글쓰기 버튼이 보여야함 -->
+			<c:if test="${(type eq '/notice' && (user.authority eq 'ADMIN' || user.authority eq 'SUPER ADMIN')) || (type ne '/notice')}">
+				<a href="<%=request.getContextPath()%>/board${type}/register">
+					<button class="btn btn-outline-success">글쓰기</button>
+				</a>
+			</c:if>
+		</c:if>
 	</div>
 </body>
 </html>

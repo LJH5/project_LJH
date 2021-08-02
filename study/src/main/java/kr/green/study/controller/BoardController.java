@@ -101,7 +101,7 @@ public class BoardController {
 		return mv;
 	}
 	@PostMapping("/modify")
-	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest request, MultipartFile[] fileList, Integer [] fileNumList) {
+	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest request, MultipartFile[] fileList, Integer [] fileNumList) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
 		boardService.updateBoard(board, user, fileList, fileNumList);
 		mv.addObject("num", board.getNum());
@@ -112,7 +112,7 @@ public class BoardController {
 	public ModelAndView deleteGet(ModelAndView mv, Integer num, HttpServletRequest request) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		boardService.deleteBoard(num ,user);
-		mv.setViewName("/template/board/list");
+		mv.setViewName("/redirect:/board/list");
 		return mv;
 		
 	}

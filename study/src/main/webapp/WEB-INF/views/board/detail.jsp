@@ -42,7 +42,7 @@
 		<div class="form-group">
 			<label>첨부파일</label>
 			<c:forEach items="${fList}" var="file"></c:forEach>
-			<a class="form-control" href="<%= request.getContextPath() %>/board/download?fileName=${file.name}">${file.ori_name}</a>
+			<a class="form-control" href="<%=request.getContextPath()%>/board/download?fileName=${file.name}">${file.ori_name}</a>
 		</div>
 		<div class="reply form-group">
 			<label>댓글</label>
@@ -60,11 +60,11 @@
 				<button class="btn btn-outline-success">답변</button>
 			</a>
 		</c:if>
-		<c:if test="${user != null && user.id == user.id == board.writer}">
-			<a href="<%= request.getContextPath() %>/board${type}/modify?num=${board.num}" style="text-decoration: none">
+		<c:if test="${user != null && user.id == board.writer}">
+			<a href="<%=request.getContextPath()%>/board${type}/modify?num=${board.num}" style="text-decoration: none">
 				<button class="btn btn-outline-danger">수정</button>
 			</a>
-			<a href="<%= request.getContextPath() %>/board${type}/delete?num=${board.num}">
+			<a href="<%=request.getContextPath()%>/board${type}/delete?num=${board.num}" style="text-decoration: none">
 				<button class="btn btn-outline-danger">삭제</button>
 			</a>
 		</c:if>

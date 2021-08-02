@@ -21,7 +21,7 @@
 				#{board.oriNo}, ifnull(max(groupOrd)+1,1) from board where oriNo = #{board.orino}
 			</if>
 			<if test="board.oriNo == 0">
-				ifnull(max(groupOrd)+1, 1), 0 from board
+				ifnull(max(num)+1, 1), 0 from board
 			</if>
 	</insert>
 	<update id="updateBoard">
@@ -32,12 +32,12 @@
 	</update>
 	<update id="deleteBoard">
 		update board set
-			vaild = 'D'
+			valid = 'D'
 			where num = #{num}
 	</update>
 	<update id="deleteReplyBoard">
 		update board set
-			vaild = 'D'
+			valid = 'D'
 			where oriNo = #{num}
 	</update>
 	<insert id="insertFile">

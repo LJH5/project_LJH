@@ -20,7 +20,7 @@
 	    <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 	    <property name="url" value="jdbc:mysql://localhost:3306/spring_ljh?useSSL=false&amp;serverTimezone=Asia/Seoul"></property>
 	    <property name="username" value="root"></property>
-	    <property name="password" value="cjgreen"></property>
+	    <property name="password" value="asdasd123123"></property>
 	</bean> 
 	
 	<!-- Mapper 정보 설정 -->

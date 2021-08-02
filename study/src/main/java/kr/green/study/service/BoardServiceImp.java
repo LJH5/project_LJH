@@ -67,7 +67,7 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	@Override
-	public void updateBoard(BoardVO board, MemberVO user, MultipartFile[] fileList, Integer [] fileNumList) {
+	public void updateBoard(BoardVO board, MemberVO user, MultipartFile[] fileList, Integer [] fileNumList) throws Exception {
 		if(user == null || board == null)
 			return;
 		BoardVO dbBoard = boardDao.selectBoard(board.getNum());
@@ -77,16 +77,17 @@ public class BoardServiceImp implements BoardService {
 		dbBoard.setContents(board.getContents());
 		boardDao.updateBoard(dbBoard);
 		
-		ArrayList<Integer> dbFileNumList = boardDao.selectNumFileList(board.getNum());
+		ArrayList<Integer> dbFileNumList = boardDao.selectFileNumList(board.getNum());
 		//System.out.println(fList);
-		int dbsize = 0;
-		if(dbFileNumList == null) {
+		int dbSize = 0;
+		if(dbFileNumList != null) {
+			dbSize = dbFileNumList.size();
 			//배열 fileNumList를 ArrayList로 변환
-			dbsize = d
 			ArrayList<Integer> inputFileNumList = new ArrayList<Integer>();
 			if(fileNumList != null) {
 				for(Integer tmp : fileNumList) {
 					inputFileNumList.add(tmp);
+					dbSize--;
 				}
 			}
 			
@@ -99,8 +100,8 @@ public class BoardServiceImp implements BoardService {
 			//fileList에 있는 파일 첨부 추가
 			if(fileList == null)
 				return;
-			int size = fileList.length() > 3 - dbsize ? 3 - 3dbsize : fileList.length;
-			for(int i = 0; i<3 - dbsize; i++) {
+			int size = fileList.length > 3 - dbSize ? 3 - dbSize : fileList.length;
+			for(int i = 0; i<3 - dbSize; i++) {
 				insertFile(fileList[i], board.getNum());
 			}
 		}
