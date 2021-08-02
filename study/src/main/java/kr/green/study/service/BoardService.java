@@ -31,6 +31,6 @@ public interface BoardService {
 
 	ResponseEntity<byte[]> downloadFile(String fileName) throws IOException;
 
-	int getTotalCount();
+	int getTotalCount(Criteria cri);
 
 }

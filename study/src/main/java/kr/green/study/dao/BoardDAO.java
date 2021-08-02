@@ -34,6 +34,6 @@ public interface BoardDAO {
 
 	FileVO selectFile(Integer tmp);
 
-	int getTotalCount();
+	int getTotalCount(Criteria cri);
 
 }

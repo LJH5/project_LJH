@@ -9,8 +9,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 </head>
 <body>
-	<form class="container" method="post" enctype="multipart/form-data"
-		action="<%=request.getContextPath()%>/board/modify">
+	<form class="container" method="post" enctype="multipart/form-data">
 		<h1>게시글 수정</h1>
 		<div class="form-group">
 			<label>제목</label> <input type="text" class="form-control"
