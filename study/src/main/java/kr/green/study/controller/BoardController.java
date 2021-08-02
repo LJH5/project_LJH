@@ -1,6 +1,5 @@
 package kr.green.study.controller;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.study.pagination.Criteria;
+import kr.green.study.pagination.PageMaker;
 import kr.green.study.service.BoardService;
 import kr.green.study.service.MemberService;
 import kr.green.study.vo.BoardVO;
@@ -30,9 +31,12 @@ public class BoardController {
 	private MemberService memberService;
 	
 	@GetMapping("/list")
-	public ModelAndView listGet(ModelAndView mv) {
-		ArrayList<BoardVO> list = boardService.getBoardList();
+	public ModelAndView listGet(ModelAndView mv , Criteria cri) {
+		ArrayList<BoardVO> list = boardService.getBoardList(cri);
 		//System.out.println(list);
+		int totalCount = boardService.getTotalCount();
+		PageMaker pm = new PageMaker(totalCount,10,cri);
+		mv.addObject("pm",pm);
 		mv.addObject("list", list);
 		mv.setViewName("/template/board/list");
 		return mv;

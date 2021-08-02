@@ -34,6 +34,25 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		${pm}
+		 <ul class="pagination justify-content-center">
+			<c:if test="${pm.prev}">
+				<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/board/list?page=${pm.startPage-1}">이전</a></li>
+			</c:if>
+			<c:forEach begin="${pm.stertPage}" end="${pm.endPage}" var="index">
+				<c:choose>
+					<c:when test="${pm.criteria.page == index}">
+						 <li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/board/list?page=${index}">${index}</a></li>	
+					</c:when>
+					<c:otherwise>
+						 <li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/board/list?page=${index}">${index}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		    <c:if test="${pm.next}">
+			    <li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/board/list?page=${pm.endPage+1}">다음</a></li>
+		    </c:if>
+		  </ul>
 		<a href="<%=request.getContextPath()%>/board/register">
 			<button class="btn btn-outline-success">글쓰기</button>
 		</a>
