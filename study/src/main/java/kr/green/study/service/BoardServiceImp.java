@@ -50,9 +50,9 @@ public class BoardServiceImp implements BoardService {
 		if(user == null || board == null)
 			return;
 		BoardVO dbBoard = boardDao.selectBoard(board.getNum());
-		if(dbBoard == null || !user.getId().equals(dbBoard.getWriter()));
+		if(dbBoard == null || !user.getId().equals(dbBoard.getWriter()))
 			return;
-			dbBoard.setTitle(board.getTitle());
+		dbBoard.setTitle(board.getTitle());
 		dbBoard.setContents(board.getContents());
 		boardDao.updateBoard(dbBoard);
 	}
