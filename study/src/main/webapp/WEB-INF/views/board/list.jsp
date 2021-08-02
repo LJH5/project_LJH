@@ -1,6 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!doctype html>
 
 <html>
@@ -35,27 +35,33 @@
 			</tbody>
 		</table>
 		<!-- ${pm} -->
-		 <ul class="pagination justify-content-center">
+		<ul class="pagination justify-content-center">
 			<c:if test="${pm.prev}">
-				<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/board${type}/list?page=${pm.startPage-1}">이전</a></li>
+				<li class="page-item"><a class="page-link"
+					href="<%= request.getContextPath() %>/board${type}/list?page=${pm.startPage-1}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${pm.stertPage}" end="${pm.endPage}" var="index">
 				<c:choose>
 					<c:when test="${pm.criteria.page == index}">
-						 <li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/board${type}/list?page=${index}">${index}</a></li>	
+						<li class="page-item"><a class="page-link"
+							href="<%= request.getContextPath() %>/board${type}/list?page=${index}">${index}</a></li>
 					</c:when>
 					<c:otherwise>
-						 <li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/board${type}/list?page=${index}">${index}</a></li>
+						<li class="page-item"><a class="page-link"
+							href="<%= request.getContextPath() %>/board${type}/list?page=${index}">${index}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-		    <c:if test="${pm.next}">
-			    <li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/board${type}/list?page=${pm.endPage+1}">다음</a></li>
-		    </c:if>
-		  </ul>
-		<a href="<%=request.getContextPath()%>/board${type}/register">
-			<button class="btn btn-outline-success">글쓰기</button>
-		</a>
+			<c:if test="${pm.next}">
+				<li class="page-item"><a class="page-link"
+					href="<%= request.getContextPath() %>/board${type}/list?page=${pm.endPage+1}">다음</a></li>
+			</c:if>
+		</ul>
+		<!-- 타입이 공지이고 관리자이거나 타입이 공지사항이 아니면 글쓰기 버튼이 보여야함 -->
+		<c:if test="${user != null}"></c:if>
+			<a href="<%=request.getContextPath()%>/board${type}/register">
+				<button class="btn btn-outline-success">글쓰기</button>
+			</a>
 	</div>
 </body>
 </html>
