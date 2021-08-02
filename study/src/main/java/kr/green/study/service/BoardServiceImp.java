@@ -54,13 +54,7 @@ public class BoardServiceImp implements BoardService {
 			return;
 		int size = fileList.length < 3 ? fileList.length : 3;
 		for(int i = 0; i<size; i++) {
-			MultipartFile tmp = fileList[i];
-			if(tmp == null || tmp.getOriginalFilename().length() == 0) {
-				continue;
-			}
-			String name = UploadFileUtils.uploadFile(uploadPath, tmp.getOriginalFilename(), tmp.getBytes());
-			FileVO file = new FileVO(board.getNum(), name, tmp.getOriginalFilename());
-			boardDao.insertFile(file);
+			insertFile(fileList[i], board.getNum());
 		}
 	}
 
@@ -73,7 +67,7 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	@Override
-	public void updateBoard(BoardVO board, MemberVO user) {
+	public void updateBoard(BoardVO board, MemberVO user, MultipartFile[] fileList, Integer [] fileNumList) {
 		if(user == null || board == null)
 			return;
 		BoardVO dbBoard = boardDao.selectBoard(board.getNum());
@@ -82,11 +76,39 @@ public class BoardServiceImp implements BoardService {
 		dbBoard.setTitle(board.getTitle());
 		dbBoard.setContents(board.getContents());
 		boardDao.updateBoard(dbBoard);
+		
+		ArrayList<Integer> dbFileNumList = boardDao.selectNumFileList(board.getNum());
+		//System.out.println(fList);
+		int dbsize = 0;
+		if(dbFileNumList == null) {
+			//배열 fileNumList를 ArrayList로 변환
+			dbsize = d
+			ArrayList<Integer> inputFileNumList = new ArrayList<Integer>();
+			if(fileNumList != null) {
+				for(Integer tmp : fileNumList) {
+					inputFileNumList.add(tmp);
+				}
+			}
+			
+			//dbfList에 있는 첨부파일 번호들 중에서 fileNumList에 없는 첨부파일 삭제
+			for(Integer tmp : dbFileNumList) {
+				if(!inputFileNumList.contains(tmp)) {
+					deleteFile(boardDao.selectFile(tmp));
+				}
+			}
+			//fileList에 있는 파일 첨부 추가
+			if(fileList == null)
+				return;
+			int size = fileList.length() > 3 - dbsize ? 3 - 3dbsize : fileList.length;
+			for(int i = 0; i<3 - dbsize; i++) {
+				insertFile(fileList[i], board.getNum());
+			}
+		}
 	}
 
 	@Override
 	public void deleteBoard(Integer num, MemberVO user) {
-		if(num == null || user ==null)
+		if(num == null || user == null)
 			return;
 		BoardVO board = boardDao.selectBoard(num);
 		if(board == null || board.getWriter().equals(user.getId()))
@@ -98,10 +120,7 @@ public class BoardServiceImp implements BoardService {
 		if(fList == null || fList.size() == 0)
 			return;
 		for(FileVO tmp : fList) {
-			File file = new File(uploadPath+tmp.getName());
-			if(file.exists())
-				file.delete(); //실제 파일 삭제
-			boardDao.deleteFile(tmp.getNum()); // 데이터베이스에서 삭제된 것 처럼 처리
+			deleteFile(tmp);
 		}
 	}
 
@@ -138,5 +157,19 @@ public class BoardServiceImp implements BoardService {
 		        in.close();
 		    }
 		    return entity;
+	}
+	private void insertFile(MultipartFile tmp, int num) throws  Exception {
+		if(tmp == null || tmp.getOriginalFilename().length() == 0) {
+			return;
+		}
+		String name = UploadFileUtils.uploadFile(uploadPath, tmp.getOriginalFilename(), tmp.getBytes());
+		FileVO file = new FileVO(num, name, tmp.getOriginalFilename());
+		boardDao.insertFile(file);
+	}
+	private void deleteFile(FileVO tmp) {
+		File file = new File(uploadPath+tmp.getName());
+		if(file.exists())
+			file.delete(); //실제 파일 삭제
+		boardDao.deleteFile(tmp.getNum()); // 데이터베이스에서 삭제된 것 처럼 처리
 	}
 }

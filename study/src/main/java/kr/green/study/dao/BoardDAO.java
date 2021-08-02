@@ -29,4 +29,8 @@ public interface BoardDAO {
 
 	void deleteFile(int num);
 
+	ArrayList<Integer> selectNumFileList(int num);
+
+	FileVO selectFile(Integer tmp);
+
 }
