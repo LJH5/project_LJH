@@ -29,6 +29,8 @@ CREATE TABLE `member` (
   `email` varchar(45) NOT NULL,
   `name` varchar(45) NOT NULL DEFAULT ' ',
   `authority` varchar(45) NOT NULL DEFAULT 'USER',
+  `session_id` varchar(255) DEFAULT NULL,
+  `session_limit` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,7 +41,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES ('123','$2a$10$ClI9NbN9Rxkvcu4ZAY4CuuVlb5rcEIxRcdPgYCiNznb14O.SlgaN.','M','','','USER'),('123123','$2a$10$05VlYp3izPJ5bgDCFv7uQuF2k6ppdY3WB1VS6No2RJ7py5yDVLj5a','M','','','USER'),('asd','$2a$10$nDyqaAFDY8TzvEYmpAut1e3xkyJz6.t2TLNd5zPBeeR7XVGpbEZRe','F','asd','asd','USER'),('iop','$2a$10$xZyqtTmdKjKTptMblLwcQuVkm3oioQdYB1ZBWKMZa4lK2vfU4eBdy','M','iop','iop','USER'),('qwe','$2a$10$.W6Y9wi1QiqYF7cQtAspJuGB6Yg07gBZEDwWmp3FxxWSi7SN205.a','M','qweqwe','qwe','USER');
+INSERT INTO `member` VALUES ('asd','$2a$10$nDyqaAFDY8TzvEYmpAut1e3xkyJz6.t2TLNd5zPBeeR7XVGpbEZRe','F','asd','asd','SUPER ADMIN','none','2021-07-30 13:02:25'),('iop','$2a$10$xZyqtTmdKjKTptMblLwcQuVkm3oioQdYB1ZBWKMZa4lK2vfU4eBdy','M','iop','iop','USER',NULL,NULL),('qaz','$2a$10$tT4m9wj7QvCvW0gstJQ6E.vNF9RolPtTt2ekdo8us/nVk/tU0Tg/G','M','qaz','qaz','USER',NULL,NULL),('qwe','$2a$10$.W6Y9wi1QiqYF7cQtAspJuGB6Yg07gBZEDwWmp3FxxWSi7SN205.a','M','qweqwe','qwe','ADMIN',NULL,NULL);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-26 22:13:19
+-- Dump completed on 2021-08-02  9:30:17
