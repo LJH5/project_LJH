@@ -1,5 +1,6 @@
 package kr.green.study.service;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +26,7 @@ import lombok.AllArgsConstructor;
 public class BoardServiceImp implements BoardService {
 	@Autowired
 	private BoardDAO boardDao;
-	private String uploadPath = "";
+	private String uploadPath = "D:\\JAVA_LJH\\uploadfiles";
 	
 
 	@Override
@@ -93,6 +94,15 @@ public class BoardServiceImp implements BoardService {
 		boardDao.deleteBoard(num);
 		boardDao.deleteReplyBoard(num);
 		
+		ArrayList<FileVO> fList = boardDao.selectFileList(num);
+		if(fList == null || fList.size() == 0)
+			return;
+		for(FileVO tmp : fList) {
+			File file = new File(uploadPath+tmp.getName());
+			if(file.exists())
+				file.delete(); //실제 파일 삭제
+			boardDao.deleteFile(tmp.getNum()); // 데이터베이스에서 삭제된 것 처럼 처리
+		}
 	}
 
 	@Override
