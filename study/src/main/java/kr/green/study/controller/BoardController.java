@@ -48,7 +48,7 @@ public class BoardController {
 		return mv;
 	}
 	@PostMapping("/register")
-	public ModelAndView registerPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request) {
+	public ModelAndView registerPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request) throws Exception {
 		//System.out.println(board);
 		/* 파일 이름이 제대로 넘어오는지 확인
 		for(MultipartFile tmp : fileList) {

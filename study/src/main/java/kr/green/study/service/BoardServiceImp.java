@@ -1,12 +1,15 @@
 package kr.green.study.service;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.green.study.dao.BoardDAO;
+import kr.green.study.utils.UploadFileUtils;
 import kr.green.study.vo.BoardVO;
+import kr.green.study.vo.FileVO;
 import kr.green.study.vo.MemberVO;
 import lombok.AllArgsConstructor;
 
@@ -14,6 +17,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class BoardServiceImp implements BoardService {
 	private BoardDAO boardDao;
+	private String uploadPath = "";
+	
 
 	@Override
 	public ArrayList<BoardVO> getBoardList() {
@@ -29,12 +34,25 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	@Override
-	public void insertBoard(BoardVO board, MultipartFile[] fileList, MemberVO user) {
+	public void insertBoard(BoardVO board, MultipartFile[] fileList, MemberVO user) throws Exception {
 		if(board == null || user == null)
 			return;
 		board.setWriter(user.getId());
 		board.setGroupOrd(0);
 		boardDao.insertBoard(board);
+		//System.out.println(board.getNum()); 게시글 등록시 게시글 번호 확인
+		if(fileList == null)
+			return;
+		int size = fileList.length < 3 ? fileList.length : 3;
+		for(int i = 0; i<size; i++) {
+			MultipartFile tmp = fileList[i];
+			if(tmp == null || tmp.getOriginalFilename().length() == 0) {
+				continue;
+			}
+			String name = UploadFileUtils.uploadFile(uploadPath, tmp.getOriginalFilename(), tmp.getBytes());
+			FileVO file = new FileVO(board.getNum(), name, tmp.getOriginalFilename());
+			boardDao.insertFile(file);
+		}
 	}
 
 	@Override
