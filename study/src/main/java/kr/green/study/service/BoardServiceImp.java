@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,8 +22,8 @@ import kr.green.study.vo.MemberVO;
 import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor
 public class BoardServiceImp implements BoardService {
+	@Autowired
 	private BoardDAO boardDao;
 	private String uploadPath = "";
 	
