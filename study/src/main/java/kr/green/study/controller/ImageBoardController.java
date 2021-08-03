@@ -24,23 +24,24 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/board/notice")
-public class NoticeBoardController {
+@RequestMapping("/board/image")
+public class ImageBoardController {
 	
 	private BoardService boardService;
 	private MemberService memberService;
 	
 	@GetMapping("/list")
 	public ModelAndView listGet(ModelAndView mv, Criteria cri) {
-		cri.setType("NOTICE");
+		cri.setType("IMAGE"); // IMAGE 타입의 파일만 불러온다 
 		ArrayList<BoardVO> list = boardService.getBoardList(cri);
 		//System.out.println(list);
 		int totalCount = boardService.getTotalCount(cri);
 		PageMaker pm = new PageMaker(totalCount,10,cri);
+		boardService.getThumbnail(list);
 		mv.addObject("pm",pm);
 		mv.addObject("list", list);
-		mv.addObject("type", "/notice");
-		mv.setViewName("/template/board/list");
+		mv.addObject("type", "/image");
+		mv.setViewName("/template/board/image/list");
 		return mv;
 	}
 	@GetMapping("/detail")
@@ -51,24 +52,38 @@ public class NoticeBoardController {
 		
 		ArrayList<FileVO> fList = boardService.getFileList(num);
 		
+		mv.addObject("type", "/image");
 		mv.addObject("board", board);
 		mv.addObject("fList", fList);
-		mv.addObject("type", "/notice");
-		mv.setViewName("/template/board/detail");
+		mv.setViewName("/template/board/image/detail");
 		return mv;
 	}
 	@GetMapping("/register")
 	public ModelAndView registerGet(ModelAndView mv) {
-		mv.addObject("type", "/notice");
-		mv.setViewName("/template/board/register");
+		
+		mv.setViewName("/template/board/image/register");
 		return mv;
 	}
 	@PostMapping("/register")
-	public ModelAndView registerPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request) throws Exception {
+	public ModelAndView registerPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request, MultipartFile mainImage) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
-		board.setType("NOTICE");
-		boardService.insertBoard(board, fileList, user);
-		mv.setViewName("redirect:/board/notice/list");
+		board.setType("IMAGE");
+		boardService.insertBoard(board, fileList, user, mainImage);
+		mv.setViewName("redirect:/board/image/list");
+		return mv;
+	}
+	@GetMapping("/reply/register")
+	public ModelAndView replyRegisterGet(ModelAndView mv, Integer oriNo) {
+		mv.addObject("oriNo", oriNo);
+		mv.setViewName("/template/board/image/replyregister");
+		return mv;
+	}
+	@PostMapping("/reply/register")
+	public ModelAndView replyRegisterPost(ModelAndView mv, BoardVO board, HttpServletRequest request) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		board.setType("NORMAL");
+		boardService.insertReplyBoard(board, user);
+		mv.setViewName("redirect:/board/image/list");
 		return mv;
 	}
 	@GetMapping("/modify")
@@ -78,24 +93,24 @@ public class NoticeBoardController {
 		ArrayList<FileVO> fList = boardService.getFileList(num);
 		mv.addObject("board", board);
 		mv.addObject("fList", fList);
-		mv.addObject("type", "/notice");
-		mv.setViewName("/template/board/modify");
+		mv.setViewName("/template/board/image/modify");
 		return mv;
 	}
 	@PostMapping("/modify")
-	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest request, MultipartFile[] fileList, Integer [] fileNumList) throws Exception {
+	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest request, MultipartFile[] fileList, Integer [] fileNumList, MultipartFile mainImage, Integer thumbnailNo) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
-		boardService.updateBoard(board, user, fileList, fileNumList);
+		boardService.updateBoard(board, user, fileList, fileNumList, mainImage, thumbnailNo);
 		mv.addObject("num", board.getNum());
-		mv.setViewName("redirect:/board/notice/detail");
+		mv.setViewName("redirect:/board/image/detail");
 		return mv;
 	}
 	@GetMapping("/delete")
 	public ModelAndView deleteGet(ModelAndView mv, Integer num, HttpServletRequest request) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		boardService.deleteBoard(num ,user);
-		mv.setViewName("/template/board/list");
+		mv.setViewName("/redirect:/board/image/list");
 		return mv;
 		
 	}
+
 }

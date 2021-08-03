@@ -41,8 +41,8 @@
 			where oriNo = #{num}
 	</update>
 	<insert id="insertFile">
-		insert into file(board, name, ori_name)
-			values(#{board}, #{name}, #{ori_name})
+		insert into file(board, name, ori_name, thumbnail)
+			values(#{board}, #{name}, #{ori_name}, #{thumbnail})
 	</insert>
 	<update id="updateViews">
 		update board set
@@ -51,6 +51,7 @@
 	</update>
 	<select id="selectFileList" resultType="kr.green.study.vo.FileVO">
 		select * from file where state = 'I' and board = #{num}
+			order by num desc
 	</select>
 	<update id="deleteFile">
 		update file set
@@ -60,6 +61,7 @@
 	</update>
 	<select id="selectFileNumList" resultType="int">
 		select num from file where state = 'I' and board = #{num}
+			order by num desc
 	</select>
 	<select id="selectFile" resultType="kr.green.study.vo.FileVO">
 		select * from file where num = #{tmp} and state = 'I'
@@ -67,5 +69,8 @@
 	<select id="getTotalCount" resultType="int">
 		select count(*) from board
 			where valid = 'I' and type = #{type}
+	</select>
+	<select id="selectThumbnail" resultType="kr.green.study.vo.FileVO">
+		select * from file where board = #{num} and state = 'I' and thumbnail = 'Y'
 	</select>
 </mapper>
