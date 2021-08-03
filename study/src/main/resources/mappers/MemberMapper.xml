@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -18,7 +18,7 @@
 	</update>
 	<select id="selectUserBySession" resultType="kr.green.study.vo.MemberVO">
 		select * from member 
-			where session_id = # {session_id} and session_limit > now()
+			where session_id = #{session_id} and session_limit > now()
 	</select>
 	<select id="selectUserList" resultType="kr.green.study.vo.MemberVO">
 		select * from member

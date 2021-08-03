@@ -33,16 +33,49 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+	.container{
+		position: relative;
+	}
+	.pw-box{
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		z-index: 10;
+		display: none;
+	}
+	.pw-box .pw-input-box{
+		width: 500px;
+		height: 300px;
+		border: 1px solid black;
+		background: white;
+		margin: 0 auto;
+		top: 100px;
+		left: calc(50% - 250px);
+		z-index: 3;
+		position: absolute;
+	}
+	.pw-box .pw-bg-box{
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		background: black;
+		opacity: 0.3;
+		
+	}
 </style>
 </head>
 <body>
 	<div class="container">
 		<ul class="item-list">
 			<c:forEach items="${list}" var="board">
-				<li class="item">
+				<li class="item" data="${board.num}">
 					<a href="<%= request.getContextPath() %>/board/image/detail?num=${board.num}">
 						<img alt="이미지를 찾을 수 없습니다." src="/resources/img${board.thumbnail.name}" width="100%" height="300px">
-						<span class="title">제목</span>
+						<span class="title">${board.title}</span>
 					</a>
 				</li>			
 			</c:forEach>
@@ -78,6 +111,45 @@
 				</a>
 			</c:if>
 		</c:if>
+		<form id="pwBox" class="pw-box" method="post" action="<%= request.getContextPath() %>/board/image/post">
+			<div class="pw-input-box pl-2 pr-2">
+				<label>비밀번호를 입력하세요.</label>
+				<input type="password" name="pw" class="form-control">
+				<input type="text" name="num">
+				<button class="btn btn-outline-success col-12">확인</button>
+			</div>
+			<div class="pw-bg-box"></div>
+		</form>
 	</div>
+	
+	<script type="text/javascript">
+		$(function(){
+			$('.item-list .item a').click(function(e){
+				e.preventDefault();
+				$('.pw-box').show();
+				var num = $(this).parent().attr('data');
+				$('.pw-box[name=num]').val(num);
+			})
+			$('.pw-box button').click(function(){
+				var num = $('.pw-box[name=num]').val();
+				var pw = $('.pw-box[name=pw]').val();
+				alert(num+","+pw)
+				var data = {num: num, pw: pw};
+				$.ajax({
+					type: 'post',
+					url : '<%=request.getContextPath()%>/board/image/check',
+					data: JSON.stringify(data),
+					contentType: "application/json; charset: utf-8",
+					success: function(res){
+						//console.log(res);
+						if(res == 'true')
+							$('#pwBox').submit();
+						else
+							alert('잘못된 비밀번호입니다.');
+					}
+				})
+			})
+		})
+	</script>
 </body>
 </html>

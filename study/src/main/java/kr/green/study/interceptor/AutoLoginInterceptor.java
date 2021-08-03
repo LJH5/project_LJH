@@ -25,7 +25,7 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 		//세션에 회원 정보가 있으면 자동 로그인 기능을 활용할 필요가 없고, 없으면 자동 로그인을 해야 하는지 확인
 		if(user == null) {
 			//loginCookie 정보를 가져와서 있으면 로그인을 시도하고, 없으면 안함
-			Cookie loginCookie = WebUtils.getCookie(request, "loginCookis");
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 			//자동 로그인 쿠키정보가 있으면 자동 로그인을 해야함
 			if(loginCookie != null) {
 				user = memberService.getMemberByCookie(loginCookie.getValue());

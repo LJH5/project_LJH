@@ -28,6 +28,10 @@
 			<input type="file" name="fileList" class="form-control">
 			<input type="file" name="fileList" class="form-control">
 		</div>
+		<div class="form-group">
+			<label>비밀번호</label>
+			<input type="password" class="form-control" name="pw">
+		</div>
 		<button type="submit" class="btn btn-outline-success">등록</button>
 		<a href="<%=request.getContextPath() %>/board${type}/list"><button type="button" class="btn btn-outline-success">목록</button></a>
 	</form>
@@ -40,6 +44,10 @@
 					alert('대표이미지를 선택하세요.')
 					return false;
 				}
+				//비밀번호가 입력됐는지 확인
+				if(($'[name=pw]').val == ''){
+					alert('')
+				} 
 				return true;
 			})
 			$('#summernote').summernote({
