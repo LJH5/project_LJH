@@ -70,5 +70,31 @@
 			</a>
 		</c:if>
 	</div>	
+	<script type="text/javascript">
+	var rp_bd_num ='${board.num}';
+	var rp_me_id = '${user.id}';
+	var contextPath = '<%=request.getContextPath()%>';
+		$('.reply-btn').click(function(){
+			//console.log('클릭');
+			if(rp_me_id == ''){
+				alert('로그인을 하세요.')
+				return;
+			}
+			var rp_content = $('.reply-input').val();
+			var data = {
+					rp_bd_num: rp_bd_num, rp_content: rp_content
+			}
+			//console.log(data);
+			$.ajax({
+				type: 'post',
+				url : contextPath + '/reply/add',
+				data: JSON.stringify(data),
+				contentType: "application/json; charset=utf-8",
+				success: function(res){
+					console.log(res);
+				}
+			})
+		})
+	</script>
 </body>
 </html>

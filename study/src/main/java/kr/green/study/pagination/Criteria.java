@@ -17,7 +17,7 @@ public class Criteria {
 		this.sort = "asc";
 		this.type = "NORMAL";
 	}
-	
+	public Criteria(int page, int)
 	public int getPageStart() {
 		return (this.page -1) * perPageNum;
 	}
