@@ -91,8 +91,8 @@ public class BoardServiceImp implements BoardService {
 					dbSize--;
 				}
 			}
-			//메인 이미지의 삭제를 막아줌
-			if(board.getType().equals("IMAGE"))
+			//이미지의 삭제를 막아줌
+			if(dbBoard.getType().equals("IMAGE"))
 				dbFileNumList.remove(0);
 			//dbfList에 있는 첨부파일 번호들 중에서 fileNumList에 없는 첨부파일 삭제
 			for(Integer tmp : dbFileNumList) {
@@ -215,6 +215,6 @@ public class BoardServiceImp implements BoardService {
 			return;
 		ArrayList<Integer> dbFileNumList = boardDao.selectFileNumList(board.getNum());
 		deleteFile(boardDao.selectFile(dbFileNumList.get(0)));
-		insertFile(mainImage, board.getNum());
+		insertFile(mainImage, board.getNum(), "Y");
 	}
 }

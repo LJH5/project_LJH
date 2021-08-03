@@ -51,7 +51,7 @@
 	</update>
 	<select id="selectFileList" resultType="kr.green.study.vo.FileVO">
 		select * from file where state = 'I' and board = #{num}
-			order by num desc
+			order by thumbnail desc
 	</select>
 	<update id="deleteFile">
 		update file set
@@ -61,7 +61,7 @@
 	</update>
 	<select id="selectFileNumList" resultType="int">
 		select num from file where state = 'I' and board = #{num}
-			order by num desc
+			order by thumbnail desc
 	</select>
 	<select id="selectFile" resultType="kr.green.study.vo.FileVO">
 		select * from file where num = #{tmp} and state = 'I'
