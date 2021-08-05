@@ -21,8 +21,10 @@ public class HomeController {
 	
 	MemberService memberService;
 	
-	@GetMapping("main/home")
+	@GetMapping("/")
 	public ModelAndView home(ModelAndView mv) {
+		
+		
 		
 		mv.addObject("title", "메인");
 		mv.setViewName("/template/main/home");
