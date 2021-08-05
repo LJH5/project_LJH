@@ -20,7 +20,8 @@ CREATE TABLE `restaurant` (
 	`rt_menu`	VARCHAR(255)	NULL,
 	`rt_me_id`	varchar(15)	NOT NULL,
 	`rt_regDate`	VARCHAR(255)	NULL,
-	`rt_upDate`	VARCHAR(255)	NULL
+	`rt_upDate`	VARCHAR(255)	NULL,
+	`rt_score`	float	NULL
 );
 
 CREATE TABLE `recommend` (
@@ -34,7 +35,7 @@ CREATE TABLE `recommend` (
 CREATE TABLE `image` (
 	`im_num`	int	NOT NULL,
 	`im_type`	varchar(10)	NULL,
-	`im_number`	int	NULL,
+	`im_where`	varchar(15)	NULL,
 	`im_name`	varchar(255)	NULL,
 	`im_thumbnail`	varchar(1)	NULL
 );
@@ -43,30 +44,30 @@ CREATE TABLE `review` (
 	`re_num`	int	NOT NULL,
 	`re_me_id`	varchar(15)	NOT NULL,
 	`re_rt_num`	int	NOT NULL,
-	`re_content`	lontext	NULL,
+	`re_content`	longtext	NULL,
 	`re_regDate`	datetime	NULL,
 	`re_upDate`	datetime	NULL,
 	`re_report`	int	NULL,
 	`re_recommend`	int	NULL,
 	`re_totalSc`	float	NULL,
-	`sc_service`	int	NULL,
-	`sc_mood`	int	NULL,
-	`sc_tasty`	int	NULL,
-	`sc_quantity`	int	NULL,
-	`sc_clean`	int	NULL
+	`re_service`	int	NULL,
+	`re_mood`	int	NULL,
+	`re_tasty`	int	NULL,
+	`re_quantity`	int	NULL,
+	`re_clean`	int	NULL
 );
 
 CREATE TABLE `reply` (
 	`rp_num`	int	NOT NULL,
 	`rp_bo_num`	int	NOT NULL,
-	`re_me_id`	varchar(15)	NOT NULL,
+	`rp_me_id`	varchar(15)	NOT NULL,
 	`rp_content`	longtext	NULL,
 	`rp_regDate`	datetime	NULL,
 	`rp_upDate`	datetime	NULL
 );
 
 CREATE TABLE `favorites` (
-	`fa_num`	VARCHAR(255)	NOT NULL,
+	`fa_num`	int	NOT NULL,
 	`fa_me_id`	varchar(15)	NOT NULL,
 	`fa_rt_num`	int	NOT NULL
 );
