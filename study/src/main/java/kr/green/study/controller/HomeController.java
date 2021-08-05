@@ -19,7 +19,7 @@ public class HomeController {
 
 	MemberService memberService;
 	
-	@GetMapping("/")
+	@GetMapping("main/home")
 	public ModelAndView home(ModelAndView mv) {
 		
 		mv.addObject("title", "메인");
