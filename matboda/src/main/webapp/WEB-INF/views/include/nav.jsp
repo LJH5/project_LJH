@@ -8,13 +8,17 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm navbar-yellow">
-	
 		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/main/home">맛보다</a></li>
+			<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/">맛보다</a></li>
 		</ul>
-		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/member/signup">회원가입</a></li>
-		</ul>
+		<c:if test="${user == null}">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/member/signin">로그인</a></li>
+			</ul>
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/member/signup">회원가입</a></li>
+			</ul>
+		</c:if>
 	</nav>
 </body>
 </html>

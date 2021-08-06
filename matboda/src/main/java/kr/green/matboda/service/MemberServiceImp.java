@@ -51,10 +51,17 @@ public class MemberServiceImp implements MemberService{
 		memberDao.insertMember(user);
 		return true;
 	}
-
-	private void alert(int i) {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public MemberVO signin(MemberVO user) {
+		if(user == null || user.getMe_id() == null)
+			return null;
+		MemberVO dbUser = memberDao.selectUser(user.getMe_id());
+		if(dbUser == null)
+			return null;
+		if(user.getMe_pw() == null || !passwordEncoder.matches(user.getMe_pw(), dbUser.getMe_pw()))
+			return null;
+		dbUser.setUseCookie(user.getUseCookie());
+		return dbUser;
 	}
 	
 }

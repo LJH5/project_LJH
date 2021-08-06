@@ -37,4 +37,14 @@
 	    </beans:property>
 	</beans:bean>
 	
+	<!-- 인터셉터 설정 -->
+	<beans:bean id="loginInterceptor" class="kr.green.matboda.interceptor.LoginInterceptor"></beans:bean>
+	
+	<interceptors>
+	    <interceptor>
+	        <mapping path="/member/signin"/>
+	        <beans:ref bean="loginInterceptor"/>
+	    </interceptor>
+	</interceptors>
+	
 </beans:beans>
