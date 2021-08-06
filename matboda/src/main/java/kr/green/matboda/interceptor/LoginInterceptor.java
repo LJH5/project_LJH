@@ -7,13 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import kr.green.matboda.service.MemberService;
 import kr.green.matboda.vo.MemberVO;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter{
+	
+	@Autowired
+	MemberService memberService;
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
@@ -23,6 +28,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		    if(user != null) {
 		        HttpSession session = request.getSession();
 		        session.setAttribute("user", user);
+		        if(user.getUseCookie() != null) {
+		        	Cookie loginCookie = new Cookie("loginCookie", session.getId());
+		        	int timeSecond = 60 * 60 * 24 * 7;
+		        	loginCookie.setPath("/");
+		        	loginCookie.setMaxAge(timeSecond);
+		        	response.addCookie(loginCookie);
+		        	memberService.keepLogin(user.getMe_id(), session.getId(), 
+		        		new Date(System.currentTimeMillis() + timeSecond * 1000));
+		        }
 		    }
 		}
 }

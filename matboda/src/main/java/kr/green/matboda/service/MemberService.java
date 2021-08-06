@@ -1,6 +1,9 @@
 package kr.green.matboda.service;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import kr.green.matboda.vo.MemberVO;
 
@@ -12,6 +15,10 @@ public interface MemberService {
 
 	Object getMember(String id);
 
-	void signout(HttpServletRequest request);
+	void signout(HttpServletRequest request, HttpServletResponse response);
+
+	MemberVO getMemberByCookie(String value);
+
+	void keepLogin(String me_id, String id, Date date);
 
 }

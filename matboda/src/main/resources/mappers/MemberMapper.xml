@@ -10,4 +10,14 @@
 	<select id="selectUser" resultType="kr.green.matboda.vo.MemberVO">
 		select * from member where me_id = #{me_id}
 	</select>
+	<update id="keepLogin">
+		update member set
+			me_sessionId = #{me_sessionId},
+			me_sessionLimit = #{me_sessionLimit}
+		where me_id = #{me_id}
+	</update>
+	<select id="selectUserBySeesion" resultType="kr.green.matboda.vo.MemberVO">
+		select * from member 
+			where me_sessionId = #{me_sessionId} and me_sessionLimit > now() 
+	</select>
 </mapper>

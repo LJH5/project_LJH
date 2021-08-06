@@ -1,6 +1,7 @@
 package kr.green.matboda.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,8 +57,8 @@ public class MemberController {
 		return memberService.getMember(id) != null ? "FAIL" : "OK";
 	}
 	@GetMapping("/signout")
-	public ModelAndView memberSignoutGet(ModelAndView mv,HttpServletRequest request ) {
-		memberService.signout(request);
+	public ModelAndView memberSignoutGet(ModelAndView mv, HttpServletRequest request, HttpServletResponse response ) {
+		memberService.signout(request, response);
 		mv.setViewName("redirect:/");
 		return mv;
 	}

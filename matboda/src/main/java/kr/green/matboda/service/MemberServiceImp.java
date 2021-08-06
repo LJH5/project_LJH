@@ -1,11 +1,18 @@
 package kr.green.matboda.service;
 
+import java.net.http.HttpResponse;
+import java.util.Date;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
+
 import kr.green.matboda.dao.MemberDAO;
 import kr.green.matboda.vo.MemberVO;
 import lombok.AllArgsConstructor;
@@ -73,9 +80,40 @@ public class MemberServiceImp implements MemberService{
 		return memberDao.selectUser(id);
 	}
 	@Override
-	public void signout(HttpServletRequest request) {
-		if(request != null)
-			request.getSession().removeAttribute("user");
+	public void signout(HttpServletRequest request, HttpServletResponse response) {
+		if(request == null || response == null)
+			return;
+		MemberVO user = getMemberByRequest(request);
+		if(user == null)
+			return;
+		HttpSession session = request.getSession();
+		session.removeAttribute("user");
+		session.invalidate();
+		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+		if(loginCookie == null)
+			return ;
+		loginCookie.setPath("/");
+		loginCookie.setMaxAge(0);
+		response.addCookie(loginCookie);
+		keepLogin(user.getMe_id(), "none", new Date());
+	}
+	@Override
+	public MemberVO getMemberByCookie(String me_sessionId) {
+		if(me_sessionId == null)
+			return null;
+		return memberDao.selectUserBySeesion(me_sessionId);
+	}
+	@Override
+	public void keepLogin(String me_id, String me_sessionId, Date me_sessionLimit) {
+		if(me_id == null)
+			return;
+		memberDao.keepLogin(me_id, me_sessionId, me_sessionLimit);
+		
+	}
+	private MemberVO getMemberByRequest(HttpServletRequest request) {
+		if(request == null)
+			return null;
+		return (MemberVO)request.getSession().getAttribute("user");
 	}
 	
 }
