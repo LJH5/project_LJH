@@ -19,6 +19,11 @@
 				<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/member/signup">회원가입</a></li>
 			</ul>
 		</c:if>
+		<c:if test="${user != null}">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/member/signout">로그아웃</a></li>
+			</ul>
+		</c:if>
 	</nav>
 </body>
 </html>

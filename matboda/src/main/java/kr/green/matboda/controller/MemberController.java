@@ -1,9 +1,12 @@
 package kr.green.matboda.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.matboda.service.MemberService;
@@ -45,6 +48,17 @@ public class MemberController {
 		else
 			mv.setViewName("redirect:/member/signin");
 		mv.addObject("user", loginUser);
+		return mv;
+	}
+	@ResponseBody
+	@PostMapping("/id/check")
+	public String idCheck(String id) {
+		return memberService.getMember(id) != null ? "FAIL" : "OK";
+	}
+	@GetMapping("/signout")
+	public ModelAndView memberSignoutGet(ModelAndView mv,HttpServletRequest request ) {
+		memberService.signout(request);
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 }

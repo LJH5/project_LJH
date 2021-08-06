@@ -18,7 +18,7 @@
 	<h1>회원가입</h1>
 	<div class="form-group">
 		<label>아이디</label>
-		<input type="text" class="form-control" name="me_id">
+		<input type="text" class="form-control" name="me_id" id="me_id">
 	</div>
 		<button type="button" class="id-dup-btn btn btn-outline-success col-12">아이디 중복 검사</button>
 	<div class="form-group">
@@ -57,6 +57,7 @@
 			<option value="F">여성</option>
 		</select>
 	</div>
+	<input type="hidden" name="idDup">
 	<button class="btn btn-outline-success col-12">회원가입</button>
 </form>
 <script type="text/javascript">
@@ -121,6 +122,19 @@
 	            }
 	        }
 	    });
+		$(document).on('click', '.id-dup-btn', function(){
+        	var id = $('[name=me_id]').val();
+        	console.log(id)
+			if(id == ''){
+				alert('아이디를 입력하세요.');
+				return;
+			}
+        	var res = memberService.idCheck(contextPath, id);
+        	if(res)
+        		alert('사용 가능한 아이디입니다.')
+        	else
+        		alert('이미 가입된 아이디입니다.')
+   		})
 	})
 	$.validator.addMethod(
 	    "regex",
@@ -130,6 +144,30 @@
 	    },
 	    "입력이 잘못되었습니다."
 	);
+	var contextPath = '<%=request.getContextPath()%>';
+	var memberService = (function(){
+		function idCheck(contextPath, id){
+			var flag = false;
+			$.ajax({
+				async: false,
+	    		type : 'post',
+	    		url  : contextPath + '/member/id/check',
+	    		data : {id : id},
+	    		success : function (res){
+	    			if(res == 'OK'){
+	    				flag = true;
+	    			}else{
+	    				flag = false;
+	    			}
+	    		}
+	    	})
+	    	return flag;
+		}
+		return {
+			name : 'memberService',
+			idCheck : idCheck
+		}
+	})();
 </script>
 </body>
 </html>

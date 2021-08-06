@@ -2,6 +2,8 @@ package kr.green.matboda.service;
 
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import kr.green.matboda.dao.MemberDAO;
@@ -62,6 +64,18 @@ public class MemberServiceImp implements MemberService{
 			return null;
 		dbUser.setUseCookie(user.getUseCookie());
 		return dbUser;
+	}
+	@Override
+	public Object getMember(String id) {
+		if (id == null) {
+			return null;
+		}
+		return memberDao.selectUser(id);
+	}
+	@Override
+	public void signout(HttpServletRequest request) {
+		if(request != null)
+			request.getSession().removeAttribute("user");
 	}
 	
 }
