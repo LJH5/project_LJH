@@ -40,6 +40,9 @@
 	<!-- 인터셉터 설정 -->
 	<beans:bean id="loginInterceptor" class="kr.green.matboda.interceptor.LoginInterceptor"></beans:bean>
 	<beans:bean id="autoLoginInterceptor" class="kr.green.matboda.interceptor.AutoLoginInterceptor"></beans:bean>
+	<beans:bean id="adminInterceptor" class="kr.green.matboda.interceptor.AdminInterceptor"></beans:bean>
+	<beans:bean id="memberInterceptor" class="kr.green.matboda.interceptor.MemberInterceptor"></beans:bean>
+	<beans:bean id="guestInterceptor" class="kr.green.matboda.interceptor.GuestInterceptor"></beans:bean>
 	
 	<interceptors>
 	    <interceptor>
@@ -51,6 +54,25 @@
 	    <interceptor>
 	        <mapping path="/**/"/>
 	        <beans:ref bean="autoLoginInterceptor"/>
+	    </interceptor>
+	</interceptors>
+	<interceptors>
+	    <interceptor>
+	        <mapping path="/admin/*"/>
+	        <beans:ref bean="adminInterceptor"/>
+	    </interceptor>
+	</interceptors>
+	<interceptors>
+	    <interceptor>
+	        <mapping path="/abcd/*"/>
+	        <beans:ref bean="memberInterceptor"/>
+	    </interceptor>
+	</interceptors>
+	<interceptors>
+	    <interceptor>
+	        <mapping path="/member/sginup"/>
+	        <mapping path="/member/sginin"/>
+	        <beans:ref bean="guestInterceptor"/>
 	    </interceptor>
 	</interceptors>
 	
