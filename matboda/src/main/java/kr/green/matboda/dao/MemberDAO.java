@@ -1,5 +1,6 @@
 package kr.green.matboda.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.ibatis.annotations.Param;
@@ -15,5 +16,7 @@ public interface MemberDAO {
 	void keepLogin(@Param("me_id")String me_id, @Param("me_sessionId")String me_sessionId, @Param("me_sessionLimit")Date me_sessionLimit);
 
 	MemberVO selectUserBySeesion(String me_sessionId);
+
+	ArrayList<MemberVO> selectUserList(@Param("me_authority")String me_authority);
 
 }

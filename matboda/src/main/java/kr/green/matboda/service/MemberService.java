@@ -1,5 +1,6 @@
 package kr.green.matboda.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,5 +21,9 @@ public interface MemberService {
 	MemberVO getMemberByCookie(String value);
 
 	void keepLogin(String me_id, String id, Date date);
+
+	MemberVO getMemberByRequest(HttpServletRequest request);
+
+	ArrayList<MemberVO> getMemberList(MemberVO user);
 
 }

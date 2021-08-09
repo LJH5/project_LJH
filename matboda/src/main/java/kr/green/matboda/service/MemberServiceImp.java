@@ -1,6 +1,7 @@
 package kr.green.matboda.service;
 
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -110,10 +111,16 @@ public class MemberServiceImp implements MemberService{
 		memberDao.keepLogin(me_id, me_sessionId, me_sessionLimit);
 		
 	}
-	private MemberVO getMemberByRequest(HttpServletRequest request) {
+	public MemberVO getMemberByRequest(HttpServletRequest request) {
 		if(request == null)
 			return null;
 		return (MemberVO)request.getSession().getAttribute("user");
+	}
+	@Override
+	public ArrayList<MemberVO> getMemberList(MemberVO user) {
+		if(user == null || user.getMe_authority().equals("USER"))
+			return null;
+		return memberDao.selectUserList(user.getMe_authority());
 	}
 	
 }

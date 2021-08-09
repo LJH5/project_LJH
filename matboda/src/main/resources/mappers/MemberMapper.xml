@@ -20,4 +20,14 @@
 		select * from member 
 			where me_sessionId = #{me_sessionId} and me_sessionLimit > now() 
 	</select>
+	<select id="selectUserList" resultType="kr.green.matboda.vo.MemberVO">
+		select * from member
+			<if test="me_authority == 'ADMIN'">
+				where me_authority = 'USER'
+			</if>
+			<if test="me_authority == 'SUPER ADMIN'">
+				where me_authority != 'SUPER ADMIN'
+			</if>
+			order by me_signupDate desc
+	</select>
 </mapper>
