@@ -28,7 +28,7 @@
 			<if test="me_authority == 'SUPER ADMIN'">
 				where me_authority != 'SUPER ADMIN'
 			</if>
-			order by me_signupDate desc
+			order by ${cri.sortType} ${cri.sort} limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<update id="updateUser">
 		update member set
@@ -42,4 +42,13 @@
 			me_authority = #{me_authority}
 		where me_id = #{me_id}
 	</update>
+	<select id="getTotalCount" resultType="int">
+		select count(*) from member
+			<if test="me_authority == 'ADMIN'">
+				where me_authority = 'USER'
+			</if>
+			<if test="me_authority == 'SUPER ADMIN'">
+				where me_authority != 'SUPER ADMIN'
+			</if>
+	</select>
 </mapper>

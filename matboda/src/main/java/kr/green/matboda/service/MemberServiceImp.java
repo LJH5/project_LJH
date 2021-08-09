@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
 
 import kr.green.matboda.dao.MemberDAO;
+import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.MemberVO;
 import lombok.AllArgsConstructor;
 
@@ -117,10 +118,10 @@ public class MemberServiceImp implements MemberService{
 		return (MemberVO)request.getSession().getAttribute("user");
 	}
 	@Override
-	public ArrayList<MemberVO> getMemberList(MemberVO user) {
+	public ArrayList<MemberVO> getMemberList(MemberVO user, Criteria cri) {
 		if(user == null || user.getMe_authority().equals("USER"))
 			return null;
-		return memberDao.selectUserList(user.getMe_authority());
+		return memberDao.selectUserList(user.getMe_authority(), cri);
 	}
 	@Override
 	public boolean updateAuthority(MemberVO user, MemberVO loginUser) {
@@ -132,6 +133,12 @@ public class MemberServiceImp implements MemberService{
 		dbUser.setMe_authority(user.getMe_authority());
 		memberDao.updateUser(dbUser);
 		return true;
+	}
+	@Override
+	public int getTotalCount(MemberVO user) {
+		if(user == null)
+			return 0;
+		return memberDao.getTotalCount(user.getMe_authority());
 	}
 	
 }

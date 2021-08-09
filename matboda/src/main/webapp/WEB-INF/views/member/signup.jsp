@@ -43,7 +43,7 @@
 	</div>
 	<div class="form-group">
 		<label>이메일</label>
-		<input type="text" class="form-control" name="me_email">
+		<input type="email" class="form-control" name="me_email">
 	</div>
 	<div class="form-group">
 		<label>전화번호</label>
