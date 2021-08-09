@@ -53,7 +53,7 @@ public class MemberServiceImp implements MemberService{
 		if(user.getMe_gender() == null)
 			return false;
 		//별명
-		if(user.getMe_nickname() == null)
+		if(user.getMe_nickname() == "")
 			user.setMe_nickname(user.getMe_name());
 		//비밀번호 암호화
 		String encPw = passwordEncoder.encode(user.getMe_pw());
