@@ -33,4 +33,29 @@ public class MemberVO {
 			return "최고 관리자";
 		return "";
 	}
+	public int compareAuthority(MemberVO user) {
+		if(user == null)
+			return -100;
+		if(user.getMe_authority().equals(getMe_authority()))
+			return 0;
+		switch(me_authority) {
+		case "USER":
+			if(user.getMe_authority().equals("ADMIN") || 
+				user.getMe_authority().equals("SUPER ADMIN"))
+				return -1;
+			return -100;
+		case "ADMIN":
+			if(user.getMe_authority().equals("SUPER ADMIN"))
+					return -1;
+			if(user.getMe_authority().equals("USER"))
+					return 1;
+			return -100;
+		case "SUPER ADMIN":
+			if(user.getMe_authority().equals("ADMIN") || 
+					user.getMe_authority().equals("USER"))
+					return 1;
+			return -100;
+		}
+		return -100;
+	}
 }

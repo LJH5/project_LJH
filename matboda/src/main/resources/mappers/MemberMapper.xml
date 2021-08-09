@@ -30,4 +30,16 @@
 			</if>
 			order by me_signupDate desc
 	</select>
+	<update id="updateUser">
+		update member set
+			me_pw = #{me_pw},
+			me_nickname = #{me_nickname},
+			me_picture = #{me_picture},
+			me_name = #{me_name},
+			me_email = #{me_email},
+			me_phoneNum = #{me_phoneNum},
+			me_gender = #{me_gender},
+			me_authority = #{me_authority}
+		where me_id = #{me_id}
+	</update>
 </mapper>
