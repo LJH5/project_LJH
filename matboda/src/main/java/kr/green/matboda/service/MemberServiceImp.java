@@ -121,7 +121,7 @@ public class MemberServiceImp implements MemberService{
 	public ArrayList<MemberVO> getMemberList(MemberVO user, Criteria cri) {
 		if(user == null || user.getMe_authority().equals("USER"))
 			return null;
-		return memberDao.selectUserList(user.getMe_authority(), cri);
+		return memberDao.selectUserList(user.getMe_id(), user.getMe_authority(), cri);
 	}
 	@Override
 	public boolean updateAuthority(MemberVO user, MemberVO loginUser) {

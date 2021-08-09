@@ -18,10 +18,11 @@ public interface MemberDAO {
 
 	MemberVO selectUserBySeesion(String me_sessionId);
 
-	ArrayList<MemberVO> selectUserList(@Param("me_authority")String me_authority, @Param("cri")Criteria cri);
+	ArrayList<MemberVO> selectUserList(@Param("me_id")String me_id, @Param("me_authority")String me_authority, @Param("cri")Criteria cri);
 
 	void updateUser(MemberVO dbUser);
 
 	int getTotalCount(@Param("me_authority")String me_authority);
+
 
 }

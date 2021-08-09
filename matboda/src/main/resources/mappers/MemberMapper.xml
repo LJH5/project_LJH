@@ -28,6 +28,7 @@
 			<if test="me_authority == 'SUPER ADMIN'">
 				where me_authority != 'SUPER ADMIN'
 			</if>
+			me_id like concat('%', #{cri.search} ,'%')
 			order by ${cri.sortType} ${cri.sort} limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<update id="updateUser">
@@ -50,5 +51,6 @@
 			<if test="me_authority == 'SUPER ADMIN'">
 				where me_authority != 'SUPER ADMIN'
 			</if>
+			me_id like concat('%', #{cri.search} ,'%')
 	</select>
 </mapper>

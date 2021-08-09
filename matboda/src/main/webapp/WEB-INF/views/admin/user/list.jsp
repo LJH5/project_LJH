@@ -8,6 +8,12 @@
 <body>
 <div class="container">
 	<h1>회원관리</h1>
+	<form method="get" action="<%=request.getContextPath()%>/admin/user/list">
+		<div class="input-group mb-3">
+			<input type="text" class="form-control" name="search" value="<c:out value="${pm.criteria.search}"/>" >
+			<button class="btn btn-outline-dark">검색</button>
+		</div>
+	</form>
 	<table class="table table-striped table-hover">
 			<thead>
 				<tr>
@@ -39,7 +45,7 @@
 			<tbody>
 				<c:forEach items="${list}" var="member">    
 					<tr>
-						<td>${member.me_id}</td>
+						<td class="me_id">${member.me_id}</td>
 						<td>${member.date}</td>
 						<td>${member.authorityStr}</td>
 						<td>
