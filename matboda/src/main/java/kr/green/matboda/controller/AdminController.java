@@ -28,11 +28,10 @@ public class AdminController {
 	@GetMapping("/user/list")
 	public ModelAndView userListGet(ModelAndView mv, HttpServletRequest request, Criteria cri) {
 		MemberVO user = memberService.getMemberByRequest(request);
-		cri.setPerPageNum(2);
+		cri.setPerPageNum(5);
 		ArrayList<MemberVO> list = memberService.getMemberList(user, cri);
 		int totalCount = memberService.getTotalCount(user);
-		PageMaker pm = new PageMaker(totalCount , 2, cri);
-		System.out.println(pm);
+		PageMaker pm = new PageMaker(totalCount ,10, cri);
 		mv.addObject("list", list);
 		mv.addObject("pm", pm);
 		mv.setViewName("/template/admin/user/list");
