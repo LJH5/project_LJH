@@ -9,7 +9,7 @@ import kr.green.matboda.vo.BoardVO;
 
 public interface BoardDAO {
 
-	ArrayList<BoardVO> selectBoardList(Criteria cri);
+	ArrayList<BoardVO> selectBoardList(@Param("cri")Criteria cri);
 
 	BoardVO selectBoard(Integer num);
 
