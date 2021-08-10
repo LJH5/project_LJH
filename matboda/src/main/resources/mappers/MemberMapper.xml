@@ -14,7 +14,6 @@
 		update member set
 			me_sessionId = #{me_sessionId},
 			me_sessionLimit = #{me_sessionLimit}
-		where me_id = #{me_id}
 	</update>
 	<select id="selectUserBySeesion" resultType="kr.green.matboda.vo.MemberVO">
 		select * from member 
@@ -28,7 +27,9 @@
 			<if test="me_authority == 'SUPER ADMIN'">
 				where me_authority != 'SUPER ADMIN'
 			</if>
-			me_id like concat('%', #{cri.search} ,'%')
+			<if test="cri.search != ''">
+				and me_id = #{cri.search} 
+			</if>
 			order by ${cri.sortType} ${cri.sort} limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<update id="updateUser">
@@ -51,6 +52,5 @@
 			<if test="me_authority == 'SUPER ADMIN'">
 				where me_authority != 'SUPER ADMIN'
 			</if>
-			me_id like concat('%', #{cri.search} ,'%')
 	</select>
 </mapper>

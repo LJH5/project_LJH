@@ -21,7 +21,6 @@ public class Criteria {
 		this.search = "";
 	}
 	public Criteria(int page, int perPageNum) {
-		this();
 		this.page = page;
 		this.perPageNum = perPageNum;
 	}
@@ -33,15 +32,5 @@ public class Criteria {
 			return "asc";
 		else
 			return "desc";
-	}
-	public String getSearch() {
-		return search;
-	}
-	public void setSearch(String search) {
-		this.search = search;
-	}
-	@Override
-	public String toString() {
-		return "Criteria [search=" + search + "]";
 	}
 }

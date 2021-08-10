@@ -11,7 +11,7 @@
 	<form method="get" action="<%=request.getContextPath()%>/admin/user/list">
 		<div class="input-group mb-3">
 			<input type="text" class="form-control" name="search" value="<c:out value="${pm.criteria.search}"/>" >
-			<button class="btn btn-outline-dark">검색</button>
+			<button class="search-btn btn btn-outline-dark">검색</button>
 		</div>
 	</form>
 	<table class="table table-striped table-hover">
