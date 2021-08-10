@@ -26,5 +26,18 @@ public class BoardController {
 		mv.setViewName("/template/board/list");
 		return mv;
 	}
+	@GetMapping("/detail")
+	public ModelAndView detailGet(ModelAndView mv, Integer num) {
+		BoardVO board = boardService.getBoard(num);
+		mv.addObject("title", "게시판");
+		mv.addObject("board", board);
+		mv.setViewName("/template/board/detail");
+		return mv;
+	}
+	@GetMapping("/register")
+	public ModelAndView registerGet(ModelAndView mv) {
+		mv.setViewName("/template/board/register");
+		return mv;
+	}
 
 }
