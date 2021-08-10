@@ -14,6 +14,7 @@
 		update member set
 			me_sessionId = #{me_sessionId},
 			me_sessionLimit = #{me_sessionLimit}
+		where me_id = #{me_id}
 	</update>
 	<select id="selectUserBySeesion" resultType="kr.green.matboda.vo.MemberVO">
 		select * from member 
