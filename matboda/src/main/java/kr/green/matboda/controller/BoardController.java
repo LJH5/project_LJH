@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.matboda.pagination.Criteria;
+import kr.green.matboda.pagination.PageMaker;
 import kr.green.matboda.service.BoardService;
 import kr.green.matboda.service.MemberService;
 import kr.green.matboda.vo.BoardVO;
@@ -28,9 +29,15 @@ public class BoardController {
 	
 	@GetMapping("/list")
 	public ModelAndView listGet(ModelAndView mv, Criteria cri) {
+		cri.setPerPageNum(5);
 		ArrayList<BoardVO> list = boardService.getBoardList(cri);
+		System.out.println(cri);
+		//int totalCount = boardService.getTotalCount(cri);
+		//PageMaker pm = new PageMaker(totalCount, 2, cri);
+		
 		mv.addObject("title", "게시판");
 		mv.addObject("list", list);
+		//mv.addObject("pm", pm);
 		mv.setViewName("/template/board/list");
 		return mv;
 	}
