@@ -6,6 +6,7 @@
 	<select id="selectBoardList" resultType="kr.green.matboda.vo.BoardVO">
 		select * from board
 			order by bo_num desc
+			limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="selectBoard" resultType="kr.green.matboda.vo.BoardVO">
 		select * from board

@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.BoardVO;
 
 public interface BoardDAO {
 
-	ArrayList<BoardVO> selectBoardList();
+	ArrayList<BoardVO> selectBoardList(Criteria cri);
 
 	BoardVO selectBoard(Integer num);
 

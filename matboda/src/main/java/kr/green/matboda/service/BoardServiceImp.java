@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.green.matboda.dao.BoardDAO;
+import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.BoardVO;
 import kr.green.matboda.vo.MemberVO;
 import lombok.AllArgsConstructor;
@@ -16,8 +17,8 @@ public class BoardServiceImp implements BoardService{
 	BoardDAO boardDao;
 
 	@Override
-	public ArrayList<BoardVO> getBoardList() {
-		return boardDao.selectBoardList();
+	public ArrayList<BoardVO> getBoardList(Criteria cri) {
+		return boardDao.selectBoardList(cri);
 	}
 
 	@Override

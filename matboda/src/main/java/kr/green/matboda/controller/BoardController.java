@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.service.BoardService;
 import kr.green.matboda.service.MemberService;
 import kr.green.matboda.vo.BoardVO;
@@ -26,8 +27,8 @@ public class BoardController {
 	MemberService memberService;
 	
 	@GetMapping("/list")
-	public ModelAndView listGet(ModelAndView mv) {
-		ArrayList<BoardVO> list = boardService.getBoardList();
+	public ModelAndView listGet(ModelAndView mv, Criteria cri) {
+		ArrayList<BoardVO> list = boardService.getBoardList(cri);
 		mv.addObject("title", "게시판");
 		mv.addObject("list", list);
 		mv.setViewName("/template/board/list");
