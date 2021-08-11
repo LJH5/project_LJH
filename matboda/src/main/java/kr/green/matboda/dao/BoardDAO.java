@@ -27,5 +27,7 @@ public interface BoardDAO {
 	void insertImage(ImageVO image);
 
 	void updateViews(Integer num);
+	
+	ArrayList<ImageVO> selectFileList(@Param("num") Integer num);
 
 }

@@ -1,6 +1,5 @@
 package kr.green.matboda.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import kr.green.matboda.utils.UploadFileUtils;
 import kr.green.matboda.vo.BoardVO;
 import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
-import lombok.AllArgsConstructor;
 
 @Service
 public class BoardServiceImp implements BoardService{
@@ -77,13 +75,20 @@ public class BoardServiceImp implements BoardService{
 			return ;
 		BoardVO board = boardDao.selectBoard(num);
 		if(board == null || !board.getBo_me_id().equals(user.getMe_id()))
-				return;
+			return;
 		boardDao.deleteBoard(num);
 		boardDao.deleteReplyBoard(num);
 	}
 	@Override
 	public void updateViews(Integer num) {
 		boardDao.updateViews(num);
+	}
+
+	@Override
+	public ArrayList<ImageVO> getFileList(Integer num) {
+		if(num == null)
+			return null;
+		 return boardDao.selectFileList(num);  
 	}
 	
 }

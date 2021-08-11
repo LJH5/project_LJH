@@ -25,5 +25,7 @@ public interface BoardService {
 
 	void updateViews(Integer num);
 
+	ArrayList<ImageVO> getFileList(Integer num);
+
 
 }

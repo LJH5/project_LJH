@@ -45,8 +45,12 @@ public class BoardController {
 	public ModelAndView detailGet(ModelAndView mv, Integer num) {
 		boardService.updateViews(num);
 		BoardVO board = boardService.getBoard(num);
+		
+		ArrayList<ImageVO> fList = boardService.getFileList(num);
+		System.out.println(fList);
 		mv.addObject("title", "Q&A");
 		mv.addObject("board", board);
+		mv.addObject("fList", fList);
 		mv.setViewName("/template/board/detail");
 		return mv;
 	}
