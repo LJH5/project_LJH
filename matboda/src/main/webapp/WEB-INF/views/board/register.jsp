@@ -20,7 +20,7 @@
 		<div class="form-group">
 			<input type="file" name="fileList" class="form-control">
 		</div>
-		<button class="btn btn-outline-success">등록</button>
+		<button type="submit" class="btn btn-outline-success">등록</button>
 		<a href="<%=request.getContextPath()%>/board/list"><button type="button" class="btn btn-outline-success">목록</button></a>
 	</form>
 	<script type="text/javascript">

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.BoardVO;
+import kr.green.matboda.vo.ImageVO;
 
 public interface BoardDAO {
 
@@ -22,5 +23,7 @@ public interface BoardDAO {
 	void deleteBoard(Integer num);
 
 	void deleteReplyBoard(Integer num);
+
+	void insertImage(ImageVO image);
 
 }

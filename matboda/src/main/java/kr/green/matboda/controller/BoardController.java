@@ -55,8 +55,9 @@ public class BoardController {
 		return mv;
 	}
 	@PostMapping("/register")
-	public ModelAndView registerPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request ) {
+	public ModelAndView registerPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request ) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
+		board.setBo_type("Q&A");
 		boardService.insertBoard(board, fileList, user);
 		mv.setViewName("redirect:/board/list");
 		return mv;
@@ -64,7 +65,6 @@ public class BoardController {
 	@GetMapping("/modify")
 	public ModelAndView modifyGet(ModelAndView mv, Integer num) {
 		BoardVO board = boardService.getBoard(num);
-		System.out.println(board);
 		mv.addObject("title", "게시글 수정");
 		mv.addObject("board", board);
 		mv.setViewName("/template/board/modify");
@@ -85,4 +85,6 @@ public class BoardController {
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
+
+	
 }

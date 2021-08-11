@@ -1,21 +1,27 @@
 package kr.green.matboda.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.green.matboda.dao.BoardDAO;
 import kr.green.matboda.pagination.Criteria;
+import kr.green.matboda.utils.UploadFileUtils;
 import kr.green.matboda.vo.BoardVO;
+import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
 import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor
 public class BoardServiceImp implements BoardService{
+	@Autowired
 	BoardDAO boardDao;
-
+	
+	private String uploadPath = "D:\\JAVA_LJH\\uploadfiles";
+	
 	@Override
 	public ArrayList<BoardVO> getBoardList(Criteria cri) {
 		return boardDao.selectBoardList(cri);
@@ -29,13 +35,23 @@ public class BoardServiceImp implements BoardService{
 	}
 
 	@Override
-	public void insertBoard(BoardVO board, MultipartFile[] fileList, MemberVO user) {
-		if(board == null || user == null)
+	public void insertBoard(BoardVO board, MultipartFile[] fileList, MemberVO user) throws Exception {
+		if(board == null || user == null || board.getBo_title().length() == 0 )
 			return;
 		board.setBo_me_id(user.getMe_id());
-		System.out.println(board);
 		boardDao.insertBoard(board);
-		
+		if(fileList == null)
+			return;
+		int size = fileList.length < 3 ? fileList.length : 3;
+		for(int i = 0; i<size; i++) {
+			MultipartFile tmp = fileList[i];
+			if(tmp == null || tmp.getOriginalFilename().length() == 0) {
+				continue;
+			}
+			String name = UploadFileUtils.uploadFile(uploadPath, tmp.getOriginalFilename(), tmp.getBytes());
+			ImageVO image = new ImageVO(board.getBo_type(), ""+board.getBo_num(), name, tmp.getOriginalFilename());
+			boardDao.insertImage(image);
+		}
 	}
 
 	@Override
