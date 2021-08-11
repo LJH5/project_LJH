@@ -37,5 +37,10 @@ public class BoardServiceImp implements BoardService{
 		boardDao.insertBoard(board);
 		
 	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		return boardDao.selectTotalCount(cri);
+	}
 	
 }

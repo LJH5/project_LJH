@@ -16,4 +16,7 @@
 		insert into board(bo_title, bo_content, bo_me_id)
 			values(#{board.bo_title}, #{board.bo_content}, #{board.bo_me_id});
 	</insert>
+	<select id="selectTotalCount" resultType="int">
+		select count(*) from board
+	</select>
 </mapper>

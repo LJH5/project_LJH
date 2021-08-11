@@ -16,5 +16,7 @@ public interface BoardService {
 
 	void insertBoard(BoardVO board, MultipartFile[] fileList, MemberVO user);
 
+	int getTotalCount(Criteria cri);
+
 
 }

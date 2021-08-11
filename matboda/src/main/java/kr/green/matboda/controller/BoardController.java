@@ -31,13 +31,12 @@ public class BoardController {
 	public ModelAndView listGet(ModelAndView mv, Criteria cri) {
 		cri.setPerPageNum(5);
 		ArrayList<BoardVO> list = boardService.getBoardList(cri);
-		System.out.println(cri);
-		//int totalCount = boardService.getTotalCount(cri);
-		//PageMaker pm = new PageMaker(totalCount, 2, cri);
+		int totalCount = boardService.getTotalCount(cri);
+		PageMaker pm = new PageMaker(totalCount, 10, cri);
 		
 		mv.addObject("title", "게시판");
 		mv.addObject("list", list);
-		//mv.addObject("pm", pm);
+		mv.addObject("pm", pm);
 		mv.setViewName("/template/board/list");
 		return mv;
 	}

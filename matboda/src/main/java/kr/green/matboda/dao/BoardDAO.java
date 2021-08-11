@@ -15,4 +15,6 @@ public interface BoardDAO {
 
 	void insertBoard(@Param("board")BoardVO board);
 
+	int selectTotalCount(@Param("cri")Criteria cri);
+
 }
