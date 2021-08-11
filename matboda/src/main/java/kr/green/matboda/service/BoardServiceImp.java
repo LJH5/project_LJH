@@ -81,5 +81,9 @@ public class BoardServiceImp implements BoardService{
 		boardDao.deleteBoard(num);
 		boardDao.deleteReplyBoard(num);
 	}
+	@Override
+	public void updateViews(Integer num) {
+		boardDao.updateViews(num);
+	}
 	
 }

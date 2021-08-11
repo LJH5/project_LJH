@@ -16,6 +16,7 @@ import kr.green.matboda.pagination.PageMaker;
 import kr.green.matboda.service.BoardService;
 import kr.green.matboda.service.MemberService;
 import kr.green.matboda.vo.BoardVO;
+import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
 import lombok.AllArgsConstructor;
 
@@ -42,6 +43,7 @@ public class BoardController {
 	}
 	@GetMapping("/detail")
 	public ModelAndView detailGet(ModelAndView mv, Integer num) {
+		boardService.updateViews(num);
 		BoardVO board = boardService.getBoard(num);
 		mv.addObject("title", "Q&A");
 		mv.addObject("board", board);

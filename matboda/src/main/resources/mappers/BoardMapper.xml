@@ -22,7 +22,7 @@
 		update board set
 			bo_title = #{bo_title},
 			bo_content = #{bo_content}
-		where bo_num = #{bo_num}
+			where bo_num = #{bo_num}
 	</update>
 	<delete id="deleteBoard">
 		delete from board where bo_num = #{num}
@@ -34,4 +34,9 @@
 		insert into image(im_type, im_where, im_name, im_oriName)
 			values(#{im_type}, #{im_where}, #{im_name}, #{im_oriName})
 	</insert>
+	<update id="updateViews">
+		update board set
+			bo_views = bo_views+1
+			where bo_num = #{bo_num}
+	</update>
 </mapper>

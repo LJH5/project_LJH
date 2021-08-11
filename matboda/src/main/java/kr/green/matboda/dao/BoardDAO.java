@@ -26,4 +26,6 @@ public interface BoardDAO {
 
 	void insertImage(ImageVO image);
 
+	void updateViews(Integer num);
+
 }
