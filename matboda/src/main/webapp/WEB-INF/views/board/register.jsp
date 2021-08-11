@@ -7,7 +7,6 @@
 </head>
 <body>
 	<form class="container" method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/board/register">
-		<h1>게시판</h1>
 		<div class="form-group">
 			<label>제목</label>
 			<input type="text" class="form-control" name="bo_title">
@@ -17,8 +16,6 @@
 			<textarea id="summernote" class="form-control" name="bo_content" rows="10">${board.bo_content}</textarea>
 		</div>
 		<div class="form-group">
-			<input type="file" name="fileList" class="form-control">
-			<input type="file" name="fileList" class="form-control">
 			<input type="file" name="fileList" class="form-control">
 		</div>
 		<button class="btn btn-outline-success">등록</button>

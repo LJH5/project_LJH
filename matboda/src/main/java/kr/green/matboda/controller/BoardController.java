@@ -34,7 +34,7 @@ public class BoardController {
 		int totalCount = boardService.getTotalCount(cri);
 		PageMaker pm = new PageMaker(totalCount, 10, cri);
 		
-		mv.addObject("title", "게시판");
+		mv.addObject("title", "Q&A");
 		mv.addObject("list", list);
 		mv.addObject("pm", pm);
 		mv.setViewName("/template/board/list");
@@ -43,13 +43,14 @@ public class BoardController {
 	@GetMapping("/detail")
 	public ModelAndView detailGet(ModelAndView mv, Integer num) {
 		BoardVO board = boardService.getBoard(num);
-		mv.addObject("title", "게시판");
+		mv.addObject("title", "Q&A");
 		mv.addObject("board", board);
 		mv.setViewName("/template/board/detail");
 		return mv;
 	}
 	@GetMapping("/register")
 	public ModelAndView registerGet(ModelAndView mv) {
+		mv.addObject("title", "Q&A");
 		mv.setViewName("/template/board/register");
 		return mv;
 	}
