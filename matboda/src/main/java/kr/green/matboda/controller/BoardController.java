@@ -55,9 +55,33 @@ public class BoardController {
 		return mv;
 	}
 	@PostMapping("/register")
-	public ModelAndView registerPost(ModelAndView mv,BoardVO board, MultipartFile [] fileList, HttpServletRequest request ) {
+	public ModelAndView registerPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request ) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		boardService.insertBoard(board, fileList, user);
+		mv.setViewName("redirect:/board/list");
+		return mv;
+	}
+	@GetMapping("/modify")
+	public ModelAndView modifyGet(ModelAndView mv, Integer num) {
+		BoardVO board = boardService.getBoard(num);
+		System.out.println(board);
+		mv.addObject("title", "게시글 수정");
+		mv.addObject("board", board);
+		mv.setViewName("/template/board/modify");
+		return mv;
+	}
+	@PostMapping("/modify")
+	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request ) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		boardService.updateBoard(board, fileList, user);
+		mv.addObject("bo_num", board.getBo_num());
+		mv.setViewName("redirect:/board/list");
+		return mv;
+	}
+	@GetMapping("/delete")
+	public ModelAndView deleteGet(ModelAndView mv,Integer num,HttpServletRequest request) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		boardService.deleteBoard(num, user);
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}

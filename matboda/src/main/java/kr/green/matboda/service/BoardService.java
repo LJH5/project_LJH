@@ -18,5 +18,9 @@ public interface BoardService {
 
 	int getTotalCount(Criteria cri);
 
+	void updateBoard(BoardVO board, MultipartFile[] fileList, MemberVO user);
+
+	void deleteBoard(Integer num, MemberVO user);
+
 
 }

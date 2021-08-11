@@ -17,4 +17,10 @@ public interface BoardDAO {
 
 	int selectTotalCount(@Param("cri")Criteria cri);
 
+	void updateBoard(BoardVO dbBoard);
+
+	void deleteBoard(Integer num);
+
+	void deleteReplyBoard(Integer num);
+
 }
