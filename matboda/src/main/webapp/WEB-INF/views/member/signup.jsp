@@ -43,7 +43,7 @@
 	</div>
 	<div class="form-group">
 		<label>이메일</label>
-		<input type="email" class="form-control" name="me_email">
+		<input type="text" class="form-control" name="me_email">
 	</div>
 	<div class="form-group">
 		<label>전화번호</label>
@@ -82,7 +82,7 @@
 	            },
 	            me_email: {
 	                required : true,
-	                email : true
+	                regex: /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/
 	            },
 	            me_phoneNum: {
 	            	required : true,
@@ -112,7 +112,7 @@
 	            },
 	            me_email: {
 	                required : "필수 정보입니다.",
-	                email : "메일규칙에 어긋납니다."
+	                regex : "메일규칙에 어긋납니다."
 	            },
 	            me_phoneNum: {
 	            	required: "필수 정보입니다."

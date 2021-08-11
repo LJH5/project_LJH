@@ -42,8 +42,8 @@ public class MemberServiceImp implements MemberService{
 		String nameRegex = "^[가-힣a-zA-Z]+$";
 		if(user.getMe_name() == null || !Pattern.matches(nameRegex, user.getMe_name()))
 			return false;
-		//이메일 유효성 검사, xx@yy.zz or xx@yy.zz.cc
-		String emailRegex = "\\w+@\\w+\\.\\w+(\\.\\w+)?";
+		//이메일 유효성 검사
+		String emailRegex = "^([0-9a-zA-Z_\\.-]+)@([0-9a-zA-Z_-]+)(\\.[0-9a-zA-Z_-]+){1,2}$";
 		if(user.getMe_email() == null || !Pattern.matches(emailRegex, user.getMe_email()))
 			return false;
 		//전화번호 유효성 검사
