@@ -20,19 +20,19 @@
 		<h1>게시판</h1>
 		<div class="form-group">
 			<label>제목</label>
-			<input type="text" class="form-control" name="title" value="<c:out value="${board.bo_title}"/>" readonly>
+			<input type="text" class="form-control" name="bo_title" value="<c:out value="${board.bo_title}"/>" readonly>
 		</div>
 		<div class="form-group">
 			<label>작성자</label>
-			<input type="text" class="form-control" name="writer" value="${board.bo_me_id}" readonly>
+			<input type="text" class="form-control" name="bo_me_id" value="${board.bo_me_id}" readonly>
 		</div>
 		<div class="form-group">
 			<label>작성일</label>
-			<input type="text" class="form-control" name="registered" value="${board.dateTime}" readonly>
+			<input type="text" class="form-control" name="bo_regdate" value="${board.dateTime}" readonly>
 		</div>
 		<div class="form-group">
 			<label>조회수</label>
-			<input type="text" class="form-control" name="views" value="${board.bo_views}" readonly>
+			<input type="text" class="form-control" name="bo_views" value="${board.bo_views}" readonly>
 		</div>
 
 		<div class="form-group">
@@ -50,6 +50,15 @@
 				</div>
 			</div>
 		</div>
+		<c:if test="${user != null && user.me_id == board.bo_me_id }">
+			<a href="<%=request.getContextPath()%>/board/modify?num=${board.bo_num}" style="text-decoration: none">
+				<button class="btn btn-outline-success">수정</button>
+			</a>
+			<a href="<%=request.getContextPath()%>/board/delete?num=${board.bo_num}" style="text-decoration: none">
+				<button class="btn btn-outline-danger">삭제</button>
+			</a>
+		</c:if>
+			
 	</div>
 </body>
 </html>
