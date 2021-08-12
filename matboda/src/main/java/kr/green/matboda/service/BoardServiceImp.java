@@ -75,7 +75,6 @@ public class BoardServiceImp implements BoardService{
 		int dbSize = 0;
 		if(dbFileNumList != null) {
 			dbSize = dbFileNumList.size();
-			//배열 fileNumList를 ArraylList로 변환
 			ArrayList<Integer> inputFileNumList = new ArrayList<Integer>();
 			if(fileNumList != null) {
 				for(Integer tmp : fileNumList) {
@@ -83,7 +82,6 @@ public class BoardServiceImp implements BoardService{
 					dbSize--;
 				}
 			}
-			//dbFileNumList에 있는 첨부파일 번호들 중에서 inputFileNumList에 없는 첨부파일을 삭제
 			for(Integer tmp : dbFileNumList) {
 				if(!inputFileNumList.contains(tmp)) {
 					deleteFile(boardDao.selectFile(tmp));
@@ -93,9 +91,11 @@ public class BoardServiceImp implements BoardService{
 		}
 		if(fileList == null)
 			return;
-		int size = fileList.length > 3 - dbSize ? 3 - dbSize : fileList.length;
-		for(int i = 0; i<size; i++) {
-			insertFile(fileList[i], board.getBo_type(), ""+board.getBo_num());
+		for(MultipartFile tmp : fileList) {
+			if(insertFile(tmp, board.getBo_type(), ""+board.getBo_num()))
+				dbSize++;
+			if(dbSize == 3)
+				break;
 		}
 	}
 
@@ -148,13 +148,14 @@ public class BoardServiceImp implements BoardService{
 	    }
 	    return entity;
 	}
-	private void insertFile(MultipartFile tmp, String type, String num) throws Exception {
+	private boolean insertFile(MultipartFile tmp, String type, String num) throws Exception {
 		if(tmp == null || tmp.getOriginalFilename().length() == 0) {
-			return;
+			return false;
 		}
 		String name = UploadFileUtils.uploadFile(uploadPath, tmp.getOriginalFilename(), tmp.getBytes());
 		ImageVO image = new ImageVO(type, num, name, tmp.getOriginalFilename());
 		boardDao.insertImage(image);
+		return true;
 	}
 	
 	private void deleteFile(ImageVO tmp) {

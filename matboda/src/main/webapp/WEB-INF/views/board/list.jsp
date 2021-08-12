@@ -48,20 +48,13 @@
 		    	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/board${type}/list?page=${pm.endPage+1}">다음</a></li>
 		    </c:if>
 		</ul>
-		<c:choose>
-    		<c:when test="${type == '/notice'}">
-    			<c:if test="${user.me_authority == 'ADMIN' || user.me_authority == 'SUPER ADMIN'}">
-					 <a href="<%=request.getContextPath()%>/board${type}/register">
-						<button class="btn btn-outline-success">글쓰기</button>
-					</a>		
-    			</c:if>
-    		</c:when>
-    		<c:otherwise>
-   				 <a href="<%=request.getContextPath()%>/board${type}/register">
+		<c:if test="${user != null}">
+			<c:if test="${(type eq '/notice' && (user.me_authority eq 'ADMIN' || user.me_authority eq 'SUPER ADMIN')) || (type ne '/notice')}">
+				<a href="<%=request.getContextPath()%>/board${type}/register">
 					<button class="btn btn-outline-success">글쓰기</button>
-				</a>	
-    		</c:otherwise>
-    	</c:choose>
+				</a>
+			</c:if>
+		</c:if>
 	</div>
 </body>
 </html>
