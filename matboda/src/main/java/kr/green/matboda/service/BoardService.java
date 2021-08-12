@@ -21,15 +21,13 @@ public interface BoardService {
 
 	int getTotalCount(Criteria cri);
 
-	void updateBoard(BoardVO board, MultipartFile[] fileList, MemberVO user);
+	void updateBoard(BoardVO board, MultipartFile[] fileList, MemberVO user, Integer[] fileNumList);
 
 	void deleteBoard(Integer num, MemberVO user);
 
 	void updateViews(Integer num);
 
 	ArrayList<ImageVO> getFileList(Integer num);
-
-	void updateBoard(BoardVO board, MemberVO user, MultipartFile[] fileList, Integer[] fileNumList);
 
 	ResponseEntity<byte[]> downloadFile(String fileName) throws IOException;
 

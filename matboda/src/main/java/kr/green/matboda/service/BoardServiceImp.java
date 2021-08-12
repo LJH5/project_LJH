@@ -51,13 +51,7 @@ public class BoardServiceImp implements BoardService{
 			return;
 		int size = fileList.length < 3 ? fileList.length : 3;
 		for(int i = 0; i<size; i++) {
-			MultipartFile tmp = fileList[i];
-			if(tmp == null || tmp.getOriginalFilename().length() == 0) {
-				continue;
-			}
-			String name = UploadFileUtils.uploadFile(uploadPath, tmp.getOriginalFilename(), tmp.getBytes());
-			ImageVO image = new ImageVO(board.getBo_type(), ""+board.getBo_num(), name, tmp.getOriginalFilename());
-			boardDao.insertImage(image);
+			insertFile(fileList[i], board.getBo_type(), ""+board.getBo_num());
 		}
 	}
 
@@ -67,7 +61,7 @@ public class BoardServiceImp implements BoardService{
 	}
 
 	@Override
-	public void updateBoard(BoardVO board, MultipartFile[] fileList, MemberVO user) {
+	public void updateBoard(BoardVO board, MultipartFile[] fileList, MemberVO user, Integer[] fileNumList) {
 		if(board == null || user == null)
 			return;
 		BoardVO dbBoard = boardDao.selectBoard(board.getBo_num());
@@ -92,10 +86,7 @@ public class BoardServiceImp implements BoardService{
 		if(fList == null || fList.size() == 0)
 			return;
 		for(ImageVO tmp: fList) {
-			File file = new File(uploadPath+tmp.getIm_name());
-			if(file.exists())
-				file.delete();
-			boardDao.deleteFile(tmp.getIm_num());
+			deleteFile(tmp);
 		}
 	}
 	@Override
@@ -109,13 +100,6 @@ public class BoardServiceImp implements BoardService{
 			return null;
 		 return boardDao.selectFileList(num);  
 	}
-
-	@Override
-	public void updateBoard(BoardVO board, MemberVO user, MultipartFile[] fileList, Integer[] fileNumList) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public ResponseEntity<byte[]> downloadFile(String fileName) throws IOException {
 		InputStream in = null;
@@ -137,5 +121,19 @@ public class BoardServiceImp implements BoardService{
 	    }
 	    return entity;
 	}
+	private void insertFile(MultipartFile tmp, String type, String num) throws Exception {
+		if(tmp == null || tmp.getOriginalFilename().length() == 0) {
+			return;
+		}
+		String name = UploadFileUtils.uploadFile(uploadPath, tmp.getOriginalFilename(), tmp.getBytes());
+		ImageVO image = new ImageVO(type, num, name, tmp.getOriginalFilename());
+		boardDao.insertImage(image);
+	}
 	
+	private void deleteFile(ImageVO tmp) {
+		File file = new File(uploadPath+tmp.getIm_name());
+		if(file.exists())
+			file.delete();
+		boardDao.deleteFile(tmp.getIm_num());
+	}
 }
