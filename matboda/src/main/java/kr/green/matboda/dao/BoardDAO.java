@@ -30,4 +30,6 @@ public interface BoardDAO {
 	
 	ArrayList<ImageVO> selectFileList(@Param("num") Integer num);
 
+	void deleteFile(int im_num);
+
 }

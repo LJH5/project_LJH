@@ -43,4 +43,7 @@
 		select * from image 
 			where im_where = #{num}
 	</select>
+	<delete id="deleteFile">
+		delete from image where im_num = #{im_num}
+	</delete>
 </mapper>

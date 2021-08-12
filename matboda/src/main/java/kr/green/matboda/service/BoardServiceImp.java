@@ -1,5 +1,6 @@
 package kr.green.matboda.service;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -86,6 +87,16 @@ public class BoardServiceImp implements BoardService{
 			return;
 		boardDao.deleteBoard(num);
 		boardDao.deleteReplyBoard(num);
+		
+		ArrayList<ImageVO> fList = boardDao.selectFileList(num);
+		if(fList == null || fList.size() == 0)
+			return;
+		for(ImageVO tmp: fList) {
+			File file = new File(uploadPath+tmp.getIm_name());
+			if(file.exists())
+				file.delete();
+			boardDao.deleteFile(tmp.getIm_num());
+		}
 	}
 	@Override
 	public void updateViews(Integer num) {
