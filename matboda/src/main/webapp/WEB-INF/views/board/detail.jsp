@@ -57,10 +57,10 @@
 			</div>
 		</div>
 		<c:if test="${user != null && user.me_id == board.bo_me_id }">
-			<a href="<%=request.getContextPath()%>/board/modify?num=${board.bo_num}" style="text-decoration: none">
+			<a href="<%=request.getContextPath()%>/board${type}/modify?num=${board.bo_num}" style="text-decoration: none">
 				<button class="btn btn-outline-success">수정</button>
 			</a>
-			<a href="<%=request.getContextPath()%>/board/delete?num=${board.bo_num}" style="text-decoration: none">
+			<a href="<%=request.getContextPath()%>/board${type}/delete?num=${board.bo_num}" style="text-decoration: none">
 				<button class="btn btn-outline-danger">삭제</button>
 			</a>
 		</c:if>

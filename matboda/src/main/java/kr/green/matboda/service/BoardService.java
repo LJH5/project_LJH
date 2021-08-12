@@ -1,7 +1,9 @@
 package kr.green.matboda.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.green.matboda.pagination.Criteria;
@@ -26,6 +28,10 @@ public interface BoardService {
 	void updateViews(Integer num);
 
 	ArrayList<ImageVO> getFileList(Integer num);
+
+	void updateBoard(BoardVO board, MemberVO user, MultipartFile[] fileList, Integer[] fileNumList);
+
+	ResponseEntity<byte[]> downloadFile(String fileName) throws IOException;
 
 
 }

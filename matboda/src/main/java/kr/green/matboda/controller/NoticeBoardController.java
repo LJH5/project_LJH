@@ -24,22 +24,20 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/board")
-public class BoardController {
+public class NoticeBoardController {
 	
-	BoardService boardService;
-	MemberService memberService;
+	private BoardService boardService;
+	private MemberService memberService;
 	
-	@GetMapping("/list")
+	@RequestMapping("board/notice")
 	public ModelAndView listGet(ModelAndView mv, Criteria cri) {
-		cri.setPerPageNum(5);
+		cri.setType("NOTICE");
 		ArrayList<BoardVO> list = boardService.getBoardList(cri);
 		int totalCount = boardService.getTotalCount(cri);
 		PageMaker pm = new PageMaker(totalCount, 10, cri);
-		
-		mv.addObject("title", "Q&A");
-		mv.addObject("list", list);
 		mv.addObject("pm", pm);
+		mv.addObject("list",list);
+		mv.addObject("type", "/notice");
 		mv.setViewName("/template/board/list");
 		return mv;
 	}
@@ -47,50 +45,54 @@ public class BoardController {
 	public ModelAndView detailGet(ModelAndView mv, Integer num) {
 		boardService.updateViews(num);
 		BoardVO board = boardService.getBoard(num);
-		
+
 		ArrayList<ImageVO> fList = boardService.getFileList(num);
-		System.out.println(fList);
-		mv.addObject("title", "Q&A");
+
 		mv.addObject("board", board);
 		mv.addObject("fList", fList);
+		mv.addObject("type", "/notice");
 		mv.setViewName("/template/board/detail");
 		return mv;
 	}
 	@GetMapping("/register")
 	public ModelAndView registerGet(ModelAndView mv) {
-		mv.addObject("title", "Q&A");
 		mv.setViewName("/template/board/register");
+		mv.addObject("type", "/notice");
 		return mv;
 	}
 	@PostMapping("/register")
-	public ModelAndView registerPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request ) throws Exception {
+	public ModelAndView registerPost(ModelAndView mv,BoardVO board, 
+			MultipartFile [] fileList, HttpServletRequest request ) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
-		board.setBo_type("Q&A");
+		board.setBo_type("NOTICE");
 		boardService.insertBoard(board, fileList, user);
-		mv.setViewName("redirect:/board/list");
+		mv.setViewName("redirect:/board/notice/list");
 		return mv;
 	}
 	@GetMapping("/modify")
-	public ModelAndView modifyGet(ModelAndView mv, Integer num) {
+	public ModelAndView modifyGet(ModelAndView mv,Integer num) {
 		BoardVO board = boardService.getBoard(num);
-		mv.addObject("title", "게시글 수정");
+		ArrayList<ImageVO> fList = boardService.getFileList(num);
 		mv.addObject("board", board);
+		mv.addObject("fList",fList);
+		mv.addObject("type", "/notice");
 		mv.setViewName("/template/board/modify");
 		return mv;
 	}
 	@PostMapping("/modify")
-	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request ) {
+	public ModelAndView modifyPost(ModelAndView mv,BoardVO board, HttpServletRequest request,
+			MultipartFile[] fileList, Integer [] fileNumList) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
-		boardService.updateBoard(board, fileList, user);
-		mv.addObject("bo_num", board.getBo_num());
-		mv.setViewName("redirect:/board/list");
+		boardService.updateBoard(board,user,fileList, fileNumList);
+		mv.addObject("num", board.getBo_num());
+		mv.setViewName("redirect:/board/notice/detail");
 		return mv;
 	}
 	@GetMapping("/delete")
 	public ModelAndView deleteGet(ModelAndView mv,Integer num,HttpServletRequest request) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		boardService.deleteBoard(num, user);
-		mv.setViewName("redirect:/board/list");
+		mv.setViewName("redirect:/board/notice/list");
 		return mv;
 	}
 	@ResponseBody
@@ -98,5 +100,4 @@ public class BoardController {
 	public ResponseEntity<byte[]> downloadFile(String fileName)throws Exception{
 	    return boardService.downloadFile(fileName);
 	}
-	
 }

@@ -64,7 +64,8 @@
 	</interceptors>
 	<interceptors>
 	    <interceptor>
-	        <mapping path="/abcd/*"/>
+	        <mapping path="/board/register"/>
+	        <mapping path="/board/detail/*"/>
 	        <beans:ref bean="memberInterceptor"/>
 	    </interceptor>
 	</interceptors>
