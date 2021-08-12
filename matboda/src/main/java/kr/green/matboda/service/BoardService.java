@@ -21,7 +21,7 @@ public interface BoardService {
 
 	int getTotalCount(Criteria cri);
 
-	void updateBoard(BoardVO board, MultipartFile[] fileList, MemberVO user, Integer[] fileNumList);
+	void updateBoard(BoardVO board, MultipartFile[] fileList, MemberVO user, Integer[] fileNumList) throws Exception;
 
 	void deleteBoard(Integer num, MemberVO user);
 

@@ -17,7 +17,7 @@ public class Criteria {
 		this.perPageNum = 10;
 		this.sortType = "me_signupdate";
 		this.sort = "desc";
-		this.type = "NORMAL";
+		this.type = "Q&A";
 		this.search = "";
 	}
 	public Criteria(int page, int perPageNum) {

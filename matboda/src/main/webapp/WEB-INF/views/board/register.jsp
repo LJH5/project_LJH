@@ -8,7 +8,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
 <body>
-	<form class="container" method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/board/register">
+	<form class="container" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label>제목</label>
 			<input type="text" class="form-control" name="bo_title">
@@ -21,7 +21,7 @@
 			<input type="file" name="fileList" class="form-control">
 		</div>
 		<button type="submit" class="btn btn-outline-success">등록</button>
-		<a href="<%=request.getContextPath()%>/board/list"><button type="button" class="btn btn-outline-success">목록</button></a>
+		<a href="<%=request.getContextPath()%>/board${type}/list"><button type="button" class="btn btn-outline-success">목록</button></a>
 	</form>
 	<script type="text/javascript">
 	$(function(){

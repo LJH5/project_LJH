@@ -24,12 +24,13 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("board/notice")
 public class NoticeBoardController {
 	
 	private BoardService boardService;
 	private MemberService memberService;
 	
-	@RequestMapping("board/notice")
+	@GetMapping("/list")
 	public ModelAndView listGet(ModelAndView mv, Criteria cri) {
 		cri.setType("NOTICE");
 		ArrayList<BoardVO> list = boardService.getBoardList(cri);
@@ -80,10 +81,10 @@ public class NoticeBoardController {
 		return mv;
 	}
 	@PostMapping("/modify")
-	public ModelAndView modifyPost(ModelAndView mv,BoardVO board, HttpServletRequest request,
+	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest request,
 			MultipartFile[] fileList, Integer [] fileNumList) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
-		boardService.updateBoard(board,user,fileList, fileNumList);
+		boardService.updateBoard(board, fileList, user, fileNumList);
 		mv.addObject("num", board.getBo_num());
 		mv.setViewName("redirect:/board/notice/detail");
 		return mv;

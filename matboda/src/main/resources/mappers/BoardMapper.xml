@@ -5,6 +5,7 @@
 <mapper namespace="kr.green.matboda.dao.BoardDAO">
 	<select id="selectBoardList" resultType="kr.green.matboda.vo.BoardVO">
 		select * from board
+			where bo_type = #{cri.type}
 			order by bo_num desc
 			limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
@@ -12,8 +13,8 @@
 		select * from board where bo_num = #{num}
 	</select>
 	<insert id="insertBoard" useGeneratedKeys="true" keyProperty="board.bo_num" parameterType="kr.green.matboda.vo.BoardVO">
-		insert into board(bo_title, bo_content, bo_me_id)
-			values(#{board.bo_title}, #{board.bo_content}, #{board.bo_me_id});
+		insert into board(bo_title, bo_content, bo_me_id, bo_type)
+			values(#{board.bo_title}, #{board.bo_content}, #{board.bo_me_id}, #{board.bo_type});
 	</insert>
 	<select id="selectTotalCount" resultType="int">
 		select count(*) from board
@@ -46,4 +47,10 @@
 	<delete id="deleteFile">
 		delete from image where im_num = #{im_num}
 	</delete>
+	<select id="selectFileNumList" resultType="int">
+		select im_num from image where im_where = #{num}
+	</select>
+	<select id="selectFile" resultType="kr.green.matboda.vo.ImageVO">
+		select * from image where im_num = #{tmp}
+	</select>
 </mapper>

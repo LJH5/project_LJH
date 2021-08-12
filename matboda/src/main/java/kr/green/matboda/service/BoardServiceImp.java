@@ -61,7 +61,7 @@ public class BoardServiceImp implements BoardService{
 	}
 
 	@Override
-	public void updateBoard(BoardVO board, MultipartFile[] fileList, MemberVO user, Integer[] fileNumList) {
+	public void updateBoard(BoardVO board, MultipartFile[] fileList, MemberVO user, Integer[] fileNumList) throws Exception {
 		if(board == null || user == null)
 			return;
 		BoardVO dbBoard = boardDao.selectBoard(board.getBo_num());
@@ -70,6 +70,33 @@ public class BoardServiceImp implements BoardService{
 		dbBoard.setBo_title(board.getBo_title());
 		dbBoard.setBo_content(board.getBo_content());
 		boardDao.updateBoard(dbBoard);
+		
+		ArrayList<Integer> dbFileNumList = boardDao.selectFileNumList(board.getBo_num());
+		int dbSize = 0;
+		if(dbFileNumList != null) {
+			dbSize = dbFileNumList.size();
+			//배열 fileNumList를 ArraylList로 변환
+			ArrayList<Integer> inputFileNumList = new ArrayList<Integer>();
+			if(fileNumList != null) {
+				for(Integer tmp : fileNumList) {
+					inputFileNumList.add(tmp);
+					dbSize--;
+				}
+			}
+			//dbFileNumList에 있는 첨부파일 번호들 중에서 inputFileNumList에 없는 첨부파일을 삭제
+			for(Integer tmp : dbFileNumList) {
+				if(!inputFileNumList.contains(tmp)) {
+					deleteFile(boardDao.selectFile(tmp));
+				}
+			}
+			
+		}
+		if(fileList == null)
+			return;
+		int size = fileList.length > 3 - dbSize ? 3 - dbSize : fileList.length;
+		for(int i = 0; i<size; i++) {
+			insertFile(fileList[i], board.getBo_type(), ""+board.getBo_num());
+		}
 	}
 
 	@Override

@@ -32,4 +32,8 @@ public interface BoardDAO {
 
 	void deleteFile(int im_num);
 
+	ArrayList<Integer> selectFileNumList(int bo_num);
+
+	ImageVO selectFile(Integer tmp);
+
 }
