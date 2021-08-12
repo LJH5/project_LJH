@@ -24,7 +24,7 @@
 						<td>${pm.totalCount - status.index - pm.criteria.pageStart}</td>
 						
 						<td>
-							<a href="<%=request.getContextPath()%>/board/detail?num=${board.bo_num}">
+							<a href="<%=request.getContextPath()%>/board${type}/detail?num=${board.bo_num}">
 								${board.bo_title}
 							</a>
 						</td>

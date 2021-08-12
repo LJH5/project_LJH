@@ -13,7 +13,7 @@
 		</div>
 		<input type="hidden" name="oriNo" value="${oriNo}">
 		<button class="btn btn-outline-success">등록</button>
-		<a href="<%=request.getContextPath()%>/board/list"><button type="button" class="btn btn-outline-danger">목록</button></a>
+		<a href="<%=request.getContextPath()%>/board${type}/list"><button type="button" class="btn btn-outline-danger">목록</button></a>
 	</form>
 	<script type="text/javascript">
 	$(function(){

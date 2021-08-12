@@ -11,12 +11,6 @@
 		<ul class="navbar-nav">
 			<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/">맛보다</a></li>
 		</ul>
-		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/board/list">문의사항</a></li>
-		</ul>
-		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/board/notice/list">공지사항</a></li>
-		</ul>
 		<c:if test="${user == null}">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/member/signin">로그인</a></li>
