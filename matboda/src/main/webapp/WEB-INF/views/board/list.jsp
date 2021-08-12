@@ -19,9 +19,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="board">
+				<c:forEach items="${list}" var="board" varStatus="status">
 					<tr>
-						<td>${board.bo_num}</td>
+						<td>${pm.totalCount - status.index - pm.criteria.pageStart}</td>
 						
 						<td>
 							<a href="<%=request.getContextPath()%>/board/detail?num=${board.bo_num}">
