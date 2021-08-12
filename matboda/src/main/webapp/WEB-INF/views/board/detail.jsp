@@ -42,7 +42,7 @@
 		<div class="form-group">
 			<label>첨부파일</label>
 			<c:forEach items="${fList}" var="image">
-				<a class="form-control" href="<%=request.getContextPath()%>/board/download?fileName=${image.im_name}">${imgage.im_oriName}</a>
+				<a class="form-control" href="<%=request.getContextPath()%>/board/download?fileName=${image.im_name}">${image.im_oriName}</a>
 			</c:forEach>
 		</div>
 		<div class="reply form-group">
