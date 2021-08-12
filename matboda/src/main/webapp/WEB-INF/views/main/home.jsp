@@ -7,5 +7,6 @@
 
 </head>
 <body>
+	맛보다 메인페이지
 </body>
 </html>
