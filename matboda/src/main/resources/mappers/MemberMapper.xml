@@ -2,56 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.green.matboda.dao.MemberDAO">
- 	<insert id="insertMember">
-		insert into member(me_id, me_pw, me_nickname, me_picture, me_name, me_email, me_phoneNum, me_gender)
-			values(#{me_id}, #{me_pw}, #{me_nickname}, #{me_picture}, #{me_name}, #{me_email}, #{me_phoneNum}, #{me_gender})
-	</insert>
-	<select id="selectUser" resultType="kr.green.matboda.vo.MemberVO">
-		select * from member where me_id = #{me_id}
-	</select>
-	<update id="keepLogin">
-		update member set
-			me_sessionId = #{me_sessionId},
-			me_sessionLimit = #{me_sessionLimit}
-		where me_id = #{me_id}
-	</update>
-	<select id="selectUserBySeesion" resultType="kr.green.matboda.vo.MemberVO">
-		select * from member 
-			where me_sessionId = #{me_sessionId} and me_sessionLimit > now() 
-	</select>
-	<select id="selectUserList" resultType="kr.green.matboda.vo.MemberVO">
-		select * from member
-			<if test="me_authority == 'ADMIN'">
-				where me_authority = 'USER'
-			</if>
-			<if test="me_authority == 'SUPER ADMIN'">
-				where me_authority != 'SUPER ADMIN'
-			</if>
-			<if test="cri.search != ''">
-				and me_id = #{cri.search} 
-			</if>
-			order by ${cri.sortType} ${cri.sort} limit #{cri.pageStart}, #{cri.perPageNum}
-	</select>
-	<update id="updateUser">
-		update member set
-			me_pw = #{me_pw},
-			me_nickname = #{me_nickname},
-			me_picture = #{me_picture},
-			me_name = #{me_name},
-			me_email = #{me_email},
-			me_phoneNum = #{me_phoneNum},
-			me_gender = #{me_gender},
-			me_authority = #{me_authority}
-		where me_id = #{me_id}
-	</update>
-	<select id="getTotalCount" resultType="int">
-		select count(*) from member
-			<if test="me_authority == 'ADMIN'">
-				where me_authority = 'USER'
-			</if>
-			<if test="me_authority == 'SUPER ADMIN'">
-				where me_authority != 'SUPER ADMIN'
-			</if>
-	</select>
+<mapper namespace="kr.green.matboda.dao.RestaurantDAO">
+ 	<insert id="insertRt">
+ 		insert into restaurant(rt_name, rt_address, rt_phoneNum, rt_type, rt_openTime, rt_me_id)
+ 			values(#{rt_name}, #{rt_address}, #{rt_phoneNum}, #{rt_type}, #{rt_openTime}, #{rt_me_id})
+ 	</insert>
 </mapper>

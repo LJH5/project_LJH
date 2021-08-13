@@ -108,7 +108,7 @@
 	            },
 	            me_name: {
 	                required : "필수 정보입니다.",
-	                regex: "한글이나 영문 대ㆍ소문자만 사용 가능합니다."
+	                regex : "한글이나 영문 대ㆍ소문자만 사용 가능합니다."
 	            },
 	            me_email: {
 	                required : "필수 정보입니다.",
@@ -116,6 +116,7 @@
 	            },
 	            me_phoneNum: {
 	            	required: "필수 정보입니다."
+	            	regex : "올바른 전화번호가 아닙니다."
 	            },
 	            me_gender: {
 	            	required : "필수 정보입니다."
