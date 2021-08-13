@@ -74,6 +74,8 @@ public class BoardController {
 		BoardVO board = boardService.getBoard(num);
 		
 		ArrayList<ImageVO> fList = boardService.getFileList(num);
+		System.out.println(board);
+		System.out.println(fList);
 		
 		mv.addObject("title", "게시글 수정");
 		mv.addObject("board", board);
@@ -84,6 +86,7 @@ public class BoardController {
 	@PostMapping("/modify")
 	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request, Integer [] fileNumList ) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
+		board.setBo_type("Q&A");
 		boardService.updateBoard(board, fileList, user, fileNumList);
 		mv.addObject("bo_num", board.getBo_num());
 		mv.setViewName("redirect:/board/list");

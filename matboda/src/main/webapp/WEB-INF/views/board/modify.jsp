@@ -26,10 +26,13 @@
 			<label>첨부파일</label>
 			<c:forEach items="${fList}" var="file">
 				<div class="form-control">
-					<span>${image.im_name}</span>
+					<span>${image.im_oriName}</span>
 					<i class="fas fa-times"></i>
 					<input type="hidden"name="fileNumList" value="${image.im_num}">
 				</div>
+			</c:forEach>
+			<c:forEach begin="1" end="${1 - fList.size()}">
+				<input type="file" class="form-control" name="fileList">
 			</c:forEach>
 		</div>
 		<input type="hidden" name="bo_num" value="${board.bo_num}">
@@ -43,6 +46,10 @@
 				tabsize: 2,
 				height: 400
 			});
+			$('.file-box .fa-times').click(function(){
+				$(this).parent().remove();
+				$('.file-box').append('<input type="file" class="form-control" name="fileList">');
+			})
 		})
 	</script>
 </body>

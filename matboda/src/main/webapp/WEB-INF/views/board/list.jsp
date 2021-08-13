@@ -22,7 +22,6 @@
 				<c:forEach items="${list}" var="board" varStatus="status">
 					<tr>
 						<td>${pm.totalCount - status.index - pm.criteria.pageStart}</td>
-						
 						<td>
 							<a href="<%=request.getContextPath()%>/board/detail?num=${board.bo_num}">
 								${board.bo_title}

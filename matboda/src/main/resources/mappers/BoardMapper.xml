@@ -18,6 +18,7 @@
 	</insert>
 	<select id="selectTotalCount" resultType="int">
 		select count(*) from board
+			where bo_type = #{cri.type}
 	</select>
 	<update id="updateBoard">
 		update board set

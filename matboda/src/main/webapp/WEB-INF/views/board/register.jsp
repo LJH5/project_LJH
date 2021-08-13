@@ -18,6 +18,7 @@
 			<textarea id="summernote" class="form-control" name="bo_content" rows="10">${board.bo_content}</textarea>
 		</div>
 		<div class="form-group">
+			<label>첨부파일</label>
 			<input type="file" name="fileList" class="form-control">
 		</div>
 		<button type="submit" class="btn btn-outline-success">등록</button>

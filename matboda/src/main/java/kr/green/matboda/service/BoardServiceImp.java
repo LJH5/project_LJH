@@ -75,7 +75,6 @@ public class BoardServiceImp implements BoardService{
 		int dbSize = 0;
 		if(dbFileNumList != null) {
 			dbSize = dbFileNumList.size();
-			//배열 fileNumList를 ArraylList로 변환
 			ArrayList<Integer> inputFileNumList = new ArrayList<Integer>();
 			if(fileNumList != null) {
 				for(Integer tmp : fileNumList) {
@@ -83,7 +82,6 @@ public class BoardServiceImp implements BoardService{
 					dbSize--;
 				}
 			}
-			//dbFileNumList에 있는 첨부파일 번호들 중에서 inputFileNumList에 없는 첨부파일을 삭제
 			for(Integer tmp : dbFileNumList) {
 				if(!inputFileNumList.contains(tmp)) {
 					deleteFile(boardDao.selectFile(tmp));
@@ -125,7 +123,8 @@ public class BoardServiceImp implements BoardService{
 	public ArrayList<ImageVO> getFileList(Integer num) {
 		if(num == null)
 			return null;
-		 return boardDao.selectFileList(num);  
+		System.out.println(num);
+		return boardDao.selectFileList(num);  
 	}
 	@Override
 	public ResponseEntity<byte[]> downloadFile(String fileName) throws IOException {
