@@ -123,7 +123,6 @@ public class BoardServiceImp implements BoardService{
 	public ArrayList<ImageVO> getFileList(Integer num) {
 		if(num == null)
 			return null;
-		System.out.println(num);
 		return boardDao.selectFileList(num);  
 	}
 	@Override
