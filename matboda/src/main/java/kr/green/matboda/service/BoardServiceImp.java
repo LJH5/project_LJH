@@ -27,7 +27,7 @@ public class BoardServiceImp implements BoardService{
 	@Autowired
 	BoardDAO boardDao;
 	
-	private String uploadPath = "C:\\Users\\sigma\\Desktop\\JAVA_LJH\\uploadfiles";
+	private String uploadPath = "D:\\JAVA_LJH\\uploadfiles";
 	
 	@Override
 	public ArrayList<BoardVO> getBoardList(Criteria cri) {
