@@ -72,10 +72,7 @@ public class BoardController {
 	@GetMapping("/modify")
 	public ModelAndView modifyGet(ModelAndView mv, Integer num) {
 		BoardVO board = boardService.getBoard(num);
-		
 		ArrayList<ImageVO> fList = boardService.getFileList(num);
-		System.out.println(board);
-		System.out.println(fList);
 		
 		mv.addObject("title", "게시글 수정");
 		mv.addObject("board", board);
