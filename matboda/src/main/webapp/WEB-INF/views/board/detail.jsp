@@ -40,8 +40,8 @@
 			<div class="form-control" style="min-height:400px;">${board.bo_content}</div>
 		</div>
 		<div class="form-group">
-			<label>첨부파일</label>
 			<c:forEach items="${fList}" var="image">
+				<label>첨부파일</label>
 				<a class="form-control" href="<%=request.getContextPath()%>/board${type}/download?fileName=${image.im_name}">${image.im_oriName}</a>
 			</c:forEach>
 		</div>

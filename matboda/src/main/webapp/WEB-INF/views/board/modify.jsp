@@ -24,11 +24,11 @@
 		</div>
 		<div class="form-group file-box">
 			<label>첨부파일</label>
-			<c:forEach items="${fList}" var="file">
+			<c:forEach items="${fList}" var="image">
 				<div class="form-control">
-					<span>${image.im_name}</span>
+					<span>${image.im_oriName}</span>
 					<i class="fas fa-times"></i>
-					<input type="hidden"name="fileNumList" value="${image.im_num}">
+					<input type="hidden" name="fileNumList" value="${image.im_num}">
 				</div>
 			</c:forEach>
 		</div>
@@ -43,6 +43,10 @@
 				tabsize: 2,
 				height: 400
 			});
+			$('.file-box .fa-times').click(function(){
+				$(this).parent().remove();
+				$('.file-box').append('<input type="file" class="form-control" name="fileList">');
+			})
 		})
 	</script>
 </body>

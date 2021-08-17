@@ -28,7 +28,7 @@ public interface BoardDAO {
 
 	void updateViews(Integer num);
 	
-	ArrayList<ImageVO> selectFileList(@Param("num") Integer num);
+	ArrayList<ImageVO> selectFileList(Integer num);
 
 	void deleteFile(int im_num);
 
