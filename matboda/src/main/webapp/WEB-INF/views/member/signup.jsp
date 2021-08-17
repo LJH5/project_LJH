@@ -115,7 +115,8 @@
 	                regex : "메일규칙에 어긋납니다."
 	            },
 	            me_phoneNum: {
-	            	required: "필수 정보입니다."
+	            	required: "필수 정보입니다.",
+	            		regex : "올바른 전화번호가 아닙니다."
 	            },
 	            me_gender: {
 	            	required : "필수 정보입니다."

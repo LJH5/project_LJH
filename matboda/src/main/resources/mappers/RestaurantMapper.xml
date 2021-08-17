@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.green.matboda.dao.RestaurantDAO">
+ 	<insert id="insertRt">
+ 		insert into restaurant(rt_name, rt_address, rt_phoneNum, rt_type, rt_openTime, rt_me_id)
+ 			values(#{rt_name}, #{rt_address}, #{rt_phoneNum}, #{rt_type}, #{rt_openTime}, #{rt_me_id})
+ 	</insert>
+</mapper>
