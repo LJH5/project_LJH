@@ -7,4 +7,8 @@ public interface RestaurantService {
 
 	void insertRestaurant(RestaurantVO rt, MemberVO user);
 
+	RestaurantVO getRt(Integer num);
+
+	void updateRt(RestaurantVO rt, MemberVO user);
+
 }

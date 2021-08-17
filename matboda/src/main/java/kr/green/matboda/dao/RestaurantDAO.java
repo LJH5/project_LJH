@@ -6,4 +6,8 @@ public interface RestaurantDAO {
 
 	void insertRt(RestaurantVO rt);
 
+	RestaurantVO selectRt(Integer num);
+
+	void updateRt(RestaurantVO dbRt);
+
 }

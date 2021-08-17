@@ -15,11 +15,11 @@
 </head>
 <body>
 
-<form class="container" method="post" action="<%=request.getContextPath()%>/restaurant/register">
-	<h1>음식점 등록</h1>
+<form class="container" method="post" action="<%=request.getContextPath()%>/restaurant/modify">
+	<h1>음식점 수정</h1>
 	<div class="form-group">
 		<label>상호명</label>
-		<input type="text" class="form-control" name="rt_name" id="rt_name">
+		<input type="text" class="form-control" name="rt_name" id="rt_name" value="${rt.rt_name}">
 	</div>
 	<div class="form-group address">
          <label>주소</label>
@@ -34,7 +34,7 @@
     </div>
 	<div class="form-group">
 		<label>전화번호</label>
-		<input type="text" class="form-control" name="rt_phoneNum" placeholder="(-) 붙여서 입력해주세요.">
+		<input type="text" class="form-control" name="rt_phoneNum" placeholder="(-) 붙여서 입력해주세요." value="${rt.rt_phoneNum}">
 	</div>
 	<div class="form-group">
 		<label>음식종류</label>
@@ -49,13 +49,13 @@
 			<option value="브런치/버거/샌드위치">브런치/버거/샌드위치</option>
 			<option value="다국적 아시아">다국적 아시아</option>
 			<option value="세계 음식">세계 음식</option>
-			<option value="기타">기타</option>
+			<option value="기타" selected>기타</option>
 		</select>
 	</div>
 	<div class="form-group">
 		<label>영업시간</label>
 		<select class="form-control" name="openHour">
-			<option value="00">00</option>
+			<option value="00" >00</option>
 			<option value="01">01</option>
 			<option value="02">02</option>
 			<option value="03">03</option>
@@ -130,9 +130,8 @@
 		<div>분</div>
 		<input type="hidden" name="rt_openTime">
 	</div>
-	<input type="hidden" name="dupCheck">
-	<input type="hidden" name="rt_num" value="${restaurant.rt_num}">
-	<button class="btn btn-outline-success col-12">음식점 등록</button>
+	<input type="hidden" name="num" value="${board.num}">
+	<button class="btn btn-outline-success col-12">수정하기</button>
 </form>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -187,6 +186,8 @@
         }).open();
     }
     $(function(){
+    	$('[name=rt_type]').val('${rt.rt_type}');
+    	$('[name=rt_type]').val('${rt.rt_type}');
 	    $("form").validate({
 			rules: {
 				rt_name: {
@@ -243,13 +244,13 @@
 	    })
     });
     $.validator.addMethod(
-    	    "regex",
-    	    function(value, element, regexp) {
-    	        var re = new RegExp(regexp);
-    	        return this.optional(element) || re.test(value);
-    	    },
-    	    "입력이 잘못되었습니다."
-    	);
+   	    "regex",
+   	    function(value, element, regexp) {
+   	        var re = new RegExp(regexp);
+   	        return this.optional(element) || re.test(value);
+   	    },
+   	    "입력이 잘못되었습니다."
+    );
 </script>
 </body>
 </html>

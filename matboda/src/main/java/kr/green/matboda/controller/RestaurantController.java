@@ -35,8 +35,33 @@ public class RestaurantController {
 	public ModelAndView restaurantRegisterPost(ModelAndView mv, RestaurantVO rt, HttpServletRequest request) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		restaurantService.insertRestaurant(rt, user);
-		System.out.println(rt);
 		mv.setViewName("redirect:/");
+		return mv;
+	}
+	@GetMapping("/main")
+	public ModelAndView restaurantMainGet(ModelAndView mv, Integer num) {
+		RestaurantVO rt = restaurantService.getRt(num);
+		mv.addObject("title", rt.getRt_name());
+		mv.addObject("rt", rt);
+		mv.setViewName("/template/restaurant/main");
+		return mv;
+	}
+	@GetMapping("/modify")
+	public ModelAndView restaurantmodifyGet(ModelAndView mv,Integer num) {
+		RestaurantVO rt = restaurantService.getRt(num);
+		mv.addObject("title", rt.getRt_name());
+		mv.addObject("rt", rt);
+		mv.setViewName("/template/restaurant/modify");
+		return mv;
+	}
+	@PostMapping("/modify")
+	public ModelAndView restaurantmodifyPost(ModelAndView mv, RestaurantVO rt, HttpServletRequest request) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		System.out.println(user);
+		System.out.println(rt);
+		restaurantService.updateRt(rt, user);
+		mv.addObject("rt_num", rt.getRt_num());
+		mv.setViewName("redirect:/restaurant/main");
 		return mv;
 	}
 

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        .container{
+            margin-top: 50px;
+            margin-left: 20px;
+        }
+        #rt_name{
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .infBox{
+            margin-bottom: 10px;
+        }
+        .infBox #reviewNum{
+            margin-right: 20px;
+        }
+        .detail{
+            border-top: 1px solid rgba(194, 184, 184, 0.747);
+            border-bottom: 1px solid rgba(194, 184, 184, 0.747);
+            padding: 10px 0;
+            position: relative;
+        }
+        .detail li{
+            margin-bottom: 10px;
+        }
+        .detail>ul>li{
+            color: rgb(112, 112, 112);
+        }
+        .content{
+            position: absolute;
+            top: 10px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="rt_name">
+            rt_name 
+            rt_score
+        </div>
+        <div class="infBox">
+            <span id="reviewNum">리뷰수</span>
+            <span id="favoritesNum">즐겨찾기수</span>
+        </div>
+        <div class="detail">
+            <ul>
+                <li>주소</li>
+                <li>전화번호</li>
+                <li>음식종류</li>
+                <li>영업시간</li>
+            </ul>
+            <div class="content">
+                <ul>
+                    <li>rt_address</li>
+                    <li>rt_phoneNum</li>
+                    <li>rt_type</li>
+                    <li>rt_openTime</li>
+                </ul>
+            </div>
+        </div>
+       
+    </div>
+</body>
+</html>
