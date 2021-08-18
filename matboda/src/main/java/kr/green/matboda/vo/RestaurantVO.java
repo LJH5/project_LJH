@@ -16,9 +16,9 @@ public class RestaurantVO {
 	private String rt_menu;
 	private String rt_me_id;
 	private Date rt_regDate;
-	private Date rt_upDate;
+	private String rt_upDate;
 	private float rt_score;
-
+	
 	public String getDate(Date date) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(date);

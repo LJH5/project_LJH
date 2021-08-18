@@ -13,11 +13,12 @@
  	</select>
  	<update id="updateRt">
  		update restaurant set
- 			rt_name = #{rt_name}
- 			rt_address = #{rt_address}
- 			rt_phoneNum =  #{rt_phoneNum}
- 			rt_type = #{rt_type}
- 			rt_openTime = #{rt_openTime}
- 			where restaurant_num = #{rt_num}
+ 			rt_name = #{rt_name},
+ 			rt_address = #{rt_address},
+ 			rt_phoneNum =  #{rt_phoneNum},
+ 			rt_type = #{rt_type},
+ 			rt_openTime = #{rt_openTime},
+ 			rt_upDate = #{rt_upDate}
+ 			where rt_num = #{rt_num}
  	</update>
 </mapper>

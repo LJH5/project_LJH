@@ -11,6 +11,9 @@
 		.error{
 			color : red
 		}
+		.before{
+			margin-bottom: 10px;
+		}
 	</style>
 </head>
 <body>
@@ -22,15 +25,16 @@
 		<input type="text" class="form-control" name="rt_name" id="rt_name" value="${rt.rt_name}">
 	</div>
 	<div class="form-group address">
-         <label>주소</label>
-	         <input class="form-control"type="text" id="sample4_postcode" placeholder="우편번호">
-	         <input class="form-control"type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-	         <input class="form-control"type="text" id="sample4_roadAddress" placeholder="도로명주소">
-	         <input class="form-control"type="text" id="sample4_jibunAddress" placeholder="지번주소">
-	         <span class="form-control"id="guide" style="color:#999;display:none"></span>
-	         <input class="form-control"type="text" id="sample4_detailAddress" placeholder="상세주소">
-	         <input class="form-control"type="text" id="sample4_extraAddress" placeholder="참고항목">
-	         <input type="hidden" name="rt_address">
+		<label>주소</label>
+		<input class="form-control before" readonly value="${rt.rt_address}">
+		<input class="form-control"type="text" id="sample4_postcode" placeholder="우편번호">
+		<input class="form-control"type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+		<input class="form-control"type="text" id="sample4_roadAddress" placeholder="도로명주소">
+		<input class="form-control"type="text" id="sample4_jibunAddress" placeholder="지번주소">
+		<span class="form-control"id="guide" style="color:#999;display:none"></span>
+		<input class="form-control"type="text" id="sample4_detailAddress" placeholder="상세주소">
+		<input class="form-control"type="text" id="sample4_extraAddress" placeholder="참고항목">
+		<input type="hidden" name="rt_address">
     </div>
 	<div class="form-group">
 		<label>전화번호</label>
@@ -54,8 +58,9 @@
 	</div>
 	<div class="form-group">
 		<label>영업시간</label>
+		<input class="form-control before" readonly value="${rt.rt_openTime}">
 		<select class="form-control" name="openHour">
-			<option value="00" >00</option>
+			<option value="00">00</option>
 			<option value="01">01</option>
 			<option value="02">02</option>
 			<option value="03">03</option>
@@ -130,7 +135,7 @@
 		<div>분</div>
 		<input type="hidden" name="rt_openTime">
 	</div>
-	<input type="hidden" name="num" value="${board.num}">
+	<input type="hidden" name="rt_num" value="${rt.rt_num}">
 	<button class="btn btn-outline-success col-12">수정하기</button>
 </form>
 <script>
@@ -187,7 +192,6 @@
     }
     $(function(){
     	$('[name=rt_type]').val('${rt.rt_type}');
-    	$('[name=rt_type]').val('${rt.rt_type}');
 	    $("form").validate({
 			rules: {
 				rt_name: {
@@ -228,7 +232,7 @@
 				var jibun = $('input[id=sample4_jibunAddress]').val();
 				var detail = $('input[id=sample4_detailAddress]').val();
 				var extra = $('input[id=sample4_extraAddress]').val();
-				var address = road+detail+extra;
+				var address = road +" "+detail + extra;
 				$('[name=rt_address]').val(address);
 				
 				

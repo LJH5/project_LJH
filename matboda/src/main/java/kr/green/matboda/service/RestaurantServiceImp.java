@@ -1,5 +1,7 @@
 package kr.green.matboda.service;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Service;
 
 import kr.green.matboda.dao.BoardDAO;
@@ -37,10 +39,13 @@ public class RestaurantServiceImp implements RestaurantService{
 		if(dbRt == null || !user.getMe_id().equals(dbRt.getRt_me_id()))
 			return;
 		dbRt.setRt_name(rt.getRt_name());
-		dbRt.setRt_address(rt.getRt_address());
 		dbRt.setRt_phoneNum(rt.getRt_phoneNum());
 		dbRt.setRt_type(rt.getRt_type());
 		dbRt.setRt_openTime(rt.getRt_openTime());
+		Date now = new Date();
+		dbRt.setRt_upDate(rt.getDate(now));
+		if(rt.getRt_address() != null && rt.getRt_address().trim().length() > 3)
+			dbRt.setRt_address(rt.getRt_address());
 		restaurantDao.updateRt(dbRt);
 	}
 
