@@ -79,7 +79,12 @@
 			var data = {
 					rp_bo_num:rp_bo_num, rp_content:rp_content
 			}
-			replyService.add(contextPath, data, addOk);
+			replyService.add(contextPath, data, addOk, listOk);
+			$('.reply-input').val('');
+		})
+		$(document).on('click','.reply .pagination li', function(){
+			var page = $(this).attr('data-page');
+			replyService.list(contextPath, {page : page, rp_bo_num: rp_bo_num}, listOk);
 		})
 		replyService.list(contextPath, {page : 1, rp_bo_num: rp_bo_num}, listOk);
 	})
@@ -93,9 +98,36 @@
 		var list = res.list;
 		var str = '';
 		for(i = 0; i<list.length; i++){
-			str += list[i].rp_me_id + ' : ' + list[i].rp_content + '<br>';
+			str +=
+				'<div class="input-group">'+
+					'<div class="input-group-prepend">'+
+			        	'<span class="input-group-text">'+list[i].rp_me_id+'</span>'+
+				    '</div>'+
+					'<div class="form-control reply-content">'+list[i].rp_content+'</div>'+
+					'<div class="input-group-append">';
+						if(list[i].rp_me_id == rp_me_id){
+							str += 
+							'<button class="btn btn-outline-success reply-mod-btn">수정</button>'+
+						    '<button class="btn btn-outline-danger reply-del-btn">삭제</button>'
+						}
+					str +=
+					'</div>'+
+				'</div>'
 		}
 		$('.reply-list').html(str);
+		str ='';
+		var pm = res.pm;
+		if(pm.prev)
+			str += '<li class="page-item" data-page="'+(pm.startPage-1)+'"><a class="page-link" href="javascript:void(0);">이전</a></li>'
+		for(i=pm.startPage; i<=pm.endPage; i++){
+			if(pm.criteria.page != i)
+				str += '<li class="page-item" data-page="'+i+'"><a class="page-link" href="javascript:void(0);">'+i+'</a></li>'
+			else
+				str += '<li class="page-item active" data-page="'+i+'"><a class="page-link" href="javascript:void(0);">'+i+'</a></li>'
+		}
+		if(pm.next)
+			str += '<li class="page-item" data-page="'+(pm.endPage+1)+'"><a class="page-link" href="javascript:void(0);">다음</a></li>'
+		$('.pagination').html(str);
 	}
 </script>
 </body>
