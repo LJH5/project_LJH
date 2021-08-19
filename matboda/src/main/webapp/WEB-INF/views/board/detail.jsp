@@ -109,29 +109,27 @@
 			var rp_num = $(this).siblings('.rp_num').val();
 			var rp_content = $(this).parent().siblings('.reply-content').val();
 			var page = $('.reply .pagination .active a').html();
-			var data = {rp_num:rp_num, rp_content : rp_content}
-			$.ajax({
-				type : 'post',
-				url  : contextPath + '/reply/mod',
-				data : JSON.stringify(data),
-				contentType : "application/json; charset=utf-8",
-				success : function(res){
-					if(res == 'OK'){
-						alert('댓글을 수정했습니다.')
-					}else{
-						alert('댓글 수정에 실패했습니다.')
-					}
-					replyService.list(contextPath, {page : page, rp_bo_num: rp_bo_num}, listOk);
-				}
-			})
+			var data = {
+					rp_num     : rp_num, 
+					rp_content : rp_content,
+					rp_bo_num  : rp_bo_num,
+					page       : page
+			}
+			replyService.mod(contextPath, data, responseOk ,listOk );
+		});
+		$(document).on('click','.reply-del-btn', function(){
+			var rp_num = $(this).siblings('.rp_num').val();
+			var data = {rp_num : rp_num, rp_bo_num : rp_bo_num};
+			replyService.del(contextPath, data, responseOk, listOk);
+			
 		});
 		replyService.list(contextPath, {page : 1, rp_bo_num: rp_bo_num}, listOk);
 	})
-	function addOk(res){
+	function responseOk(res, str){
 		if(res == 'OK')
-			alert('댓글이 등록되었습니다.');
+			alert('댓글이 '+str+' 되었습니다.');
 		else
-			alert('댓글 등록에 실패했습니다.');
+			alert('댓글 '+str+'에 실패했습니다.');
 	}
 	function listOk(res){
 		var list = res.list;

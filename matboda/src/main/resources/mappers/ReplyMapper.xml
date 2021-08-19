@@ -30,4 +30,9 @@
 			rp_content = #{rp_content}
 			where rp_num = #{rp_num}
 	</update>
+	
+	<delete id="deleteReply">
+		delete from reply
+			where rp_num = #{rp_num}
+	</delete>
 </mapper>
