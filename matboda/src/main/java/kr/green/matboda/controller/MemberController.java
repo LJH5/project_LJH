@@ -62,4 +62,9 @@ public class MemberController {
 		mv.setViewName("redirect:/");
 		return mv;
 	}
+	@GetMapping("/mypage")
+	public ModelAndView memberMypageGet(ModelAndView mv) {
+		mv.setViewName("/template/member/mypage");
+		return mv;
+	}
 }

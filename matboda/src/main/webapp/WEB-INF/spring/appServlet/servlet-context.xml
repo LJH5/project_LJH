@@ -70,7 +70,8 @@
 	        <mapping path="/board/register"/>
 	        <mapping path="/board/modify"/>
 	        <mapping path="/board/delete"/>
-	         <mapping path="/restaurant/*"/>
+	        <mapping path="/restaurant/*"/>
+	        <mapping path="/member/mypage"/>
 	        <beans:ref bean="memberInterceptor"/>
 	    </interceptor>
 	</interceptors>
