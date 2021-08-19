@@ -4,15 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>게시판</title>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/reply.js"></script>
 	<style>
-	.recommend-btn{
-		font-size: 30px;
-	}
-	.fa-thumbs-down{
-		transform : rotateY(180deg);
-	}
+		.recommend-btn{
+			font-size: 30px;
+		}
+		.fa-thumbs-down{
+			transform : rotateY(180deg);
+		}
 	</style>
 </head>
 <body>
@@ -63,8 +62,41 @@
 			<a href="<%=request.getContextPath()%>/board${type}/delete?num=${board.bo_num}" style="text-decoration: none">
 				<button class="btn btn-outline-danger">삭제</button>
 			</a>
-		</c:if>
-			
+		</c:if>	
 	</div>
+	
+<script type="text/javascript">
+	var rp_bo_num = '${board.bo_num}';
+	var rp_me_id = '${user.me_id}';
+	var contextPath = '<%=request.getContextPath()%>';
+	$(function(){
+		$('.reply-btn').click(function(){
+			if(rp_me_id == ''){
+				alert('로그인을 하세요.');
+				return;
+			}
+			var rp_content = $('.reply-input').val();
+			var data = {
+					rp_bo_num:rp_bo_num, rp_content:rp_content
+			}
+			replyService.add(contextPath, data, addOk);
+		})
+		replyService.list(contextPath, {page : 1, rp_bo_num: rp_bo_num}, listOk);
+	})
+	function addOk(res){
+		if(res == 'OK')
+			alert('댓글이 등록되었습니다.');
+		else
+			alert('댓글 등록에 실패했습니다.');
+	}
+	function listOk(res){
+		var list = res.list;
+		var str = '';
+		for(i = 0; i<list.length; i++){
+			str += list[i].rp_me_id + ' : ' + list[i].rp_content + '<br>';
+		}
+		$('.reply-list').html(str);
+	}
+</script>
 </body>
 </html>

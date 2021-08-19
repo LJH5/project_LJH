@@ -21,6 +21,7 @@ public class Criteria {
 		this.search = "";
 	}
 	public Criteria(int page, int perPageNum) {
+		this();
 		this.page = page;
 		this.perPageNum = perPageNum;
 	}
