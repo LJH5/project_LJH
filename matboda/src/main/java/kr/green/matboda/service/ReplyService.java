@@ -14,4 +14,6 @@ public interface ReplyService {
 
 	int getTotalCount(int rp_bo_num);
 
+	String modifyReply(ReplyVO reply, MemberVO user);
+
 }

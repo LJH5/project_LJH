@@ -40,4 +40,15 @@ public class ReplyServiceImp implements ReplyService {
 	public int getTotalCount(int rp_bo_num) {
 		return replyDao.selectTotalCount(rp_bo_num);
 	}
+
+	@Override
+	public String modifyReply(ReplyVO reply, MemberVO user) {
+		if(reply == null || user == null)
+			return "FAIL";
+		ReplyVO dbReply = replyDao.selectReply(reply.getRp_num());
+		if(dbReply == null || !dbReply.getRp_me_id().equals(user.getMe_id()))
+			return "FAIL";
+		replyDao.updateReply(reply);
+		return "OK";
+	}
 }

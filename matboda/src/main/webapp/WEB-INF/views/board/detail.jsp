@@ -86,6 +86,45 @@
 			var page = $(this).attr('data-page');
 			replyService.list(contextPath, {page : page, rp_bo_num: rp_bo_num}, listOk);
 		})
+		$(document).on('click','.reply-mod-btn', function(){
+			var rp_content = $(this).parent().siblings('.reply-content').text();
+			
+			$('.reply .reply-content').each(function(){
+				var rp_content = $(this).text();
+				var str = '<div class="form-control reply-content">'+rp_content+'</div>';
+				$(this).before(str);
+				$(this).remove();
+				$('.reply .reply-ok-btn').remove();
+				$('.reply .reply-mod-btn').show();
+			})
+			
+			$(this).parent().siblings('.reply-content').remove();
+			var str = '<textarea class="form-control reply-content">'+rp_content+'</textarea>'
+			$(this).parent().before(str);
+			$(this).hide();
+			str = '<button class="btn btn-outline-success reply-ok-btn">등록</button>';
+			$(this).before(str);		
+		})
+		$(document).on('click','.reply-ok-btn', function(){
+			var rp_num = $(this).siblings('.rp_num').val();
+			var rp_content = $(this).parent().siblings('.reply-content').val();
+			var page = $('.reply .pagination .active a').html();
+			var data = {rp_num:rp_num, rp_content : rp_content}
+			$.ajax({
+				type : 'post',
+				url  : contextPath + '/reply/mod',
+				data : JSON.stringify(data),
+				contentType : "application/json; charset=utf-8",
+				success : function(res){
+					if(res == 'OK'){
+						alert('댓글을 수정했습니다.')
+					}else{
+						alert('댓글 수정에 실패했습니다.')
+					}
+					replyService.list(contextPath, {page : page, rp_bo_num: rp_bo_num}, listOk);
+				}
+			})
+		});
 		replyService.list(contextPath, {page : 1, rp_bo_num: rp_bo_num}, listOk);
 	})
 	function addOk(res){
@@ -108,7 +147,8 @@
 						if(list[i].rp_me_id == rp_me_id){
 							str += 
 							'<button class="btn btn-outline-success reply-mod-btn">수정</button>'+
-						    '<button class="btn btn-outline-danger reply-del-btn">삭제</button>'
+						    '<button class="btn btn-outline-danger reply-del-btn">삭제</button>'+
+						    '<input type="hidden" class="rp_num" value="'+list[i].rp_num+'">'
 						}
 					str +=
 					'</div>'+

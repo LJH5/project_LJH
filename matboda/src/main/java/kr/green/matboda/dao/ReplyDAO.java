@@ -14,5 +14,9 @@ public interface ReplyDAO {
 	ArrayList<ReplyVO> selectReplyList(@Param("rp_bo_num")int rp_bo_num, @Param("cri")Criteria cri);
 
 	int selectTotalCount(int rp_bo_num);
+
+	ReplyVO selectReply(int rp_num);
+
+	void updateReply(ReplyVO reply);
 	
 }

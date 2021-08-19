@@ -9,12 +9,25 @@
 			order by rp_num desc 
 			limit #{cri.pageStart}, #{cri.perPageNum} 
 	</select>
+	
 	<select id="selectTotalCount" resultType="int">
 		select count(*) from reply
 			where rp_bo_num = #{rp_bo_num}
 	</select>
+	
+	<select id="selectReply" resultType="kr.green.matboda.vo.ReplyVO">
+		select * from reply
+			where rp_num = #{rp_num}
+	</select>
+	
 	<insert id="insertReply">
 		insert into reply(rp_bo_num, rp_me_id, rp_content)
 			values(#{rp_bo_num}, #{rp_me_id}, #{rp_content})
 	</insert>
+	
+	<update id="updateReply">
+		update reply set
+			rp_content = #{rp_content}
+			where rp_num = #{rp_num}
+	</update>
 </mapper>
