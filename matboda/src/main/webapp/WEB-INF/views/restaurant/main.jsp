@@ -68,7 +68,7 @@
             </ul>
         </div>
         <div>
-	        <c:if test="${user != null && (user.me_id == rt.rt_me_id || user.authority == 'ADMIN' || user.authority == 'SUPER ADMIN')}">
+	        <c:if test="${user != null && (user.me_id == rt.rt_me_id || user.me_authority == 'ADMIN' || user.me_authority == 'SUPER ADMIN')}">
 				<a href="<%=request.getContextPath()%>/restaurant/modify?num=${rt.rt_num}" style="text-decoration: none">
 					<button class="btn btn-outline-success">수정</button>
 				</a>

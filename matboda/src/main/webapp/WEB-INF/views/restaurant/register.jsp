@@ -131,7 +131,6 @@
 		<input type="hidden" name="rt_openTime">
 	</div>
 	<input type="hidden" name="dupCheck">
-	<input type="hidden" name="rt_num" value="${restaurant.rt_num}">
 	<button class="btn btn-outline-success col-12">음식점 등록</button>
 </form>
 <script>
