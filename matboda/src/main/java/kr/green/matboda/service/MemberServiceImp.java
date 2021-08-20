@@ -130,6 +130,8 @@ public class MemberServiceImp implements MemberService{
 		if(loginUser.compareAuthority(user) <= 0)
 			return false;
 		MemberVO dbUser = memberDao.selectUser(user.getMe_id());
+		if(dbUser == null)
+			return false;
 		dbUser.setMe_authority(user.getMe_authority());
 		memberDao.updateUser(dbUser);
 		return true;
@@ -139,6 +141,18 @@ public class MemberServiceImp implements MemberService{
 		if(user == null)
 			return 0;
 		return memberDao.getTotalCount(user.getMe_authority());
+	}
+	@Override
+	public String deleteMember(String me_id, MemberVO user) {
+		if(user == null || user.getMe_authority().equals("USER")) {
+			return "FAIL";
+		}
+		MemberVO dbUser = memberDao.selectUser(me_id);
+		if(dbUser == null || !dbUser.getMe_id().equals(me_id)) {
+			return "FAIL";
+		}
+		memberDao.deleteMember(me_id);
+		return "OK";
 	}
 	
 }

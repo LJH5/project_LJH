@@ -24,5 +24,7 @@ public interface MemberDAO {
 
 	int getTotalCount(@Param("me_authority")String me_authority);
 
+	void deleteMember(String me_id);
+
 
 }

@@ -30,5 +30,7 @@ public interface MemberService {
 	boolean updateAuthority(MemberVO user, MemberVO loginUser);
 
 	int getTotalCount(MemberVO user);
+	
+	String deleteMember(String me_id, MemberVO user);
 
 }

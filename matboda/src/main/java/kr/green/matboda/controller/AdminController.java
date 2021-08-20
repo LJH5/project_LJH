@@ -43,4 +43,11 @@ public class AdminController {
 		MemberVO loginUser = memberService.getMemberByRequest(request);
 		return memberService.updateAuthority(user, loginUser)?"OK" : "FAIL";
 	}
+	@ResponseBody
+	@PostMapping("/user/del")
+	public String delPost(String me_id, HttpServletRequest request) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		return memberService.deleteMember(me_id, user);
+		
+	}
 }

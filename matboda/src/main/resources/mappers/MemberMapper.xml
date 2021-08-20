@@ -54,4 +54,8 @@
 				where me_authority != 'SUPER ADMIN'
 			</if>
 	</select>
+	<delete id="deleteMember">
+		delete from member
+			where me_id = #{me_id}
+	</delete>
 </mapper>

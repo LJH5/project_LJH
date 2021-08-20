@@ -40,6 +40,7 @@
 						</a>
 					</th>
 					<th>설정</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -56,6 +57,7 @@
 								</c:if>
 							</select>
 						</td>
+						<td><button type="submit" class="del-btn btn btn-outline-danger">회원삭제</button></td>
 					</tr>
 				</c:forEach>
 		    </tbody>
@@ -97,6 +99,23 @@
 					}
 					else
 						alert(id+"님의 등급 변경이 실패했습니다.");
+				}
+			})
+		})
+		$(document).on('click', '.del-btn', function(){
+			var me_id = $(this).parent().siblings('.me_id').text();
+			var data = {me_id: me_id};
+			
+			$.ajax({
+				type : 'post',
+				url  : contextPath + '/admin/user/del',
+				data : data,
+				success : function(res){
+					if (res == 'OK') {
+						alert('회원삭제 성공');
+					}else{
+						alert('회원삭제 실패');
+					}
 				}
 			})
 		})

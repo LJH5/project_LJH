@@ -67,4 +67,5 @@ public class MemberController {
 		mv.setViewName("/template/member/mypage");
 		return mv;
 	}
+	
 }

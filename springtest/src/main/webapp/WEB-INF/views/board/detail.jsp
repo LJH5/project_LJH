@@ -171,7 +171,6 @@
 				replySevice.list(contextPath, pr_bd_num, page, id);
 			})
 			$(document).on('click', '.mod-btn', function(){
-				//console.log('수정');
 				var contentObj = $(this).parent().prev().children().last()
 				var rp_num = $(this).attr('data');
 				var str = 
