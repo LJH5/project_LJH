@@ -47,7 +47,7 @@ public class RestaurantController {
 		return mv;
 	}
 	@GetMapping("/modify")
-	public ModelAndView restaurantmodifyGet(ModelAndView mv,Integer num) {
+	public ModelAndView restaurantmodifyGet(ModelAndView mv, Integer num) {
 		RestaurantVO rt = restaurantService.getRt(num);
 		mv.addObject("title", rt.getRt_name());
 		mv.addObject("rt", rt);

@@ -39,7 +39,7 @@
 	</div>
 	<div class="form-group">
 		<label>프로필 사진</label>
-			<input type="text" class="form-control" name="me_picture">
+		<input type="file" name="me_picture" class="form-control">
 	</div>
 	<div class="form-group">
 		<label>이메일</label>

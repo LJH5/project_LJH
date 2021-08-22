@@ -39,8 +39,8 @@
 							</c:if>
 						</a>
 					</th>
-					<th>설정</th>
-					<th>삭제</th>
+					<th>권한</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>

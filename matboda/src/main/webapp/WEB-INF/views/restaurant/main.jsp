@@ -59,6 +59,11 @@
             <span id="reviewNum">리뷰수</span>
             <span id="favoritesNum">즐겨찾기수</span>
         </div>
+        <div>
+        	<a href="<%=request.getContextPath()%>/restaurant/review?num=${rt.rt_num}" style="text-decoration: none">
+				<button class="btn btn-outline-success">리뷰쓰기</button>
+			</a>
+        </div>
         <div class="detail">
             <ul>
                 <li>주소 <span class="content">${rt.rt_address}</span></li>

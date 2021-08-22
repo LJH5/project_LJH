@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.green.matboda.dao.ReviewDAO">
+	<select id="selectReviewList" resultType="kr.green.matboda.vo.ReviewVO">
+		select * from Review
+			where re_bo_num = #{re_bo_num}
+			order by re_num desc 
+			limit #{cri.pageStart}, #{cri.pereageNum} 
+	</select>
+	
+	<select id="selectTotalCount" resultType="int">
+		select count(*) from review
+			where re_bo_num = #{re_bo_num}
+	</select>
+	
+	<select id="selectReview" resultType="kr.green.matboda.vo.ReviewVO">
+		select * from review
+			where re_num = #{re_num}
+	</select>
+	
+	<insert id="insertReview">
+		insert into review(re_bo_num, re_me_id, re_content)
+			values(#{re_bo_num}, #{re_me_id}, #{re_content})
+	</insert>
+	
+	<update id="updateReview">
+		update review set
+			re_content = #{re_content}
+			where re_num = #{re_num}
+	</update>
+	
+	<delete id="deleteReview">
+		delete from review
+			where re_num = #{re_num}
+	</delete>
+</mapper>
