@@ -58,7 +58,7 @@ public class RestaurantController {
 	public ModelAndView restaurantmodifyPost(ModelAndView mv, RestaurantVO rt, HttpServletRequest request) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		restaurantService.updateRt(rt, user);
-		mv.addObject("rt_num", rt.getRt_num());
+		mv.addObject("num", rt.getRt_num());
 		mv.setViewName("redirect:/restaurant/main");
 		return mv;
 	}
