@@ -232,8 +232,8 @@
 				
 				var openHour = $('[name=openHour]').val();
 				var openMinute = $('[name=openMinute]').val();
-				var closeHour = $('[name=openHour]').val();
-				var closeMinute = $('[name=openMinute]').val();
+				var closeHour = $('[name=closeHour]').val();
+				var closeMinute = $('[name=closeMinute]').val();
 				var openTime =  openHour+':'+openMinute+' ~ ' +closeHour+':'+closeMinute;
 				$('[name=rt_openTime]').val(openTime);
 				$('form').submit();
