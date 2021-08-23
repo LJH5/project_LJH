@@ -6,12 +6,14 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.MemberVO;
 
 public interface MemberService {
 
-	boolean signup(MemberVO user);
+	boolean signup(MemberVO user, MultipartFile file);
 
 	MemberVO signin(MemberVO user);
 

@@ -1,6 +1,5 @@
 package kr.green.matboda.service;
 
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -12,10 +11,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
 import kr.green.matboda.dao.MemberDAO;
 import kr.green.matboda.pagination.Criteria;
+import kr.green.matboda.utils.UploadFileUtils;
+import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
 import lombok.AllArgsConstructor;
 
@@ -26,8 +28,11 @@ public class MemberServiceImp implements MemberService{
 	MemberDAO memberDao;
 	BCryptPasswordEncoder passwordEncoder;
 	
+	@SuppressWarnings("unused")
+	private String uploadPath = "D:\\JAVA_LJH\\uploardfiles"; 
+	
 	@Override
-	public boolean signup(MemberVO user) {
+	public boolean signup(MemberVO user, MultipartFile file) {
 		if(user == null)
 			return false;
 		//아이디 유효성 검사
@@ -59,7 +64,19 @@ public class MemberServiceImp implements MemberService{
 		//비밀번호 암호화
 		String encPw = passwordEncoder.encode(user.getMe_pw());
 		user.setMe_pw(encPw);
+		
 		memberDao.insertMember(user);
+		
+		if(file != null && file.getOriginalFilename().length() != 0) {
+			try {
+				String filename = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+				ImageVO fileVo = new ImageVO("profile",user.getMe_id(), filename, file.getOriginalFilename());
+				memberDao.insertImage(fileVo);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("첨부파일 업로드 중 예외 발생");
+			}
+		}
 		return true;
 	}
 	@Override

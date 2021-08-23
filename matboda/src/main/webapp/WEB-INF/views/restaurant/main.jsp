@@ -60,7 +60,7 @@
             <span id="favoritesNum">즐겨찾기수</span>
         </div>
         <div>
-        	<a href="<%=request.getContextPath()%>/restaurant/review?num=${rt.rt_num}" style="text-decoration: none">
+        	<a href="<%=request.getContextPath()%>/review/register" style="text-decoration: none">
 				<button class="btn btn-outline-success">리뷰쓰기</button>
 			</a>
         </div>

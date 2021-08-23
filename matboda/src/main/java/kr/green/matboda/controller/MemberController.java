@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.matboda.service.MemberService;
@@ -29,9 +30,8 @@ public class MemberController {
 		return mv;
 	}
 	@PostMapping("/signup")
-	public ModelAndView memberSignupPost(ModelAndView mv, MemberVO user) {
-		//System.out.println(user);
-		boolean signupOk = memberService.signup(user);
+	public ModelAndView memberSignupPost(ModelAndView mv, MemberVO user, MultipartFile file) {
+		memberService.signup(user, file);
 		mv.setViewName("redirect:/");
 		return mv;
 	}

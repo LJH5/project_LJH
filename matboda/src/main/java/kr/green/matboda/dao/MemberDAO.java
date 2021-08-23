@@ -6,6 +6,7 @@ import java.util.Date;
 import org.apache.ibatis.annotations.Param;
 
 import kr.green.matboda.pagination.Criteria;
+import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
 
 public interface MemberDAO {
@@ -25,6 +26,8 @@ public interface MemberDAO {
 	int getTotalCount(@Param("me_authority")String me_authority);
 
 	void deleteMember(String me_id);
+
+	void insertImage(ImageVO fileVo);
 
 
 }

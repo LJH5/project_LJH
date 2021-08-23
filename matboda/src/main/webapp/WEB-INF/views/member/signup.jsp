@@ -39,7 +39,8 @@
 	</div>
 	<div class="form-group">
 		<label>프로필 사진</label>
-		<input type="file" name="me_picture" class="form-control">
+		<input type="file" name="file" class="form-control" id="image" accept="image/*" onchange="setThumbnail(event);" value="${member.me_picture}">
+		<div id="image-container"></div>
 	</div>
 	<div class="form-group">
 		<label>이메일</label>
@@ -61,6 +62,19 @@
 	<button class="btn btn-outline-success col-12">회원가입</button>
 </form>
 <script type="text/javascript">
+	function setThumbnail(event){
+		var reader = new FileReader();
+		
+		reader.onload = function(event){
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			img.setAttribute("class", "col-lg-6");
+			document.querySelector("div#image-container").innerHTML = '';
+			document.querySelector("div#image-container").appendChild(img);
+		};
+		
+		reader.readAsDataURL(event.target.files[0]);
+	}
 	$(function(){
 	    $("form").validate({
 	        rules: {
