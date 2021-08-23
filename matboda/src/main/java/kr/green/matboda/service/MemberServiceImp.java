@@ -28,7 +28,6 @@ public class MemberServiceImp implements MemberService{
 	MemberDAO memberDao;
 	BCryptPasswordEncoder passwordEncoder;
 	
-	@SuppressWarnings("unused")
 	private String uploadPath = "D:\\JAVA_LJH\\uploardfiles"; 
 	
 	@Override
