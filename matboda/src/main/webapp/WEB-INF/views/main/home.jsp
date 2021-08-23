@@ -26,7 +26,7 @@
 		<ul class="item-list">
 			<li class="item">
 				<a href="<%=request.getContextPath()%>/restaurant/main/?num=1">
-					<img alt="" src="<%=request.getContextPath()%>/resources/img${board.thumbnail.name}" width="100%" height="300">
+					<img alt="" src="<%=request.getContextPath()%>/img${image.im_thumbnail.name}" width="100%" height="300">
 					<span class="title">${rt.rt_name}</span>
 				</a>
 			</li>
