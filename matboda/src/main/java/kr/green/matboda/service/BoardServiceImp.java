@@ -28,6 +28,7 @@ public class BoardServiceImp implements BoardService{
 	BoardDAO boardDao;
 	
 	private String uploadPath = "D:\\JAVA_LJH\\img";
+	private String uploadThumbnailPath = "D:\\JAVA_LJH\\img";
 	
 	@Override
 	public ArrayList<BoardVO> getBoardList(Criteria cri) {
@@ -163,5 +164,14 @@ public class BoardServiceImp implements BoardService{
 		if(file.exists())
 			file.delete();
 		boardDao.deleteFile(tmp.getIm_num());
+	}
+
+	@Override
+	public String uploadImg(MultipartFile file) throws Exception {
+		int extensionIndex = file.getOriginalFilename().lastIndexOf('.');
+		String extension = file.getOriginalFilename().substring(extensionIndex);
+		String name = "img" + extension;
+		System.out.println(name);
+		return UploadFileUtils.uploadFile(uploadThumbnailPath, name , file.getBytes());
 	}
 }
