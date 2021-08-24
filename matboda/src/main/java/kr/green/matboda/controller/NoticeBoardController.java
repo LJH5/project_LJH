@@ -84,6 +84,7 @@ public class NoticeBoardController {
 	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest request,
 			MultipartFile[] fileList, Integer [] fileNumList) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
+		board.setBo_type("NOTICE");
 		boardService.updateBoard(board, fileList, user, fileNumList);
 		mv.addObject("num", board.getBo_num());
 		mv.setViewName("redirect:/board/notice/detail");

@@ -24,19 +24,41 @@
 		</div>
 		<div class="form-group file-box">
 			<label>첨부파일</label>
-			<c:forEach items="${fList}" var="image">
-				<div class="form-control">
-					<span>${image.im_oriName}</span>
-					<i class="fas fa-times"></i>
-					<input type="hidden" name="fileNumList" value="${image.im_num}">
-				</div>
-			</c:forEach>
+			<c:choose>
+				<c:when test="${image.im_num != null }">
+					<c:forEach items="${fList}" var="image">
+						<div class="form-control">
+							<span>${image.im_oriName}</span>
+							<i class="fas fa-times"></i>
+							<input type="hidden" name="fileNumList" value="${image.im_num}">
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)">
+				</c:otherwise>
+			</c:choose>
+			
 		</div>
 		<input type="hidden" name="bo_num" value="${board.bo_num}">
 		<button class="btn btn-outline-success">등록</button>
 		<a href="<%=request.getContextPath()%>/board${type}/list"><button type="button" class="btn btn-outline-danger">목록</button></a>
 	</form>
 	<script type="text/javascript">
+		function chk_file_type(obj) {
+			var file_kind = obj.value.lastIndexOf('.');
+			var file_name = obj.value.substring(file_kind+1,obj.length);
+			var file_type = file_name.toLowerCase();
+			var check_file_type=new Array();
+			check_file_type=['jpg','gif','png','jpeg','bmp','tif'];
+			if(check_file_type.indexOf(file_type)==-1) {
+				alert('이미지 파일만 첨부 가능합니다.');
+				var parent_Obj=obj.parentNode;
+				var node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
+				$('[name=fileList]').val("");
+				return false;
+			}
+		}
 		$(function(){
 			$('#summernote').summernote({
 				placeholder: 'Hello Bootstrap 4',

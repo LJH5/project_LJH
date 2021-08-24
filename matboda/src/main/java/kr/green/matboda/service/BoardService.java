@@ -31,5 +31,7 @@ public interface BoardService {
 
 	ResponseEntity<byte[]> downloadFile(String fileName) throws IOException;
 
+	String uploadImg(MultipartFile file) throws Exception;
+
 
 }

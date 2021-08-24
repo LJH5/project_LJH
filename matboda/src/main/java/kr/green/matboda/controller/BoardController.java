@@ -84,6 +84,7 @@ public class BoardController {
 	@PostMapping("/modify")
 	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, MultipartFile [] fileList, HttpServletRequest request, Integer [] fileNumList ) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
+		board.setBo_type("Q&A");
 		boardService.updateBoard(board, fileList, user, fileNumList);
 		mv.addObject("bo_num", board.getBo_num());
 		mv.setViewName("redirect:/board/list");
@@ -101,5 +102,10 @@ public class BoardController {
 	public ResponseEntity<byte[]> downloadFile(String fileName)throws Exception{
 	    return boardService.downloadFile(fileName);
 	}
-	
+	@ResponseBody
+	@PostMapping("/img/upload")
+	public String imgUploadPost(MultipartFile file) throws Exception {
+		String imgUrl = boardService.uploadImg(file);
+		return imgUrl;
+	}
 }
