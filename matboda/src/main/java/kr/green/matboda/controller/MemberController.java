@@ -30,8 +30,8 @@ public class MemberController {
 		return mv;
 	}
 	@PostMapping("/signup")
-	public ModelAndView memberSignupPost(ModelAndView mv, MemberVO user, MultipartFile file) {
-		memberService.signup(user, file);
+	public ModelAndView memberSignupPost(ModelAndView mv, MemberVO user) {
+		memberService.signup(user);
 		mv.setViewName("redirect:/");
 		return mv;
 	}

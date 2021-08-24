@@ -27,11 +27,10 @@ public class ReviewController {
 		mv.setViewName("/template/review/register");
 		return mv;
 	}
-//	@GetMapping("/register")
-//	public ModelAndView registerPost(ModelAndView mv, ReviewVO review, HttpServletRequest request, MultipartFile [] fileList) {
-//		MemberVO user = memberService.getMemberByRequest(request);
-//		
-//		mv.setViewName("redirect:/restaurant/main");
-//		return mv;
-//	}
+	@PostMapping("/register")
+	public ModelAndView registerPost(ModelAndView mv, ReviewVO review, HttpServletRequest request, MultipartFile [] fileList) {
+		
+		mv.setViewName("redirect:/restaurant/main");
+		return mv;
+	}
 }

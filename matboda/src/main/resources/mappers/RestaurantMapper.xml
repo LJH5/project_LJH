@@ -21,4 +21,7 @@
  			rt_upDate = #{rt_upDate}
  			where rt_num = #{rt_num}
  	</update>
+ 	<select id="selectRestaurant" resultType="kr.green.matboda.vo.RestaurantVO">
+ 		select * from restaurant
+ 	</select>
 </mapper>

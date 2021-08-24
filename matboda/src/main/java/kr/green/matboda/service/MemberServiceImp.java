@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,14 +25,13 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class MemberServiceImp implements MemberService{
-
-	MemberDAO memberDao;
+	
+	private MemberDAO memberDao;
 	BCryptPasswordEncoder passwordEncoder;
 	
-	private String uploadPath = "D:\\JAVA_LJH\\uploardfiles"; 
 	
 	@Override
-	public boolean signup(MemberVO user, MultipartFile file) {
+	public boolean signup(MemberVO user) {
 		if(user == null)
 			return false;
 		//아이디 유효성 검사
@@ -63,19 +63,7 @@ public class MemberServiceImp implements MemberService{
 		//비밀번호 암호화
 		String encPw = passwordEncoder.encode(user.getMe_pw());
 		user.setMe_pw(encPw);
-		
 		memberDao.insertMember(user);
-		
-		if(file != null && file.getOriginalFilename().length() != 0) {
-			try {
-				String filename = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
-				ImageVO fileVo = new ImageVO("profile",user.getMe_id(), filename, file.getOriginalFilename());
-				memberDao.insertImage(fileVo);
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("첨부파일 업로드 중 예외 발생");
-			}
-		}
 		return true;
 	}
 	@Override

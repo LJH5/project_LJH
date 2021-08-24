@@ -12,7 +12,15 @@
 <form class="container" method="post" action="<%=request.getContextPath()%>/member/signup">
 	<h1>Mypage</h1>
 	<div class="form-group">
-		<label>프로필 사진</label>
+		<c:choose>
+			<c:when test="${me_picture == null}">
+				<img alt="" src="/matboda/img/2021/08/24/d00a446f-f243-4490-adc0-20d06330db35_img.png">
+			</c:when>
+			<c:otherwise>
+				<li class="page-item"><a class="page-link"
+					href="<%= request.getContextPath() %>/board${type}/list?page=${index}">${index}</a></li>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div class="form-group">
 		<label>별명</label>
@@ -30,9 +38,9 @@
 		<label>전화번호</label>
 		<input type="text" class="form-control" name="me_phoneNum" readonly value="${user.me_phoneNum}">
 	</div>
-	<button type="button" class="btn btn-outline-success col-12">프로필 수정</button>
-	<button type="button" class="btn btn-outline-success col-12">비밀번호 번경</button>
-	<button type="button" class="btn btn-outline-success col-12">회원탈퇴</button>
+	<button type="button" class="btn btn-outline-success col-4">프로필 수정</button>
+	<button type="button" class="btn btn-outline-success col-4">비밀번호 번경</button>
+	<button type="button" class="btn btn-outline-danger col-3 ml-4">회원탈퇴</button>
 </form>
 <script type="text/javascript">
 	$(function(){

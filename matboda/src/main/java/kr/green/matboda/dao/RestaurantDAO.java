@@ -1,5 +1,7 @@
 package kr.green.matboda.dao;
 
+import java.util.ArrayList;
+
 import kr.green.matboda.vo.RestaurantVO;
 
 public interface RestaurantDAO {
@@ -10,4 +12,5 @@ public interface RestaurantDAO {
 
 	void updateRt(RestaurantVO dbRt);
 
+	ArrayList<RestaurantVO> selectRestaurant();
 }

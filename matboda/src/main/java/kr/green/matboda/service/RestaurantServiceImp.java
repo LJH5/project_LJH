@@ -1,5 +1,6 @@
 package kr.green.matboda.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.stereotype.Service;
@@ -47,6 +48,11 @@ public class RestaurantServiceImp implements RestaurantService{
 		if(rt.getRt_address() != null && rt.getRt_address().trim().length() > 3)
 			dbRt.setRt_address(rt.getRt_address());
 		restaurantDao.updateRt(dbRt);
+	}
+
+	@Override
+	public ArrayList<RestaurantVO> getRestaurant() {
+		return restaurantDao.selectRestaurant();
 	}
 
 }

@@ -1,6 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 
 <html>
 <head>
@@ -12,25 +12,24 @@
 		clear: both; content: ''; display: block;
 	}
 	.item-list .item{
-		width:calc(100% / 3); float: left; text-align: center;
-		box-sizing: border-box; padding : 0 10px;
-	}
-	.item-list .item span{
-		display: block; width: 100%; margin-top: 5px; line-height: 20px; 
-		height: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+		width: 200px;
+		
 	}
 </style>
 </head>
 <body>
-	<div class="container">
-		<ul class="item-list">
-			<li class="item">
-				<a href="<%=request.getContextPath()%>/restaurant/main/?num=1">
-					<img alt="" src="<%=request.getContextPath()%>/img${image.im_thumbnail.name}" width="100%" height="300">
-					<span class="title">${rt.rt_name}</span>
-				</a>
-			</li>
-		</ul>
-	</div>
+	<c:forEach items="${list}" var="rt">
+		<div class="container">
+			<ul class="item-list">
+				<li class="item">
+					<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+						<img alt="" src="/matboda/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.png" width="300" height="300">
+						<span class="title">${rt.rt_name}</span>
+						<span class="score">${rt.rt_score}</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</c:forEach>
 </body>
 </html>

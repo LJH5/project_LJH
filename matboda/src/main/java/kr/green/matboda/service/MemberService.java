@@ -13,7 +13,7 @@ import kr.green.matboda.vo.MemberVO;
 
 public interface MemberService {
 
-	boolean signup(MemberVO user, MultipartFile file);
+	boolean signup(MemberVO user);
 
 	MemberVO signin(MemberVO user);
 

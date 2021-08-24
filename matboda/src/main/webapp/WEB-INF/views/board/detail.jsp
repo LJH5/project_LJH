@@ -44,17 +44,19 @@
 				<a class="form-control" href="<%=request.getContextPath()%>/board${type}/download?fileName=${image.im_name}">${image.im_oriName}</a>
 			</c:forEach>
 		</div>
-		<div class="reply form-group">
+		<c:if test="${board.bo_type != 'NOTICE' }">
+			<div class="reply form-group">
 			<label>댓글</label>
 			<div class="contents">
 				<div class="reply-list form-group"></div>
 				<ul class="pagination justify-content-center"></ul>
 				<div class="reply-box form-group">
 					<textarea class="reply-input form-control mb-2" ></textarea>
-					<button type="button" class="reply-btn btn btn-outline-success">등록</button>
+					<button type="button" class="reply-btn btn btn-outline-success">댓글 등록</button>
 				</div>
 			</div>
 		</div>
+		</c:if>
 		<c:if test="${user != null && user.me_id == board.bo_me_id }">
 			<a href="<%=request.getContextPath()%>/board${type}/modify?num=${board.bo_num}" style="text-decoration: none">
 				<button class="btn btn-outline-success">수정</button>
@@ -62,7 +64,10 @@
 			<a href="<%=request.getContextPath()%>/board${type}/delete?num=${board.bo_num}" style="text-decoration: none">
 				<button class="btn btn-outline-danger">삭제</button>
 			</a>
-		</c:if>	
+		</c:if>
+		<a href="<%=request.getContextPath()%>/board${type}/list" style="text-decoration: none">
+			<button class="btn btn-outline-success">목록</button>
+		</a>	
 	</div>
 	
 <script type="text/javascript">

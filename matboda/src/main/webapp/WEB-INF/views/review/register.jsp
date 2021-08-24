@@ -79,26 +79,44 @@
 				 <input type="hidden" name="re_totalSc">
 			<div class="review-box form-group">
 				<textarea class="review-input form-control mb-2" placeholder="리뷰를 작성해주세요."></textarea>
+				<div class="form-group files">
+					<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)" >
+				</div>
 				<a href="<%= request.getContextPath() %>/restaurant/main/?num=1"><button type="button" class="review-btn btn btn-outline-danger">취소</button></a>
-				<button class="review-btn btn btn-outline-success">등록</button>
+				<button class="review-btn btn btn-outline-success">리뷰 올리기</button>
 			</div>
 		</div>
 	</form>
 	<script type="text/javascript">
 	 $(function(){
-	    $("form").validate({
-			submitHandler: function(form){
-				var service = $('[name=re_service]').val();
-				var mood = $('[name=mood]').val();
-				var clean = $('[name=clean]').val();
-				var tasty = $('[name=tasty]').val();
-				var quantity = $('[name=quantity]').val();
-				var totalSc =  (service+mood+clean+tasty+quantity)/5
-				$('[name=re_totalSc]').val(totalSc);
-				$('form').submit();
+		$(document).on('change', 'input[name=fileList]', function(){
+			var val = $(this).val();
+			console.log(val)
+		})
+		$(document).on('click', '.review-btn', function(){
+			var service = $('[name=re_service]').val();
+			var mood = $('[name=re_mood]').val();
+			var clean = $('[name=re_clean]').val();
+			var tasty = $('[name=re_tasty]').val();
+			var quantity = $('[name=re_quantity]').val();
+			var totalSc =  (service+mood+clean+tasty+quantity)/5
+			$('[name=re_totalSc]').val(totalSc);
+		})
+	 })
+	 function chk_file_type(obj) {
+			var file_kind = obj.value.lastIndexOf('.');
+			var file_name = obj.value.substring(file_kind+1,obj.length);
+			var file_type = file_name.toLowerCase();
+			var check_file_type=new Array();
+			check_file_type=['jpg','gif','png','jpeg','bmp','tif'];
+			if(check_file_type.indexOf(file_type)==-1) {
+				alert('이미지 파일만 첨부 가능합니다.');
+				var parent_Obj=obj.parentNode;
+				var node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
+				$('[name=fileList]').val("");
+				return false;
 			}
-	    })
-	 }
+		}
 	</script>
 </body>
 </html>
