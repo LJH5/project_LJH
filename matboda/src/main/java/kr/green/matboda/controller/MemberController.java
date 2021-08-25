@@ -63,7 +63,9 @@ public class MemberController {
 		return mv;
 	}
 	@GetMapping("/mypage")
-	public ModelAndView memberMypageGet(ModelAndView mv) {
+	public ModelAndView memberMypageGet(ModelAndView mv, HttpServletRequest request) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		mv.addObject("user", user);
 		mv.setViewName("/template/member/mypage");
 		return mv;
 	}

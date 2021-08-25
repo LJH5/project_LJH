@@ -13,12 +13,11 @@
 	<h1>Mypage</h1>
 	<div class="form-group">
 		<c:choose>
-			<c:when test="${me_picture == null}">
-				<img alt="" src="/matboda/img/2021/08/24/d00a446f-f243-4490-adc0-20d06330db35_img.png">
+			<c:when test="${user.me_picture == null}">
+				<img alt="" src="matboda/img/2021/08/24/d00a446f-f243-4490-adc0-20d06330db35_img.png">
 			</c:when>
 			<c:otherwise>
-				<li class="page-item"><a class="page-link"
-					href="<%= request.getContextPath() %>/board${type}/list?page=${index}">${index}</a></li>
+				<img alt="" src="${user.me_picture}">
 			</c:otherwise>
 		</c:choose>
 	</div>
