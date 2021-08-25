@@ -45,7 +45,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${list}" var="member">    
-					<tr>
+					<tr id="uList">
 						<td class="me_id">${member.me_id}</td>
 						<td>${member.date}</td>
 						<td>${member.authorityStr}</td>
@@ -113,6 +113,7 @@
 				success : function(res){
 					if (res == 'OK') {
 						alert('회원삭제 성공');
+						$('#uList').load("/matboda/admin/user/list #uList");
 					}else{
 						alert('회원삭제 실패');
 					}
