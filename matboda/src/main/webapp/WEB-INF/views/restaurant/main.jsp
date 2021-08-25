@@ -31,6 +31,7 @@
             margin-right: 20px;
         }
         .detail{
+        	width: 600px;
             border-top: 1px solid rgba(194, 184, 184, 0.747);
             border-bottom: 1px solid rgba(194, 184, 184, 0.747);
             box-sizing: border-box;
