@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.matboda.service.MemberService;
 import kr.green.matboda.service.RestaurantService;
+import kr.green.matboda.service.ReviewService;
 import kr.green.matboda.vo.MemberVO;
 import kr.green.matboda.vo.RestaurantVO;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,6 @@ public class RestaurantController {
 	@Autowired
 	private RestaurantService restaurantService;
 	private MemberService memberService;
-
 
 	@GetMapping("/register")
 	public ModelAndView restaurantRegisterGet(ModelAndView mv) {
@@ -62,5 +62,4 @@ public class RestaurantController {
 		mv.setViewName("redirect:/restaurant/main");
 		return mv;
 	}
-
 } 

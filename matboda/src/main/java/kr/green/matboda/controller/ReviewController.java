@@ -7,8 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.matboda.service.MemberService;
+import kr.green.matboda.service.RestaurantService;
 import kr.green.matboda.service.ReviewService;
 import kr.green.matboda.vo.MemberVO;
+import kr.green.matboda.vo.RestaurantVO;
 import kr.green.matboda.vo.ReviewVO;
 import lombok.AllArgsConstructor;
 
@@ -21,15 +23,15 @@ public class ReviewController {
 	MemberService memberService;
 	
 	@GetMapping("/register")
-	public ModelAndView registerGet(ModelAndView mv) {
-		
-		mv.addObject("title", "리뷰 등록");
+	public ModelAndView registerGet(ModelAndView mv, Integer num, ReviewVO review) {
+		review.setRe_rt_num(num);
 		mv.setViewName("/template/review/register");
 		return mv;
 	}
 	@PostMapping("/register")
 	public ModelAndView registerPost(ModelAndView mv, ReviewVO review, HttpServletRequest request, MultipartFile [] fileList) {
-		
+		MemberVO user = memberService.getMemberByRequest(request);
+		reviewService.insertReview(review, user, fileList);
 		mv.setViewName("redirect:/restaurant/main");
 		return mv;
 	}
