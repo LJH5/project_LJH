@@ -87,21 +87,25 @@
 			</div>
 		</div>
 	</form>
+</body>
 	<script type="text/javascript">
 	 $(function(){
 		$(document).on('change', 'input[name=fileList]', function(){
 			var val = $(this).val();
 			var length = $('input[name=fileList]').length;
-			alert(length);
 			var str = '<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)" data="">';
+			
 			if(val == ''){
 				$(this).remove();
-			} 
-			if(length < 5){
-				$(this).parent().append(str);
+				if(length == 5 && $('input[name=fileList]').last().val() != ''){
+					$('.files').append(str);      
+				}
 			}else{
-				return
+				if(length < 5){
+					$('.files').append(str);
+				}
 			}
+			
 		})
 		$(document).on('click', '.review-btn', function(){
 			var service = $('[name=re_service]').val();
@@ -113,20 +117,5 @@
 			$('[name=re_totalSc]').val(totalSc);
 		})
 	 })
-	 function chk_file_type(obj) {
-			var file_kind = obj.value.lastIndexOf('.');
-			var file_name = obj.value.substring(file_kind+1,obj.length);
-			var file_type = file_name.toLowerCase();
-			var check_file_type=new Array();
-			check_file_type=['jpg','gif','png','jpeg','bmp','tif'];
-			if(check_file_type.indexOf(file_type)==-1) {
-				alert('이미지 파일만 첨부 가능합니다.');
-				var parent_Obj=obj.parentNode;
-				var node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
-				$(this).remove();
-				return false;
-			}
-		}
 	</script>
-</body>
 </html>
