@@ -43,94 +43,94 @@
 	<div class="form-group">
 		<label>음식종류</label>
 		<select class="form-control" name="rt_type">
-			<option value="한식">한식</option>
-			<option value="치킨">치킨</option>
-			<option value="양식/피자">양식/피자</option>
-			<option value="중식">중식</option>
-			<option value="일식">일식</option>
-			<option value="분식">분식</option>
-			<option value="카페/디저트">카페/디저트</option>
-			<option value="브런치/버거/샌드위치">브런치/버거/샌드위치</option>
-			<option value="다국적 아시아">다국적 아시아</option>
-			<option value="세계 음식">세계 음식</option>
-			<option value="기타" selected>기타</option>
+			<option>한식</option>
+			<option>치킨</option>
+			<option>양식/피자</option>
+			<option >중식</option>
+			<option >일식</option>
+			<option >분식</option>
+			<option>카페/디저트</option>
+			<option>브런치/버거/샌드위치</option>
+			<option>다국적 아시아</option>
+			<option>세계 음식</option>
+			<option selected>기타</option>
 		</select>
 	</div>
 	<div class="form-group">
 		<label>영업시간</label>
 		<input class="form-control before" readonly value="${rt.rt_openTime}">
 		<select class="form-control" name="openHour">
-			<option value="00">00</option>
-			<option value="01">01</option>
-			<option value="02">02</option>
-			<option value="03">03</option>
-			<option value="04">04</option>
-			<option value="05">05</option>
-			<option value="06">06</option>
-			<option value="07">07</option>
-			<option value="08">08</option>
-			<option value="09">09</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
-			<option value="13">13</option>
-			<option value="14">14</option>
-			<option value="15">15</option>
-			<option value="16">16</option>
-			<option value="17">17</option>
-			<option value="18">18</option>
-			<option value="19">19</option>
-			<option value="20">20</option>
-			<option value="21">21</option>
-			<option value="22">22</option>
-			<option value="23">23</option>
-			<option value="24">24</option>
+			<option>00</option>
+			<option>01</option>
+			<option>02</option>
+			<option>03</option>
+			<option>04</option>
+			<option>05</option>
+			<option>06</option>
+			<option>07</option>
+			<option>08</option>
+			<option>09</option>
+			<option>10</option>
+			<option>11</option>
+			<option>12</option>
+			<option>13</option>
+			<option>14</option>
+			<option>15</option>
+			<option>16</option>
+			<option>17</option>
+			<option>18</option>
+			<option>19</option>
+			<option>20</option>
+			<option>21</option>
+			<option>22</option>
+			<option>23</option>
+			<option>24</option>
 		</select>
 		<div>시</div>
 		<select class="form-control" name="openMinute">
-			<option value="00">00</option>
-			<option value="10">10</option>
-			<option value="20">20</option>
-			<option value="30">30</option>
-			<option value="40">40</option>
-			<option value="50">50</option>
+			<option>00</option>
+			<option>10</option>
+			<option>20</option>
+			<option>30</option>
+			<option>40</option>
+			<option>50</option>
 		</select>
 		<div>분 ~ </div>
 		<select class="form-control" name="closeHour">
-			<option value="00">00</option>
-			<option value="01">01</option>
-			<option value="02">02</option>
-			<option value="03">03</option>
-			<option value="04">04</option>
-			<option value="05">05</option>
-			<option value="06">06</option>
-			<option value="07">07</option>
-			<option value="08">08</option>
-			<option value="09">09</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
-			<option value="13">13</option>
-			<option value="14">14</option>
-			<option value="15">15</option>
-			<option value="16">16</option>
-			<option value="17">17</option>
-			<option value="18">18</option>
-			<option value="19">19</option>
-			<option value="20">20</option>
-			<option value="21">21</option>
-			<option value="22">22</option>
-			<option value="23">23</option>
-			<option value="24" selected>24</option>
+			<option>00</option>
+			<option>01</option>
+			<option>02</option>
+			<option>03</option>
+			<option>04</option>
+			<option>05</option>
+			<option>06</option>
+			<option>07</option>
+			<option>08</option>
+			<option>09</option>
+			<option>10</option>
+			<option>11</option>
+			<option>12</option>
+			<option>13</option>
+			<option>14</option>
+			<option>15</option>
+			<option>16</option>
+			<option>17</option>
+			<option>18</option>
+			<option>19</option>
+			<option>20</option>
+			<option>21</option>
+			<option>22</option>
+			<option>23</option>
+			<option selected>24</option>
 		</select>
 		<div>시</div>
 		<select class="form-control" name="closeMinute">
-			<option value="00">00</option>
-			<option value="10">10</option>
-			<option value="20">20</option>
-			<option value="30">30</option>
-			<option value="40">40</option>
-			<option value="50">50</option>
+			<option>00</option>
+			<option>10</option>
+			<option>20</option>
+			<option>30</option>
+			<option>40</option>
+			<option>50</option>
 		</select>
 		<div>분</div>
 		<input type="hidden" name="rt_openTime">

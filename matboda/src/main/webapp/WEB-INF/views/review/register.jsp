@@ -76,13 +76,14 @@
 						</tr>
 					</thead>
 				</table>
-				 <input type="hidden" name="re_totalSc">
+				<input type="hidden" name="re_totalSc">
+				<input type="hidden" name="re_rt_num" value="${num}">
 			<div class="review-box form-group">
-				<textarea class="review-input form-control mb-2" placeholder="리뷰를 작성해주세요."></textarea>
+				<textarea class="review-input form-control mb-2" name="re_content" placeholder="리뷰를 작성해주세요.">${review.re_content}</textarea>
 				<div class="form-group files">
-					<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)" data=""/>
+					<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)"/>
 				</div>
-				<a href="<%= request.getContextPath() %>/restaurant/main/?num=1"><button type="button" class="review-btn btn btn-outline-danger">취소</button></a>
+				<a href="<%= request.getContextPath() %>/restaurant/main/?num=${num}"><button type="button" class="review-btn btn btn-outline-danger">취소</button></a>
 				<button class="review-btn btn btn-outline-success">리뷰 올리기</button>
 			</div>
 		</div>

@@ -62,10 +62,8 @@
         </div>
         <form method="GET" action="<%=request.getContextPath()%>/review/register">
 	         <div>
-	        	<a href="<%=request.getContextPath()%>/review/register" style="text-decoration: none">
-					<input type="hidden" name="num" value="${rt.rt_num}">
-					<button class="btn btn-outline-success">리뷰쓰기</button>
-				</a>
+				<input type="hidden" name="num" value="${rt.rt_num}">
+				<button class="btn btn-outline-success">리뷰쓰기</button>
 	        </div>
         </form>
         <div class="detail">
