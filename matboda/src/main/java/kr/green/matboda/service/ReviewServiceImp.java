@@ -30,4 +30,10 @@ public class ReviewServiceImp implements ReviewService {
 			return null;
 		return reviewDao.selectReview(num);
 	}
+
+	@Override
+	public void deleteReview(Integer num, MemberVO user) {
+		// TODO Auto-generated method stub
+		
+	}
 }
