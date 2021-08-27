@@ -12,4 +12,6 @@ public interface ReviewService {
 	void insertReview(ReviewVO review, MemberVO user, MultipartFile[] fileList);
 
 	ArrayList<ReviewVO> getReviewList(Integer num);
+
+	void deleteReview(Integer num, MemberVO user);
 }

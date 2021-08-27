@@ -8,8 +8,9 @@ import lombok.Data;
 @Data
 public class ReviewVO {
 	private int re_num;
-	private String re_me_nickname;
+	private String re_me_id;
 	private int re_rt_num;
+	private String re_me_nickname;
 	private String re_content;
 	private Date re_regDate;
 	private Date re_upDate;

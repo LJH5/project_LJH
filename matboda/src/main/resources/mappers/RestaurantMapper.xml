@@ -24,4 +24,8 @@
  	<select id="selectRestaurant" resultType="kr.green.matboda.vo.RestaurantVO">
  		select * from restaurant
  	</select>
+	<delete id="deleteRt">
+ 		delete from restaurant
+ 			where rt_num = #{num}
+ 	</delete>
 </mapper>

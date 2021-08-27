@@ -13,4 +13,6 @@ public interface RestaurantDAO {
 	void updateRt(RestaurantVO dbRt);
 
 	ArrayList<RestaurantVO> selectRestaurant();
+
+	void deleteRt(Integer num);
 }

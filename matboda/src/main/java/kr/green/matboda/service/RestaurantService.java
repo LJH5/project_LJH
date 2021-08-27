@@ -15,4 +15,6 @@ public interface RestaurantService {
 
 	ArrayList<RestaurantVO> getRestaurant();
 
+	void deleteRt(Integer num, MemberVO user);
+
 }

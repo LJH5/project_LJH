@@ -91,6 +91,10 @@
 					${review.re_content}
 					${review.re_upDateStr}
 				</div>
+				<div class="btn-box">
+					<button class="btn btn-outline-success">맛잘알</button>
+					<button class="btn btn-outline-danger">신고</button>
+				</div>
 			</c:forEach>
 		</div>
 	</div>

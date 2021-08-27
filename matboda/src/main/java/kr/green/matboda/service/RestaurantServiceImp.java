@@ -55,4 +55,14 @@ public class RestaurantServiceImp implements RestaurantService{
 		return restaurantDao.selectRestaurant();
 	}
 
+	@Override
+	public void deleteRt(Integer num, MemberVO user) {
+		if(num == null || user == null)
+			return;
+		RestaurantVO rt = restaurantDao.selectRt(num);
+		if(rt == null || (!user.getMe_authority().equals("ADMIN") && !user.getMe_authority().equals("SUPER ADMIN")))
+			return;
+		restaurantDao.deleteRt(num);
+	}
+
 }

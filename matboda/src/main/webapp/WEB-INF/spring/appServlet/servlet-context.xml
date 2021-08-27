@@ -62,6 +62,7 @@
            	<mapping path="/board/notice/register"/>
 	        <mapping path="/board/notice/modify"/>
 	        <mapping path="/board/notice/delete"/>
+	        <mapping path="/restaurant/delete"/>
 	        <beans:ref bean="adminInterceptor"/>
 	    </interceptor>
 	</interceptors>

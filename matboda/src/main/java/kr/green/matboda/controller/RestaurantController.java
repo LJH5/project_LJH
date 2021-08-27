@@ -68,4 +68,11 @@ public class RestaurantController {
 		mv.setViewName("redirect:/restaurant/main");
 		return mv;
 	}
+	@GetMapping("/delete")
+	public ModelAndView restaurantdeletePost(ModelAndView mv, Integer num, HttpServletRequest request) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		restaurantService.deleteRt(num, user);
+		mv.setViewName("redirect:/");
+		return mv;
+	}
 } 
