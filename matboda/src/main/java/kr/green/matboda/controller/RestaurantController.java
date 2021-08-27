@@ -67,9 +67,5 @@ public class RestaurantController {
 		mv.addObject("num", rt.getRt_num());
 		mv.setViewName("redirect:/restaurant/main");
 		return mv;
-	}@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
 	}
 } 
