@@ -2,7 +2,9 @@ package kr.green.matboda.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,20 +16,19 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/review")
 public class ReviewController {
 	
 	ReviewService reviewService;
 	MemberService memberService;
 	
-	@GetMapping("/register")
+	@GetMapping("/review/register")
 	public ModelAndView registerGet(ModelAndView mv, Integer num, ReviewVO review) {
 		review.setRe_rt_num(num);
 		mv.addObject("num", num);
 		mv.setViewName("/template/review/register");
 		return mv;
 	}
-	@PostMapping("/register")
+	@PostMapping("/review/register")
 	public ModelAndView registerPost(ModelAndView mv, ReviewVO review, HttpServletRequest request, MultipartFile [] fileList) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		reviewService.insertReview(review, user, fileList);

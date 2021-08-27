@@ -7,4 +7,8 @@
 		insert into review(re_me_id, re_rt_num, re_content, re_totalSc, re_service, re_mood, re_tasty, re_quantity, re_clean) 
 			values(#{review.re_me_id}, #{review.re_rt_num}, #{review.re_content}, #{review.re_totalSc}, #{review.re_service}, #{review.re_mood}, #{review.re_tasty}, #{review.re_quantity}, #{review.re_clean})
 	</insert>
+	<select id="selectReview" resultType="kr.green.matboda.vo.ReviewVO">
+		select * from review
+			where re_rt_num = #{num}
+	</select>
 </mapper>

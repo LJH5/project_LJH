@@ -1,5 +1,7 @@
 package kr.green.matboda.service;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,5 +22,10 @@ public class ReviewServiceImp implements ReviewService {
 			return;
 		review.setRe_me_id(user.getMe_id());
 		reviewDao.insertReview(review);
+	}
+
+	@Override
+	public ArrayList<ReviewVO> getReviewList(Integer num) {
+		return reviewDao.selectReview(num);
 	}
 }

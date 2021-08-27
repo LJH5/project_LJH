@@ -1,5 +1,7 @@
 package kr.green.matboda.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import kr.green.matboda.service.RestaurantService;
 import kr.green.matboda.service.ReviewService;
 import kr.green.matboda.vo.MemberVO;
 import kr.green.matboda.vo.RestaurantVO;
+import kr.green.matboda.vo.ReviewVO;
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -24,6 +27,7 @@ public class RestaurantController {
 	@Autowired
 	private RestaurantService restaurantService;
 	private MemberService memberService;
+	private ReviewService reviewSevice;
 
 	@GetMapping("/register")
 	public ModelAndView restaurantRegisterGet(ModelAndView mv) {
@@ -41,6 +45,8 @@ public class RestaurantController {
 	@GetMapping("/main")
 	public ModelAndView restaurantMainGet(ModelAndView mv, Integer num) {
 		RestaurantVO rt = restaurantService.getRt(num);
+		ArrayList<ReviewVO> review = reviewSevice.getReviewList(num);
+		System.out.println(review);
 		mv.addObject("title", rt.getRt_name());
 		mv.addObject("rt", rt);
 		mv.setViewName("/template/restaurant/main");
@@ -61,5 +67,9 @@ public class RestaurantController {
 		mv.addObject("num", rt.getRt_num());
 		mv.setViewName("redirect:/restaurant/main");
 		return mv;
+	}@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
 	}
 } 
