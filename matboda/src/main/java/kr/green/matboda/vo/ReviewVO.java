@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class ReviewVO {
 	private int re_num;
-	private String re_me_id;
+	private String re_me_nickname;
 	private int re_rt_num;
 	private String re_content;
 	private Date re_regDate;
@@ -22,12 +22,12 @@ public class ReviewVO {
 	private int re_quantity;
 	private int re_clean;
 	
-	public String getRp_regDateStr() {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	public String getRe_regDateStr() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(re_regDate);
 	}
-	public String getRp_upDateStr() {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	public String getRe_upDateStr() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(re_upDate);
 	}
 }

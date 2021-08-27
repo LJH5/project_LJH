@@ -20,12 +20,14 @@ public class ReviewServiceImp implements ReviewService {
 	public void insertReview(ReviewVO review, MemberVO user, MultipartFile[] fileList) {
 		if(user == null || review == null)
 			return;
-		review.setRe_me_id(user.getMe_id());
+		review.setRe_me_nickname(user.getMe_nickname());
 		reviewDao.insertReview(review);
 	}
 
 	@Override
 	public ArrayList<ReviewVO> getReviewList(Integer num) {
+		if(num == null)
+			return null;
 		return reviewDao.selectReview(num);
 	}
 }

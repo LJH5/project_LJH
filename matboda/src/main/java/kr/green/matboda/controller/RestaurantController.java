@@ -46,9 +46,9 @@ public class RestaurantController {
 	public ModelAndView restaurantMainGet(ModelAndView mv, Integer num) {
 		RestaurantVO rt = restaurantService.getRt(num);
 		ArrayList<ReviewVO> review = reviewSevice.getReviewList(num);
-		System.out.println(review);
 		mv.addObject("title", rt.getRt_name());
 		mv.addObject("rt", rt);
+		mv.addObject("review", review);
 		mv.setViewName("/template/restaurant/main");
 		return mv;
 	}
