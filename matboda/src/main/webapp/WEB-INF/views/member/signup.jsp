@@ -87,6 +87,9 @@
 	            me_gender: {
 	            	required : true
 	            },
+	            me_nickname: {
+	            	regex: /^([가-힣a-zA-Z]+){2,15}$/
+	            },
 	        },
 	        //규칙체크 실패시 출력될 메시지
 	        messages : {
@@ -116,6 +119,9 @@
 	            },
 	            me_gender: {
 	            	required : "필수 정보입니다."
+	            },
+	            me_nickname: {
+	            	 regex : "2~20자의 한글이나 영문 대ㆍ소문자만 사용 가능합니다."
 	            }
 	        }
 	    });
