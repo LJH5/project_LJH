@@ -52,7 +52,7 @@ public class BoardServiceImp implements BoardService{
 			return;
 		int size = fileList.length < 3 ? fileList.length : 3;
 		for(int i = 0; i<size; i++) {
-			insertFile(fileList[i], board.getBo_type(), ""+board.getBo_num());
+			insertFile(fileList[i], board.getBo_type(), board.getBo_num());
 		}
 	}
 
@@ -93,7 +93,7 @@ public class BoardServiceImp implements BoardService{
 		if(fileList == null)
 			return;
 		for(MultipartFile tmp : fileList) {
-			if(insertFile(tmp, board.getBo_type(), ""+board.getBo_num()))
+			if(insertFile(tmp, board.getBo_type(), board.getBo_num()))
 				dbSize++;
 			if(dbSize == 3)
 				break;
@@ -149,7 +149,7 @@ public class BoardServiceImp implements BoardService{
 	    }
 	    return entity;
 	}
-	private boolean insertFile(MultipartFile tmp, String type, String num) throws Exception {
+	public boolean insertFile(MultipartFile tmp, String type, int num) throws Exception {
 		if(tmp == null || tmp.getOriginalFilename().length() == 0) {
 			return false;
 		}

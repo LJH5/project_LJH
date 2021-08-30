@@ -48,7 +48,7 @@ public class RestaurantController {
 		ArrayList<ReviewVO> review = reviewSevice.getReviewList(num);
 		mv.addObject("title", rt.getRt_name());
 		mv.addObject("rt", rt);
-		mv.addObject("review", review);
+		mv.addObject("reviews", review);
 		mv.setViewName("/template/restaurant/main");
 		return mv;
 	}

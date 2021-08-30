@@ -9,9 +9,9 @@ import kr.green.matboda.vo.ReviewVO;
 
 public interface ReviewService {
 
-	void insertReview(ReviewVO review, MemberVO user, MultipartFile[] fileList);
+	void insertReview(ReviewVO review, MemberVO user, MultipartFile[] fileList) throws Exception;
 
 	ArrayList<ReviewVO> getReviewList(Integer num);
 
-	void deleteReview(Integer num, MemberVO user);
+	String deleteReview(Integer re_num, MemberVO user);
 }

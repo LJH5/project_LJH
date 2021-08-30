@@ -48,6 +48,9 @@
             position: absolute;
             left: 100px;
         }
+        .btn-box{
+        	border-bottom: 1px solid rgba(194, 184, 184, 0.747);
+        }
     </style>
 </head>
 <body>
@@ -73,8 +76,7 @@
 				<li>영업시간 <span class="content">${rt.rt_openTime}</span></li>
 			</ul>
 			<div>
-				<c:if
-					test="${user != null && (user.me_id == rt.rt_me_id || user.me_authority == 'ADMIN' || user.me_authority == 'SUPER ADMIN')}">
+				<c:if test="${user != null && (user.me_id == rt.rt_me_id || user.me_authority == 'ADMIN' || user.me_authority == 'SUPER ADMIN')}">
 					<a href="<%=request.getContextPath()%>/restaurant/modify?num=${rt.rt_num}" style="text-decoration: none">
 						<button class="btn btn-outline-success">수정</button>
 					</a>
@@ -84,19 +86,60 @@
 				</c:if>
 			</div>
 		</div>
-		<div class="review-box">
-			<c:forEach items="${review}" var="review">
-				<div class="revierw">
-					${review.re_me_nickname}
-					${review.re_content}
-					${review.re_upDateStr}
+		<div id="review-box">
+			<c:forEach items="${reviews}" var="review">
+				<div class="review">
+					종합 ${review.re_totalSc}
+					서비스 ${review.re_service}
+					분위기 ${review.re_mood}
+					청결함 ${review.re_clean}
+					음식맛 ${review.re_tasty}
+					음식량 ${review.re_quantity}
+					<ul>
+						<li>${review.re_me_nickname}</li>
+						<li>${review.re_content}</li>
+						<li>${review.re_upDateStr}</li>
+					</ul>
 				</div>
-				<div class="btn-box">
-					<button class="btn btn-outline-success">맛잘알</button>
-					<button class="btn btn-outline-danger">신고</button>
-				</div>
+				<c:choose>
+					<c:when test="${user.me_id != rt.rt_me_id}">
+						<div class="btn-box">
+							<button class="btn btn-outline-success">맛잘알</button>
+							<button class="btn btn-outline-danger">신고</button>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="btn-box">
+							<a href="<%= request.getContextPath() %>/review/modify?num=${review.re_num}">
+								<button class="mod-btn btn btn-outline-success">수정</button>
+							</a>
+							<button class="del-btn btn btn-outline-danger">삭제</button>
+							<input class="re_num" type="hidden" value="${review.re_num}">
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</c:forEach>
 		</div>
 	</div>
+	<script type="text/javascript">
+		var contextPath = '<%=request.getContextPath()%>';
+		$(document).on('click', '.del-btn', function(){
+			var re_num = $(this).siblings('.re_num').val();
+			var data = {re_num : re_num}
+			$.ajax({
+				type : 'post',
+				url  : contextPath + '/review/delete',
+				data : data,
+				success : function(res){
+					if (res == 'OK') {
+						alert('리뷰삭제 성공');
+						$('#review-box').load("/matboda/restaurant/main #review-box");
+					}else{
+						alert('리뷰삭제 실패');
+					}
+				}
+			})
+		})
+	</script>
 </body>
 </html>

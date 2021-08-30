@@ -12,6 +12,13 @@
 			height: 30px;
 			line-height: 30px;
 		}
+		#star a{ 
+			text-decoration: none; color: gray; 
+		} 
+		#star a.on{
+			color: rgb(255, 165, 0); 
+		}
+
 	</style>
 </head>
 <body>
@@ -25,53 +32,58 @@
 						<tr>
 							<th>
 								<label>서비스</label>
-								<select class="form-control" name="re_service">
-									<option value=1>1</option>
-									<option value=2>2</option>
-									<option value=3>3</option>
-									<option value=4>4</option>
-									<option value=5>5</option>
-								</select>
+								<P id="star">
+									<a href="#" value="1"><i class="fas fa-star"></i></a>
+									<a href="#" value="2"><i class="fas fa-star"></i></a> 
+									<a href="#" value="3"><i class="fas fa-star"></i></a> 
+									<a href="#" value="4"><i class="fas fa-star"></i></a> 
+									<a href="#" value="5"><i class="fas fa-star"></i></a> 
+									<input type="hidden" name="re_service">
+								<p>
 							</th>
 							<th>
 								<label>분위기</label>
-								<select class="form-control" name="re_mood">
-									<option value=1>1</option>
-									<option value=2>2</option>
-									<option value=3>3</option>
-									<option value=4>4</option>
-									<option value=5>5</option>
-								</select>
+								<P id="star">
+									<a href="#" value="1"><i class="fas fa-star"></i></a>
+									<a href="#" value="2"><i class="fas fa-star"></i></a> 
+									<a href="#" value="3"><i class="fas fa-star"></i></a> 
+									<a href="#" value="4"><i class="fas fa-star"></i></a> 
+									<a href="#" value="5"><i class="fas fa-star"></i></a>
+									<input type="hidden" name="re_mood"> 
+								<p>
 							</th>
 							<th>
 								<label>청결</label>
-								<select class="form-control" name="re_clean">
-									<option value=1>1</option>
-									<option value=2>2</option>
-									<option value=3>3</option>
-									<option value=4>4</option>
-									<option value=5>5</option>
-								</select>
+								<P id="star">
+									<a href="#" value="1"><i class="fas fa-star"></i></a>
+									<a href="#" value="2"><i class="fas fa-star"></i></a> 
+									<a href="#" value="3"><i class="fas fa-star"></i></a> 
+									<a href="#" value="4"><i class="fas fa-star"></i></a> 
+									<a href="#" value="5"><i class="fas fa-star"></i></a>
+									<input type="hidden" name="re_clean">  
+								<p>
 							</th>
 							<th>
 								<label>맛</label>
-								<select class="form-control" name="re_tasty">
-									<option value=1>1</option>
-									<option value=2>2</option>
-									<option value=3>3</option>
-									<option value=4>4</option>
-									<option value=5>5</option>
-								</select>
+								<P id="star">
+									<a href="#" value="1"><i class="fas fa-star"></i></a>
+									<a href="#" value="2"><i class="fas fa-star"></i></a> 
+									<a href="#" value="3"><i class="fas fa-star"></i></a> 
+									<a href="#" value="4"><i class="fas fa-star"></i></a> 
+									<a href="#" value="5"><i class="fas fa-star"></i></a>
+									<input type="hidden" name="re_tasty">  
+								<p>
 							</th>
 							<th>
 								<label>양</label>
-								<select class="form-control" name="re_quantity">
-									<option value=1>1</option>
-									<option value=2>2</option>
-									<option value=3>3</option>
-									<option value=4>4</option>
-									<option value=5>5</option>
-								</select>
+								<P id="star">
+									<a href="#" value="1"><i class="fas fa-star"></i></a>
+									<a href="#" value="2"><i class="fas fa-star"></i></a> 
+									<a href="#" value="3"><i class="fas fa-star"></i></a> 
+									<a href="#" value="4"><i class="fas fa-star"></i></a> 
+									<a href="#" value="5"><i class="fas fa-star"></i></a> 
+									<input type="hidden" name="re_quantity"> 
+								<p>
 							</th>
 						</tr>
 					</thead>
@@ -88,35 +100,41 @@
 			</div>
 		</div>
 	</form>
-</body>
-	<script type="text/javascript">
-	 $(function(){
-		$(document).on('change', 'input[name=fileList]', function(){
-			var val = $(this).val();
-			var length = $('input[name=fileList]').length;
-			var str = '<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)" data="">';
-			
-			if(val == ''){
-				$(this).remove();
-				if(length == 5 && $('input[name=fileList]').last().val() != ''){
-					$('.files').append(str);      
+	<script>
+		 $(function(){
+			$(document).on('change', 'input[name=fileList]', function(){
+				var val = $(this).val();
+				var length = $('input[name=fileList]').length;
+				var str = '<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)" data="">';
+				
+				if(val == ''){
+					$(this).remove();
+					if(length == 5 && $('input[name=fileList]').last().val() != ''){
+						$('.files').append(str);      
+					}
+				}else{
+					if(length < 5){
+						$('.files').append(str);
+					}
 				}
-			}else{
-				if(length < 5){
-					$('.files').append(str);
-				}
-			}
-			
-		})
-		$(document).on('click', '.review-btn', function(){
-			var service = $('[name=re_service]').val();
-			var mood = $('[name=re_mood]').val();
-			var clean = $('[name=re_clean]').val();
-			var tasty = $('[name=re_tasty]').val();
-			var quantity = $('[name=re_quantity]').val();
-			var totalSc =  (service+mood+clean+tasty+quantity)/5
-			$('[name=re_totalSc]').val(totalSc);
-		})
-	 })
+				
+			})
+			$(document).on('click', '.review-btn', function(){
+				var service = parseInt($('input[name=re_service]').val());
+				var mood = parseInt($('input[name=re_mood]').val());
+				var clean = parseInt($('input[name=re_clean]').val());
+				var tasty = parseInt($('input[name=re_tasty]').val());
+				var quantity = parseInt($('input[name=re_quantity]').val());
+				var totalSc = (service+mood+clean+tasty+quantity)/5
+				$('[name=re_totalSc]').val(totalSc);
+			})
+			$('#star a').click(function(){ 
+				$(this).parent().children("a").removeClass("on"); 
+				$(this).addClass("on").prevAll("a").addClass("on");
+				var sp = $(this).attr("value");
+				$(this).siblings().last().val(sp);
+			});
+		 })	
 	</script>
+</body>
 </html>

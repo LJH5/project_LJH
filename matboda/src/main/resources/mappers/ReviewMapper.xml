@@ -4,11 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.green.matboda.dao.ReviewDAO">
 	<insert id="insertReview">
-		insert into review(re_me_id, re_rt_num, re_content, re_totalSc, re_service, re_mood, re_tasty, re_quantity, re_clean) 
-			values(#{review.re_me_id}, #{review.re_rt_num}, #{review.re_content}, #{review.re_totalSc}, #{review.re_service}, #{review.re_mood}, #{review.re_tasty}, #{review.re_quantity}, #{review.re_clean})
+		insert into review(re_me_id, re_me_nickname, re_rt_num, re_content, re_totalSc, re_service, re_mood, re_tasty, re_quantity, re_clean) 
+			values(#{re_me_id}, #{re_me_nickname}, #{re_rt_num}, #{re_content}, #{re_totalSc}, #{re_service}, #{re_mood}, #{re_tasty}, #{re_quantity}, #{re_clean})
 	</insert>
 	<select id="selectReview" resultType="kr.green.matboda.vo.ReviewVO">
 		select * from review
-			where re_rt_num = #{num}
+			where re_rt_num = #{num} 
+			order by re_num desc
 	</select>
+	<insert id="insertImage">
+		insert into image(im_type, im_where, im_name, im_oriName)
+			values(#{im_type}, #{im_where}, #{im_name}, #{im_oriName})
+	</insert>
+	<select id="selectRe" resultType="kr.green.matboda.vo.ReviewVO">
+		select * from review
+			where re_num = #{num}
+	</select>
+	<delete id="deleteReview">
+		delete from review 
+			where re_num = #{re_num}
+	</delete>
 </mapper>
