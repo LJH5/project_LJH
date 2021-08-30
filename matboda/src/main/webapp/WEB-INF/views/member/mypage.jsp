@@ -14,7 +14,7 @@
 	<div class="form-group">
 		<c:choose>
 			<c:when test="${user.me_picture == null}">
-				<img alt="" src="matboda/img/2021/08/24/d00a446f-f243-4490-adc0-20d06330db35_img.png">
+				<img src="/matboda/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png" style="width: 180px;">
 			</c:when>
 			<c:otherwise>
 				<img alt="" src="${user.me_picture}">
