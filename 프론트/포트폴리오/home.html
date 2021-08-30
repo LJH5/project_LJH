@@ -32,6 +32,10 @@
             height: 70px;
             padding: 10px;
         }
+        .nav .nav-box{
+            margin: 0 auto;
+
+        }
         .nav .logo{
             margin-top: 5px;
         }
@@ -130,7 +134,7 @@
             font-size: 45px;
             top: 5px;
             left: 5px;
-            z-index: 5;
+            z-index: 2;
         }
         .top3 .rank  img{
 	        display: block;
@@ -201,6 +205,7 @@
             margin-right: 20px;
             box-sizing: border-box;
             margin-bottom: 20px;
+            overflow: hidden;
         }
         .swiper-container img{
 	        display: block;
@@ -212,27 +217,76 @@
         .footer{
             position: absolute;
             bottom: 0;
-           width: 100%;
+            width: 100%;
+        }
+        .user-menu{
+            width: 250px;
+            height: 300px;
+            border: 2px solid rgb(255, 165, 0);
+            background-color: white;
+            position: absolute;
+            top: 70px;
+            right: -10px;
+            z-index: 3;
+        }
+        .user-menu img{
+            width: 150px;
+            height: 150px;
+            border-radius: 100%;
+            margin-top: 10px;
+            margin-left: 50px;
+        }
+        .user-menu .me_nickname{
+            font-size: 20px;
+        }
+        .user-menu .mypage a,
+        .user-menu .signout a{
+            width: 100px;
+            height: 50px;
+            padding: 10px;
+            background-color: white;
+            border: 2px solid rgb(255, 165, 0);
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 50px;
+            font-size: 19px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        .user-menu .mypage a{
+            left: 10px;
+        }
+        .user-menu .signout a{
+            right: 10px;
         }
     </style>
 </head>
 <body>
     <div class="homepage">
         <div class="nav">
-            <div class="logo">
-                <a href="<%= request.getContextPath() %>/"><h2>맛보다</h2></a>
-            </div>
-            <c:if test="${user == null}">
-                <div class="user-box">    
-                    <a href="<%= request.getContextPath() %>/member/signin"><i class="far fa-user-circle"></i></a>
-                    <a href="<%= request.getContextPath() %>/member/signup"></a>
+            <div class="nav-box">    
+                <div class="logo">
+                    <a href="<%= request.getContextPath() %>/"><h2>맛보다</h2></a>
                 </div>
-            </c:if>
-            <div class="search">
-                <form action="#">
-                    <div></div>
-                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                </form>
+                <c:if test="${user == null}">
+                    <div class="user-box">
+                        <div class="user-account">    
+                            <a href="#"><i class="far fa-user-circle"></i></a>
+                        </div>
+                        <div class="user-menu">
+                            <img src="../JS수업/img/cat.jfif">
+                            <div class="me_nickname">고양이</div>
+                            <span class="mypage"><a href="#">마이페이지</a></span>
+                            <span class="signout"><a href="#">로그아웃</a></span>
+                        </div>
+                    </div>
+                </c:if>
+                <div class="search">
+                    <form action="#">
+                        <div></div>
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="body">
@@ -363,6 +417,9 @@
             },function(){
                 id1 = rollingTop('.report-box .content', 'li','-50',500,3000);
             })
+            $('.user-account').click(function(){
+                $('.user-menu').toggle();
+            })
         })
         var swiper = new Swiper(".mySwiper", {
             spaceBetween: 0,
@@ -374,7 +431,7 @@
             pagination: {
             el: ".swiper-pagination",
             clickable: true,
-            },
+            }
         });
     </script>
     </body>
