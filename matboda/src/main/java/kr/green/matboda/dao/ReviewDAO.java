@@ -11,7 +11,7 @@ public interface ReviewDAO {
 
 	ArrayList<ReviewVO> selectReview(Integer num);
 
-	void insertImage(ImageVO image);
+	void insertImage(ImageVO file);
 
 	ReviewVO selectRe(Integer num);
 

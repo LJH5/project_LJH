@@ -138,15 +138,6 @@
 		    </form>
 		</div>
 	</div>
-	<nav class="navbar navbar-expand-sm navbar-yellow">
-		<c:if test="${user != null}">
-			<ul class="navbar-nav">
-				<c:if test="${user.me_authority != 'USER'}">
-					<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/admin/user/list">회원관리</a></li>	
-				</c:if>
-			</ul>
-		</c:if>
-	</nav>
 	<script type="text/javascript">
 		$(function(){
 			 $('.account').click(function(){

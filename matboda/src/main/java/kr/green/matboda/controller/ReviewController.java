@@ -32,9 +32,10 @@ public class ReviewController {
 		return mv;
 	}
 	@PostMapping("/register")
-	public ModelAndView registerPost(ModelAndView mv, ReviewVO review, HttpServletRequest request, MultipartFile [] fileList) throws Exception {
+	public ModelAndView registerPost(ModelAndView mv, ReviewVO review, MultipartFile [] fileList, HttpServletRequest request) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
-		reviewService.insertReview(review, user, fileList);
+		reviewService.insertReview(review, fileList, user);
+		System.out.println(fileList);
 		mv.setViewName("redirect:/restaurant/main?num="+review.getRe_rt_num());
 		return mv;
 	}

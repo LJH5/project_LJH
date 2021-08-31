@@ -102,10 +102,13 @@
 	</form>
 	<script>
 		 $(function(){
+			$('form').submit(function(){
+				return true;
+			})
 			$(document).on('change', 'input[name=fileList]', function(){
 				var val = $(this).val();
 				var length = $('input[name=fileList]').length;
-				var str = '<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)" data="">';
+				var str = '<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)">';
 				
 				if(val == ''){
 					$(this).remove();
