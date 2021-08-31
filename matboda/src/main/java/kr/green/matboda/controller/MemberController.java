@@ -57,7 +57,7 @@ public class MemberController {
 		return memberService.getMember(id) != null ? "FAIL" : "OK";
 	}
 	@GetMapping("/signout")
-	public ModelAndView memberSignoutGet(ModelAndView mv, HttpServletRequest request, HttpServletResponse response ) {
+	public ModelAndView memberSignoutGet(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
 		memberService.signout(request, response);
 		mv.setViewName("redirect:/");
 		return mv;
@@ -69,5 +69,20 @@ public class MemberController {
 		mv.setViewName("/template/member/mypage");
 		return mv;
 	}
-	
+	@GetMapping("/modify")
+	public ModelAndView memberModifyGet(ModelAndView mv, HttpServletRequest request) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		mv.addObject("user", user);
+		mv.setViewName("/template/member/modify");
+		return mv;
+	}
+	@PostMapping("/modify")
+	public ModelAndView memberModifyPost(ModelAndView mv, MemberVO user, HttpServletRequest request) {
+		MemberVO loginUser = memberService.getMemberByRequest(request);
+		System.out.println(loginUser);
+		System.out.println(user);
+		memberService.updateMember(user, loginUser);
+		mv.setViewName("redirect:/member/mypage");
+		return mv;
+	}
 }

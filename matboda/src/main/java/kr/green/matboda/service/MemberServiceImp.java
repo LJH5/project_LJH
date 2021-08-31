@@ -158,5 +158,16 @@ public class MemberServiceImp implements MemberService{
 		memberDao.deleteMember(me_id);
 		return "OK";
 	}
-	
+	@Override
+	public void updateMember(MemberVO user, MemberVO loginUser) {
+		if(loginUser == null || user == null || user.getMe_id() == null || !user.getMe_id().equals(loginUser.getMe_id()))
+			return;
+		MemberVO dbUser = memberDao.selectUser(user.getMe_id());
+		dbUser.setMe_picture(user.getMe_picture());
+		dbUser.setMe_nickname(user.getMe_nickname());
+		dbUser.setMe_email(user.getMe_email());
+		dbUser.setMe_phoneNum(user.getMe_phoneNum());
+		memberDao.updateUser(dbUser);
+	}
+		
 }
