@@ -28,16 +28,15 @@ CREATE TABLE `restaurant` (
   `rt_address` varchar(255) NOT NULL,
   `rt_phoneNum` varchar(255) NOT NULL,
   `rt_type` varchar(255) NOT NULL,
-  `rt_openTime` varchar(255) NOT NULL,
-  `rt_menu` varchar(255) DEFAULT NULL,
-  `rt_me_id` varchar(15) NOT NULL,
+  `rt_openTime` varchar(50) NOT NULL,
+  `rt_me_id` varchar(15) DEFAULT NULL,
   `rt_regDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `rt_upDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `rt_score` float NOT NULL,
+  `rt_score` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`rt_num`),
   KEY `rt_me_id_idx` (`rt_me_id`),
-  CONSTRAINT `rt_me_id` FOREIGN KEY (`rt_me_id`) REFERENCES `member` (`me_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `rt_me_id` FOREIGN KEY (`rt_me_id`) REFERENCES `member` (`me_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +45,7 @@ CREATE TABLE `restaurant` (
 
 LOCK TABLES `restaurant` WRITE;
 /*!40000 ALTER TABLE `restaurant` DISABLE KEYS */;
+INSERT INTO `restaurant` VALUES (2,'마라탕 먹지 마라2','','02-2655-5595','china','07:00 ~ 20:00','asd','2021-08-13 17:39:14','2021-08-13 17:39:14',0);
 /*!40000 ALTER TABLE `restaurant` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-05 12:42:19
+-- Dump completed on 2021-08-27 13:07:52

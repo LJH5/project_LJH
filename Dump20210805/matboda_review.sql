@@ -26,6 +26,7 @@ CREATE TABLE `review` (
   `re_num` int NOT NULL AUTO_INCREMENT,
   `re_me_id` varchar(15) NOT NULL,
   `re_rt_num` int NOT NULL,
+  `re_me_nickname` varchar(20) NOT NULL,
   `re_content` longtext NOT NULL,
   `re_regDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `re_upDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -38,11 +39,11 @@ CREATE TABLE `review` (
   `re_quantity` int NOT NULL DEFAULT '0',
   `re_clean` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`re_num`),
-  KEY `re_me_id_idx` (`re_me_id`),
   KEY `re_rt_num_idx` (`re_rt_num`),
-  CONSTRAINT `re_me_id` FOREIGN KEY (`re_me_id`) REFERENCES `member` (`me_id`),
-  CONSTRAINT `re_rt_num` FOREIGN KEY (`re_rt_num`) REFERENCES `restaurant` (`rt_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `re_me_id_idx` (`re_me_id`),
+  CONSTRAINT `re_me_id` FOREIGN KEY (`re_me_id`) REFERENCES `member` (`me_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `re_rt_num` FOREIGN KEY (`re_rt_num`) REFERENCES `restaurant` (`rt_num`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-05 12:42:19
+-- Dump completed on 2021-08-27 13:07:52

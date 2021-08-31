@@ -26,7 +26,7 @@ CREATE TABLE `member` (
   `me_id` varchar(15) NOT NULL,
   `me_pw` varchar(255) NOT NULL,
   `me_nickname` varchar(20) NOT NULL,
-  `me_picture` varchar(255) NOT NULL DEFAULT 'path',
+  `me_picture` varchar(255) DEFAULT NULL,
   `me_name` varchar(45) NOT NULL,
   `me_email` varchar(45) NOT NULL,
   `me_phoneNum` varchar(13) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES ('asd','$2a$10$QOuPG9.Xp21te2q04LAWde75HHmGwNr9lq7mi.o.BmvBtQacLBDpK','asd','','asd','asd@asd','01012345678','M','SUPER ADMIN','1715B64732C412A4DDB6A1CA0BD51B28','2021-08-16 16:56:17.487','2021-08-09 10:28:27'),('asdf1234','$2a$10$tHqBc9aIt09/5S2ERQYi/utPUh/M4LOXtzMMCwAsvJFDqXZuWN0cK','','','홍길동','asdf@asdf.com','01012345679','M','ADMIN',NULL,NULL,'2021-08-09 10:28:27'),('hjkl1234','$2a$10$L4vurCl.GVDz2NhjfXSIzekDddlY8tpSy.pCYVOf1bJqTm7YaRi.W','','','관우','rhksdn@rhksdn.com','01022332333','N','USER',NULL,NULL,'2021-08-09 15:49:14'),('qwer1234','$2a$10$NnDyBgxoue3LCZ50eVLabuUAtBInMT3WsnDYuPvQkqVRdeIr4gg1u','','','제갈량','qwer1234@qwer.com','01022222222','M','USER',NULL,NULL,'2021-08-09 15:21:17'),('uiop1234','$2a$10$203l.wfl00ynzOR6Sg916uMrHG7ipWqHxcPSQ7JQc6IkdY8QNMqtC','','','아이유','werwqr@sdfwe.asd','01011115555','F','ADMIN',NULL,NULL,'2021-08-09 15:15:00'),('zxcv1234','$2a$10$d9DeueVX5QMgBHbKlSeW4uEgjI3ZlNGa2GEyTtdBo3sYclSmEK3DG','유비','','유비','zxcv@zxcv.com','01033336666','M','USER',NULL,NULL,'2021-08-09 15:23:45');
+INSERT INTO `member` VALUES ('abcd1234','$2a$10$YC/Hs.KpmKMhK97SAR9i2ukdABEkzcIh2TO57jWKI2esj3Y1ng5aG','우의',NULL,'우의','abcd123@asdf.asdf','01011115555','N','USER',NULL,NULL,'2021-08-24 10:00:46'),('asd','$2a$10$QOuPG9.Xp21te2q04LAWde75HHmGwNr9lq7mi.o.BmvBtQacLBDpK','asd',NULL,'asd','asd@asd','01012345678','M','SUPER ADMIN','none','2021-08-27 12:42:48.752','2021-08-09 10:28:27'),('asdf1234','$2a$10$tHqBc9aIt09/5S2ERQYi/utPUh/M4LOXtzMMCwAsvJFDqXZuWN0cK','',NULL,'홍길동','asdf@asdf.com','01012345679','M','ADMIN','none','2021-08-24 12:50:48.713','2021-08-09 15:21:17'),('hjkl1234','$2a$10$L4vurCl.GVDz2NhjfXSIzekDddlY8tpSy.pCYVOf1bJqTm7YaRi.W','',NULL,'관우','rhksdn@rhksdn.com','01022332333','N','USER','','','2021-08-09 15:21:17'),('qkqh1234','$2a$10$7THlZ9wonk5/WDGlBPKoIenctT17g9IKATyYil0TvkIJU7ObIUDsi','그린',NULL,'그린','rhksdn@rhksdn.com','01055555555','N','USER',NULL,NULL,'2021-08-24 09:48:55'),('qwef123','$2a$10$U13FcBuXiQYgSY.NeaPQG.3iZzxH3mIb8dAbtnHoMlZAotx2ygmiq','장비',NULL,'장비','rhksdn@rhkeresdn.com','01022223333','M','USER','','','2021-08-10 11:40:45'),('qwer1234','$2a$10$NnDyBgxoue3LCZ50eVLabuUAtBInMT3WsnDYuPvQkqVRdeIr4gg1u','',NULL,'제갈량','qwer1234@qwer.com','01022222222','M','USER','none','2021-08-24 16:44:42.59','2021-08-09 15:21:17'),('slcp1234','$2a$10$4qNd1zTlP.dB06O3iFIZzO52Ar0iOSErShGTd4ymAKwzQoxGfYwMy','중2병',NULL,'니체','slcp1234@asd.asd','01022222222','M','USER','none','2021-08-24 09:32:43.867','2021-08-23 17:04:12'),('uiop1234','$2a$10$203l.wfl00ynzOR6Sg916uMrHG7ipWqHxcPSQ7JQc6IkdY8QNMqtC','',NULL,'아이유','werwqr@sdfwe.asd','01011115555','F','ADMIN','','','2021-08-09 15:15:00'),('zxcv1234','$2a$10$d9DeueVX5QMgBHbKlSeW4uEgjI3ZlNGa2GEyTtdBo3sYclSmEK3DG','유비',NULL,'유비','zxcv@zxcv.com','01033336666','M','USER','','','2021-08-09 15:23:45');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-09 17:25:15
+-- Dump completed on 2021-08-27 13:07:52
