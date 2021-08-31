@@ -4,25 +4,247 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>리뷰</title>
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="../JS수업/JS/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../JS수업/JS/rolling.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    
     <style>
-        .review-contaniner{
-            border-top: 2px solid black;
-            width: 700px;
-            min-height: 300px;
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        
+        .img-container{
+            height: 300px;
+            background: yellow;
+        }
+        .main-container{
+            overflow: hidden;
+        }
+        .inner-container{
+            min-width: 900px;
+            display: flex;
+        }
+        .left-container{
+            width: 75%;
+        }
+        .left-container .inner-box{
+            max-width: 900px;
+            background: lightgreen;
+            margin: 0 auto;
+        }
+        .left-container .top-container{
+            background-color: rgb(214, 207, 202);
+        }
+        .left-container .shop-head .fa-star{
+            color: rgb(255, 165, 0);
+            font-size: 50px;
+        }
+        .left-container .title{
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .left-container .title .btn-box{
+            position: absolute;
+            text-align: center;
+            right: 0;
+            top: 0;
+        }
+        .left-container .title .review-btn{
+            float: left;
+            margin-right: 10px;
+        }
+        .left-container .title .favorites-btn{
+            float: right;
+        }
+        .left-container .title .review-btn:hover,
+        .left-container .title .favorites-btn:hover{
+            color: rgb(255, 165, 0);
+            cursor: pointer;
+        }
+        .left-container .title .btn-box i{
+            font-size: 30px;
+        }
+        .left-container .review-text,
+        .left-container .favorites-text{
+            font-size: 20px;
+        }
+        .left-container .title .rt_score{
+                color: rgb(255, 165, 0);
+        }
+        .left-container .infBox{
+            margin-bottom: 10px;
+        }
+        .left-container .infBox #reviewNum{
+            margin-right: 20px;
+        }
+        
+        .left-container .middle-container{
+            background: azure;
+            margin-bottom: 10px;
+        }
+        .left-container .detail{
+            width: 600px;
+            box-sizing: border-box;
+            padding-top: 10px;
+            position: relative;
+        }
+        .left-container .detail li{
+            margin-bottom: 10px;
+        }
+        .left-container .detail li{
+            color: rgb(112, 112, 112);
+        }
+        .left-container .bottom-container{
+            background: beige;
+        }
+        .left-container .content{
+            position: absolute;
+            left: 100px;
+        }
+        .right-container{
+            width: 25%;
+            
+        }
+        .right-container .map{
+            width: 500px;
+            height: 500px;
+            background-color: lime;
+        }
+        .after::after{
+            display: block;
+            clear: both;
+            content: '';
         }
     </style>
 </head>
 <body>
-    <div class="review-contaniner">
+    <div class="img-container">
 
     </div>
+    <div class="main-container">
+        <div class="inner-container">
+            <div class="left-container">
+                <div class="inner-box">
+                    <div class="container">
+                        <div class="top-container">
+                            <div class="title">
+                                <span class="rt_name">${rt.rt_name}</span> 
+                                <span class="rt_score">${rt.rt_score}</span>
+                                <div class="btn-box">
+                                    <form method="GET" action="<%=request.getContextPath()%>/review/register">
+                                        <input type="hidden" name="num" value="${rt.rt_num}">
+                                        <div class="review-btn">
+                                            <i class="fas fa-pen"></i>
+                                            <div class="review-text">리뷰쓰기</div>
+                                        </div>
+                                        <div class="favorites-btn">
+                                            <i class="far fa-star"></i>
+                                            <div class="favorites-text">즐겨찾기</div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="infBox">
+                                <span id="reviewNum">리뷰수</span> <span id="favoritesNum">즐겨찾기수</span>
+                            </div>
+                        </div>
+                        <div class="middle-container">
+                            <div class="detail">
+                                <ul>
+                                    <li>주소 <span class="content">${rt.rt_address}</span></li>
+                                    <li>전화번호 <span class="content">${rt.rt_phoneNum}</span></li>
+                                    <li>음식종류 <span class="content">${rt.rt_type}</span></li>
+                                    <li>영업시간 <span class="content">${rt.rt_openTime}</span></li>
+                                </ul>
+                                <div>
+                                    <c:if test="${user != null && (user.me_id == rt.rt_me_id || user.me_authority == 'ADMIN' || user.me_authority == 'SUPER ADMIN')}">
+                                        <a href="<%=request.getContextPath()%>/restaurant/modify?num=${rt.rt_num}" style="text-decoration: none">
+                                            <button class="btn btn-outline-success">수정</button>
+                                        </a>
+                                        <a href="<%=request.getContextPath()%>/restaurant/delete?num=${rt.rt_num}" style="text-decoration: none">
+                                            <button class="btn btn-outline-danger">삭제</button>
+                                        </a>
+                                    </c:if>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-container">
+                            <div id="review-box">
+                                <c:forEach items="${reviews}" var="review">
+                                    <div class="review">
+                                        종합 ${review.re_totalSc}
+                                        서비스 ${review.re_service}
+                                        분위기 ${review.re_mood}
+                                        청결함 ${review.re_clean}
+                                        음식맛 ${review.re_tasty}
+                                        음식량 ${review.re_quantity}
+                                        <ul>
+                                            <li>${review.re_me_nickname}</li>
+                                            <li>${review.re_content}</li>
+                                            <li>${review.re_upDateStr}</li>
+                                        </ul>
+                                    </div>
+                                    <c:choose>
+                                        <c:when test="${user.me_id != rt.rt_me_id}">
+                                            <div class="btn-box">
+                                                <button class="btn btn-outline-success">맛잘알</button>
+                                                <button class="btn btn-outline-danger">신고</button>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="btn-box">
+                                                <a href="<%= request.getContextPath() %>/review/modify?num=${review.re_num}">
+                                                    <button class="mod-btn btn btn-outline-success">수정</button>
+                                                </a>
+                                                <button class="del-btn btn btn-outline-danger">삭제</button>
+                                                <input class="re_num" type="hidden" value="${review.re_num}">
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-container">
+                <div class="map">
+
+                </div>
+            </div>
+        </div>
+    </div>
+	<script type="text/javascript">
+		var contextPath = '<%=request.getContextPath()%>';
+		$(document).on('click', '.del-btn', function(){
+            var re_num = $(this).siblings('.re_num').val();
+			var data = {re_num : re_num}
+			$.ajax({
+				type : 'post',
+				url  : contextPath + '/review/delete',
+				data : data,
+				success : function(res){
+                    if (res == 'OK') {
+						alert('리뷰삭제 성공');
+						$('#review-box').load("/matboda/restaurant/main #review-box");
+					}else{
+						alert('리뷰삭제 실패');
+					}
+				}
+			})
+		})
+	</script>
 </body>
 </html>
-<option value="00">00</option>
-<option value="10">10</option>
-<option value="20">20</option>
-<option value="30">30</option>
-<option value="40">40</option>
-<option value="50">50</option>
-
