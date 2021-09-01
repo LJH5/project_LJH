@@ -53,12 +53,13 @@ public class ReviewServiceImp implements ReviewService {
 		reviewDao.deleteReview(re_num);
 		ArrayList<ImageVO> imageList = reviewDao.selectimageList(re_num);
 		System.out.println(imageList);
+		System.out.println(re_num);
 		if(imageList != null && imageList.size() != 0) {
 			for(ImageVO tmp : imageList) {
 				reviewDao.deleteFile(tmp.getIm_num());
 			}
 		}
-		return "FAIL";	
+		return "OK";	
 	}
 
 	public boolean insertFile(MultipartFile tmp, String type, int num) throws Exception {

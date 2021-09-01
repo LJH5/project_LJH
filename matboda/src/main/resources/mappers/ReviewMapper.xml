@@ -40,6 +40,6 @@
 		where re_num = #{re_num}
 	</update>
 	<delete id="deleteFile">
-		
+		delete from image where im_num = #{im_num}
 	</delete>
 </mapper>
