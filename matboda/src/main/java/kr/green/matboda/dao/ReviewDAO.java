@@ -19,7 +19,7 @@ public interface ReviewDAO {
 
 	void deleteReview(Integer re_num);
 
-	ArrayList<ImageVO> selectFileList(Integer num);
+	ArrayList<ImageVO> selectimageList(Integer num);
 
 	void updateReview(ReviewVO dbReview);
 

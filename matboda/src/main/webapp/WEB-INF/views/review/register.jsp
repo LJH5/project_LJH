@@ -93,7 +93,7 @@
 			<div class="review-box form-group">
 				<textarea class="review-input form-control mb-2" name="re_content" placeholder="리뷰를 작성해주세요.">${review.re_content}</textarea>
 				<div class="form-group files">
-					<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)"/>
+					<input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)"/>
 				</div>
 				<a href="<%= request.getContextPath() %>/restaurant/main/?num=${num}"><button type="button" class="review-btn btn btn-outline-danger">취소</button></a>
 				<button class="review-btn btn btn-outline-success">리뷰 올리기</button>
@@ -105,14 +105,14 @@
 			$('form').submit(function(){
 				return true;
 			})
-			$(document).on('change', 'input[name=fileList]', function(){
+			$(document).on('change', 'input[name=imageList]', function(){
 				var val = $(this).val();
-				var length = $('input[name=fileList]').length;
-				var str = '<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)">';
+				var length = $('input[name=imageList]').length;
+				var str = '<input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)">';
 				
 				if(val == ''){
 					$(this).remove();
-					if(length == 5 && $('input[name=fileList]').last().val() != ''){
+					if(length == 5 && $('input[name=imageList]').last().val() != ''){
 						$('.files').append(str);      
 					}
 				}else{

@@ -24,7 +24,7 @@
 		delete from review 
 			where re_num = #{re_num}
 	</delete>
-	<select id="selectFileList" resultType="kr.green.matboda.vo.ImageVO">
+	<select id="selectimageList" resultType="kr.green.matboda.vo.ImageVO">
 		select * from image where im_type = 'REVIEW' and im_where = #{num} 
 	</select>
 	

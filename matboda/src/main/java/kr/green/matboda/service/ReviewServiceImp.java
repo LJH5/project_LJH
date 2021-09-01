@@ -21,18 +21,18 @@ public class ReviewServiceImp implements ReviewService {
 	private String uploadPath = "D:\\JAVA_LJH\\img";
 
 	@Override
-	public void insertReview(ReviewVO review, MultipartFile[] fileList, MemberVO user) throws Exception {
+	public void insertReview(ReviewVO review, MultipartFile[] imageList, MemberVO user) throws Exception {
 		if(user == null || review == null || review.getRe_content().length() == 0)
 			return;
 		review.setRe_me_nickname(user.getMe_nickname());
 		review.setRe_me_id(user.getMe_id());
 		reviewDao.insertReview(review);
 		
-		if(fileList == null)
+		if(imageList == null)
 			return;
-		int size = fileList.length < 5 ? fileList.length : 5;
+		int size = imageList.length < 5 ? imageList.length : 5;
 		for(int i = 0; i<size; i++) {
-			insertFile(fileList[i], "REVIEW", review.getRe_num());
+			insertFile(imageList[i], "REVIEW", review.getRe_num());
 		}
 	}
 
@@ -51,10 +51,10 @@ public class ReviewServiceImp implements ReviewService {
 		if(review == null || !review.getRe_me_id().equals(user.getMe_id()))
 			return "FAIL";
 		reviewDao.deleteReview(re_num);
-		ArrayList<ImageVO> fileList = reviewDao.selectFileList(re_num);
-		System.out.println(fileList);
-		if(fileList != null && fileList.size() != 0) {
-			for(ImageVO tmp : fileList) {
+		ArrayList<ImageVO> imageList = reviewDao.selectimageList(re_num);
+		System.out.println(imageList);
+		if(imageList != null && imageList.size() != 0) {
+			for(ImageVO tmp : imageList) {
 				reviewDao.deleteFile(tmp.getIm_num());
 			}
 		}
@@ -79,10 +79,10 @@ public class ReviewServiceImp implements ReviewService {
 	}
 
 	@Override
-	public ArrayList<ImageVO> getFileList(Integer num) {
+	public ArrayList<ImageVO> getimageList(Integer num) {
 		if(num == null)
 			return null;
-		return reviewDao.selectFileList(num);
+		return reviewDao.selectimageList(num);
 	}
 
 	@Override
@@ -90,13 +90,13 @@ public class ReviewServiceImp implements ReviewService {
 		if(review == null || review.size() == 0)
 			return;
 		for(ReviewVO tmp : review) {
-			tmp.setRe_image(reviewDao.selectFileList(tmp.getRe_num()));
+			tmp.setRe_image(reviewDao.selectimageList(tmp.getRe_num()));
 		}
 		
 	}
 
 	@Override
-	public void updateReview(ReviewVO review, MemberVO user, MultipartFile[] fileList, Integer [] fileNumList) {
+	public void updateReview(ReviewVO review, MemberVO user, MultipartFile[] imageList, Integer [] fileNumList) {
 		if(review == null || user == null)
 			return;
 		ReviewVO dbReview = reviewDao.selectRe(review.getRe_num());
