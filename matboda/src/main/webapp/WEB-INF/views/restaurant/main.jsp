@@ -101,6 +101,9 @@
 						<li>${review.re_upDateStr}</li>
 					</ul>
 				</div>
+				<c:forEach items="${review.re_image}" var="img">
+					<img src="<%=request.getContextPath() %>/img/${img.im_name}" style="width: 100px" height="100px">
+				</c:forEach>
 				<c:choose>
 					<c:when test="${user.me_id != rt.rt_me_id}">
 						<div class="btn-box">

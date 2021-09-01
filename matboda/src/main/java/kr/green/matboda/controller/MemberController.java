@@ -77,11 +77,9 @@ public class MemberController {
 		return mv;
 	}
 	@PostMapping("/modify")
-	public ModelAndView memberModifyPost(ModelAndView mv, MemberVO user, HttpServletRequest request) {
+	public ModelAndView memberModifyPost(ModelAndView mv, MemberVO user, HttpServletRequest request, MultipartFile file) {
 		MemberVO loginUser = memberService.getMemberByRequest(request);
-		System.out.println(loginUser);
-		System.out.println(user);
-		memberService.updateMember(user, loginUser);
+		memberService.updateMember(user, loginUser, file);
 		mv.setViewName("redirect:/member/mypage");
 		return mv;
 	}

@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.green.matboda.dao.ReviewDAO">
-	<insert id="insertReview">
+	<insert id="insertReview" useGeneratedKeys="true" keyProperty="review.re_num" parameterType="kr.green.matboda.vo.ReviewVO">
 		insert into review(re_me_id, re_me_nickname, re_rt_num, re_content, re_totalSc, re_service, re_mood, re_tasty, re_quantity, re_clean) 
-			values(#{re_me_id}, #{re_me_nickname}, #{re_rt_num}, #{re_content}, #{re_totalSc}, #{re_service}, #{re_mood}, #{re_tasty}, #{re_quantity}, #{re_clean})
+			values(#{review.re_me_id}, #{review.re_me_nickname}, #{review.re_rt_num}, #{review.re_content}, #{review.re_totalSc}, #{review.re_service}, #{review.re_mood}, #{review.re_tasty}, #{review.re_quantity}, #{review.re_clean})
 	</insert>
 	<select id="selectReview" resultType="kr.green.matboda.vo.ReviewVO">
 		select * from review
@@ -23,5 +23,23 @@
 	<delete id="deleteReview">
 		delete from review 
 			where re_num = #{re_num}
+	</delete>
+	<select id="selectFileList" resultType="kr.green.matboda.vo.ImageVO">
+		select * from image where im_type = 'REVIEW' and im_where = #{num} 
+	</select>
+	
+	<update id="updateReview">
+		update review set
+			re_content = #{re_content}, 
+			re_totalSc = #{re_totalSc},
+			re_service = #{re_service}, 
+			re_mood = #{re_mood}, 
+			re_tasty = #{re_tasty}, 
+			re_quantity = #{re_quantity}, 
+			re_clean = #{re_clean}
+		where re_num = #{re_num}
+	</update>
+	<delete id="deleteFile">
+		
 	</delete>
 </mapper>

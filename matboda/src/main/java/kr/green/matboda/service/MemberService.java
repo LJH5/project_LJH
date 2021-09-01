@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.MemberVO;
 
@@ -33,6 +35,6 @@ public interface MemberService {
 	
 	String deleteMember(String me_id, MemberVO user);
 
-	void updateMember(MemberVO user, MemberVO loginUser);
+	void updateMember(MemberVO user, MemberVO loginUser, MultipartFile file);
 
 }

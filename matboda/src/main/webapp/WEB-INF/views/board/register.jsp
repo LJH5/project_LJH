@@ -19,26 +19,24 @@
 		</div>
 		<div class="form-group">
 			<label>첨부파일</label>
-			<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)">
+			<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="setThumbnail(event)">
+			<div id="image_container"></div>
+
 		</div>
 		<button type="submit" class="btn btn-outline-success">등록</button>
 		<a href="<%=request.getContextPath()%>/board${type}/list"><button type="button" class="btn btn-outline-success">목록</button></a>
 	</form>
 	<script type="text/javascript">
-		function chk_file_type(obj) {
-			var file_kind = obj.value.lastIndexOf('.');
-			var file_name = obj.value.substring(file_kind+1,obj.length);
-			var file_type = file_name.toLowerCase();
-			var check_file_type=new Array();
-			check_file_type=['jpg','gif','png','jpeg','bmp','tif'];
-			if(check_file_type.indexOf(file_type)==-1) {
-				alert('이미지 파일만 첨부 가능합니다.');
-				var parent_Obj=obj.parentNode;
-				var node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
-				$('[name=fileList]').val("");
-				return false;
-			}
+		function setThumbnail(event) { 
+			var reader = new FileReader(); 
+			reader.onload = function(event) { 
+				var img = document.createElement("img"); 
+				img.setAttribute("src", event.target.result); 
+				document.querySelector("div#image_container").appendChild(img); 
+			}; 
+			reader.readAsDataURL(event.target.files[0]); 
 		}
+
 		$(function(){
 			$('form').submit(function(){
 				return true;
@@ -75,12 +73,11 @@
 	        	enctype: 'multipart/form-data',
 	        	processData: false,
 	        	success: function(img_name) {
-	        		console.log(img_name)
 	          		$(el).summernote('editor.insertImage', '<%=request.getContextPath()%>/img'+ img_name);
 	        	}
 	      	});
 	    }
-		</script>	
+	</script>	
 			
 </body>
 </html>

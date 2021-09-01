@@ -23,12 +23,13 @@ import kr.green.matboda.vo.MemberVO;
 import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor
 public class MemberServiceImp implements MemberService{
-	
+	@Autowired
 	private MemberDAO memberDao;
+	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
+	private String uploadPath = "D:\\JAVA_LJH\\img";
 	
 	@Override
 	public boolean signup(MemberVO user) {
@@ -159,7 +160,7 @@ public class MemberServiceImp implements MemberService{
 		return "OK";
 	}
 	@Override
-	public void updateMember(MemberVO user, MemberVO loginUser) {
+	public void updateMember(MemberVO user, MemberVO loginUser, MultipartFile file) {
 		if(loginUser == null || user == null || user.getMe_id() == null || !user.getMe_id().equals(loginUser.getMe_id()))
 			return;
 		MemberVO dbUser = memberDao.selectUser(user.getMe_id());
@@ -169,5 +170,4 @@ public class MemberServiceImp implements MemberService{
 		dbUser.setMe_phoneNum(user.getMe_phoneNum());
 		memberDao.updateUser(dbUser);
 	}
-		
 }

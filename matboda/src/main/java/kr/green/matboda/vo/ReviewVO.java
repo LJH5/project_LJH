@@ -1,6 +1,7 @@
 package kr.green.matboda.vo;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import lombok.Data;
@@ -22,6 +23,7 @@ public class ReviewVO {
 	private int re_tasty;
 	private int re_quantity;
 	private int re_clean;
+	ArrayList<ImageVO> re_image;
 	
 	public String getRe_regDateStr() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

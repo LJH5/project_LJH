@@ -10,16 +10,10 @@
 		.error{
 			color : red
 		}
-		.img-box{
-			background: green;
-			width: 200px;
-			height: 200px;
-			border-radius: 100%;
-			overflow: hidden;
-		}
 		.img-box img{
 			width: 200px;
 			height: 200px;
+			border-radius: 100%;
 		}
 	</style>
 </head>
@@ -29,9 +23,16 @@
 	<h1>프로필 수정</h1>
 	<div class="form-group img-box">
 		<label  class="me_picture" for="me_picture">
-			<img src="/matboda/img/2021/08/31/ebd346-df82-45b1-9b4f-d4c1f72364eb_img">
+			<c:choose>
+				<c:when test="${user.me_picture == null || user.me_picture == ''}">
+					<img id="image_container" src="/matboda/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png" style="width: 180px;">
+				</c:when>
+				<c:otherwise>
+					<img id="image_container" src="/matboda/img/${user.me_picture}">
+				</c:otherwise>
+			</c:choose>
 		</label>
-		<input type="file" name="me_picture" id="me_picture" style="display: none;"/>
+		<input type="file" name="me_picture" id="me_picture" style="display: none;" onchange="setThumbnail(event);"/>
 	</div>
 	<div class="form-group">
 		<label>별명</label>
@@ -50,6 +51,16 @@
 </form>
 <script type="text/javascript">
 $(function(){
+	function setThumbnail(event) { 
+		var reader = new FileReader(); 
+		reader.onload = function(event) { 
+			var img = document.createElement("img"); 
+			img.setAttribute("src", event.target.result); 
+			document.querySelector("div#image_container").appendChild(img); 
+		}; 
+			reader.readAsDataURL(event.target.files[0]); 
+	}
+
     $("form").validate({
         rules: {
             me_email: {

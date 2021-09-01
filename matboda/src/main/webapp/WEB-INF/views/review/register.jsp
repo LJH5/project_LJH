@@ -22,7 +22,7 @@
 	</style>
 </head>
 <body>
-	<form class="contanier" method="post" action="<%=request.getContextPath()%>/review/register">
+	<form class="contanier" method="post" enctype="multipart/form-data">
 		<div>음식점에 대한 솔직한 리뷰 부탁드립니다.</div>
 		<div class="contents">
 			<div class="review-list form-group"></div>

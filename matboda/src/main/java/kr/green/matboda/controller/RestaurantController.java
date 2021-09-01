@@ -27,7 +27,7 @@ public class RestaurantController {
 	@Autowired
 	private RestaurantService restaurantService;
 	private MemberService memberService;
-	private ReviewService reviewSevice;
+	private ReviewService reviewService;
 
 	@GetMapping("/register")
 	public ModelAndView restaurantRegisterGet(ModelAndView mv) {
@@ -45,7 +45,9 @@ public class RestaurantController {
 	@GetMapping("/main")
 	public ModelAndView restaurantMainGet(ModelAndView mv, Integer num) {
 		RestaurantVO rt = restaurantService.getRt(num);
-		ArrayList<ReviewVO> review = reviewSevice.getReviewList(num);
+		
+		ArrayList<ReviewVO> review = reviewService.getReviewList(num);
+		reviewService.getImageList(review);
 		mv.addObject("title", rt.getRt_name());
 		mv.addObject("rt", rt);
 		mv.addObject("reviews", review);

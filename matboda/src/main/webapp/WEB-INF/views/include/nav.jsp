@@ -110,7 +110,7 @@
 			<c:if test="${user != null}">
 				<div class="account">
 					<c:choose>
-						<c:when test="${user.me_picture == null}">
+						<c:when test="${user.me_picture == null || user.me_picture == ''}">
 							<img src="/matboda/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png">
 						</c:when>
 						<c:otherwise>

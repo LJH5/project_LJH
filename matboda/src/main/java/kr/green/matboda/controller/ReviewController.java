@@ -1,5 +1,7 @@
 package kr.green.matboda.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.matboda.service.MemberService;
 import kr.green.matboda.service.ReviewService;
+import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
 import kr.green.matboda.vo.ReviewVO;
 import lombok.AllArgsConstructor;
@@ -35,7 +38,6 @@ public class ReviewController {
 	public ModelAndView registerPost(ModelAndView mv, ReviewVO review, MultipartFile [] fileList, HttpServletRequest request) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
 		reviewService.insertReview(review, fileList, user);
-		System.out.println(fileList);
 		mv.setViewName("redirect:/restaurant/main?num="+review.getRe_rt_num());
 		return mv;
 	}
@@ -44,5 +46,23 @@ public class ReviewController {
 	public String deletePost(Integer re_num, HttpServletRequest request) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		return reviewService.deleteReview(re_num, user);
+	}
+	@GetMapping("/modify")
+	public ModelAndView modifyGet(ModelAndView mv, Integer num) {
+		ReviewVO review = reviewService.getReview(num);
+		ArrayList<ImageVO> fileList = reviewService.getFileList(num);
+		
+		mv.addObject("review", review);
+		mv.addObject("fileList", fileList);
+		mv.setViewName("/template/review/modify");
+		return mv;
+	}
+	@PostMapping("/modify")
+	public ModelAndView modifyPost(ModelAndView mv, ReviewVO review, HttpServletRequest request, MultipartFile[] fileList, Integer [] fileNumList) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		reviewService.updateReview(review, user, fileList, fileNumList);
+		mv.addObject("re_num", review.getRe_num());
+		mv.setViewName("redirect:/restaurant/main?num="+review.getRe_rt_num());
+		return mv;
 	}
 }
