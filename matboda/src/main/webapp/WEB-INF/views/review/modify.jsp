@@ -12,10 +12,10 @@
 			height: 30px;
 			line-height: 30px;
 		}
-		#star a{ 
+		.star a{ 
 			text-decoration: none; color: gray; 
 		} 
-		#star a.on{
+		.star a.on{
 			color: rgb(255, 165, 0); 
 		}
 
@@ -32,58 +32,59 @@
 					<tr>
 						<th>
 							<label>서비스</label>
-							<P id="star">
+							<P class="star service">
 								<a href="#" value="1"><i class="fas fa-star"></i></a>
 								<a href="#" value="2"><i class="fas fa-star"></i></a> 
 								<a href="#" value="3"><i class="fas fa-star"></i></a> 
 								<a href="#" value="4"><i class="fas fa-star"></i></a> 
 								<a href="#" value="5"><i class="fas fa-star"></i></a> 
 								<input type="hidden" name="re_service" value="${review.re_service}">
-							<p>
+							</p>
 						</th>
 						<th>
 							<label>분위기</label>
-							<P id="star">
+							<P class="star mood">
 								<a href="#" value="1"><i class="fas fa-star"></i></a>
 								<a href="#" value="2"><i class="fas fa-star"></i></a> 
 								<a href="#" value="3"><i class="fas fa-star"></i></a> 
 								<a href="#" value="4"><i class="fas fa-star"></i></a> 
 								<a href="#" value="5"><i class="fas fa-star"></i></a>
 								<input type="hidden" name="re_mood" value="${review.re_mood}"> 
-							<p>
+							</p>
 						</th>
 						<th>
 							<label>청결</label>
-							<P id="star">
+							<P class="star clean">
 								<a href="#" value="1"><i class="fas fa-star"></i></a>
 								<a href="#" value="2"><i class="fas fa-star"></i></a> 
 								<a href="#" value="3"><i class="fas fa-star"></i></a> 
 								<a href="#" value="4"><i class="fas fa-star"></i></a> 
 								<a href="#" value="5"><i class="fas fa-star"></i></a>
 								<input type="hidden" name="re_clean" value="${review.re_clean}">  
-							<p>
+							</p>
 						</th>
 						<th>
-							<label>맛</label>
-							<P id="star">
+							<label>음식맛</label>
+							<P class="star tasty">
 								<a href="#" value="1"><i class="fas fa-star"></i></a>
 								<a href="#" value="2"><i class="fas fa-star"></i></a> 
 								<a href="#" value="3"><i class="fas fa-star"></i></a> 
 								<a href="#" value="4"><i class="fas fa-star"></i></a> 
 								<a href="#" value="5"><i class="fas fa-star"></i></a>
 								<input type="hidden" name="re_tasty" value="${review.re_tasty}">  
-							<p>
+							</p>
 						</th>
 						<th>
-							<label>양</label>
-							<P id="star">
+							<label>음식량</label>
+							<P class="star quantity">
 								<a href="#" value="1"><i class="fas fa-star"></i></a>
 								<a href="#" value="2"><i class="fas fa-star"></i></a> 
 								<a href="#" value="3"><i class="fas fa-star"></i></a> 
 								<a href="#" value="4"><i class="fas fa-star"></i></a> 
 								<a href="#" value="5"><i class="fas fa-star"></i></a> 
-								<input type="hidden" name="re_quantity" value="${review.re_quantity}"> 
-							<p>
+								<input type="hidden" name="re_quantity" value="${review.re_quantity}">
+								
+							</p>
 						</th>
 					</tr>
 				</thead>
@@ -93,6 +94,9 @@
 			<input type="hidden" name="re_rt_num" value="${review.re_rt_num}">
 			<div class="review-box form-group">
 				<textarea class="review-input form-control mb-2" name="re_content" placeholder="리뷰를 작성해주세요.">${review.re_content}</textarea>
+				<c:forEach items="${imageList}" var="image">
+					<img src="<%=request.getContextPath() %>/img/${image.im_name}" style="width: 100px" height="100px">
+				</c:forEach>
 				<div class="form-group files">
 					<input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)"/>
 				</div>
@@ -106,7 +110,6 @@
 			$('form').submit(function(){
 				return true;
 			})
-			
 			$(document).on('change', 'input[name=imageList]', function(){
 				var val = $(this).val();
 				var length = $('input[name=imageList]').length;
@@ -133,12 +136,38 @@
 				var totalSc = (service+mood+clean+tasty+quantity)/5
 				$('[name=re_totalSc]').val(totalSc);
 			})
-			$('#star a').click(function(){ 
+			$('.star a').click(function(){ 
+				console.log(123)
 				$(this).parent().children("a").removeClass("on"); 
 				$(this).addClass("on").prevAll("a").addClass("on");
 				var sp = $(this).attr("value");
 				$(this).siblings().last().val(sp);
 			});
+			var service = parseInt('${review.re_service}');
+			$('.service a').each(function(index){
+				if(index < service)
+					$(this).addClass("on");
+			})
+			var mood = parseInt('${review.re_mood}');
+			$('.mood a').each(function(index){
+				if(index < mood)
+					$(this).addClass("on");
+			})
+			var clean = parseInt('${review.re_clean}');
+			$('.clean a').each(function(index){
+				if(index < clean)
+					$(this).addClass("on");
+			})
+			var tasty = parseInt('${review.re_tasty}');
+			$('.tasty a').each(function(index){
+				if(index < tasty)
+					$(this).addClass("on");
+			})
+			var quantity = parseInt('${review.re_quantity}');
+			$('.quantity a').each(function(index){
+				if(index < quantity)
+					$(this).addClass("on");
+			})
 		 })	
 	</script>
 </body>

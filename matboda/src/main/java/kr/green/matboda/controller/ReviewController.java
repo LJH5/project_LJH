@@ -51,16 +51,15 @@ public class ReviewController {
 	public ModelAndView modifyGet(ModelAndView mv, Integer num) {
 		ReviewVO review = reviewService.getReview(num);
 		ArrayList<ImageVO> imageList = reviewService.getimageList(num);
-		
 		mv.addObject("review", review);
 		mv.addObject("imageList", imageList);
 		mv.setViewName("/template/review/modify");
 		return mv;
 	}
 	@PostMapping("/modify")
-	public ModelAndView modifyPost(ModelAndView mv, ReviewVO review, HttpServletRequest request, MultipartFile[] imageList, Integer [] fileNumList) {
+	public ModelAndView modifyPost(ModelAndView mv, ReviewVO review, HttpServletRequest request, MultipartFile[] imageList, Integer[] imageNumList) {
 		MemberVO user = memberService.getMemberByRequest(request);
-		reviewService.updateReview(review, user, imageList, fileNumList);
+		reviewService.updateReview(review, user, imageList, imageNumList);
 		mv.addObject("re_num", review.getRe_num());
 		mv.setViewName("redirect:/restaurant/main?num="+review.getRe_rt_num());
 		return mv;

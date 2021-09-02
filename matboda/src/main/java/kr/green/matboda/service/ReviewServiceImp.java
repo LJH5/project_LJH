@@ -52,8 +52,6 @@ public class ReviewServiceImp implements ReviewService {
 			return "FAIL";
 		reviewDao.deleteReview(re_num);
 		ArrayList<ImageVO> imageList = reviewDao.selectimageList(re_num);
-		System.out.println(imageList);
-		System.out.println(re_num);
 		if(imageList != null && imageList.size() != 0) {
 			for(ImageVO tmp : imageList) {
 				reviewDao.deleteFile(tmp.getIm_num());
@@ -97,7 +95,7 @@ public class ReviewServiceImp implements ReviewService {
 	}
 
 	@Override
-	public void updateReview(ReviewVO review, MemberVO user, MultipartFile[] imageList, Integer [] fileNumList) {
+	public void updateReview(ReviewVO review, MemberVO user, MultipartFile[] imageList, Integer[] imageNumList) {
 		if(review == null || user == null)
 			return;
 		ReviewVO dbReview = reviewDao.selectRe(review.getRe_num());

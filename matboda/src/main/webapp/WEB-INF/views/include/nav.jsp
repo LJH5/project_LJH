@@ -68,7 +68,7 @@
             font-size: 50px;
             color: rgb(255, 165, 0);
         }
-        .user-box img{
+        .user-box .account img{
         	position: absolute;
         	top: 10px;
         	right: 0;
@@ -80,19 +80,46 @@
         	cursor: pointer;
         }
         .user-menu{
-            width: 200px;
+            width: 250px;
             height: 300px;
-            background-color: aqua;
+            border: 2px solid rgb(255, 165, 0);
+            background-color: white;
             position: absolute;
             top: 70px;
-            right: 0px;
-            z-index: 1;
+            right: -10px;
+            z-index: 3;
             display: none;
-            font-size: 20px
         }
-        .user-menu .mypage{
-            width: 50px;
-
+        .user-menu img{
+            width: 150px;
+            height: 150px;
+            border-radius: 100%;
+            margin-top: 10px;
+            margin-left: 50px;
+        }
+        .user-menu .me_nickname{
+            font-size: 20px;
+            text-align: center;
+        }
+        .user-menu .mypage a,
+        .user-menu .signout a{
+            width: 100px;
+            height: 50px;
+            padding: 10px;
+            background-color: white;
+            border: 2px solid rgb(255, 165, 0);
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 50px;
+            font-size: 19px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        .user-menu .mypage a{
+            left: 10px;
+        }
+        .user-menu .signout a{
+            right: 10px;
         }
 	</style>
 </head>
@@ -119,12 +146,17 @@
 					</c:choose>
 				</div>
 				<div class="user-menu">
-					<div class="mypage">
-						<a class="nav-link" href="<%= request.getContextPath() %>/member/mypage">마이페이지</a>
-					</div>
-					<div class="signout">
-						<a class="nav-link" href="<%= request.getContextPath() %>/member/signout">로그아웃</a>
-					</div>
+					<c:choose>
+						<c:when test="${user.me_picture == null || user.me_picture ==''}">
+							<img src="/matboda/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png">
+						</c:when>
+						<c:otherwise>
+							<img src="/matboda/img/${user.me_picture}">
+						</c:otherwise>
+					</c:choose>
+					<div class="me_nickname">${user.me_nickname}</div>
+					<span class="mypage"><a href="<%= request.getContextPath() %>/member/mypage">마이페이지</a></span>
+					<span class="signout"><a href="<%= request.getContextPath() %>/member/signout">로그아웃</a></span>
 				</div>
 				<c:if test="${user.me_authority != 'USER'}">
 					<a class="nav-link" href="<%= request.getContextPath() %>/admin/user/list"></a>
@@ -141,8 +173,11 @@
 	<script type="text/javascript">
 		$(function(){
 			 $('.account').click(function(){
-	                $('.user-menu').toggle();
-	            })
+                $('.user-menu').toggle();
+	         })
+	         $('.maypage').click(function(){
+	         	$('.user-menu').hide();
+	         })
 		})
 	</script>
 </body>

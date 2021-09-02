@@ -54,6 +54,11 @@
     </style>
 </head>
 <body>
+	<div>
+		<c:forEach items="${imageList}" var="image">
+			<img src="<%=request.getContextPath() %>/img/${image.im_name}" style="width: 100px" height="100px">
+		</c:forEach>
+	</div>
 	<div class="container">
 		<div id="title">
 			${rt.rt_name} <span id="score">${rt.rt_score}</span>
@@ -136,7 +141,7 @@
 				success : function(res){
 					if (res == 'OK') {
 						alert('리뷰삭제 성공');
-						$('#review-box').load("/matboda/restaurant/main #review-box");
+						$('#review-box').load(contextPath + '/restaurant/main #review-box');
 					}else{
 						alert('리뷰삭제 실패');
 					}

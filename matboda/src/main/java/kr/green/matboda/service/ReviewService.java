@@ -22,6 +22,6 @@ public interface ReviewService {
 
 	void getImageList(ArrayList<ReviewVO> review);
 
-	void updateReview(ReviewVO review, MemberVO user, MultipartFile[] imageList, Integer [] fileNumList);
+	void updateReview(ReviewVO review, MemberVO user, MultipartFile[] imageList, Integer[] imageNumList);
 
 }

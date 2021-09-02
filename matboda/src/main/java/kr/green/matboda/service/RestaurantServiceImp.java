@@ -64,5 +64,4 @@ public class RestaurantServiceImp implements RestaurantService{
 			return;
 		restaurantDao.deleteRt(num);
 	}
-
 }
