@@ -57,9 +57,9 @@ public class ReviewController {
 		return mv;
 	}
 	@PostMapping("/modify")
-	public ModelAndView modifyPost(ModelAndView mv, ReviewVO review, HttpServletRequest request, MultipartFile[] imageList, Integer[] imageNumList) {
+	public ModelAndView modifyPost(ModelAndView mv, ReviewVO review, HttpServletRequest request, MultipartFile[] imageList, Integer[] imageNum) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
-		reviewService.updateReview(review, user, imageList, imageNumList);
+		reviewService.updateReview(review, user, imageList, imageNum);
 		mv.addObject("re_num", review.getRe_num());
 		mv.setViewName("redirect:/restaurant/main?num="+review.getRe_rt_num());
 		return mv;

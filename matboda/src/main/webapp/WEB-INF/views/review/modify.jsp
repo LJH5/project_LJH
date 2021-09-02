@@ -18,7 +18,13 @@
 		.star a.on{
 			color: rgb(255, 165, 0); 
 		}
-
+		.img-wrap{
+			width: 300px;
+			margin-top: 50px;
+		}
+		.img-wrap img{
+			max-width: 100%;
+		}
 	</style>
 </head>
 <body>
@@ -99,6 +105,12 @@
 				</c:forEach>
 				<div class="form-group files">
 					<input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)"/>
+					<input type="hidden"name="imageNum" value="${image.im_num}">
+				</div>
+				<div>
+					<div class="img-wrap">
+						<img id="img">
+					</div>
 				</div>
 				<a href="<%= request.getContextPath() %>/restaurant/main/?num=${num}"><button type="button" class="review-btn btn btn-outline-danger">취소</button></a>
 				<button class="review-btn btn btn-outline-success">리뷰 올리기</button>
@@ -106,14 +118,15 @@
 		</div>
 	</form>
 	<script>
-		 $(function(){
+		$(function(){
 			$('form').submit(function(){
 				return true;
 			})
 			$(document).on('change', 'input[name=imageList]', function(){
 				var val = $(this).val();
 				var length = $('input[name=imageList]').length;
-				var str = '<input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)">';
+				var str = '<input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)">'+
+						  '<input type="hidden"name="imageNum" value="${image.im_num}">';
 				
 				if(val == ''){
 					$(this).remove();
@@ -168,7 +181,30 @@
 				if(index < quantity)
 					$(this).addClass("on");
 			})
-		 })	
+			
+			var sel_file;
+			$(document).ready(function(){
+				$('#image').on('change',handleImgFileSelect);
+			})
+			function handleImgFileSelect(e){
+				var file = e.target.files;
+				var filesArr = Array.prototype.slice.call(file);
+				
+				filesArr.forEach(function(f){
+					if(!f.type.match('image.*')){
+						alert('이미지 파일만 선택이 가능합니다.');
+						return;
+					}
+					sel_file = f;
+					
+					var reader = new FileReader();
+					reader.onload = function(e){
+						$('#img').attr("src", e.target.result);
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+		})	
 	</script>
 </body>
 </html>

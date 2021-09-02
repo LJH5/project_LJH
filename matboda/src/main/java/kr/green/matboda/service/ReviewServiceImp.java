@@ -95,7 +95,7 @@ public class ReviewServiceImp implements ReviewService {
 	}
 
 	@Override
-	public void updateReview(ReviewVO review, MemberVO user, MultipartFile[] imageList, Integer[] imageNumList) {
+	public void updateReview(ReviewVO review, MemberVO user, MultipartFile[] imageList, Integer[] imageNum) throws Exception {
 		if(review == null || user == null)
 			return;
 		ReviewVO dbReview = reviewDao.selectRe(review.getRe_num());
@@ -110,6 +110,27 @@ public class ReviewServiceImp implements ReviewService {
 		
 		reviewDao.updateReview(dbReview);
 		
-		
+		ArrayList<Integer> nums = new ArrayList<Integer>();
+		for(Integer tmp : imageNum) {
+			nums.add(tmp);
+		}
+		ArrayList<ImageVO> iList = reviewDao.selectimageList(review.getRe_num());
+		System.out.println(iList);
+		for(ImageVO tmp : iList) {
+			if(!nums.contains((Integer)tmp.getIm_num())) {
+				deleteImage(tmp);
+			}
+		}
+		for(MultipartFile tmp : imageList) {
+			insertFile(tmp, "REVIEW", review.getRe_num());
+		}
+	}
+
+	private void deleteImage(ImageVO image) {
+		File itmp = new File(uploadPath+image.getIm_name());
+		if(itmp.exists()) {
+			itmp.delete();
+		}
+		reviewDao.deleteFile(image.getIm_num());
 	}
 }
