@@ -19,20 +19,21 @@
 </head>
 <body>
 
-<form class="container" method="post" action="<%=request.getContextPath()%>/member/modify">
+<form class="container" method="post" action="<%=request.getContextPath()%>/member/modify" enctype="multipart/form-data">
 	<h1>프로필 수정</h1>
 	<div class="form-group img-box">
+		<div id="image_container"></div>
 		<label  class="me_picture" for="me_picture">
 			<c:choose>
 				<c:when test="${user.me_picture == null || user.me_picture == ''}">
-					<img id="image_container" src="/matboda/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png" style="width: 180px;">
+					<img src="/matboda/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png" style="width: 180px;">
 				</c:when>
 				<c:otherwise>
-					<img id="image_container" src="/matboda/img/${user.me_picture}">
+					<img src="/matboda/img/${user.me_picture}">
 				</c:otherwise>
 			</c:choose>
 		</label>
-		<input type="file" name="me_picture" id="me_picture" style="display: none;" onchange="setThumbnail(event);"/>
+		<input type="file" name="file" id="me_picture" style="display: none;" accept="image/*" onchange="setThumbnail(event);"/>
 	</div>
 	<div class="form-group">
 		<label>별명</label>
@@ -51,16 +52,6 @@
 </form>
 <script type="text/javascript">
 $(function(){
-	function setThumbnail(event) { 
-		var reader = new FileReader(); 
-		reader.onload = function(event) { 
-			var img = document.createElement("img"); 
-			img.setAttribute("src", event.target.result); 
-			document.querySelector("div#image_container").appendChild(img); 
-		}; 
-			reader.readAsDataURL(event.target.files[0]); 
-	}
-
     $("form").validate({
         rules: {
             me_email: {
@@ -101,6 +92,17 @@ $(function(){
 	    },
 	    "입력이 잘못되었습니다."
 	);
+</script>
+<script> 
+	function setThumbnail(event) { 
+		var reader = new FileReader(); 
+		reader.onload = function(event) { 
+			var img = document.createElement("img"); 
+			img.setAttribute("src", event.target.result); 
+			document.querySelector("div#image_container").appendChild(img); 
+		};
+		reader.readAsDataURL(event.target.files[0]); 
+	} 
 </script>
 </body>
 </html>

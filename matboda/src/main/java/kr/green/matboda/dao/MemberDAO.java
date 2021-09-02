@@ -6,7 +6,6 @@ import java.util.Date;
 import org.apache.ibatis.annotations.Param;
 
 import kr.green.matboda.pagination.Criteria;
-import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
 
 public interface MemberDAO {
@@ -21,10 +20,11 @@ public interface MemberDAO {
 
 	ArrayList<MemberVO> selectUserList(@Param("me_authority")String me_authority, @Param("cri")Criteria cri);
 
-	void updateUser(MemberVO dbUser);
-
 	int getTotalCount(@Param("me_authority")String me_authority);
 
 	void deleteMember(String me_id);
+
+	void updateUser(MemberVO dbUser);
+
 
 }

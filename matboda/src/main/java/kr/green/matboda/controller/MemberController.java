@@ -77,9 +77,11 @@ public class MemberController {
 		return mv;
 	}
 	@PostMapping("/modify")
-	public ModelAndView memberModifyPost(ModelAndView mv, MemberVO user, HttpServletRequest request, MultipartFile file) {
+	public ModelAndView memberModifyPost(ModelAndView mv, MemberVO user, HttpServletRequest request, MultipartFile file)throws Exception {
 		MemberVO loginUser = memberService.getMemberByRequest(request);
-		memberService.updateMember(user, loginUser, file);
+		MemberVO uUser = memberService.updateMember(user, loginUser, file);
+		if(loginUser != null)
+			request.getSession().setAttribute("user", uUser);
 		mv.setViewName("redirect:/member/mypage");
 		return mv;
 	}

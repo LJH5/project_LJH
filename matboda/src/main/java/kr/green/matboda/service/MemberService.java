@@ -35,6 +35,6 @@ public interface MemberService {
 	
 	String deleteMember(String me_id, MemberVO user);
 
-	void updateMember(MemberVO user, MemberVO loginUser, MultipartFile file);
+	MemberVO updateMember(MemberVO user, MemberVO loginUser, MultipartFile file) throws Exception;
 
 }

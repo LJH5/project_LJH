@@ -104,7 +104,7 @@
 					<img src="<%=request.getContextPath() %>/img/${image.im_name}" style="width: 100px" height="100px">
 				</c:forEach>
 				<div class="form-group files">
-					<input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)"/>
+					<input type="file" name="imageList" class="form-control" id="image" accept="image/*"onchange="chk_file_type(this)"/>
 					<input type="hidden"name="imageNum" value="${image.im_num}">
 				</div>
 				<div>
@@ -181,29 +181,6 @@
 				if(index < quantity)
 					$(this).addClass("on");
 			})
-			
-			var sel_file;
-			$(document).ready(function(){
-				$('#image').on('change',handleImgFileSelect);
-			})
-			function handleImgFileSelect(e){
-				var file = e.target.files;
-				var filesArr = Array.prototype.slice.call(file);
-				
-				filesArr.forEach(function(f){
-					if(!f.type.match('image.*')){
-						alert('이미지 파일만 선택이 가능합니다.');
-						return;
-					}
-					sel_file = f;
-					
-					var reader = new FileReader();
-					reader.onload = function(e){
-						$('#img').attr("src", e.target.result);
-					}
-					reader.readAsDataURL(f);
-				});
-			}
 		})	
 	</script>
 </body>

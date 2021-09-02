@@ -18,9 +18,7 @@ import org.springframework.web.util.WebUtils;
 import kr.green.matboda.dao.MemberDAO;
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.utils.UploadFileUtils;
-import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
-import lombok.AllArgsConstructor;
 
 @Service
 public class MemberServiceImp implements MemberService{
@@ -160,14 +158,16 @@ public class MemberServiceImp implements MemberService{
 		return "OK";
 	}
 	@Override
-	public void updateMember(MemberVO user, MemberVO loginUser, MultipartFile file) {
+	public MemberVO updateMember(MemberVO user, MemberVO loginUser, MultipartFile file) throws Exception {
 		if(loginUser == null || user == null || user.getMe_id() == null || !user.getMe_id().equals(loginUser.getMe_id()))
-			return;
+			return null;
 		MemberVO dbUser = memberDao.selectUser(user.getMe_id());
-		dbUser.setMe_picture(user.getMe_picture());
+		String imageName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+		dbUser.setMe_picture(imageName);
 		dbUser.setMe_nickname(user.getMe_nickname());
 		dbUser.setMe_email(user.getMe_email());
 		dbUser.setMe_phoneNum(user.getMe_phoneNum());
 		memberDao.updateUser(dbUser);
+		return dbUser;
 	}
 }
