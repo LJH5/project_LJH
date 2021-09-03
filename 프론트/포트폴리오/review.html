@@ -109,6 +109,9 @@
         .left-container .bottom-container{
             background: beige;
         }
+        .left-container .sc-container{
+            background: rgba(168, 163, 163, 0.589);
+        }
         .left-container .content{
             position: absolute;
             left: 100px;
@@ -184,12 +187,18 @@
                             <div id="review-box">
                                 <c:forEach items="${reviews}" var="review">
                                     <div class="review">
-                                        종합 ${review.re_totalSc}
-                                        서비스 ${review.re_service}
-                                        분위기 ${review.re_mood}
-                                        청결함 ${review.re_clean}
-                                        음식맛 ${review.re_tasty}
-                                        음식량 ${review.re_quantity}
+                                        <div class="sc-container">
+                                            <div class="sc-total">
+                                                종합 ${review.re_totalSc}
+                                            </div>
+                                            <div class="sc-detail">
+                                                <div>서비스 ★★★★★</div>
+                                                <div>분위기 ${review.re_mood}</div>
+                                                <div>청결함 ${review.re_clean}</div>
+                                                <div>음식맛 ${review.re_tasty}</div>
+                                                <div>음식량 ${review.re_quantity}</div>
+                                            </div>
+                                        </div>
                                         <ul>
                                             <li>${review.re_me_nickname}</li>
                                             <li>${review.re_content}</li>

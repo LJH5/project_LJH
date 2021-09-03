@@ -276,8 +276,8 @@
                         <div class="user-menu">
                             <img src="../JS수업/img/cat.jfif">
                             <div class="me_nickname">고양이</div>
-                            <span class="mypage"><a href="#">마이페이지</a></span>
-                            <span class="signout"><a href="#">로그아웃</a></span>
+                            <span class="mypage"><a href="<%= request.getContextPath() %>/member/mypage">마이페이지</a></span>
+                            <span class="signout"><a href="<%= request.getContextPath() %>/member/signout">로그아웃</a></span>
                         </div>
                     </div>
                 </c:if>
@@ -422,7 +422,7 @@
             })
         })
         var swiper = new Swiper(".mySwiper", {
-            spaceBetween: 0,
+            spaceBetween: 10,
             centeredSlides: true,
             autoplay: {
             delay: 5000,
