@@ -113,7 +113,7 @@
 					<img src="<%=request.getContextPath() %>/img/${img.im_name}" style="width: 100px" height="100px">
 				</c:forEach>
 				<c:choose>
-					<c:when test="${user.me_id != re.re_me_id}">
+					<c:when test="${user.me_id != review.re_me_id}">
 						<div class="btn-box">
 							<button class="btn btn-outline-success">맛잘알</button>
 							<button class="btn btn-outline-danger">신고</button>
