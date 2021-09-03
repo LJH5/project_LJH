@@ -26,7 +26,7 @@
 						<c:choose>
 							<c:when test=""></c:when>
 						</c:choose>
-						<img src="/matboda/img/" width="300" height="300">
+						<img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300" height="300">
 						<span class="title">${rt.rt_name}</span>
 						<span class="score">${rt.rt_score}</span>
 					</a>

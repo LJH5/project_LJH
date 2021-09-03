@@ -49,10 +49,10 @@ public class RestaurantController {
 	public ModelAndView restaurantMainGet(ModelAndView mv, Integer num, Criteria cri) {
 		RestaurantVO rt = restaurantService.getRt(num);
 		
-		cri.setPerPageNum(2);
+		cri.setPerPageNum(5);
 		ArrayList<ReviewVO> review = reviewService.getReviewList(num, cri);
 		int totalCount = reviewService.getTotalCount(num, cri);
-		PageMaker pm = new PageMaker(totalCount, 2, cri);
+		PageMaker pm = new PageMaker(totalCount, 5, cri);
 		
 		reviewService.getImageList(review);
 		ArrayList<ImageVO> imageList = reviewService.getTopImageList(num);

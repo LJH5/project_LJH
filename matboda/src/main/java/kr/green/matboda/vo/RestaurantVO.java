@@ -20,6 +20,7 @@ public class RestaurantVO {
 	private String rt_upDate;
 	private float rt_score;
 	ArrayList<ImageVO> rt_image;
+	private String rt_im_name; 
 	
 	public String getDate(Date date) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
