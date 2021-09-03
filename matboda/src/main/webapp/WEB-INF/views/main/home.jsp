@@ -12,7 +12,7 @@
 		clear: both; content: ''; display: block;
 	}
 	.item-list .item{
-		width: 200px;
+		width: 300px;
 		
 	}
 </style>
@@ -28,7 +28,9 @@
 						</c:choose>
 						<img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300" height="300">
 						<span class="title">${rt.rt_name}</span>
-						<span class="score">${rt.rt_score}</span>
+						<span class="score">${rt.rt_score}</span> <br>
+						<span class="address">${rt.rt_address}</span>
+						
 					</a>
 				</li>
 			</ul>

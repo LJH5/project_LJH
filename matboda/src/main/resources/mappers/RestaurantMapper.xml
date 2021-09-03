@@ -22,11 +22,7 @@
  			where rt_num = #{rt_num}
  	</update>
  	<select id="selectRestaurant" resultType="kr.green.matboda.vo.RestaurantVO">
- 		select *, im_name as rt_im_name  from restaurant 
-			join review on rt_num = re_rt_num
-			join image on re_num = im_where 
-			where rt_num 
-			order by rand() limit 1
+ 		select * from restaurant
  	</select>
 	<delete id="deleteRt">
  		delete from restaurant
