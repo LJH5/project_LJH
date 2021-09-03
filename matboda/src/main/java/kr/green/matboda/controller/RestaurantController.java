@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.matboda.pagination.Criteria;
+import kr.green.matboda.pagination.PageMaker;
 import kr.green.matboda.service.MemberService;
 import kr.green.matboda.service.RestaurantService;
 import kr.green.matboda.service.ReviewService;
@@ -44,14 +46,18 @@ public class RestaurantController {
 		return mv;
 	}
 	@GetMapping("/main")
-	public ModelAndView restaurantMainGet(ModelAndView mv, Integer num) {
+	public ModelAndView restaurantMainGet(ModelAndView mv, Integer num, Criteria cri) {
 		RestaurantVO rt = restaurantService.getRt(num);
 		
-		ArrayList<ReviewVO> review = reviewService.getReviewList(num);
-		reviewService.getImageList(review);
+		cri.setPerPageNum(2);
+		ArrayList<ReviewVO> review = reviewService.getReviewList(num, cri);
+		int totalCount = reviewService.getTotalCount(num, cri);
+		PageMaker pm = new PageMaker(totalCount, 2, cri);
 		
+		reviewService.getImageList(review);
 		ArrayList<ImageVO> imageList = reviewService.getTopImageList(num);
 		
+		mv.addObject("pm", pm);
 		mv.addObject("title", rt.getRt_name());
 		mv.addObject("rt", rt);
 		mv.addObject("reviews", review);

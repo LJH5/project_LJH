@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.green.matboda.dao.ReviewDAO;
+import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.utils.UploadFileUtils;
 import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
@@ -37,10 +38,10 @@ public class ReviewServiceImp implements ReviewService {
 	}
 
 	@Override
-	public ArrayList<ReviewVO> getReviewList(Integer num) {
+	public ArrayList<ReviewVO> getReviewList(Integer num, Criteria cri) {
 		if(num == null)
 			return null;
-		return reviewDao.selectReview(num);
+		return reviewDao.selectReview(num, cri);
 	}
 
 	@Override
@@ -139,6 +140,11 @@ public class ReviewServiceImp implements ReviewService {
 		if(num == null)
 			return null;
 		return reviewDao.selectTopImageList(num);
+	}
+
+	@Override
+	public int getTotalCount( Integer num, Criteria cri) {
+		return reviewDao.selectTotalCount(num, cri);
 	}
 
 }

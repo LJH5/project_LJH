@@ -8,6 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.matboda.service.MemberService;
 import kr.green.matboda.service.RestaurantService;
+import kr.green.matboda.service.ReviewService;
+import kr.green.matboda.service.ReviewServiceImp;
+import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.RestaurantVO;
 import lombok.AllArgsConstructor;
 
@@ -16,7 +19,7 @@ import lombok.AllArgsConstructor;
 public class HomeController {
 	
 	RestaurantService restaurantService;
-	
+	ReviewService reviewService;
 	@GetMapping("/")
 	public ModelAndView home(ModelAndView mv) {
 		

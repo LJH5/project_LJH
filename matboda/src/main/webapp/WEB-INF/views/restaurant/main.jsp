@@ -94,12 +94,15 @@
 		<div id="review-box">
 			<c:forEach items="${reviews}" var="review">
 				<div class="review">
-					종합 ${review.re_totalSc}
-					서비스 ${review.re_service}
-					분위기 ${review.re_mood}
-					청결함 ${review.re_clean}
-					음식맛 ${review.re_tasty}
-					음식량 ${review.re_quantity}
+					<div>
+						종합 ${review.re_totalSc}
+						서비스 ${review.re_service}
+						분위기 ${review.re_mood}
+						청결함 ${review.re_clean}
+						음식맛 ${review.re_tasty}
+						음식량 ${review.re_quantity}
+					</div>
+						<img src="<%=request.getContextPath() %>/img/${review.re_me_picture}" style="width: 100px; height: 100px; border-radius: 100%" >
 					<ul>
 						<li>${review.re_me_nickname}</li>
 						<li>${review.re_content}</li>
@@ -110,7 +113,7 @@
 					<img src="<%=request.getContextPath() %>/img/${img.im_name}" style="width: 100px" height="100px">
 				</c:forEach>
 				<c:choose>
-					<c:when test="${user.me_id != rt.rt_me_id}">
+					<c:when test="${user.me_id != re.re_me_id}">
 						<div class="btn-box">
 							<button class="btn btn-outline-success">맛잘알</button>
 							<button class="btn btn-outline-danger">신고</button>
@@ -128,6 +131,19 @@
 				</c:choose>
 			</c:forEach>
 		</div>
+		<ul class="pagination justify-content-center">
+			<c:if test="${pm.prev}">
+		    	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}&page=${pm.startPage-1}">이전</a></li>
+	    	</c:if>
+	    	<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="index">
+	    		<li class="page-item <c:if test="${pm.criteria.page == index }">active</c:if>">
+	    			<a class="page-link" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}&page=${index}">${index}</a>
+	    		</li>
+		    </c:forEach>
+		    <c:if test="${pm.next}">
+		    	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}&page=${pm.endPage+1}">다음</a></li>
+		    </c:if>
+		</ul>
 	</div>
 	<script type="text/javascript">
 		var contextPath = '<%=request.getContextPath()%>';

@@ -121,6 +121,20 @@
         .user-menu .signout a{
             right: 10px;
         }
+       .search-input{
+        	color:rgb(255, 165, 0);
+            height: 30px;
+            width: 400px;
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            border: none;
+            font-size: 20px;
+            background: none;
+        }
+        .search-input:focus{
+            outline: none;
+        }
 	</style>
 </head>
 <body>
@@ -165,7 +179,7 @@
 		</div>
 		<div class="search">
 		    <form action="#">
-		        <div></div>
+		        <input class="search-input" type="text" name="query" placeholder="지역이나 식당이름">
 		        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
 		    </form>
 		</div>

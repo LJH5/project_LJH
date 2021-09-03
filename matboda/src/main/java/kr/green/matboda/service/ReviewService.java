@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
 import kr.green.matboda.vo.ReviewVO;
@@ -12,7 +13,7 @@ public interface ReviewService {
 
 	void insertReview(ReviewVO review, MultipartFile[] imageList, MemberVO user) throws Exception;
 
-	ArrayList<ReviewVO> getReviewList(Integer num);
+	ArrayList<ReviewVO> getReviewList(Integer num, Criteria cri);
 
 	String deleteReview(Integer re_num, MemberVO user);
 
@@ -25,6 +26,8 @@ public interface ReviewService {
 	void updateReview(ReviewVO review, MemberVO user, MultipartFile[] imageList, Integer[] imageNum) throws Exception;
 
 	ArrayList<ImageVO> getTopImageList(Integer num);
+
+	int getTotalCount( Integer num, Criteria cri);
 
 
 }

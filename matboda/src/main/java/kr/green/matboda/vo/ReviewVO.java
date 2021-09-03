@@ -23,6 +23,7 @@ public class ReviewVO {
 	private int re_tasty;
 	private int re_quantity;
 	private int re_clean;
+	private String re_me_picture;
 	ArrayList<ImageVO> re_image;
 	
 	public String getRe_regDateStr() {
