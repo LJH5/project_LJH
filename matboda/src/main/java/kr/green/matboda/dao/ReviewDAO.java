@@ -25,5 +25,7 @@ public interface ReviewDAO {
 
 	void deleteFile(int im_num);
 
+	ArrayList<ImageVO> selectTopImageList(Integer num);
+
 
 }

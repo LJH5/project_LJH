@@ -24,4 +24,7 @@ public interface ReviewService {
 
 	void updateReview(ReviewVO review, MemberVO user, MultipartFile[] imageList, Integer[] imageNum) throws Exception;
 
+	ArrayList<ImageVO> getTopImageList(Integer num);
+
+
 }

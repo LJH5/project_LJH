@@ -50,9 +50,12 @@ public class RestaurantController {
 		ArrayList<ReviewVO> review = reviewService.getReviewList(num);
 		reviewService.getImageList(review);
 		
+		ArrayList<ImageVO> imageList = reviewService.getTopImageList(num);
+		
 		mv.addObject("title", rt.getRt_name());
 		mv.addObject("rt", rt);
 		mv.addObject("reviews", review);
+		mv.addObject("imageList", imageList);
 		mv.setViewName("/template/restaurant/main");
 		return mv;
 	}

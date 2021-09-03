@@ -15,6 +15,14 @@
 			height: 200px;
 			border-radius: 100%;
 		}
+		#image_contaniner{
+			background: black;
+			width: 200px;
+			height: 200px;
+			position: absolute;
+			left: 10px;
+			z-index: 2;
+		}
 	</style>
 </head>
 <body>
@@ -22,7 +30,6 @@
 <form class="container" method="post" action="<%=request.getContextPath()%>/member/modify" enctype="multipart/form-data">
 	<h1>프로필 수정</h1>
 	<div class="form-group img-box">
-		<div id="image_container"></div>
 		<label  class="me_picture" for="me_picture">
 			<c:choose>
 				<c:when test="${user.me_picture == null || user.me_picture == ''}">
@@ -33,6 +40,7 @@
 				</c:otherwise>
 			</c:choose>
 		</label>
+		<div id="image_container"></div>
 		<input type="file" name="file" id="me_picture" style="display: none;" accept="image/*" onchange="setThumbnail(event);"/>
 	</div>
 	<div class="form-group">

@@ -44,4 +44,11 @@
 	<delete id="deleteFile">
 		delete from image where im_num = #{im_num}
 	</delete>
+	<select id="selectTopImageList" resultType="kr.green.matboda.vo.ImageVO">
+		select * from restaurant
+			join review on rt_num = re_rt_num
+			join image on re_num = im_where
+			where rt_num = #{num}
+			order by im_num desc	
+	</select>
 </mapper>

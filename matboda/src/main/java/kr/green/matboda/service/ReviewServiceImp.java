@@ -133,4 +133,12 @@ public class ReviewServiceImp implements ReviewService {
 		}
 		reviewDao.deleteFile(image.getIm_num());
 	}
+
+	@Override
+	public ArrayList<ImageVO> getTopImageList(Integer num) {
+		if(num == null)
+			return null;
+		return reviewDao.selectTopImageList(num);
+	}
+
 }
