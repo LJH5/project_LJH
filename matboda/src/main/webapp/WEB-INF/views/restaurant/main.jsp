@@ -125,6 +125,7 @@
 							</a>
 							<button class="del-btn btn btn-outline-danger">삭제</button>
 							<input class="re_num" type="hidden" value="${review.re_num}">
+							<input class="rt_num" type="hidden" value="${rt.rt_num}">
 						</div>
 					</c:otherwise>
 				</c:choose>
@@ -146,9 +147,12 @@
 	</div>
 	<script type="text/javascript">
 		var contextPath = '<%=request.getContextPath()%>';
+		var rt_num = ${rt.rt_num};
 		$(document).on('click', '.del-btn', function(){
 			var re_num = $(this).siblings('.re_num').val();
-			var data = {re_num : re_num}
+			var data = {
+					re_num : re_num
+				}
 			$.ajax({
 				type : 'post',
 				url  : contextPath + '/review/delete',
@@ -156,7 +160,7 @@
 				success : function(res){
 					if (res == 'OK') {
 						alert('리뷰삭제 성공');
-						$('#review-box').load(contextPath + '/restaurant/main #review-box');
+						$('#review-box').load(contextPath + '/restaurant/main/?num='+rt_num+' #review-box');
 					}else{
 						alert('리뷰삭제 실패');
 					}
