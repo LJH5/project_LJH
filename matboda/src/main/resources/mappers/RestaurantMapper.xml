@@ -22,7 +22,11 @@
  			where rt_num = #{rt_num}
  	</update>
  	<select id="selectRestaurant" resultType="kr.green.matboda.vo.RestaurantVO">
- 		select * from restaurant
+ 		select restaurant.*, im_name as rt_im_name  from restaurant 
+			join review on rt_num = re_rt_num
+			join image on re_num = im_where 
+			group by rt_num
+			order by rt_score desc
  	</select>
 	<delete id="deleteRt">
  		delete from restaurant
