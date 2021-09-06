@@ -21,7 +21,7 @@ public class ReviewServiceImp implements ReviewService {
 	private ReviewDAO reviewDao;
 
 	@Autowired
-	private RestaurantDAO restaurantDAO;
+	private RestaurantDAO restaurantDao;
 	private String uploadPath = "D:\\JAVA_LJH\\img";
 
 	@Override
@@ -32,7 +32,7 @@ public class ReviewServiceImp implements ReviewService {
 		review.setRe_me_id(user.getMe_id());
 		reviewDao.insertReview(review);
 		
-		restaurantDAO.updateSc(review);
+		restaurantDao.updateSc(review.getRe_rt_num());
 		
 		if(imageList == null)
 			return;
@@ -57,6 +57,8 @@ public class ReviewServiceImp implements ReviewService {
 		if(review == null || !review.getRe_me_id().equals(user.getMe_id()))
 			return "FAIL";
 		reviewDao.deleteReview(re_num);
+		restaurantDao.updateSc(review.getRe_rt_num());
+		
 		ArrayList<ImageVO> imageList = reviewDao.selectimageList(re_num);
 		if(imageList != null && imageList.size() != 0) {
 			for(ImageVO tmp : imageList) {

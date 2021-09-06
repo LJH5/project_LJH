@@ -19,5 +19,6 @@ public interface RestaurantDAO {
 
 	void deleteRt(Integer num);
 
-	void updateSc(ReviewVO review);
+	void updateSc(int re_rt_num);
+
 }

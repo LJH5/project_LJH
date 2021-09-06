@@ -113,7 +113,8 @@
 				success : function(res){
 					if (res == 'OK') {
 						alert('회원삭제 성공');
-						$('#uList').load("/matboda/admin/user/list #uList");
+						//$('#uList').load("/matboda/admin/user/list #uList");
+						location.reload();
 					}else{
 						alert('회원삭제 실패');
 					}
