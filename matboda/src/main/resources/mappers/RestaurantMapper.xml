@@ -35,4 +35,7 @@
  	<update id="updateSc">
  		update restaurant set rt_score = (select round(avg(re_totalSc),1) from review where re_rt_num = rt_num) where rt_num = #{re_rt_num} ;
  	</update>
+ 	<select id="selectSearchRestaurant" resultType="kr.green.matboda.vo.RestaurantVO">
+ 		select * from
+ 	</select>
 </mapper>

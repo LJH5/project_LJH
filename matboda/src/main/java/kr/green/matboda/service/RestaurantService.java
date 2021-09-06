@@ -2,6 +2,7 @@ package kr.green.matboda.service;
 
 import java.util.ArrayList;
 
+import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.MemberVO;
 import kr.green.matboda.vo.RestaurantVO;
 
@@ -16,5 +17,7 @@ public interface RestaurantService {
 	ArrayList<RestaurantVO> getRestaurant();
 
 	void deleteRt(Integer num, MemberVO user);
+
+	ArrayList<RestaurantVO> getSearchRestaurant(Criteria cri);
 
 }

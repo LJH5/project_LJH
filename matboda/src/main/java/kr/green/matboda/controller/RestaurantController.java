@@ -89,9 +89,8 @@ public class RestaurantController {
 		return mv;
 	}
 	@GetMapping("/search")
-	public ModelAndView home(ModelAndView mv) {
-		
-		ArrayList<RestaurantVO> list = restaurantService.getRestaurant();
+	public ModelAndView home(ModelAndView mv, Criteria cri) {
+		ArrayList<RestaurantVO> list = restaurantService.getSearchRestaurant(cri);
 		
 		mv.addObject("title", "메인");
 		mv.addObject("list", list);
