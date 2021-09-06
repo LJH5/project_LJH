@@ -61,10 +61,11 @@
 	</div>
 	<div class="container">
 		<div id="title">
+		${rt}
 			${rt.rt_name} <span id="score">${rt.rt_score}</span>
 		</div>
 		<div class="infBox">
-			<span id="reviewNum">리뷰수</span> <span id="favoritesNum">즐겨찾기수</span>
+			<span id="reviewNum">${rt_reNum}</span> <span id="favoritesNum">즐겨찾기수</span>
 		</div>
 		<form method="GET" action="<%=request.getContextPath()%>/review/register">
 			<div>
