@@ -142,6 +142,12 @@
 		<div class="logo">
 		    <a href="<%= request.getContextPath() %>/"><h2>맛보다</h2></a>
 		</div>
+		<div class="search">
+		    <form action="<%= request.getContextPath() %>/restaurant/search">
+		        <input class="search-input" type="text" name="query" placeholder="지역이나 식당이름">
+		        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+		    </form>
+		</div>
 		<div class="user-box">
 			<c:if test="${user == null}">
 				<div class="signin">    
@@ -176,12 +182,6 @@
 					<a class="nav-link" href="<%= request.getContextPath() %>/admin/user/list"></a>
 				</c:if>
 			</c:if>
-		</div>
-		<div class="search">
-		    <form action="#">
-		        <input class="search-input" type="text" name="query" placeholder="지역이나 식당이름">
-		        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-		    </form>
 		</div>
 	</div>
 	<script type="text/javascript">

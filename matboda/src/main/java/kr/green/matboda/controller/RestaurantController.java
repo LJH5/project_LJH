@@ -66,7 +66,7 @@ public class RestaurantController {
 		return mv;
 	}
 	@GetMapping("/modify")
-	public ModelAndView restaurantmodifyGet(ModelAndView mv, Integer num) {
+	public ModelAndView restaurantModifyGet(ModelAndView mv, Integer num) {
 		RestaurantVO rt = restaurantService.getRt(num);
 		mv.addObject("title", rt.getRt_name());
 		mv.addObject("rt", rt);
@@ -74,7 +74,7 @@ public class RestaurantController {
 		return mv;
 	}
 	@PostMapping("/modify")
-	public ModelAndView restaurantmodifyPost(ModelAndView mv, RestaurantVO rt, HttpServletRequest request) {
+	public ModelAndView restaurantModifyPost(ModelAndView mv, RestaurantVO rt, HttpServletRequest request) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		restaurantService.updateRt(rt, user);
 		mv.addObject("num", rt.getRt_num());
@@ -82,10 +82,20 @@ public class RestaurantController {
 		return mv;
 	}
 	@GetMapping("/delete")
-	public ModelAndView restaurantdeletePost(ModelAndView mv, Integer num, HttpServletRequest request) {
+	public ModelAndView restaurantDeletePost(ModelAndView mv, Integer num, HttpServletRequest request) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		restaurantService.deleteRt(num, user);
 		mv.setViewName("redirect:/");
+		return mv;
+	}
+	@GetMapping("/search")
+	public ModelAndView home(ModelAndView mv) {
+		
+		ArrayList<RestaurantVO> list = restaurantService.getRestaurant();
+		
+		mv.addObject("title", "메인");
+		mv.addObject("list", list);
+		mv.setViewName("/template/restaurant/search");
 		return mv;
 	}
 } 
