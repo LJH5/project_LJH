@@ -23,10 +23,11 @@
 			<ul class="item-list">
 				<li class="item">
 					<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+						${rt}
 						<c:choose>
-							<c:when test=""></c:when>
+							<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300" height="300"></c:when>
+							<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG" width="300" height="300"></c:otherwise>
 						</c:choose>
-						<img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300" height="300">
 						<span class="title">${rt.rt_name}</span>
 						<span class="score">${rt.rt_score}</span> <br>
 						<span class="address">${rt.rt_address}</span>

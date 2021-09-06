@@ -30,5 +30,4 @@ public interface ReviewDAO {
 
 	int selectTotalCount(@Param("num")Integer num, @Param("cri")Criteria cri);
 
-
 }

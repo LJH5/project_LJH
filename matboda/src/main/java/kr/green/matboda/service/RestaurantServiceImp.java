@@ -5,7 +5,6 @@ import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
-import kr.green.matboda.dao.BoardDAO;
 import kr.green.matboda.dao.RestaurantDAO;
 import kr.green.matboda.vo.MemberVO;
 import kr.green.matboda.vo.RestaurantVO;

@@ -102,9 +102,6 @@
 	</form>
 	<script>
 		 $(function(){
-			$('form').submit(function(){
-				return true;
-			})
 			$(document).on('change', 'input[name=imageList]', function(){
 				var val = $(this).val();
 				var length = $('input[name=imageList]').length;
@@ -120,14 +117,22 @@
 						$('.files').append(str);
 					}
 				}
-				
 			})
-			$(document).on('click', '.review-btn', function(){
-				var service = parseInt($('input[name=re_service]').val());
-				var mood = parseInt($('input[name=re_mood]').val());
-				var clean = parseInt($('input[name=re_clean]').val());
-				var tasty = parseInt($('input[name=re_tasty]').val());
-				var quantity = parseInt($('input[name=re_quantity]').val());
+			var res = false;
+			$(document).on('click', '.review-btn', function(event){
+				if($('input[name=re_service]').val() == "" || $('input[name=re_mood]').val() == "" || $('input[name=re_clean]').val() == "" || $('input[name=re_tasty]').val() == "" || $('input[name=re_quantity]').val() == ""){
+					alert("별점을 모두 등록해주세요")
+					event.preventDefault()
+				}else if($('[name=re_content]').val() == ""){
+					alert("내용을 작성해주세요.")
+					event.preventDefault()		
+				}else{
+					var service = parseInt($('input[name=re_service]').val());
+					var mood = parseInt($('input[name=re_mood]').val());
+					var clean = parseInt($('input[name=re_clean]').val());
+					var tasty = parseInt($('input[name=re_tasty]').val());
+					var quantity = parseInt($('input[name=re_quantity]').val());
+				}	
 				var totalSc = (service+mood+clean+tasty+quantity)/5
 				$('[name=re_totalSc]').val(totalSc);
 			})
@@ -137,7 +142,7 @@
 				var sp = $(this).attr("value");
 				$(this).siblings().last().val(sp);
 			});
-		 })	
+		})	
 	</script>
 </body>
 </html>

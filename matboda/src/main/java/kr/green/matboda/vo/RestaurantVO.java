@@ -1,7 +1,6 @@
 package kr.green.matboda.vo;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import lombok.Data;
@@ -19,7 +18,6 @@ public class RestaurantVO {
 	private Date rt_regDate;
 	private String rt_upDate;
 	private float rt_score;
-	ArrayList<ImageVO> rt_image;
 	private String rt_im_name; 
 	
 	public String getDate(Date date) {

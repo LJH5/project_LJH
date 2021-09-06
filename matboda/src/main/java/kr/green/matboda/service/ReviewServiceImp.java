@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.green.matboda.dao.RestaurantDAO;
 import kr.green.matboda.dao.ReviewDAO;
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.utils.UploadFileUtils;
@@ -19,6 +20,8 @@ public class ReviewServiceImp implements ReviewService {
 	@Autowired
 	private ReviewDAO reviewDao;
 
+	@Autowired
+	private RestaurantDAO restaurantDAO;
 	private String uploadPath = "D:\\JAVA_LJH\\img";
 
 	@Override
@@ -28,6 +31,8 @@ public class ReviewServiceImp implements ReviewService {
 		review.setRe_me_nickname(user.getMe_nickname());
 		review.setRe_me_id(user.getMe_id());
 		reviewDao.insertReview(review);
+		
+		restaurantDAO.updateSc(review);
 		
 		if(imageList == null)
 			return;
