@@ -51,6 +51,12 @@
         .btn-box{
         	border-bottom: 1px solid rgba(194, 184, 184, 0.747);
         }
+        .recommend-btn{
+		font-size: 30px;
+		}
+		.fa-thumbs-down{
+			transform : rotateY(180deg);
+		}
     </style>
 </head>
 <body>
@@ -113,9 +119,28 @@
 				</c:forEach>
 				<c:choose>
 					<c:when test="${user.me_id != review.re_me_id}">
-						<div class="btn-box">
-							<button class="btn btn-outline-success">맛잘알</button>
-							<button class="btn btn-outline-danger">신고</button>
+						<div class="form-group">
+							<a href="#" class="recommend-btn up">
+								<c:choose>
+									<c:when test="${review != null && review.re_recommend == 1 }">
+										<i class="fas fa-thumbs-up"></i>
+									</c:when>
+									<c:otherwise>
+										<i class="far fa-thumbs-up"></i>
+									</c:otherwise>
+								</c:choose>
+							</a>
+							<a href="#" class="recommend-btn down">
+								<c:choose>
+									<c:when test="${recommend != null && review.re_recommend == 0 }">
+										<i class="fas fa-thumbs-down"></i>
+									</c:when>
+									<c:otherwise>
+										<i class="far fa-thumbs-down"></i>
+									</c:otherwise>
+								</c:choose>
+							</a>
+							<input class="re_num" type="hidden" value="${review.re_num}">
 						</div>
 					</c:when>
 					<c:otherwise>
@@ -146,25 +171,59 @@
 		</ul>
 	</div>
 	<script type="text/javascript">
-		var contextPath = '<%=request.getContextPath()%>';
-		var rt_num = ${rt.rt_num};
-		$(document).on('click', '.del-btn', function(){
-			var re_num = $(this).siblings('.re_num').val();
-			var data = {
-					re_num : re_num
-				}
-			$.ajax({
-				type : 'post',
-				url  : contextPath + '/review/delete',
-				data : data,
-				success : function(res){
-					if (res == 'OK') {
-						alert('리뷰삭제 성공');
-						$('#review-box').load(contextPath + '/restaurant/main/?num='+rt_num+' #review-box');
-					}else{
-						alert('리뷰삭제 실패');
+		$(function() {
+			var contextPath = '<%=request.getContextPath()%>';
+			var rt_num = ${rt.rt_num};
+			$(document).on('click', '.del-btn', function(){
+				var re_num = $(this).siblings('.re_num').val();
+				var data = {
+						re_num : re_num
 					}
-				}
+				$.ajax({
+					type : 'post',
+					url  : contextPath + '/review/delete',
+					data : data,
+					success : function(res){
+						if (res == 'OK') {
+							alert('리뷰삭제 성공');
+							$('#review-box').load(contextPath + '/restaurant/main/?num='+rt_num+' #review-box');
+						}else{
+							alert('리뷰삭제 실패');
+						}
+					}
+				})
+			})
+			$('.recommend-btn').click(function(e){
+				e.preventDefault();
+				var contextPath = '<%=request.getContextPath()%>/review';
+				var review = $(this).parent().children().last().val();
+				alert(review);
+				var state = $(this).hasClass('up') ? 1 : 0;
+				$.ajax({
+					type:'get',
+					url : contextPath+'/recommend/'+review +'/' +state,
+					success : function(result, status, xhr){
+						$('.recommend-btn i').removeClass('fas').addClass('far');
+						if(result == 'UP'){
+							alert('해당 게시글을 추천했습니다.');
+							$('.recommend-btn.up i').addClass('fas');
+						}else if(result == 'DOWN'){
+							alert('해당 게시글을 비추천했습니다.');
+							$('.recommend-btn.down i').addClass('fas');
+						}else if(result == 'GUEST'){
+							alert('추천/비추천을 하려면 로그인을 하세요.');
+						}else if(result == 'CANCEL'){
+							if(state == 1){
+								alert('추천을 취소했습니다.')
+							}else{
+								alert('비추천을 취소했습니다.');
+							}
+						}
+					},
+					error : function(xhr, status, e){
+						console.log('에러 발생');
+					}
+				})
 			})
 		})
 	</script>
