@@ -94,6 +94,7 @@ public class RestaurantController {
 		
 		mv.addObject("title", "메인");
 		mv.addObject("list", list);
+		mv.addObject("cri", cri);
 		mv.setViewName("/template/restaurant/search");
 		return mv;
 	}

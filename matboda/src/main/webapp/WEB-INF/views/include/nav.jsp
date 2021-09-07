@@ -42,7 +42,7 @@
             outline: none;
             border: none;
         }
-        .search .search-button{
+        .search .search-btn{
             width: 45px;
             height: 46px;
             position: absolute;
@@ -52,7 +52,7 @@
             background-color: rgb(255, 165, 0);
             border-radius: 0;    
         }
-        .search .search-button i{
+        .search .search-btn i{
             color: wheat;
             font-size: 30px;
         }
@@ -145,7 +145,7 @@
 		<div class="search">
 		    <form action="<%= request.getContextPath() %>/restaurant/search">
 		        <input class="search-input" type="text" name="search" value="<c:out value="${pm.criteria.search}"/>" placeholder="지역이나 식당이름">
-		        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+		        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
 		    </form>
 		</div>
 		<div class="user-box">
@@ -192,6 +192,12 @@
 	         $('.maypage').click(function(){
 	         	$('.user-menu').hide();
 	         })
+         	$(document).on('click', '.search-btn', function(event){
+				if($('input[name=search]').val() == ""){
+					alert("검색어를 입력해주세요.")
+					event.preventDefault()
+				}
+			})
 		})
 	</script>
 </body>
