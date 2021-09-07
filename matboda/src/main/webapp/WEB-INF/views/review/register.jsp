@@ -118,7 +118,6 @@
 					}
 				}
 			})
-			var res = false;
 			$(document).on('click', '.review-btn', function(event){
 				if($('input[name=re_service]').val() == "" || $('input[name=re_mood]').val() == "" || $('input[name=re_clean]').val() == "" || $('input[name=re_tasty]').val() == "" || $('input[name=re_quantity]').val() == ""){
 					alert("별점을 모두 등록해주세요")
