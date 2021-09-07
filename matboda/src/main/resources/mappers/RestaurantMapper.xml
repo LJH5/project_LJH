@@ -36,7 +36,11 @@
  		update restaurant set rt_score = (select round(avg(re_totalSc),1) from review where re_rt_num = rt_num) where rt_num = #{re_rt_num} ;
  	</update>
  	<select id="selectSearchRestaurant" resultType="kr.green.matboda.vo.RestaurantVO">
- 		select * from restaurant
+ 		select restaurant.*, im_name as rt_im_name  from restaurant 
+			left join review on rt_num = re_rt_num
+			left join image on re_num = im_where 
  			where rt_name like concat('%',#{cri.search},'%') or rt_address like concat('%',#{cri.search},'%')
+			group by rt_num
+			order by rt_score desc
  	</select>
 </mapper>
