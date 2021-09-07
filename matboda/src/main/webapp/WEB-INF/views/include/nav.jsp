@@ -144,7 +144,7 @@
 		</div>
 		<div class="search">
 		    <form action="<%= request.getContextPath() %>/restaurant/search">
-		        <input class="search-input" type="text" name="query" placeholder="지역이나 식당이름">
+		        <input class="search-input" type="text" name="search" value="<c:out value="${pm.criteria.search}"/>" placeholder="지역이나 식당이름">
 		        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
 		    </form>
 		</div>

@@ -61,7 +61,6 @@
 	</div>
 	<div class="container">
 		<div id="title">
-		${rt}
 			${rt.rt_name} <span id="score">${rt.rt_score}</span>
 		</div>
 		<div class="infBox">

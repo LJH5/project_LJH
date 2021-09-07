@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.RestaurantVO;
-import kr.green.matboda.vo.ReviewVO;
 
 public interface RestaurantDAO {
 
@@ -22,6 +21,6 @@ public interface RestaurantDAO {
 
 	void updateSc(int re_rt_num);
 
-	ArrayList<RestaurantVO> selectSearchRestaurant(Criteria cri);
+	ArrayList<RestaurantVO> selectSearchRestaurant(@Param("cri")Criteria cri);
 
 }
