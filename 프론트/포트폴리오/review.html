@@ -24,26 +24,25 @@
         }
         
         .img-container{
+            min-width: 1400px;
             height: 300px;
             background: yellow;
-        }
-        .main-container{
-            overflow: hidden;
         }
         .inner-container{
             min-width: 900px;
             display: flex;
         }
-        .left-container{
-            width: 75%;
+        .inner-container .left-container{
+            width: calc(75% - 20px);
+            min-width: 900px;
         }
         .left-container .inner-box{
             max-width: 900px;
-            background: lightgreen;
             margin: 0 auto;
         }
         .left-container .top-container{
-            background-color: rgb(214, 207, 202);
+            padding: 10px;
+            border-bottom: 1px solid rgba(160, 160, 160, 0.3);
         }
         .top-container .shop-head .fa-star{
             color: rgb(255, 165, 0);
@@ -56,14 +55,13 @@
             display: flex;
         }
         .top-container .title .shop-box{
-            background: rosybrown;
             width: 70%;
             font-size: 30px;
         }
         .top-container .title .btn-box{
-            background: brown;
             width: 30%;
             max-height: 110px;
+            color: #404040;
         }
         .top-container .title .review-btn,
         .top-container .title .favorites-btn{
@@ -84,58 +82,146 @@
             font-size: 20px;
         }
         .top-container .title .rt_score{
-                color: rgb(255, 165, 0);
+            color: rgb(255, 165, 0);
         }
         .top-container .inf-box{
-            margin-bottom: 10px;
             color: rgb(124, 124, 124);
         }
-        .inf-box span{
+        .top-container .inf-box span{
             margin-right: 20px;
         }
-        .inf-box i{
+        .top-container .inf-box i{
             margin-right: 5px;
         }
         .left-container .middle-container{
-            background: azure;
-            margin-bottom: 10px;
+            position: relative;
+            border-bottom: 1px solid rgba(160, 160, 160, 0.3);
         }
         .middle-container .detail-box{
-            width: 600px;
             box-sizing: border-box;
-            padding-top: 10px;
-            position: relative;
+            padding: 10px;
+        }
+        .main-container .shop-inf{
+            display: flex;
+        }
+        .main-container .shop-inf .inf-title{
+            width: 10%;
+        }
+        .main-container .shop-inf .inf-content{
+            width: 85%;
+        }
+        .middle-container .inf-content li{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
         }
         .middle-container .detail-box li{
             color: rgb(112, 112, 112);
             margin-bottom: 10px;
         }
         .middle-container .detail-box .btn-box{
-            background: rgba(0, 139, 139, 0.342);
+            position:absolute;
+            right: 5px;
+            bottom: 5px;
         }
+
+        /* 하단 리뷰 */
         .left-container .bottom-container{
-            background: beige;
+            padding: 10px;
         }
-        .bottom-container .sc-container{
+        .bottom-container .review-container{
+            background: wheat;
+            position: relative;
+            min-height: 150px;
+            border-bottom: 1px solid rgba(160, 160, 160, 0.3);
+            padding-bottom: 30px;
+        }
+        .review-container .review-inner{
+            display: flex;
+        }
+        .review-container .user-box{
+            width: 150px;
+            padding: 10px;
+        }
+        .review-container .user-box .img-box{
+            width: 130px;
+            height: 130px;
+            padding: 20px;
+        }
+        .review-container .user-box .img-box img{
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+        }
+        .review-container .user-box .user-nickname{
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            -webkit-line-clamp: 2;
+            text-align: center;
+            margin-bottom: 10px;
+            color: rgb(112, 112, 112);
+        }
+        .review-container .user-box .user-inf{
+            display: flex;
+            font-size: 15px;
+            color: rgb(112, 112, 112);
+            text-align: center;
+        }
+        .review-container .user-box .user-inf .review-num,
+        .review-container .user-box .user-inf .recommend-num{
+            width: 50%;
+        }
+        .review-container .review-box{
+            background: rgb(195, 226, 18);
+            width: 600px;
+            padding: 5px;
+        }
+        .review-box .update{
+            color: rgb(112, 112, 112);
+        }
+        .review-box .content{
+            width: 100%;
+            
+            
+        }
+        .review-box .content{
+            white-space: pre-line;
+        }
+        .review-container .side-box{
+            background: rgb(52, 224, 124);
+            width: 130px;
+        }
+        .side-box .sc-box{
             background: rgba(168, 163, 163, 0.589);
         }
-        .bottom-container .detail-btn{
+        .side-box .detail-btn{
             font-size: 15px;
-            color: rgb(83, 83, 83);
+            color: #404040;
             cursor: pointer;
         }
-        .bottom-container .sc-detail{
+        .side-box .sc-detail{
             width: 200px;
             background-color: aqua;
             display: none;
         }
-        .bottom-container .content{
-            position: absolute;
-            left: 100px;
-        }
-        .bottom-container .btn-box{
+        .bottom-container .report-box,
+        .bottom-container .recommend-box{
             font-size: 50px;
+            width: 60px;
+            text-align: center;
+        }
+        .bottom-container .report-box:hover,
+        .bottom-container .report-box:hover a,
+        .bottom-container .recommend-box:hover,
+        .bottom-container .recommend-box:hover a{
             color: rgb(255, 165, 0);
+        }
+        .bottom-container .report-box div,
+        .bottom-container .recommend-box div{
+            font-size: 20px;
         }
         .right-container{
             width: 25%;
@@ -160,60 +246,100 @@
         <div class="inner-container">
             <div class="left-container">
                 <div class="inner-box">
-                    <div class="container">
-                        <div class="top-container">
-                            <div class="title">
-                                <div class="shop-box">
-                                    <span class="rt_name">마님은 왜 돌쇠에게만 술을 주시나</span> 
-                                    <span class="rt_score">4.5</span>
-                                </div>
-                                <div class="btn-box after">
-                                    <form method="GET" action="<%=request.getContextPath()%>/review/register">
-                                        <input type="hidden" name="num" value="${rt.rt_num}">
-                                        <div class="favorites-btn">
-                                            <i class="far fa-star"></i>
-                                            <div class="favorites-text">즐겨찾기</div>
-                                        </div>
-                                        <div class="review-btn">
-                                            <i class="fas fa-pen"></i>
-                                            <div class="review-text">리뷰쓰기</div>
-                                        </div>
-                                    </form>
-                                </div>
+                    <div class="top-container">
+                        <div class="title">
+                            <div class="shop-box">
+                                <span class="rt_name">마님은 왜 돌쇠에게만 술을 주시나</span> 
+                                <span class="rt_score">4.5</span>
                             </div>
-                            <div class="inf-box">
-                                <span id="views"><i class="far fa-eye"></i>조회수</span>
-                                <span id="reviewNum"><i class="fas fa-pen"></i>리뷰수</span>
-                                <span id="favoritesNum"><i class="fas fa-star"></i>즐겨찾기수</span>
+                            <div class="btn-box after">
+                                <form method="GET" action="<%=request.getContextPath()%>/review/register">
+                                    <input type="hidden" name="num" value="${rt.rt_num}">
+                                    <div class="favorites-btn">
+                                        <i class="far fa-star"></i>
+                                        <div class="favorites-text">즐겨찾기</div>
+                                    </div>
+                                    <div class="review-btn">
+                                        <i class="fas fa-pen"></i>
+                                        <div class="review-text">리뷰쓰기</div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="middle-container">
-                            <div class="detail-box">
-                                <ul>
-                                    <li>주소 <span class="content">${rt.rt_address}</span></li>
-                                    <li>전화번호 <span class="content">${rt.rt_phoneNum}</span></li>
-                                    <li>음식종류 <span class="content">${rt.rt_type}</span></li>
-                                    <li>영업시간 <span class="content">${rt.rt_openTime}</span></li>
-                                </ul>
-                                <div class="btn-box">
-                                    <c:if test="${user != null && (user.me_id == rt.rt_me_id || user.me_authority == 'ADMIN' || user.me_authority == 'SUPER ADMIN')}">
-                                        <a href="<%=request.getContextPath()%>/restaurant/modify?num=${rt.rt_num}" style="text-decoration: none">
-                                            <button class="btn btn-outline-success">수정</button>
-                                        </a>
-                                        <a href="<%=request.getContextPath()%>/restaurant/delete?num=${rt.rt_num}" style="text-decoration: none">
-                                            <button class="btn btn-outline-danger">삭제</button>
-                                        </a>
-                                    </c:if>
+                        <div class="inf-box">
+                            <span id="views"><i class="far fa-eye"></i>조회수</span>
+                            <span id="reviewNum"><i class="fas fa-pen"></i>리뷰수</span>
+                            <span id="favoritesNum"><i class="fas fa-star"></i>즐겨찾기수</span>
+                        </div>
+                    </div>
+                    <div class="middle-container">
+                        <div class="detail-box">
+                            <div class="shop-inf">
+                                <div class="inf-title">
+                                    <ul>
+                                        <li>주소</li>
+                                        <li>전화번호</li>
+                                        <li>음식종류</li>
+                                        <li>영업시간</li>
+                                    </ul>
+                                </div>
+                                <div class="inf-content">
+                                    <ul>
+                                        <li>${rt.rt_address}${rt.rt_address}${rt.rt_address}${rt.rt_address}${rt.rt_address}${rt.rt_address}${rt.rt_address}${rt.rt_address}</li>
+                                        <li>${rt.rt_phoneNum}</li>
+                                        <li>${rt.rt_type}</li>
+                                        <li>${rt.rt_openTime}</li>
+                                    </ul>
                                 </div>
                             </div>
+                            <div class="btn-box">
+                                <c:if test="${user != null && (user.me_id == rt.rt_me_id || user.me_authority == 'ADMIN' || user.me_authority == 'SUPER ADMIN')}">
+                                    <a href="<%=request.getContextPath()%>/restaurant/modify?num=${rt.rt_num}" style="text-decoration: none">
+                                        <button class="btn btn-outline-success">수정</button>
+                                    </a>
+                                    <a href="<%=request.getContextPath()%>/restaurant/delete?num=${rt.rt_num}" style="text-decoration: none">
+                                        <button class="btn btn-outline-danger">삭제</button>
+                                    </a>
+                                </c:if>
+                            </div>
                         </div>
-                        <div class="bottom-container">
-                            <div id="review-box">
-                                <c:forEach items="${reviews}" var="review">
-                                    <div class="review">
-                                        <div class="sc-container">
+                    </div>
+                    <div class="bottom-container">
+                        <div class="review-container">
+                            <c:forEach items="${reviews}" var="review">
+                                <div class="review-inner">
+                                    <div class="user-box">
+                                        <div class="img-box">
+                                            <img src="../JS수업/img/cat.jfif">
+                                        </div>
+                                        <div class="user-nickname">${review.re_me_nickname}</div>
+                                        <div class="user-inf">
+                                            <div class="review-num">
+                                                <i class="fas fa-pen"></i>
+                                                <div>9999+</div>
+                                            </div>
+                                            <div class="recommend-num">
+                                                <i class="fas fa-thumbs-up"></i>
+                                                <div>9999+</div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="review-box">
+                                        <div class="update">${review.re_upDateStr}</div>
+                                        <pre class="content">${review.re_content}침략자 다대다의
+                                             게임 플레이가 가능한 게임으로, 학교 대항전이나 반 대항전
+                                             과 같은 여러 명이 동시에 플레이가 가능하다. 클랜을 통해 클랜 대전이 가능하며, 해당 클랜전을 통해 순위를 업로드할 수 있다. 
+                                             과거 여러 명이 함께 판을 뒤집는 형태의 타자게임으로 카드의 단어를 입력하여, 우리팀이 속한 색상의 판 갯수가 많으면 이기는 형태의 게임이다. 같은 색상의 판을 입력하여, 뒤집었을 때는 판의 단어 글자가 바뀌어, 방어를 할 수 있다. 일정 시간 이후 이벤트 타임을 통해 장문을 빠르게 입력하여, 보너스 점수 획득이 가능하다.
+                                        </pre>
+                                        <div class="image-box">
+                                            <img src="../JS수업/img/cat.jfif" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="side-box">
+                                        <div class="sc-box">
                                             <div class="sc-total">
-                                                평점 ${review.re_totalSc} <span class="detail-btn">상세보기<i class="fas fa-caret-down"></i></span>
+                                                <div>${review.re_totalSc}</div>
+                                                <div class="detail-btn">상세보기<i class="fas fa-caret-down"></i></div>
                                             </div>
                                             <div class="sc-detail">
                                                 <div>서비스 ★★★★★</div>
@@ -223,34 +349,36 @@
                                                 <div>음식량 ${review.re_quantity}</div>
                                             </div>
                                         </div>
-                                        <ul>
-                                            <li>${review.re_me_nickname}</li>
-                                            <li>${review.re_content}</li>
-                                            <li>${review.re_upDateStr}</li>
-                                        </ul>
-                                    </div>
-                                    <c:choose>
-                                        <c:when test="${user.me_id != rt.rt_me_id}">
-                                            <div class="btn-box">
-                                                <div><a href="#"><i class="far fa-thumbs-up"></i></a></div>
-                                                <div>
-                                                    <i class="fas fa-bullhorn"></i>
-                                                    <div>신고</div>
+                                        <c:choose>
+                                            <c:when test="${user.me_id != rt.rt_me_id}">
+                                                <div class="btn-box">
+                                                    <div class="recommend-box">
+                                                        <a href="#">
+                                                            <i class="far fa-thumbs-up"></i>
+                                                        </a>
+                                                        <div>맛잘알</div>
+                                                    </div>
+                                                    <div class="report-box">
+                                                        <a href="#">
+                                                            <i class="fas fa-bullhorn"></i>
+                                                        </a>
+                                                        <div>신고</div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="btn-box">
-                                                <a href="<%= request.getContextPath() %>/review/modify?num=${review.re_num}">
-                                                    <button class="mod-btn btn btn-outline-success">수정</button>
-                                                </a>
-                                                <button class="del-btn btn btn-outline-danger">삭제</button>
-                                                <input class="re_num" type="hidden" value="${review.re_num}">
-                                            </div>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                            </div>
+                                            </c:when>
+                                            <!-- <c:otherwise>
+                                                <div class="btn-box">
+                                                    <a href="<%= request.getContextPath() %>/review/modify?num=${review.re_num}">
+                                                        <button class="mod-btn btn btn-outline-success">수정</button>
+                                                    </a>
+                                                    <button class="del-btn btn btn-outline-danger">삭제</button>
+                                                    <input class="re_num" type="hidden" value="${review.re_num}">
+                                                </div>
+                                            </c:otherwise> -->
+                                        </c:choose>
+                                    </div>
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
