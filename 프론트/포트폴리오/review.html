@@ -21,6 +21,7 @@
             padding: 0;
             list-style: none;
             text-decoration: none;
+            font-family: "고딕", "굴림" ,"돋움", sans-serif;
         }
         
         .img-container{
@@ -149,7 +150,7 @@
         .review-container .user-box .img-box{
             width: 130px;
             height: 130px;
-            padding: 20px;
+            margin-top: 30px;
         }
         .review-container .user-box .img-box img{
             width: 100%;
@@ -175,7 +176,6 @@
             width: 50%;
         }
         .review-container .review-box{
-            background: rgb(195, 226, 18);
             width: 600px;
             padding: 5px;
         }
@@ -184,18 +184,17 @@
         }
         .review-box .content{
             width: 100%;
-            
-            
-        }
-        .review-box .content{
+            font-size: 17px;
             white-space: pre-line;
+            
         }
         .review-container .side-box{
             background: rgb(52, 224, 124);
             width: 130px;
+            text-align: center;
         }
-        .side-box .sc-box{
-            background: rgba(168, 163, 163, 0.589);
+        .sc-box .sc-total{
+            color: rgb(255, 165, 0);
         }
         .side-box .detail-btn{
             font-size: 15px;
@@ -203,9 +202,16 @@
             cursor: pointer;
         }
         .side-box .sc-detail{
-            width: 200px;
-            background-color: aqua;
-            display: none;
+            width: 170px;
+            border-radius: 5%;
+            border: 2px solid rgb(255, 165, 0);
+            padding: 10px;
+            position: absolute;
+            right: 0;
+            background-color: whitesmoke;
+        }
+        .side-box .sc-detail .star{
+            color: rgb(255, 165, 0);
         }
         .bottom-container .report-box,
         .bottom-container .recommend-box{
@@ -338,15 +344,32 @@
                                     <div class="side-box">
                                         <div class="sc-box">
                                             <div class="sc-total">
-                                                <div>${review.re_totalSc}</div>
-                                                <div class="detail-btn">상세보기<i class="fas fa-caret-down"></i></div>
+                                                <div><h1>4.7</h1></div>
+                                                <div class="detail-btn">상세<i class="fas fa-caret-down"></i></div>
                                             </div>
                                             <div class="sc-detail">
-                                                <div>서비스 ★★★★★</div>
-                                                <div>분위기 ${review.re_mood}</div>
-                                                <div>청결함 ${review.re_clean}</div>
-                                                <div>음식맛 ${review.re_tasty}</div>
-                                                <div>음식량 ${review.re_quantity}</div>
+                                                <a href="#">
+                                                    <div>
+                                                        <span>친절함</span>
+                                                        <span class="star">★★★★★</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>분위기</span>
+                                                        <span class="star">★★★★★</span>
+                                                    </div> 
+                                                    <div>
+                                                        <span>깨끗함</span>
+                                                        <span class="star">★★★★★</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>음식맛</span>
+                                                        <span class="star">★★★★★</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>음식량</span>
+                                                        <span class="star">★★★★★</span>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
                                         <c:choose>
