@@ -57,6 +57,10 @@
 		.fa-thumbs-down{
 			transform : rotateY(180deg);
 		}
+		.re-content{
+			width: 600px;
+			white-space: pre-line;
+		}
     </style>
 </head>
 <body>
@@ -110,9 +114,9 @@
 						<img src="<%=request.getContextPath() %>/img/${review.re_me_picture}" style="width: 100px; height: 100px; border-radius: 100%" >
 					<ul>
 						<li>${review.re_me_nickname}</li>
-						<li>${review.re_content}</li>
 						<li>${review.re_upDateStr}</li>
 					</ul>
+					<pre class="re-content">${review.re_content}</pre>
 				</div>
 				<c:forEach items="${review.re_image}" var="img">
 					<img src="<%=request.getContextPath() %>/img/${img.im_name}" style="width: 100px" height="100px">
@@ -122,7 +126,7 @@
 						<div class="form-group">
 							<a href="#" class="recommend-btn up">
 								<c:choose>
-									<c:when test="${review != null && review.re_recommend == 1 }">
+									<c:when test="${review != null && review.re_recommend == 0 }">
 										<i class="fas fa-thumbs-up"></i>
 									</c:when>
 									<c:otherwise>
@@ -132,7 +136,7 @@
 							</a>
 							<a href="#" class="recommend-btn down">
 								<c:choose>
-									<c:when test="${recommend != null && review.re_recommend == 0 }">
+									<c:when test="${recommend != null && review.re_report == 0 }">
 										<i class="fas fa-thumbs-down"></i>
 									</c:when>
 									<c:otherwise>
@@ -207,17 +211,11 @@
 						if(result == 'UP'){
 							alert('해당 게시글을 추천했습니다.');
 							$('.recommend-btn.up i').addClass('fas');
-						}else if(result == 'DOWN'){
-							alert('해당 게시글을 비추천했습니다.');
-							$('.recommend-btn.down i').addClass('fas');
+						}
 						}else if(result == 'GUEST'){
-							alert('추천/비추천을 하려면 로그인을 하세요.');
+							alert('추천을 하려면 로그인을 하세요.');
 						}else if(result == 'CANCEL'){
-							if(state == 1){
-								alert('추천을 취소했습니다.')
-							}else{
-								alert('비추천을 취소했습니다.');
-							}
+							alert('추천을 취소했습니다.')
 						}
 					},
 					error : function(xhr, status, e){

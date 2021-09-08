@@ -18,7 +18,10 @@
 		#star a.on{
 			color: rgb(255, 165, 0); 
 		}
-
+		.review-input {
+			resize: none;
+			width: 600px;
+		}
 	</style>
 </head>
 <body>
