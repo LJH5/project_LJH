@@ -134,7 +134,6 @@
             padding: 10px;
         }
         .bottom-container .review-container{
-            background: wheat;
             position: relative;
             min-height: 150px;
             border-bottom: 1px solid rgba(160, 160, 160, 0.3);
@@ -145,11 +144,11 @@
         }
         .review-container .user-box{
             width: 150px;
-            padding: 10px;
+            padding: 20px;
         }
         .review-container .user-box .img-box{
-            width: 130px;
-            height: 130px;
+            width: 110px;
+            height: 110px;
             margin-top: 30px;
         }
         .review-container .user-box .img-box img{
@@ -181,6 +180,7 @@
         }
         .review-box .update{
             color: rgb(112, 112, 112);
+            margin-bottom: 10px;
         }
         .review-box .content{
             width: 100%;
@@ -189,17 +189,25 @@
             
         }
         .review-container .side-box{
-            background: rgb(52, 224, 124);
             width: 130px;
             text-align: center;
+        }
+        .side-box .sc-box{
+            margin-bottom: 10px;
         }
         .sc-box .sc-total{
             color: rgb(255, 165, 0);
         }
-        .side-box .detail-btn{
+        .sc-box .detail-btn{
             font-size: 15px;
             color: #404040;
             cursor: pointer;
+            margin: 0 auto;
+            width: 50px;
+        }
+        .sc-box:hover a{
+            text-decoration: none;
+            cursor: default;
         }
         .side-box .sc-detail{
             width: 170px;
@@ -209,25 +217,36 @@
             position: absolute;
             right: 0;
             background-color: whitesmoke;
+            display: none;
+        }
+        .side-box .sc-detail span{
+            color: rgb(112, 112, 112);
         }
         .side-box .sc-detail .star{
             color: rgb(255, 165, 0);
         }
-        .bottom-container .report-box,
-        .bottom-container .recommend-box{
+        .side-box .report-box,
+        .side-box .recommend-box{
             font-size: 50px;
-            width: 60px;
             text-align: center;
+            color: rgb(112, 112, 112);
         }
-        .bottom-container .report-box:hover,
-        .bottom-container .report-box:hover a,
-        .bottom-container .recommend-box:hover,
-        .bottom-container .recommend-box:hover a{
+        .side-box .report-box a,
+        .side-box .recommend-box a{
+            color: rgb(112, 112, 112);
+        }
+        .side-box .recommend-box:hover,
+        .side-box .recommend-box:hover a{
             color: rgb(255, 165, 0);
         }
-        .bottom-container .report-box div,
-        .bottom-container .recommend-box div{
-            font-size: 20px;
+        .side-box .report-box:hover,
+        .side-box .report-box:hover a{
+            color: rgb(206, 3, 3);
+        }
+        .side-box .report-box div,
+        .side-box .recommend-box div{
+            font-size: 15px;
+            font-weight: bold;
         }
         .right-container{
             width: 25%;
@@ -345,10 +364,10 @@
                                         <div class="sc-box">
                                             <div class="sc-total">
                                                 <div><h1>4.7</h1></div>
-                                                <div class="detail-btn">상세<i class="fas fa-caret-down"></i></div>
+                                                 <a href=""><div class="detail-btn">상세<i class="fas fa-caret-down"></i></div></a>
                                             </div>
-                                            <div class="sc-detail">
-                                                <a href="#">
+                                            <a href="#">
+                                                <div class="sc-detail">
                                                     <div>
                                                         <span>친절함</span>
                                                         <span class="star">★★★★★</span>
@@ -369,24 +388,22 @@
                                                         <span>음식량</span>
                                                         <span class="star">★★★★★</span>
                                                     </div>
-                                                </a>
-                                            </div>
+                                                </div>
+                                            </a>
                                         </div>
                                         <c:choose>
                                             <c:when test="${user.me_id != rt.rt_me_id}">
-                                                <div class="btn-box">
-                                                    <div class="recommend-box">
-                                                        <a href="#">
-                                                            <i class="far fa-thumbs-up"></i>
-                                                        </a>
-                                                        <div>맛잘알</div>
-                                                    </div>
-                                                    <div class="report-box">
-                                                        <a href="#">
-                                                            <i class="fas fa-bullhorn"></i>
-                                                        </a>
-                                                        <div>신고</div>
-                                                    </div>
+                                                <div class="recommend-box">
+                                                    <a href="#">
+                                                        <i class="far fa-thumbs-up"></i>
+                                                    </a>
+                                                    <div>맛잘알</div>
+                                                </div>
+                                                <div class="report-box">
+                                                    <a href="#">
+                                                        <i class="fas fa-bullhorn"></i>
+                                                    </a>
+                                                    <div>신고</div>
                                                 </div>
                                             </c:when>
                                             <!-- <c:otherwise>
@@ -435,6 +452,9 @@
             })
             $(document).on('click', '.detail-btn', function(){
                 $('.sc-detail').toggle();
+            })
+            $('.sc-box a').click(function(e){
+                e.preventDefault();
             })
         })
 	</script>
