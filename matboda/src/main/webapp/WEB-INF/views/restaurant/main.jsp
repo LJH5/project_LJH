@@ -420,12 +420,26 @@
 													<span class="detail-btn">상세<i class="fas fa-caret-down"></i></span>
 												</a>
 											</div>
-											<a href="#"> <span class="sc-detail"> <span>
-														<span>친절함</span> <span class="star">★★★★★</span>
-												</span> <span> <span>분위기</span> <span class="star">★★★★★</span>
-												</span> <span> <span>깨끗함</span> <span class="star">★★★★★</span>
-												</span> <span> <span>음식맛</span> <span class="star">★★★★★</span>
-												</span> <span> <span>음식량</span> <span class="star">★★★★★</span>
+											<a href="#"> 
+											<span class="sc-detail"> 
+												<span>
+													<span>친절함</span> <span class="star">★★★★★</span>
+												</span>
+												 <span> 
+												 	<span>분위기</span> 
+												 	<span class="star">★★★★★</span>
+												</span> 
+												<span> 
+													<span>깨끗함</span> 
+													<span class="star">★★★★★</span>
+												</span> 
+												<span> 
+													<span>음식맛</span> 
+													<span class="star">★★★★★</span>
+												</span> 
+												<span> 
+													<span>음식량</span> 
+													<span class="star">★★★★★</span>
 												</span>
 											</span>
 											</a>
