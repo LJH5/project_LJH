@@ -226,25 +226,35 @@
             color: rgb(255, 165, 0);
         }
         .side-box .report-box,
-        .side-box .recommend-box{
+        .side-box .recommend-box,
+        .side-box .modify-box,
+        .side-box .delete-box{
             font-size: 50px;
             text-align: center;
             color: rgb(112, 112, 112);
         }
         .side-box .report-box a,
-        .side-box .recommend-box a{
+        .side-box .recommend-box a,
+        .side-box .modify-box a,
+        .side-box .delete-box a{
             color: rgb(112, 112, 112);
         }
         .side-box .recommend-box:hover,
-        .side-box .recommend-box:hover a{
+        .side-box .recommend-box:hover a,
+        .side-box .modify-box:hover,
+        .side-box .modify-box:hover a{
             color: rgb(255, 165, 0);
         }
         .side-box .report-box:hover,
-        .side-box .report-box:hover a{
+        .side-box .report-box:hover a,
+        .side-box .delete-box:hover,
+        .side-box .delete-box:hover a{
             color: rgb(206, 3, 3);
         }
         .side-box .report-box div,
-        .side-box .recommend-box div{
+        .side-box .recommend-box div,
+        .side-box .modify-box div,
+        .side-box .delete-box div{
             font-size: 15px;
             font-weight: bold;
         }
@@ -393,6 +403,22 @@
                                         </div>
                                         <c:choose>
                                             <c:when test="${user.me_id != rt.rt_me_id}">
+                                                <div class="btn-box">
+                                                    <c:if test="${user != null && (user.me_id == rt.rt_me_id || user.me_authority == 'ADMIN' || user.me_authority == 'SUPER ADMIN')}">
+                                                        <div class="modify-box">
+                                                            <a href="<%=request.getContextPath()%>/restaurant/modify?num=${rt.rt_num}">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <div>수정</div>
+                                                        </div>
+                                                        <div class="delete-box">
+                                                            <a href="<%=request.getContextPath()%>/restaurant/delete?num=${rt.rt_num}"> 
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                            <div>삭제</div>
+                                                        </div>
+                                                    </c:if>
+                                                </div>
                                                 <div class="recommend-box">
                                                     <a href="#">
                                                         <i class="far fa-thumbs-up"></i>

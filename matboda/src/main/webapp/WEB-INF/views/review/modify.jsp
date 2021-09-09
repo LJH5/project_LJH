@@ -25,6 +25,10 @@
 		.img-wrap img{
 			max-width: 100%;
 		}
+		.review-input{
+			resize: vertical;
+			width: 600px;
+		}
 	</style>
 </head>
 <body>

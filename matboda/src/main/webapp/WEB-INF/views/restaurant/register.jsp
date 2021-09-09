@@ -11,6 +11,14 @@
 		.error{
 			color : red
 		}
+		.open-time{
+			display: flex;
+			line-height: 35px;
+		}
+		.open-time div{
+			margin-left: 3px;
+			margin-right: 20px;
+		}
 	</style>
 </head>
 <body>
@@ -52,9 +60,9 @@
 			<option>기타</option>
 		</select>
 	</div>
-	<div class="form-group">
-		<label>영업시간</label>
-		<select class="form-control" name="openHour">
+	<label>영업시간</label>
+	<div class="form-group open-time">
+		<select class="form-control col-2" name="openHour">
 			<option>00</option>
 			<option>01</option>
 			<option>02</option>
@@ -82,7 +90,7 @@
 			<option>24</option>
 		</select>
 		<div>시</div>
-		<select class="form-control" name="openMinute">
+		<select class="form-control col-2" name="openMinute">
 			<option>00</option>
 			<option>10</option>
 			<option>20</option>
@@ -90,8 +98,9 @@
 			<option>40</option>
 			<option>50</option>
 		</select>
-		<div>분 ~ </div>
-		<select class="form-control" name="closeHour">
+		<div>분</div>
+		<div>~</div>
+		<select class="form-control col-2" name="closeHour">
 			<option>00</option>
 			<option>01</option>
 			<option>02</option>
@@ -119,7 +128,7 @@
 			<option selected>24</option>
 		</select>
 		<div>시</div>
-		<select class="form-control" name="closeMinute">
+		<select class="form-control col-2" name="closeMinute">
 			<option>00</option>
 			<option>10</option>
 			<option>20</option>
