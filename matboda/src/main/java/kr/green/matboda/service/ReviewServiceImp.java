@@ -123,7 +123,6 @@ public class ReviewServiceImp implements ReviewService {
 			nums.add(tmp);
 		}
 		ArrayList<ImageVO> iList = reviewDao.selectimageList(review.getRe_num());
-		System.out.println(iList);
 		for(ImageVO tmp : iList) {
 			if(!nums.contains((Integer)tmp.getIm_num())) {
 				deleteImage(tmp);
