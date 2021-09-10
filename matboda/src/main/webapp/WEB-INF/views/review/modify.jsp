@@ -105,11 +105,10 @@
 			<div class="review-box form-group">
 				<textarea class="review-input form-control mb-2" name="re_content" placeholder="리뷰를 작성해주세요.">${review.re_content}</textarea>
 				<c:forEach items="${imageList}" var="image">
-					<span>
+					<div>
 						<img src="<%=request.getContextPath() %>/img/${image.im_name}" style="width: 100px" height="100px">
 						<button type="button" class="del-btn">X</button>
-						<input type="hidden"name="imageNum" value="${image.im_num}">
-					</span>
+					</div>
 				</c:forEach>
 				<c:if test="${imageList == null || imageList.size() < 5}">
 					<div class="form-group files">
@@ -117,7 +116,9 @@
 						<input type="hidden"name="imageNum" value="${image.im_num}">
 					</div>
 				</c:if>
-				<a href="<%= request.getContextPath() %>/restaurant/main/?num=${num}"><button type="button" class="review-btn btn btn-outline-danger">취소</button></a>
+				<a href="<%= request.getContextPath() %>/restaurant/main/?num=${review.re_rt_num}">
+					<button type="button" class="btn btn-outline-danger">취소</button>
+				</a>
 				<button class="review-btn btn btn-outline-success">리뷰 올리기</button>
 			</div>
 		</div>
