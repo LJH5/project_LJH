@@ -218,10 +218,9 @@
         .side-box .sc-box{
             margin-bottom: 10px;
         }
-        .sc-box .sc-total a {
+        .sc-box .sc-total a{
             color: rgb(255, 165, 0);
             font-size: 30px;
-
         }
         .sc-box .detail-btn{
             font-size: 15px;
@@ -251,7 +250,7 @@
         .side-box .sc-detail .star{
             color: rgb(255, 165, 0);
         }
-       .side-box .report-box,
+        .side-box .report-box,
         .side-box .recommend-box,
         .side-box .modify-box,
         .side-box .delete-box{
@@ -276,10 +275,11 @@
         .side-box .delete-box:hover,
         .side-box .delete-box:hover a{
             color: rgb(206, 3, 3);
+            cursor: pointer;
         }
         .side-box .report-box div,
         .side-box .recommend-box div,
-        .side-box .modify-box span,
+        .side-box .modify-box div,
         .side-box .delete-box div{
             font-size: 15px;
             font-weight: bold;
@@ -300,7 +300,7 @@
         :hover a{
         	text-decoration: none
         }
-        a span{
+        .block{
         	display: block;
         }
     </style>
@@ -317,7 +317,7 @@
 	</div>
 	<div class="main-container">
 		<div class="inner-container">
-			<div class="left-container">
+			<div class="left-container" id="left-container">
 				<div class="inner-box">
 					<div class="top-container">
 						<div class="title">
@@ -381,7 +381,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="bottom-container">
+					<div class="bottom-container" id="bottom-container">
 						<c:forEach items="${reviews}" var="review">
 							<div class="review-container">
 								<div class="review-inner">
@@ -413,17 +413,18 @@
 										</div>
 									</div>
 									<div class="side-box">
-										<div class="sc-box">
-											<div class="sc-total aPrivent">
-												<a href="#"> 
-													<span class="totalSc">${review.re_totalSc}</span>
-													<span class="detail-btn">상세<i class="fas fa-caret-down"></i></span>
+										<div class="sc-box aPrevent">
+											<div class="sc-total ">
+												<a href="#">
+													<span class="totalSc block">${review.re_totalSc}</span>
+													<span class="detail-btn block">상세<i class="fas fa-caret-down"></i></span>
 												</a>
 											</div>
 											<a href="#"> 
 												<span class="sc-detail"> 
 													<span>
-														<span>친절함</span> <span class="star">★★★★★</span>
+														<span>친절함</span>
+														<span class="star">★★★★★</span>
 													</span>
 													 <span> 
 													 	<span>분위기</span> 
@@ -446,7 +447,7 @@
 										</div>
 										<c:choose>
 											<c:when test="${user.me_id != rt.rt_me_id}">
-												<div class="recommend-box aPrivent">
+												<div class="recommend-box aPrevent">
 													<a href="#"> <i class="far fa-thumbs-up"></i>
 													</a>
 													<div>맛잘알</div>
@@ -459,15 +460,13 @@
 											</c:when>
 											<c:otherwise>
 												<div class="btn-box">
-													<div class="modify-box">
-														<a href="<%= request.getContextPath() %>/review/modify?num=${review.re_num}">
-															<i class="fas fa-pen"></i>
-															<span>수정</span>
-														</a>
+													<div class="modify-box" onclick="location.href='<%= request.getContextPath() %>/review/modify?num=${review.re_num}'" style="cursor: pointer;">
+														<i class="fas fa-pen"></i>
+														<div>수정</div>
 													</div>
 													<div class="delete-box">
 														<i class="fas fa-trash-alt"></i>
-														<div class="del-btn">삭제</div>
+														<div>삭제</div>
 														<input class="re_num" type="hidden"value="${review.re_num}"> 
 														<input class="rt_num" type="hidden" value="${rt.rt_num}">
 													</div>
@@ -505,19 +504,19 @@
 	</div>
 	<script type="text/javascript">
 		$(function() {
+			$('.sc-total').click(function(){
+			    $(this).next().children().toggle();
+			})
 			$('.review-btn').click(function(){
 				$(this).parent().submit();
 			})
-			$('.aPrivent').click(function(e) {
+			$('.aPrevent a').click(function(e) {
 				e.preventDefault();
-			})
-			$(document).on('click', '.sc-total', function(){
-			    $(this).siblings().children().first('.sc-detail').toggle();
 			})
 			var contextPath = '<%=request.getContextPath()%>';
 			var rt_num = ${rt.rt_num};
-			$(document).on('click','.del-btn',function() {
-				var re_num = $(this).siblings('.re_num').val();
+			$(document).on('click','.delete-box',function() {
+				var re_num = $(this).children('.re_num').val();
 				var data = {
 					re_num : re_num
 				}
@@ -528,16 +527,14 @@
 					success : function(res) {
 						if (res == 'OK') {
 							alert('리뷰삭제 성공');
-							$('#review-box').load(contextPath+ '/restaurant/main/?num='+ rt_num + ' #review-box');
+							location.reload();
 						} else {
 							alert('리뷰삭제 실패');
 						}
 					}
 				})
 			})
-			var contextPath = '	<%=request.getContextPath()%>
-		/review';
-			var review = $(this).parent().children().last().val();
+			/* var review = $(this).parent().children().last().val();
 			var state = $(this).hasClass('up') ? 1 : 0;
 			$.ajax({
 				type : 'get',
@@ -556,7 +553,7 @@
 				error : function(xhr, status, e) {
 					console.log('에러 발생');
 				}
-			})
+			}) */
 		})
 	</script>
 	<script>
