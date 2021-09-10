@@ -563,9 +563,9 @@
 			slidesPerGroup: 1,
 			grabCursor: true,
 			loop: true,
-			loopFillGroupWithBlank: false,
+			loopFillGroupWithBlank: true,
 			autoplay: {
-				delay: 2500,
+				delay: 3000,
 				disableOnInteraction: false,
 			},
 			pagination: {

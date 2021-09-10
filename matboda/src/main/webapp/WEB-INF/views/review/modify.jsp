@@ -106,16 +106,14 @@
 				<textarea class="review-input form-control mb-2" name="re_content" placeholder="리뷰를 작성해주세요.">${review.re_content}</textarea>
 				<c:forEach items="${imageList}" var="image">
 					<img src="<%=request.getContextPath() %>/img/${image.im_name}" style="width: 100px" height="100px">
+					<div class="form-control">${iamge.im_oriName}<button type="button" class="del-btn">X</button></div>
 				</c:forEach>
-				<div class="form-group files">
-					<input type="file" name="imageList" class="form-control" id="image" accept="image/*"onchange="chk_file_type(this)"/>
-					<input type="hidden"name="imageNum" value="${image.im_num}">
-				</div>
-				<div>
-					<div class="img-wrap">
-						<img id="img">
+				<c:if test="${imageList == null || imageList.size() < 5}">
+					<div class="form-group files">
+						<input type="file" name="imageList" class="form-control" id="image" accept="image/*"onchange="chk_file_type(this)"/>
+						<input type="hidden"name="imageNum" value="${image.im_num}">
 					</div>
-				</div>
+				</c:if>
 				<a href="<%= request.getContextPath() %>/restaurant/main/?num=${num}"><button type="button" class="review-btn btn btn-outline-danger">취소</button></a>
 				<button class="review-btn btn btn-outline-success">리뷰 올리기</button>
 			</div>
@@ -123,6 +121,12 @@
 	</form>
 	<script>
 		$(function(){
+			$('.del-btn').click(function(){
+				var str = '<input type="file" class="form-control" name="file" data="">';
+				$(this).parent().remove();
+				if($('input[name=file]').length == 3)
+					$('.files').append(str)
+			})
 			$('form').submit(function(){
 				return true;
 			})
