@@ -105,8 +105,11 @@
 			<div class="review-box form-group">
 				<textarea class="review-input form-control mb-2" name="re_content" placeholder="리뷰를 작성해주세요.">${review.re_content}</textarea>
 				<c:forEach items="${imageList}" var="image">
-					<img src="<%=request.getContextPath() %>/img/${image.im_name}" style="width: 100px" height="100px">
-					<div class="form-control">${iamge.im_oriName}<button type="button" class="del-btn">X</button></div>
+					<span>
+						<img src="<%=request.getContextPath() %>/img/${image.im_name}" style="width: 100px" height="100px">
+						<button type="button" class="del-btn">X</button>
+						<input type="hidden"name="imageNum" value="${image.im_num}">
+					</span>
 				</c:forEach>
 				<c:if test="${imageList == null || imageList.size() < 5}">
 					<div class="form-group files">
