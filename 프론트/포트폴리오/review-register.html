@@ -44,6 +44,9 @@
             color: rgb(255, 165, 0);
             box-shadow: 0px 2px 1px #dee2e6;
         }
+        .middle-container{
+            margin-bottom: 10px;
+        }
         .content-container{
             width: 620px;
             margin: 0 auto;
@@ -58,17 +61,27 @@
             outline: none;
         }
         .image-container{
-            height: 100px;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .image-box{
+            width: 150px;
+            height: 150px;
+            border-radius: 1px;
+            background-color: aquamarine;
         }
         .btn-container{
             height: 100px;
             margin-bottom: 10px;
+            position: relative;
+        }
+        .btn-box{
+            position: absolute;
+            right: 0;
         }
     </style>
 </head>
 <body>
-    <form class="contanier" method="post" enctype="multipart/form-data">
+    <form name="insertFrm" class="contanier" method="post" enctype="multipart/form-data">
         <div class="container">
             <div class="inner-container">
                 <div class="text-container">
@@ -142,31 +155,47 @@
                         <input type="hidden" name="re_totalSc">
                         <input type="hidden" name="re_rt_num" value="${num}">
                     </div>
-                    <div class="content-container"  onkeyup="adjustHeight();">
-                        <textarea name="re_content" onkeyup="adjustHeight();" onkeydown="adjustHeight();" placeholder="리뷰를 작성해주세요."></textarea>
+                    <div class="content-container">
+                        <textarea name="re_content" onkeyup="len_check()" onkeydown="adjustHeight();" placeholder="님, 주문하신 메뉴는 어떠셨나요? 궁금해요!"></textarea>
                     </div>
                 </div>
                 <div class="image-container">
+                    <div class="image-box"></div>
                     <div class="form-group files">
                         <input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)"/>
                     </div>
-                    <a href="<%= request.getContextPath() %>/restaurant/main/?num=${num}"><button type="button" class=" btn btn-outline-danger">취소</button></a>
-                    <button class="review-btn btn btn-outline-success">리뷰 올리기</button>
                 </div>
                 <div class="btn-container">
-                    
+                    <div class="btn-box">
+                        <a href="<%= request.getContextPath() %>/restaurant/main/?num=${num}"><button type="button" class=" btn btn-outline-danger">취소</button></a>
+                        <button class="review-btn btn btn-outline-success">리뷰 올리기</button>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
     <script>
-        function adjustHeight() {
-            var textEle = $('textarea');
-            textEle[0].style.height = 'auto';
-            var textEleHeight = textEle.prop('scrollHeight');
-            textEle.css('height', textEleHeight);
-        };
-        adjustHeight();
+        $(function(){
+            // textarea 높이 자동
+            function adjustHeight() {
+                var textEle = $('textarea');
+                textEle[0].style.height = 'auto';
+                var textEleHeight = textEle.prop('scrollHeight');
+                textEle.css('height', textEleHeight);
+            };
+            adjustHeight();
+            
+            // textarea 글자수 제한
+            function len_check(){
+                var frm = document.insertFrm.re_content;
+                alert(frm)
+                if(frm.value.length > 20){
+                    alert("영문 20000자, 한글 10000자로 제한됩니다!");
+                    frm.value = frm.value.substring(0,20);
+                    frm.focus();
+                }
+            }
+        })
     </script>
 </body>
 </html>
