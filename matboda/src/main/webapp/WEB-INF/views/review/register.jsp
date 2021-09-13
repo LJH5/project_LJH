@@ -107,7 +107,6 @@
 		 $(function(){
 			$(document).on('change', 'input[name=imageList]', function(){
 				var val = $(this).val();
-				alert(val)
 				var length = $('input[name=imageList]').length;
 				var str = '<input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)">';
 				

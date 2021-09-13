@@ -93,7 +93,6 @@
 								<a href="#" value="4"><i class="fas fa-star"></i></a> 
 								<a href="#" value="5"><i class="fas fa-star"></i></a> 
 								<input type="hidden" name="re_quantity" value="${review.re_quantity}">
-								
 							</p>
 						</th>
 					</tr>
@@ -162,12 +161,13 @@
 				$('[name=re_totalSc]').val(totalSc);
 			})
 			$('.star a').click(function(){ 
-				console.log(123)
 				$(this).parent().children("a").removeClass("on"); 
 				$(this).addClass("on").prevAll("a").addClass("on");
 				var sp = $(this).attr("value");
 				$(this).siblings().last().val(sp);
 			});
+			
+			/* 기존의 별점을 보여줌 */
 			var service = parseInt('${review.re_service}');
 			$('.service a').each(function(index){
 				if(index < service)

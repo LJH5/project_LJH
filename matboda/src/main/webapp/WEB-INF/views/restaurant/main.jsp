@@ -241,15 +241,24 @@
             position: absolute;
             right: 0;
             background-color: white;
-            display: none;
+            text-align: left;
             z-index: 2;
+            display: none;
         }
-        .side-box .sc-detail span{
-            color: rgb(112, 112, 112);
+        .side-box .sc-detail .detail-box{
+         	color: rgb(112, 112, 112);
         }
-        .side-box .sc-detail .star{
-            color: rgb(255, 165, 0);
-        }
+        .side-box span.star > * {
+		    height: 16px; 
+		    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+		    width: 80px;
+		    display: inline-block;
+		}
+		 
+		.side-box span.star > * {
+		    background-position: 0 0;
+		    max-width:80px; 
+		}
         .side-box .report-box,
         .side-box .recommend-box,
         .side-box .modify-box,
@@ -421,26 +430,26 @@
 												</a>
 											</div>
 											<a href="#"> 
-												<span class="sc-detail"> 
-													<span>
+												<span class="sc-detail after"> 
+													<span class="detail-box">
 														<span>친절함</span>
-														<span class="star">★★★★★</span>
+														<span class="star service">${review.re_service}</span> <br>
 													</span>
-													 <span> 
+													 <span class="detail-box"> 
 													 	<span>분위기</span> 
-													 	<span class="star">★★★★★</span>
+													 	<span class="star mood">${review.re_mood}</span> <br>
 													</span> 
-													<span> 
+													<span class="detail-box"> 
 														<span>깨끗함</span> 
-														<span class="star">★★★★★</span>
+														<span class="star clean">${review.re_clean}</span> <br>
 													</span> 
-													<span> 
+													<span class="detail-box"> 
 														<span>음식맛</span> 
-														<span class="star">★★★★★</span>
+														<span class="star tasty">${review.re_tasty}</span> <br>
 													</span> 
-													<span> 
+													<span class="detail-box"> 
 														<span>음식량</span> 
-														<span class="star">★★★★★</span>
+														<span class="star quantity">${review.re_quantity}</span> <br>
 													</span>
 												</span>
 											</a>
@@ -573,6 +582,36 @@
 				clickable: true,
 			}
 		});
+		
+		$.fn.generateStars = function() {
+		    return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
+		};
+
+		// 숫자 평점을 별로 변환하도록 호출하는 함수
+		$('.star').generateStars();
+		/* 별점 출력
+		console.log($('.service').text())
+		$(document).on('click', '.sc', function(){
+			if($('.service').text() == 1){
+				$(this).text("")
+				$(this).append('<i class="fas fa-star"></i>')
+			}else if(starNum == 2){
+				$(this).text("")
+				$(this).append('<i class="fas fa-star"></i><i class="fas fa-star"></i>')
+			}else if(starNum == 3){
+				$(this).text("")
+				$(this).append('<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>')
+			}else if(starNum == 4){
+				$(this).text("")
+				$(this).append('<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>')
+			}else if(starNum == 5){
+				$(this).text("")
+				$(this).append('<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>')
+			}else{
+				$(this).text("?????")
+			}
+		})
+		 */
 	</script>
 </body>
 </html>
