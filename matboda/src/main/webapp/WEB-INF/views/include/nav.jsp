@@ -18,6 +18,12 @@
 	display: block;
 	content: '';
 }
+.nav-container{
+	position: fixed;
+	left: 0;
+	right: 0;
+	height: 70px;
+}
 .nav {
 	position: relative;
 	background: wheat;
