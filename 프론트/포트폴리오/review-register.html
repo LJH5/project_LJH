@@ -44,9 +44,6 @@
             color: rgb(255, 165, 0);
             box-shadow: 0px 2px 1px #dee2e6;
         }
-        .middle-container{
-            margin-bottom: 10px;
-        }
         .content-container{
             width: 620px;
             margin: 0 auto;
@@ -56,9 +53,19 @@
             border: none;
             overflow: hidden; 
             resize: none;
+            min-height: 300px;
         }
         .content-container textarea:focus{
             outline: none;
+        }
+        .text-length{
+            position: relative;
+            height: 30px;
+          
+        }
+        .text-length #counter{
+            position: absolute;
+            right: 0;
         }
         .image-container{
             margin-bottom: 30px;
@@ -155,10 +162,12 @@
                         <input type="hidden" name="re_totalSc">
                         <input type="hidden" name="re_rt_num" value="${num}">
                     </div>
+                    <textarea id="xt" style="width:600px;height:1px;overflow-y:hidden;position:absolute;top:-10px;" disabled></textarea>
                     <div class="content-container">
-                        <textarea name="re_content" onkeyup="len_check()" onkeydown="adjustHeight();" placeholder="님, 주문하신 메뉴는 어떠셨나요? 궁금해요!"></textarea>
+                        <textarea id="re_content" name="re_content" onkeyup="xSize(this)" placeholder="님, 주문하신 메뉴는 어떠셨나요? 궁금해요!"></textarea>
                     </div>
                 </div>
+                <div class="text-length"><span style="color:#aaa;" id="counter">(0 / 1000)</span></div>
                 <div class="image-container">
                     <div class="image-box"></div>
                     <div class="form-group files">
@@ -177,24 +186,37 @@
     <script>
         $(function(){
             // textarea 높이 자동
-            function adjustHeight() {
-                var textEle = $('textarea');
-                textEle[0].style.height = 'auto';
-                var textEleHeight = textEle.prop('scrollHeight');
-                textEle.css('height', textEleHeight);
-            };
-            adjustHeight();
-            
-            // textarea 글자수 제한
-            function len_check(){
-                var frm = document.insertFrm.re_content;
-                alert(frm)
-                if(frm.value.length > 20){
-                    alert("영문 20000자, 한글 10000자로 제한됩니다!");
-                    frm.value = frm.value.substring(0,20);
-                    frm.focus();
+            function xSize(e){
+                var xe = document.getElementById('xt'),
+                    t;
+
+                e.onfocus = function(){
+                    t = setInterval(
+                        function()
+                        {
+                            xe.value = e.value;
+                            e.style.height = (xe.scrollHeight + 12) + 'px';
+                        }, 100);
+                }
+
+                e.onblur = function()
+                {
+                    clearInterval(t);
                 }
             }
+            xSize(document.getElementById('re_content'));
+
+            // textarea 글자수 제한
+            $('.content-container').keyup(function (e){
+                var content = $(this).children().val();
+                $('#counter').html("("+content.length+" / 1000)");    //글자수 실시간 카운팅
+
+                if (content.length > 1000){
+                    alert("최대 1000자까지 입력 가능합니다.");
+                    $(this).children().val(content.substring(0, 1000));
+                    $('#counter').html("(1000 / 1000)");
+                }
+            });
         })
     </script>
 </body>
