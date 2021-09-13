@@ -278,6 +278,7 @@
         .side-box .modify-box:hover,
         .side-box .modify-box:hover a{
             color: rgb(255, 165, 0);
+            cursor: pointer;
         }
         .side-box .report-box:hover,
         .side-box .report-box:hover a,
@@ -286,12 +287,13 @@
             color: rgb(206, 3, 3);
             cursor: pointer;
         }
-        .side-box .report-box div,
-        .side-box .recommend-box div,
+        .side-box .report-box a span,
+        .side-box .recommend-box a span,
         .side-box .modify-box div,
         .side-box .delete-box div{
             font-size: 15px;
             font-weight: bold;
+          	display: block;
         }
         .right-container{
             width: 25%;
@@ -396,8 +398,14 @@
 								<div class="review-inner">
 									<div class="user-box">
 										<div class="img-box">
-											<img
-												src="<%=request.getContextPath() %>/img/${review.re_me_picture}">
+										<c:choose>
+											<c:when test="${review.re_me_picture == null || review.re_me_picture == ''}">
+												<img src="<%=request.getContextPath()%>/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png">
+											</c:when>
+											<c:otherwise>
+												<img src="<%=request.getContextPath() %>/img/${review.re_me_picture}">
+											</c:otherwise>
+										</c:choose>
 										</div>
 										<div class="user-nickname">${review.re_me_nickname}</div>
 										<div class="user-inf">
@@ -455,16 +463,18 @@
 											</a>
 										</div>
 										<c:choose>
-											<c:when test="${user.me_id != rt.rt_me_id}">
+											<c:when test="${user.me_id != review.re_me_id}">
 												<div class="recommend-box aPrevent">
-													<a href="#"> <i class="far fa-thumbs-up"></i>
+													<a href="#"> 
+														<i class="far fa-thumbs-up"></i>
+														<span>맛잘알</span>
 													</a>
-													<div>맛잘알</div>
 												</div>
 												<div class="report-box aPrivent">
-													<a href="#"> <i class="fas fa-bullhorn"></i>
+													<a href="#"> 
+														<i class="fas fa-bullhorn"></i>
+														<span>신고</span>
 													</a>
-													<div>신고</div>
 												</div>
 											</c:when>
 											<c:otherwise>
@@ -572,9 +582,9 @@
 			slidesPerGroup: 1,
 			grabCursor: true,
 			loop: true,
-			loopFillGroupWithBlank: true,
+			loopFillGroupWithBlank: false,
 			autoplay: {
-				delay: 3000,
+				delay: 2000,
 				disableOnInteraction: false,
 			},
 			pagination: {
