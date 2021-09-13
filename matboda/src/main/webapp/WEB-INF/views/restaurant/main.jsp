@@ -299,8 +299,8 @@
             width: 25%;
         }
         .right-container .map{
-            width: 500px;
-            height: 500px;
+            width: 450px;
+            height: 450px;
             background-color: lime;
         }
         .after::after{

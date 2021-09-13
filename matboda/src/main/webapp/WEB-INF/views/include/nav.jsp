@@ -18,14 +18,19 @@
 	display: block;
 	content: '';
 }
-
 .nav {
 	position: relative;
 	background: wheat;
 	height: 70px;
 	padding: 10px;
+	
 }
 
+@media screen and (max-width: 340px) {
+	.nav-container {
+		display: none;
+	}
+}
 .nav .logo {
 	margin-top: 5px;
 }
@@ -55,6 +60,7 @@
 	right: 100px;
 	top: calc(50% - 28px);
 	margin: 0 auto;
+	overflow: hidden;
 }
 
 .search-bar .search-input:focus {
@@ -155,7 +161,7 @@
 .search-input {
 	color: rgb(255, 165, 0);
 	height: 30px;
-	width: 400px;
+	width: 90%;
 	position: absolute;
 	top: 8px;
 	left: 10px;
