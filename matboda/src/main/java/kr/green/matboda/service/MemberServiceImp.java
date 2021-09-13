@@ -163,7 +163,11 @@ public class MemberServiceImp implements MemberService{
 			return null;
 		MemberVO dbUser = memberDao.selectUser(user.getMe_id());
 		String imageName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
-		dbUser.setMe_picture(imageName);
+		if(file.getOriginalFilename().equals("") ) {
+			dbUser.setMe_picture("");
+		}else {
+			dbUser.setMe_picture(imageName);
+		}
 		dbUser.setMe_nickname(user.getMe_nickname());
 		dbUser.setMe_email(user.getMe_email());
 		dbUser.setMe_phoneNum(user.getMe_phoneNum());

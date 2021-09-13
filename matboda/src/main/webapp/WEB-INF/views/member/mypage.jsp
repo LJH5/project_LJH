@@ -21,7 +21,7 @@
 	<h1>Mypage</h1>
 	<div class="me_picture">
 		<c:choose>
-			<c:when test="${user.me_picture == null || user.me_picture ==''}">
+			<c:when test="${user.me_picture == null || user.me_picture == ''}">
 				<img src="/matboda/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png" style="width: 180px;">
 			</c:when>
 			<c:otherwise>
