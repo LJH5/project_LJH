@@ -10,18 +10,34 @@
 		.error{
 			color : red
 		}
+		.img-box{
+			position: relative;
+		}
 		.img-box img{
 			width: 200px;
 			height: 200px;
 			border-radius: 100%;
 		}
-		#image_contaniner{
-			background: black;
-			width: 200px;
-			height: 200px;
+		#image-container{
+			background: white;
+			width: 210px;
+			height: 210px;
 			position: absolute;
-			left: 10px;
+			left: 0;
+			top: 0;
 			z-index: 2;
+			display: none;
+		}
+		#image-container i{
+			position: absolute;
+		    top: 0;
+		    right: 0;
+		    font-size: 30px;
+		    color: rgb(110,110,110);
+		}
+		#image-container i:hover{
+			 color: rgb(250,160,110);
+			 cursor: pointer;
 		}
 	</style>
 </head>
@@ -30,7 +46,7 @@
 <form class="container" method="post" action="<%=request.getContextPath()%>/member/modify" enctype="multipart/form-data">
 	<h1>프로필 수정</h1>
 	<div class="form-group img-box">
-		<label  class="me_picture" for="me_picture">
+		<label class="me_picture" for="me_picture">
 			<c:choose>
 				<c:when test="${user.me_picture == null || user.me_picture == ''}">
 					<img src="/matboda/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png" style="width: 180px;">
@@ -40,7 +56,7 @@
 				</c:otherwise>
 			</c:choose>
 		</label>
-		<div id="image_container"></div>
+		<div id="image-container"><i class="far fa-window-close"></i></div>
 		<input type="file" name="file" id="me_picture" style="display: none;" accept="image/*" onchange="setThumbnail(event);"/>
 	</div>
 	<div class="form-group">
@@ -59,58 +75,74 @@
 	<button class="btn btn-outline-success col-12">수정하기</button>
 </form>
 <script type="text/javascript">
-$(function(){
-    $("form").validate({
-        rules: {
-            me_email: {
-                required : true,
-                regex: /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/
-            },
-            me_phoneNum: {
-            	required : true,
-            	regex: /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/
-            },
-            me_nickname: {
-            	regex: /^([가-힣a-zA-Z]+){2,15}$/
-            },
-        },
-        //규칙체크 실패시 출력될 메시지
-        messages : {
-            me_email: {
-                required : "필수 정보입니다.",
-                regex : "메일규칙에 어긋납니다."
-            },
-            me_phoneNum: {
-            	required: "필수 정보입니다.",
-            		regex : "올바른 전화번호가 아닙니다."
-            },
-            me_gender: {
-            	required : "필수 정보입니다."
-            },
-            me_nickname: {
-            	 regex : "2~20자의 한글이나 영문 대ㆍ소문자만 사용 가능합니다."
-            }
-        }
-    });
-	$.validator.addMethod(
-	    "regex",
-	    function(value, element, regexp) {
-	        var re = new RegExp(regexp);
-	        return this.optional(element) || re.test(value);
-	    },
-	    "입력이 잘못되었습니다."
-	);
+	$(function(){
+		$("form").validate({
+	       rules: {
+	           me_email: {
+	               required : true,
+	               regex: /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/
+	           },
+	           me_phoneNum: {
+	           	required : true,
+	           	regex: /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/
+	           },
+	           me_nickname: {
+	           	regex: /^([가-힣a-zA-Z]+){2,15}$/
+	           },
+	       },
+	       //규칙체크 실패시 출력될 메시지
+	       messages : {
+	           me_email: {
+	               required : "필수 정보입니다.",
+	               regex : "메일규칙에 어긋납니다."
+	           },
+	           me_phoneNum: {
+	           	required: "필수 정보입니다.",
+	           		regex : "올바른 전화번호가 아닙니다."
+	           },
+	           me_gender: {
+	           	required : "필수 정보입니다."
+	           },
+	           me_nickname: {
+	           	 regex : "2~20자의 한글이나 영문 대ㆍ소문자만 사용 가능합니다."
+	           }
+	       }
+		});
+		$.validator.addMethod(
+		    "regex",
+		    function(value, element, regexp) {
+		        var re = new RegExp(regexp);
+		        return this.optional(element) || re.test(value);
+		    },
+		    "입력이 잘못되었습니다."
+		);
+	});
 </script>
-<script> 
+<script>
+	/* 이미지를 클릭해서 이미지 변경하는 기능 */
 	function setThumbnail(event) { 
 		var reader = new FileReader(); 
 		reader.onload = function(event) { 
 			var img = document.createElement("img"); 
 			img.setAttribute("src", event.target.result); 
-			document.querySelector("div#image_container").appendChild(img); 
+			document.querySelector("div#image-container").appendChild(img); 
 		};
-		reader.readAsDataURL(event.target.files[0]); 
-	} 
+		reader.readAsDataURL(event.target.files[0]);
+		$('#image-container').show();
+	}
+	$(function() {
+		$('.fa-window-close').click(function(){
+			$('#image-container').hide();
+			$('#image-container img').remove();
+			$('input[name=file]').val("");
+		})
+		
+		$('button').click(function() {
+			if($('input[name=file]').val() == ''){
+				$('input[name=file]').val("프로필사진(기본).png")
+			}
+		})
+	})
 </script>
 </body>
 </html>
