@@ -115,6 +115,7 @@ public class ReviewServiceImp implements ReviewService {
 		dbReview.setRe_tasty(review.getRe_tasty());
 		dbReview.setRe_quantity(review.getRe_quantity());
 		dbReview.setRe_content(review.getRe_content());
+		dbReview.setRe_totalSc(review.getRe_totalSc());
 		
 		reviewDao.updateReview(dbReview);
 		
