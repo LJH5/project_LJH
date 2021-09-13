@@ -104,9 +104,11 @@
 			<div class="review-box form-group">
 				<textarea class="review-input form-control mb-2" name="re_content" placeholder="리뷰를 작성해주세요.">${review.re_content}</textarea>
 				<c:forEach items="${imageList}" var="image">
-					<img name="imageList" src="<%=request.getContextPath() %>/img/${image.im_name}" style="width: 100px" height="100px">
-					<button type="button" class="del-btn">X</button>
-					<input type="hidden"name="imageNum" value="${image.im_num}">
+					<span>
+						<img name="imageList" src="<%=request.getContextPath() %>/img/${image.im_name}" style="width: 100px" height="100px">
+						<button type="button" class="del-btn">X</button>
+						<input type="hidden"name="imageNum" value="${image.im_num}">
+					</span>
 				</c:forEach>
 				<c:if test="${imageList == null || imageList.size() < 5}">
 					<div class="form-group files">
@@ -135,7 +137,6 @@
 			$(document).on('change', 'input[name=imageList]', function(){
 				var val = $(this).val();
 				var length = $('[name=imageList]').length;
-				alert(length)
 				var str = '<input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)">'+
 						  '<input type="hidden"name="imageNum" value="${image.im_num}">';
 				
