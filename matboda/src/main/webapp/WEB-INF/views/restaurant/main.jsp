@@ -260,7 +260,7 @@
 		    max-width:80px; 
 		}
         .side-box .report-box,
-        .side-box .recommend-box,
+        .side-box .recommend-btn,
         .side-box .modify-box,
         .side-box .delete-box{
             font-size: 30px;
@@ -268,13 +268,13 @@
             color: rgb(112, 112, 112);
         }
         .side-box .report-box a,
-        .side-box .recommend-box a,
+        .side-box .recommend-btn a,
         .side-box .modify-box a,
         .side-box .delete-box a{
             color: rgb(112, 112, 112);
         }
-        .side-box .recommend-box:hover,
-        .side-box .recommend-box:hover a,
+        .side-box .recommend-btn:hover,
+        .side-box .recommend-btn:hover a,
         .side-box .modify-box:hover,
         .side-box .modify-box:hover a{
             color: rgb(255, 165, 0);
@@ -288,7 +288,7 @@
             cursor: pointer;
         }
         .side-box .report-box a span,
-        .side-box .recommend-box a span,
+        .side-box .recommend-btn a span,
         .side-box .modify-box div,
         .side-box .delete-box div{
             font-size: 15px;
@@ -464,13 +464,14 @@
 										</div>
 										<c:choose>
 											<c:when test="${user.me_id != review.re_me_id}">
-												<div class="recommend-box aPrevent">
+												<div class="recommend-btn aPrevent">
 													<a href="#"> 
 														<i class="far fa-thumbs-up"></i>
-														<span>맛잘알</span>
+														<span class="">맛잘알</span>
 													</a>
+													<input type="hidden" name="re_num" value="${review.re_num}">
 												</div>
-												<div class="report-box aPrivent">
+												<div class="report-box aPrevent">
 													<a href="#"> 
 														<i class="fas fa-bullhorn"></i>
 														<span>신고</span>
@@ -529,9 +530,13 @@
 			$('.review-btn').click(function(){
 				$(this).parent().submit();
 			})
+			
+			// a 태그 클릭시 화면 이동 방지
 			$('.aPrevent a').click(function(e) {
 				e.preventDefault();
 			})
+			
+			//리뷰 삭제
 			var contextPath = '<%=request.getContextPath()%>';
 			var rt_num = ${rt.rt_num};
 			$(document).on('click','.delete-box',function() {
@@ -553,26 +558,15 @@
 					}
 				})
 			})
-			/* var review = $(this).parent().children().last().val();
-			var state = $(this).hasClass('up') ? 1 : 0;
-			$.ajax({
-				type : 'get',
-				url : contextPath + '/recommend/' + review + '/' + state,
-				success : function(result, status, xhr) {
-					$('.recommend-btn i').removeClass('fas').addClass('far');
-					if (result == 'UP') {
-						alert('해당 게시글을 추천했습니다.');
-						$('.recommend-btn.up i').addClass('fas');
-					} else if (result == 'GUEST') {
-						alert('추천을 하려면 로그인을 하세요.');
-					} else if (result == 'CANCEL') {
-						alert('추천을 취소했습니다.')
-					}
-				},
-				error : function(xhr, status, e) {
-					console.log('에러 발생');
-				}
-			}) */
+			
+			// 추천/신고 기능
+			$(document).on('click', '.recommend-btn', function() {
+				alert('추천')
+				$(this).children('a').attr('style','color: rgb(255, 165, 0);')
+				var state = $(this).hasClass('up') ? 1 : 0;
+				var re_num = $(this).children('input[name=re_num]').val();
+				alert(re_num)
+			})
 		})
 	</script>
 	<script>
@@ -596,32 +590,6 @@
 		$.fn.generateStars = function() {
 		    return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
 		};
-
-		// 숫자 평점을 별로 변환하도록 호출하는 함수
-		$('.star').generateStars();
-		/* 별점 출력
-		console.log($('.service').text())
-		$(document).on('click', '.sc', function(){
-			if($('.service').text() == 1){
-				$(this).text("")
-				$(this).append('<i class="fas fa-star"></i>')
-			}else if(starNum == 2){
-				$(this).text("")
-				$(this).append('<i class="fas fa-star"></i><i class="fas fa-star"></i>')
-			}else if(starNum == 3){
-				$(this).text("")
-				$(this).append('<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>')
-			}else if(starNum == 4){
-				$(this).text("")
-				$(this).append('<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>')
-			}else if(starNum == 5){
-				$(this).text("")
-				$(this).append('<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>')
-			}else{
-				$(this).text("?????")
-			}
-		})
-		 */
 	</script>
 </body>
 </html>
