@@ -259,7 +259,7 @@
 		    background-position: 0 0;
 		    max-width:80px; 
 		}
-        .side-box .report-box,
+        .side-box .report-btn,
         .side-box .recommend-btn,
         .side-box .modify-box,
         .side-box .delete-box{
@@ -267,7 +267,7 @@
             text-align: center;
             color: rgb(112, 112, 112);
         }
-        .side-box .report-box a,
+        .side-box .report-btn a,
         .side-box .recommend-btn a,
         .side-box .modify-box a,
         .side-box .delete-box a{
@@ -280,14 +280,14 @@
             color: rgb(255, 165, 0);
             cursor: pointer;
         }
-        .side-box .report-box:hover,
-        .side-box .report-box:hover a,
+        .side-box .report-btn:hover,
+        .side-box .report-btn:hover a,
         .side-box .delete-box:hover,
         .side-box .delete-box:hover a{
             color: rgb(206, 3, 3);
             cursor: pointer;
         }
-        .side-box .report-box a span,
+        .side-box .report-btn a span,
         .side-box .recommend-btn a span,
         .side-box .modify-box div,
         .side-box .delete-box div{
@@ -352,9 +352,9 @@
 							</div>
 						</div>
 						<div class="inf-box">
-							<span id="views"><i class="far fa-eye"></i>조회수</span> <span
-								id="reviewNum"><i class="fas fa-pen"></i>리뷰수</span> <span
-								id="favoritesNum"><i class="fas fa-star"></i>즐겨찾기수</span>
+							<span id="views"><i class="far fa-eye"></i>${rt.rt_view}</span> 
+							<span id="reviewNum"><i class="fas fa-pen"></i>리뷰수</span> 
+							<span id="favoritesNum"><i class="fas fa-star"></i>즐겨찾기수</span>
 						</div>
 					</div>
 					<div class="middle-container">
@@ -464,18 +464,19 @@
 										</div>
 										<c:choose>
 											<c:when test="${user.me_id != review.re_me_id}">
-												<div class="recommend-btn aPrevent">
+												<div class="recommend-btn re-btn up aPrevent">
 													<a href="#"> 
 														<i class="far fa-thumbs-up"></i>
 														<span class="">맛잘알</span>
 													</a>
 													<input type="hidden" name="re_num" value="${review.re_num}">
 												</div>
-												<div class="report-box aPrevent">
+												<div class="report-btn re-btn aPrevent">
 													<a href="#"> 
 														<i class="fas fa-bullhorn"></i>
 														<span>신고</span>
 													</a>
+													<input type="hidden" name="re_num" value="${review.re_num}">
 												</div>
 											</c:when>
 											<c:otherwise>
@@ -560,12 +561,25 @@
 			})
 			
 			// 추천/신고 기능
-			$(document).on('click', '.recommend-btn', function() {
-				alert('추천')
-				$(this).children('a').attr('style','color: rgb(255, 165, 0);')
-				var state = $(this).hasClass('up') ? 1 : 0;
+			$(document).on('click', '.re-btn', function() {
+				//alert('추천')
+				var state = $(this).hasClass('up') ? 1 : -1;
+				//alert(state)
 				var re_num = $(this).children('input[name=re_num]').val();
-				alert(re_num)
+				//alert(re_num) 확인
+				var obj = $(this);
+				
+				$.ajax({
+					type: 'get',
+					url: contextPath + '/review/recommend/' + state + '/' + re_num,
+					dataType: "json",
+					success : function(res){
+						if(res == 1){
+							alert(1);
+						}
+					}
+				})
+				
 			})
 		})
 	</script>

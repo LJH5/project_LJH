@@ -20,4 +20,6 @@ public interface RestaurantService {
 
 	ArrayList<RestaurantVO> getSearchRestaurant(Criteria cri);
 
+	int updateView(Integer num);
+
 }

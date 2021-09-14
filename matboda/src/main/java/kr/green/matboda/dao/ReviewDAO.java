@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.ImageVO;
+import kr.green.matboda.vo.RecommendVO;
 import kr.green.matboda.vo.ReviewVO;
 
 public interface ReviewDAO {
@@ -29,5 +30,11 @@ public interface ReviewDAO {
 	ArrayList<ImageVO> selectTopImageList(Integer num);
 
 	int selectTotalCount(@Param("num")Integer num, @Param("cri")Criteria cri);
+
+	RecommendVO selectRecommend(@Param("re_num")Integer re_num, @Param("me_id")String me_id);
+
+	void insertRecommend(@Param("re_num")Integer re_num, @Param("me_id")String me_id, @Param("state")int state);
+
+	void updateRecommend(@Param("rvo")RecommendVO rvo);
 
 }

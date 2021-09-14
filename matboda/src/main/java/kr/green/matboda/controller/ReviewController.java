@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,5 +64,19 @@ public class ReviewController {
 		mv.addObject("re_num", review.getRe_num());
 		mv.setViewName("redirect:/restaurant/main?num="+review.getRe_rt_num());
 		return mv;
+	}
+	@ResponseBody
+	@GetMapping("recommend/{state}/{re_num}")
+	public ModelAndView recommendGet(ModelAndView mv, @PathVariable("state") int state, @PathVariable("re_num") Integer re_num, HttpServletRequest request) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		int res = reviewService.updateRecommend(re_num, user, state);
+//		System.out.println(user);
+//		System.out.println(re_num);
+//		System.out.println(state);
+		mv.addObject("state", state);
+		mv.addObject("re_num", re_num);
+		mv.addObject("result", res);
+		return mv;
+		
 	}
 }

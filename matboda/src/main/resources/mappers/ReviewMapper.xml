@@ -56,4 +56,15 @@
 	<select id="selectTotalCount" resultType="int">
 		select count(*) from review where re_rt_num = #{num}
 	</select>
+	<select id="selectRecommend" resultType="kr.green.matboda.vo.RecommendVO">
+		select * from recommend where rc_re_num = #{re_num} and rc_me_id = #{me_id}
+	</select>
+	<insert id="insertRecommend">
+		insert into recommend(rc_re_num, rc_me_id, rc_state)
+			values(#{re_num}, #{me_id}, #{state})
+	</insert>
+	<update id="updateRecommend">
+		update recommend set rc_state = #{rvo.rc_state}
+			where rc_me_id = #{rvo.rc_me_id} and rc_re_num = #{rvo.rc_re_num}
+	</update>
 </mapper>

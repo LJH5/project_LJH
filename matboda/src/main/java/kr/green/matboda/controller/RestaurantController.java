@@ -47,6 +47,8 @@ public class RestaurantController {
 	}
 	@GetMapping("/main")
 	public ModelAndView restaurantMainGet(ModelAndView mv, Integer num, Criteria cri) {
+		restaurantService.updateView(num);
+		System.out.println(num);
 		RestaurantVO rt = restaurantService.getRt(num);
 		
 		cri.setPerPageNum(5);

@@ -13,15 +13,16 @@ import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.utils.UploadFileUtils;
 import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
+import kr.green.matboda.vo.RecommendVO;
 import kr.green.matboda.vo.ReviewVO;
 
 @Service
 public class ReviewServiceImp implements ReviewService {
 	@Autowired
 	private ReviewDAO reviewDao;
-
 	@Autowired
 	private RestaurantDAO restaurantDao;
+	
 	private String uploadPath = "D:\\JAVA_LJH\\img";
 
 	@Override
@@ -152,6 +153,29 @@ public class ReviewServiceImp implements ReviewService {
 	@Override
 	public int getTotalCount( Integer num, Criteria cri) {
 		return reviewDao.selectTotalCount(num, cri);
+	}
+
+	@Override
+	public int updateRecommend(Integer re_num, MemberVO user, int state) {
+		// 추천 1, 추천 취소 0, 로그인x -1
+		if(user == null)
+			return -1;
+		RecommendVO  rvo = reviewDao.selectRecommend(re_num, user.getMe_id());
+		if(rvo == null) {
+			reviewDao.insertRecommend(re_num, user.getMe_id(), state);
+			return 1;
+		}else {
+			// 취소
+			if(state == rvo.getRc_state()) {
+				rvo.setRc_state(0);
+				reviewDao.updateRecommend(rvo);
+				return 0;
+			}else {
+				rvo.setRc_state(state);
+				reviewDao.updateRecommend(rvo);
+				return 1;
+			}
+		}
 	}
 
 }

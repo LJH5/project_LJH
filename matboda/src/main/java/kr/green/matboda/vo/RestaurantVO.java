@@ -20,6 +20,7 @@ public class RestaurantVO {
 	private float rt_score;
 	private String rt_im_name; 
 	private int rt_reNum;
+	private int rt_view;
 	
 	public String getDate(Date date) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

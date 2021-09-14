@@ -23,4 +23,6 @@ public interface RestaurantDAO {
 
 	ArrayList<RestaurantVO> selectSearchRestaurant(@Param("cri")Criteria cri);
 
+	Object updateView(Integer num);
+
 }
