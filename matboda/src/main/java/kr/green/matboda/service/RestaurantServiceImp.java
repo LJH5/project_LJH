@@ -74,6 +74,7 @@ public class RestaurantServiceImp implements RestaurantService{
 	@Override
 	public int updateView(Integer num) {
 		RestaurantVO rt = restaurantDao.selectRt(num);
+		System.out.println(rt);
 		if(rt != null) {
 			rt.setRt_view(rt.getRt_view()+1);
 			restaurantDao.updateRt(rt);

@@ -18,7 +18,8 @@
  			rt_phoneNum =  #{rt_phoneNum},
  			rt_type = #{rt_type},
  			rt_openTime = #{rt_openTime},
- 			rt_upDate = #{rt_upDate}
+ 			rt_upDate = #{rt_upDate},
+ 			rt_view = #{rt_view},
  			where rt_num = #{rt_num}
  	</update>
  	<select id="selectRestaurant" resultType="kr.green.matboda.vo.RestaurantVO">
