@@ -21,6 +21,7 @@
 <style>
 	.body{
 		min-height: calc(100vh - 200px - 56px);
+		padding-top: 70px;
 	}
 </style>
 </head>

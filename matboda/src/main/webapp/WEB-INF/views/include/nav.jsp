@@ -22,7 +22,8 @@
 	position: fixed;
 	left: 0;
 	right: 0;
-	height: 70px;
+	top: 0;
+	z-index: 30;
 }
 .nav {
 	position: relative;
@@ -67,6 +68,7 @@
 	top: calc(50% - 28px);
 	margin: 0 auto;
 	overflow: hidden;
+	
 }
 
 .search-bar .search-input:focus {
@@ -125,7 +127,6 @@
 	position: absolute;
 	top: 70px;
 	right: -10px;
-	z-index: 3;
 	display: none;
 }
 

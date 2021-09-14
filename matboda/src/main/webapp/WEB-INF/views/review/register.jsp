@@ -5,11 +5,11 @@
 <html>
 <head>
 	<style type="text/css">
-		 *{
-            margin: 0;
-            padding: 0;
-            text-decoration: none;
-            list-style: none;
+		*{
+			margin: 0;
+			padding: 0;
+			text-decoration: none;
+			list-style: none;
         }
         .inner-container{
             width: 700px;
@@ -194,15 +194,13 @@
 			
 			    e.onfocus = function(){
 			        t = setInterval(
-			            function()
-			            {
+			            function(){
 			                xe.value = e.value;
 			                e.style.height = (xe.scrollHeight + 12) + 'px';
 			            }, 100);
 			    }
 			
-			    e.onblur = function()
-			    {
+			    e.onblur = function(){
 			        clearInterval(t);
 			    }
 			}
