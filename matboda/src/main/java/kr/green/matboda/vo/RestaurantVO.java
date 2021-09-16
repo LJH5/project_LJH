@@ -13,7 +13,6 @@ public class RestaurantVO {
 	private String rt_phoneNum;
 	private String rt_type;
 	private String rt_openTime;
-	private String rt_menu;
 	private String rt_me_id;
 	private Date rt_regDate;
 	private String rt_upDate;
