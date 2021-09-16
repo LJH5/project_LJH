@@ -38,4 +38,6 @@ public interface ReviewDAO {
 
 	void updateRecommend(@Param("rvo")RecommendVO rvo);
 
+	void deleteRtReview(Integer num);
+
 }

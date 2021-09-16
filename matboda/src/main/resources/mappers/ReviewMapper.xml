@@ -68,4 +68,7 @@
 		update recommend set rc_state = #{rvo.rc_state}
 			where rc_me_id = #{rvo.rc_me_id} and rc_re_num = #{rvo.rc_re_num}
 	</update>
+	<delete id="deleteRtReview">
+		delete from review where re_rt_num = #{num}
+	</delete>
 </mapper>

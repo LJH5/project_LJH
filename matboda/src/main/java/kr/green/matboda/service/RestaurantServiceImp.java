@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.stereotype.Service;
 
 import kr.green.matboda.dao.RestaurantDAO;
+import kr.green.matboda.dao.ReviewDAO;
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.MemberVO;
 import kr.green.matboda.vo.RestaurantVO;
@@ -16,6 +17,7 @@ import lombok.AllArgsConstructor;
 public class RestaurantServiceImp implements RestaurantService{
 
 	private RestaurantDAO restaurantDao;
+	private ReviewDAO reviewDao;
 
 	@Override
 	public void insertRestaurant(RestaurantVO rt, MemberVO user) {
@@ -63,6 +65,7 @@ public class RestaurantServiceImp implements RestaurantService{
 		if(rt == null || (!user.getMe_authority().equals("ADMIN") && !user.getMe_authority().equals("SUPER ADMIN")))
 			return;
 		restaurantDao.deleteRt(num);
+		reviewDao.deleteRtReview(num);
 	}
 
 	@Override
