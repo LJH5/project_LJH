@@ -571,7 +571,6 @@
 				$.ajax({
 					type: 'get',
 					url: contextPath + '/review/recommend/' + state + '/' + re_num,
-					dataType: "json",
 					success : function(result, status, xhr){
 						if(result == 'RECOMMEND'){
 							alert('추천');

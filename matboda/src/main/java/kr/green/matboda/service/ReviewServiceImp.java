@@ -159,7 +159,7 @@ public class ReviewServiceImp implements ReviewService {
 	public String updateRecommend(Integer re_num, MemberVO user, int state) {
 		if(user == null)
 			return "GUEST";
-		RecommendVO rvo = reviewDao.selectRecommend(re_num,user.getMe_id());
+		RecommendVO rvo = reviewDao.selectRecommend(re_num, user.getMe_id());
 
 		if(rvo == null) {
 			reviewDao.insertRecommend(re_num, user.getMe_id(), state);
