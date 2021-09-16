@@ -76,7 +76,6 @@ public class RestaurantServiceImp implements RestaurantService{
 		RestaurantVO rt = restaurantDao.selectRt(num);
 		if(rt != null) {
 			rt.setRt_view(rt.getRt_view()+1);
-			System.out.println(rt);
 			restaurantDao.updateRt(rt);
 		}
 		return 0;
