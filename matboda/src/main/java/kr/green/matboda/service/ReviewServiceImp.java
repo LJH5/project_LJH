@@ -44,10 +44,10 @@ public class ReviewServiceImp implements ReviewService {
 	}
 
 	@Override
-	public ArrayList<ReviewVO> getReviewList(Integer num, Criteria cri) {
+	public ArrayList<ReviewVO> getReviewList(Integer num, Criteria cri, MemberVO user) {
 		if(num == null)
 			return null;
-		return reviewDao.selectReview(num, cri);
+		return reviewDao.selectReview(num, cri, user);
 	}
 
 	@Override

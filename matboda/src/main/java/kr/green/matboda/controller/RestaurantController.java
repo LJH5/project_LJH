@@ -46,12 +46,14 @@ public class RestaurantController {
 		return mv;
 	}
 	@GetMapping("/main")
-	public ModelAndView restaurantMainGet(ModelAndView mv, Integer num, Criteria cri) {
+	public ModelAndView restaurantMainGet(ModelAndView mv, Integer num, Criteria cri, HttpServletRequest request) {
 		restaurantService.updateView(num);
 		RestaurantVO rt = restaurantService.getRt(num);
 		
+		MemberVO user = memberService.getMemberByRequest(request);
+		
 		cri.setPerPageNum(5);
-		ArrayList<ReviewVO> review = reviewService.getReviewList(num, cri);
+		ArrayList<ReviewVO> review = reviewService.getReviewList(num, cri, user);
 		int totalCount = reviewService.getTotalCount(num, cri);
 		PageMaker pm = new PageMaker(totalCount, 5, cri);
 		

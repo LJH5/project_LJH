@@ -465,17 +465,37 @@
 										<c:choose>
 											<c:when test="${user.me_id != review.re_me_id}">
 												<div class="recommend-btn re-btn up aPrevent">
-													<a href="#"> 
-														<i class="far fa-thumbs-up"></i>
-														<span class="">맛잘알</span>
-													</a>
+													<c:choose>
+														<c:when test="${review.re_rc_state == 1 }">
+															<a href="#" style="color: rgb(255,165,0);"> 
+																<i class="far fa-thumbs-up"></i>
+																<span class="">맛잘알</span>
+															</a>
+														</c:when>
+														<c:otherwise>
+															<a href="#"> 
+																<i class="far fa-thumbs-up"></i>
+																<span class="">맛잘알</span>
+															</a>
+														</c:otherwise>
+													</c:choose>
 													<input type="hidden" name="re_num" value="${review.re_num}">
 												</div>
 												<div class="report-btn re-btn aPrevent">
-													<a href="#"> 
-														<i class="fas fa-bullhorn"></i>
-														<span>신고</span>
-													</a>
+													<c:choose>
+														<c:when test="${review.re_rc_state == -1 }">
+															<a href="#" style="color: rgb(206, 3, 3);"> 
+																<i class="fas fa-bullhorn"></i>
+																<span>신고</span>
+															</a>
+														</c:when>
+														<c:otherwise>
+															<a href="#"> 
+																<i class="fas fa-bullhorn"></i>
+																<span>신고</span>
+															</a>
+														</c:otherwise>
+													</c:choose>
 													<input type="hidden" name="re_num" value="${review.re_num}">
 												</div>
 											</c:when>
@@ -525,6 +545,7 @@
 	</div>
 	<script type="text/javascript">
 		$(function() {
+			
 			$('.sc-total').click(function(){
 			    $(this).next().children().toggle();
 			})

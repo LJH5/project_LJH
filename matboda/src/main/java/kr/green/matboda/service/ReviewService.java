@@ -13,7 +13,7 @@ public interface ReviewService {
 
 	void insertReview(ReviewVO review, MultipartFile[] imageList, MemberVO user) throws Exception;
 
-	ArrayList<ReviewVO> getReviewList(Integer num, Criteria cri);
+	ArrayList<ReviewVO> getReviewList(Integer num, Criteria cri, MemberVO user);
 
 	String deleteReview(Integer re_num, MemberVO user);
 

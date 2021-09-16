@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.ImageVO;
+import kr.green.matboda.vo.MemberVO;
 import kr.green.matboda.vo.RecommendVO;
 import kr.green.matboda.vo.ReviewVO;
 
@@ -13,7 +14,7 @@ public interface ReviewDAO {
 
 	void insertReview(@Param("review")ReviewVO review);
 
-	ArrayList<ReviewVO> selectReview(@Param("num")Integer num, @Param("cri")Criteria cri);
+	ArrayList<ReviewVO> selectReview(@Param("num")Integer num, @Param("cri")Criteria cri, @Param("user")MemberVO user);
 
 	void insertImage(ImageVO file);
 
