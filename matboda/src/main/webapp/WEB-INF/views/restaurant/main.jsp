@@ -562,7 +562,6 @@
 			
 			// 추천/신고 기능
 			$(document).on('click', '.re-btn', function() {
-				//alert('추천')
 				var state = $(this).hasClass('up') ? 1 : -1;
 				//alert(state)
 				var re_num = $(this).children('input[name=re_num]').val();
@@ -573,13 +572,31 @@
 					type: 'get',
 					url: contextPath + '/review/recommend/' + state + '/' + re_num,
 					dataType: "json",
-					success : function(res){
-						if(res == 1){
-							alert(1);
+					success : function(result, status, xhr){
+						if(result == 'RECOMMEND'){
+							alert('추천');
+							obj.siblings().children('a').attr('style','color: rgb(112, 112, 112);');
+							obj.children('a').attr('style','color:rgb(255, 165, 0);');
+						}else if(result == 'REPORT'){
+							alert('신고')
+							obj.siblings().children('a').attr('style','color: rgb(112, 112, 112);');
+							obj.children('a').attr('style','color: rgb(206, 3, 3);');
+						}else if(result == 'GUEST'){
+							alert('추천/비추천을 하려면 로그인을 하세요.');
+						}else if(result == 'CANCEL'){
+							if(state == 1){
+								alert('추천을 취소했습니다.')
+								obj.children('a').attr('style','color: rgb(112, 112, 112);');
+							}else{
+								alert('신고를 취소했습니다.');
+								obj.children('a').attr('style','color: rgb(112, 112, 112);');
+							}
 						}
+					},
+					error : function(xhr, status, e){
+						console.log('에러 발생');
 					}
 				})
-				
 			})
 		})
 	</script>

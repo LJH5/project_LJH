@@ -29,6 +29,6 @@ public interface ReviewService {
 
 	int getTotalCount( Integer num, Criteria cri);
 
-	int updateRecommend(Integer re_num, MemberVO user, int state);
+	String updateRecommend(Integer re_num, MemberVO user, int state);
 
 }

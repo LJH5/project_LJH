@@ -156,26 +156,19 @@ public class ReviewServiceImp implements ReviewService {
 	}
 
 	@Override
-	public int updateRecommend(Integer re_num, MemberVO user, int state) {
-		// 추천 1, 추천 취소 0, 로그인x -1
+	public String updateRecommend(Integer re_num, MemberVO user, int state) {
 		if(user == null)
-			return -1;
-		RecommendVO  rvo = reviewDao.selectRecommend(re_num, user.getMe_id());
+			return "GUEST";
+		RecommendVO rvo = reviewDao.selectRecommend(re_num,user.getMe_id());
+
 		if(rvo == null) {
 			reviewDao.insertRecommend(re_num, user.getMe_id(), state);
-			return 1;
-		}else {
-			// 취소
-			if(state == rvo.getRc_state()) {
-				rvo.setRc_state(0);
-				reviewDao.updateRecommend(rvo);
-				return 0;
-			}else {
-				rvo.setRc_state(state);
-				reviewDao.updateRecommend(rvo);
-				return 1;
-			}
+			return state == 1 ? "RECOMMEND" : "REPORT";
 		}
+		state = state == rvo.getRc_state() ? 0 : state;
+		rvo.setRc_state(state);
+		reviewDao.updateRecommend(rvo);
+		return state == 0 ? "CANCEL": (state == 1 ? "RECOMMEND" : "REPORT");
 	}
 
 }
