@@ -6,40 +6,49 @@
 <html>
 <head>
 	<style type="text/css">
-		.board-box{
-			display: flex;
+		*{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			text-decoration: none;
 		}
-		.navbar-nav{
-			margin-right: 20px
+		.footer-container{
+			
+		}
+		.footer-box{
+			height: 100px;
+			line-height: 100px;
+			min-width: 1400px;
+			padding: 0 10px;
+			border-top: 1px solid rgb(200, 200, 200);
+			background: #fafbfc;
+		}
+		.footer-box span{
+			padding: 0 10px;
+			border-right: 1px solid rgb(212, 212, 212);
+		}
+		.footer-box a {
+			color: black;
+			color: #777;
+		}
+		.footer-box a:hover{
+			text-decoration: underline;
 		}
 	</style>
 </head>
 <body>
-	<div class="jumbotron"style="height: 200px; box-sizing: border-box; margin-bottom: 0">
-		<h4>맛집 정보 다모아</h4>
-		<div class="board-box">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/board/request/list">수정요청</a></li>
-			</ul>
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/board/list">문의사항</a></li>
-			</ul>
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/board/notice/list">공지사항</a></li>
-			</ul>
+	<div class="footer-container">
+		<div class="footer-box">
+			<span><a href="<%=request.getContextPath()%>/board/request/list">수정요청</a></span>
+			<span><a href="<%=request.getContextPath()%>/board/list">문의사항</a></span>
+			<span><a href="<%=request.getContextPath()%>/board/notice/list">공지사항</a></span>
 			<c:if test="${user != null}">
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록</a></li>
-				</ul>	  
+				<span><a href="<%= request.getContextPath() %>/restaurant/register">음식점 등록</a></span>
+				<c:if test="${user.me_authority != 'USER'}">
+					<span><a href="<%= request.getContextPath() %>/admin/user/list">회원관리</a></span>	
+				</c:if>
 			</c:if>
 		</div>
-		<c:if test="${user != null}">
-			<ul class="navbar-nav">
-				<c:if test="${user.me_authority != 'USER'}">
-					<li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/admin/user/list">회원관리</a></li>	
-				</c:if>
-			</ul>
-		</c:if>
 	</div>
 </body>
 </html>

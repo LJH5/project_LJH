@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			text-decoration: none;
+		}
+		.footer-container{
+			height: 50px;
+			padding: 10px;
+			background: rgb(233, 240, 240);
+			border-top: 1px solid rgb(122, 122, 122);
+			line-height: 50px;
+		}
+		.footer-box span{
+			padding: 0 10px;
+			border-right: 1px solid rgb(212, 212, 212);
+		}
+		.footer-box a {
+			color: black;
+		}
+		.footer-box a:hover{
+			text-decoration: underline;
+		}
+	</style>
+</head>
+<body>
+	<div style="margin-bottom: 20px;"></div>
+	<div class="footer-container">
+		<div class="footer-box">
+			<span><a class="nav-link" href="<%=request.getContextPath()%>/board/request/list">수정요청</a></span>
+			<span><a class="nav-link" href="<%=request.getContextPath()%>/board/list">문의사항</a></span>
+			<span><a class="nav-link" href="<%=request.getContextPath()%>/board/notice/list">공지사항</a></span>
+			<c:if test="${user != null}">
+				<span><a class="nav-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록</a></span>
+				<c:if test="${user.me_authority != 'USER'}">
+					<span><a class="nav-link" href="<%= request.getContextPath() %>/admin/user/list">회원관리</a></span>	
+				</c:if>
+			</c:if>
+		</div>
+	</div>
+</body>
+</html>

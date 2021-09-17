@@ -11,13 +11,12 @@
             padding: 0;
             list-style: none;
             text-decoration: none;
-            font-family: "고딕", "굴림" ,"돋움", sans-serif;
         }
         .swiper {
             min-width: 1400px;
             height: 300px;
             margin-bottom: 20px;
-             box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
         }
         .swiper-slide {
             background: rgb(130, 130, 130);

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="../JS수업/JS/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../JS수업/JS/rolling.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+        }
+        .after::after{
+            clear: both;
+            display: block;
+            content: '';
+        }
+        .nav{
+            position: relative;
+            background: wheat;
+            height: 70px;
+            padding: 10px;
+        }
+        .nav .nav-box{
+            margin: 0 auto;
+
+        }
+        .nav .logo{
+            margin-top: 5px;
+        }
+        .nav .logo a{
+            color: rgb(255, 165, 0);
+        }
+        .search{
+            height: 56px;
+            border: 5px solid rgb(255, 165, 0);
+            position: absolute;
+            left: 120px;
+            right: 100px;
+            top: calc(50% - 28px);
+
+        }
+        .search-bar .search-input:focus{
+            outline: none;
+            border: none;
+        }
+        .search .search-button{
+            width: 45px;
+            height: 46px;
+            position: absolute;
+            right: 0px;
+            top: 0;
+            border: none;
+            background-color: rgb(255, 165, 0);
+            border-radius: 0;    
+        }
+        .search .search-button i{
+            color: wheat;
+            font-size: 30px;
+        }
+        .user-box{
+            float: right;
+            position: absolute;
+            height: 70px;
+            top: 0;
+            right: 10px;
+            line-height: 70px;
+        }
+        .user-box a{
+            font-size: 50px;
+            color: rgb(255, 165, 0);
+        }
+        .body{
+            margin: 20px auto;
+            min-width: 700px;
+            max-width: 1300px;
+            position: relative;
+        }
+        .top3-box{
+            padding: 20px;
+            border: 2px solid rgb(255, 165, 0);
+            font-size: 30px;
+            text-align: center;
+            font-style: oblique;
+            color: rgb(255, 165, 0);
+            box-sizing: border-box;
+        }
+        .top3-box .top3{
+            margin-top: 20px;
+            display: flex;
+        }
+        .top3-box .top3 .rank{
+            width: calc(100% / 3);
+            height: 400px;
+            margin-right: 20px;
+            font-size: 20px;
+        }
+        .top3-box .top3 :nth-child(3){
+            margin-right: 0;
+        }
+        .top3 .rank{
+            overflow: hidden;
+        }
+        .top3 .rank img{
+            width: 100%;
+            height: 80%;
+        }
+        .top3 .rank .title,
+        .top3 .rank .content{
+            font-size: 25px;
+            margin-left: 10px;
+            margin-top: 5px;
+        }
+        .top3 .rank .content{
+            font-size: 15px;
+
+        }
+        .top3 .rank1{
+            position: relative;
+        }
+        .top3 .rank1 .fa-crown{
+            position: absolute;
+            font-size: 45px;
+            top: 5px;
+            left: 5px;
+            z-index: 2;
+        }
+        .top3 .rank  img{
+	        display: block;
+        	transition: transform 1s;
+        }
+        .top3 .rank:hover img{
+	        transform: scale(1.1);
+        }
+        .body .report-box{
+            width: 100%;
+            height: 50px;
+            border: 2px solid rgb(255, 165, 0);
+            margin-top: 20px;
+            box-sizing: border-box;
+            line-height: 50px;
+            
+        }
+        .report-box .report{
+            width: 100px;
+            height: 100%;
+            text-align: center;
+            border-right: 2px solid rgb(255, 165, 0);
+            color: rgb(255, 165, 0);
+            float: left;
+        }
+        .report-box .content{
+            width: calc(100% - 140px);
+            height: 100%;
+            float: left;
+            margin-left: 20px;
+            overflow: hidden;
+        }
+        .swiper-slide{
+            width: 100%;
+            overflow: hidden;
+        }
+        .category-box{
+            display: flex;
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            margin-top: 60px;
+            padding: 50px 20px;
+            border: 2px solid rgb(255, 165, 0);
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .category-TOP10{
+            position: absolute;
+            top: -30px;
+            background: white;
+            color: rgb(255, 165, 0);
+            padding: 10px;
+        }
+        .category-box .category{
+            width: calc((100% + 20px) / 4);
+            text-align: center;
+        }
+        .category-box .category-title{
+            margin-right: 20px;
+            font-size: 20px;
+            color: rgb(255, 165, 0);
+            height: 30px;
+        }   
+        .swiper-container{
+            height: 300px;
+            border: 2px solid rgb(255, 165, 0);
+            margin-right: 20px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .swiper-container img{
+	        display: block;
+        	transition: transform 1s;
+        }
+        .swiper-container:hover img{
+	        transform: scale(1.1);
+        }
+        .footer{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .user-menu{
+            width: 250px;
+            height: 300px;
+            border: 2px solid rgb(255, 165, 0);
+            background-color: white;
+            position: absolute;
+            top: 70px;
+            right: -10px;
+            z-index: 3;
+        }
+        .user-menu img{
+            width: 150px;
+            height: 150px;
+            border-radius: 100%;
+            margin-top: 10px;
+            margin-left: 50px;
+        }
+        .user-menu .me_nickname{
+            font-size: 20px;
+        }
+        .user-menu .mypage a,
+        .user-menu .signout a{
+            width: 100px;
+            height: 50px;
+            padding: 10px;
+            background-color: white;
+            border: 2px solid rgb(255, 165, 0);
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 50px;
+            font-size: 19px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        .user-menu .mypage a{
+            left: 10px;
+        }
+        .user-menu .signout a{
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="homepage">
+        <div class="nav">
+            <div class="nav-box">    
+                <div class="logo">
+                    <a href="<%= request.getContextPath() %>/"><h2>맛보다</h2></a>
+                </div>
+                <c:if test="${user == null}">
+                    <div class="user-box">
+                        <div class="user-account">    
+                            <a href="#"><i class="far fa-user-circle"></i></a>
+                        </div>
+                        <div class="user-menu">
+                            <img src="../JS수업/img/cat.jfif">
+                            <div class="me_nickname">고양이</div>
+                            <span class="mypage"><a href="<%= request.getContextPath() %>/member/mypage">마이페이지</a></span>
+                            <span class="signout"><a href="<%= request.getContextPath() %>/member/signout">로그아웃</a></span>
+                        </div>
+                    </div>
+                </c:if>
+                <div class="search">
+                    <form action="#">
+                        <div></div>
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            <div class="top3-box">
+                <div>명예의 전당 TOP3</div>
+                <div class="top3">
+                    <div class="rank rank2 after">
+                        <img src="../JS수업/img/cat.jfif" alt="고양이">
+                        <div class="title">상호명 점수</div>
+                        <div class="content">주소 - 음식종류</div>
+                    </div>
+                    <div class="rank rank1">
+                        <i class="fas fa-crown"></i>
+                        <img src="../JS수업/img/cat.jfif" alt="고양이">
+                        <div class="title">상호명 점수</div>
+                        <div class="content">주소 - 음식종류</div>
+                    </div>
+                    <div class="rank rank3">
+                        <img src="../JS수업/img/cat.jfif" alt="고양이">
+                        <div class="title">상호명 점수</div>
+                        <div class="content">주소 - 음식종류</div>
+                    </div>
+                </div>
+            </div>
+            <div class="report-box">
+                <div class="report">공지사항</div>
+                <ul class="content">
+                    <li>공지1</li>
+                    <li>공지2</li>
+                    <li>공지3</li>
+                    <li>공지4</li>
+                <ul>
+            </div>
+            <div class="category-box">
+                <div class="category-TOP10"><h1>카테고리 별 TOP 3</h1></div>
+                <div class="category">
+                    <div class="category-title">한식</div>
+                    <div class="swiper-container mySwiper">
+                        <div class="swiper-wrapper">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>         
+                    <div class="category-title">일식</div>
+                    <div class="swiper-container mySwiper">
+                        <div class="swiper-wrapper">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>           
+                </div>
+                <div class="category">
+                    <div class="category-title">치킨</div>
+                    <div class="swiper-container mySwiper">
+                        <div class="swiper-wrapper">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="category-title">분식</div>
+                    <div class="swiper-container mySwiper">
+                        <div class="swiper-wrapper">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>                      
+                </div>
+                <div class="category">
+                    <div class="category-title">양식/피자</div>
+                    <div class="swiper-container mySwiper">
+                        <div class="swiper-wrapper">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="category-title">카페/디저트</div>
+                    <div class="swiper-container mySwiper">
+                        <div class="swiper-wrapper">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>                      
+                </div>
+                <div class="category">
+                    <div class="category-title">중식</div>
+                    <div class="swiper-container mySwiper">
+                        <div class="swiper-wrapper">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="category-title">브런치/버거/샌드위치</div>
+                    <div class="swiper-container mySwiper">
+                        <div class="swiper-wrapper">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                            <img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>                      
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            qkqh
+        </div>
+    </div>   
+    <script>
+        var id1
+        $(function(){
+            id1 = rollingTop('.report-box .content', 'li','-50',500,3000);
+            $('.report-box .content').hover(function(){
+                clearInterval(id1);
+            },function(){
+                id1 = rollingTop('.report-box .content', 'li','-50',500,3000);
+            })
+            $('.user-account').click(function(){
+                $('.user-menu').toggle();
+            })
+        })
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 10,
+            centeredSlides: true,
+            autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+            },
+            pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            }
+        });
+    </script>
+    </body>
+</html>
