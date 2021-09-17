@@ -22,4 +22,6 @@ public interface RestaurantService {
 
 	int updateView(Integer num);
 
+	String updateFaverites(Integer rt_num, MemberVO user, int state);
+
 }

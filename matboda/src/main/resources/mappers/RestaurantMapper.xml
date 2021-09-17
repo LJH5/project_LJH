@@ -44,4 +44,15 @@
 			group by rt_num
 			order by rt_score desc
  	</select>
+ 	<select id="selectFavorites" resultType="kr.green.matboda.vo.FavoritesVO">
+ 		select * from favorites where fa_me_id = #{me_id} and fa_rt_num = #{rt_num}
+ 	</select>
+ 	<insert id="insertFavorites">
+ 		insert into favorites(fa_rt_num, fa_me_id, fa_state)
+ 			values(#{rt_num}, #{me_id}, #{state})
+ 	</insert>
+ 	<update id="updateFavorites">
+ 		update favorites set fa_state = #{fvo.fa_state} 
+ 			where fa_me_id = #{fvo.fa_me_id} and fa_rt_num = #{fvo.fa_rt_num}
+ 	</update>
 </mapper>

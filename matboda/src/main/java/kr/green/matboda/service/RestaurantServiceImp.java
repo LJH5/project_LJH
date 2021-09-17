@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import kr.green.matboda.dao.RestaurantDAO;
 import kr.green.matboda.dao.ReviewDAO;
 import kr.green.matboda.pagination.Criteria;
+import kr.green.matboda.vo.FavoritesVO;
 import kr.green.matboda.vo.MemberVO;
+import kr.green.matboda.vo.RecommendVO;
 import kr.green.matboda.vo.RestaurantVO;
 import lombok.AllArgsConstructor;
 
@@ -82,5 +84,20 @@ public class RestaurantServiceImp implements RestaurantService{
 			restaurantDao.updateRt(rt);
 		}
 		return 0;
+	}
+
+	@Override
+	public String updateFaverites(Integer rt_num, MemberVO user, int state) {
+		if(user == null)
+			return "GUEST";
+		FavoritesVO fvo = restaurantDao.selectFavorites(rt_num, user.getMe_id());
+		if(fvo == null) {
+			restaurantDao.insertFavorites(rt_num, user.getMe_id(), state);
+			return "OK";
+		}
+		state = state == fvo.getFa_state() ? 0 : 1;
+		fvo.setFa_state(state);
+		restaurantDao.updateFavorites(fvo);
+		return state == 0 ? "CANCEL": (state == 1 ? "OK" : "FAIL");
 	}
 }

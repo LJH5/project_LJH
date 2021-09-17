@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.matboda.pagination.Criteria;
@@ -102,5 +104,14 @@ public class RestaurantController {
 		mv.addObject("cri", cri);
 		mv.setViewName("/template/restaurant/search");
 		return mv;
+	}
+	@ResponseBody
+	@GetMapping("favorites/{state}/{rt_num}")
+	public String recommendGet(@PathVariable("state") int state, @PathVariable("rt_num") Integer rt_num, HttpServletRequest request) {
+		MemberVO user = memberService.getMemberByRequest(request);
+//		System.out.println(state);
+//		System.out.println(rt_num);
+//		System.out.println(user);
+		return restaurantService.updateFaverites(rt_num, user, state);
 	}
 } 

@@ -594,24 +594,50 @@
 					url: contextPath + '/review/recommend/' + state + '/' + re_num,
 					success : function(result, status, xhr){
 						if(result == 'RECOMMEND'){
-							alert('추천');
 							obj.siblings().children('a').attr('style','color: rgb(112, 112, 112);');
 							obj.children('a').attr('style','color:rgb(255, 165, 0);');
 						}else if(result == 'REPORT'){
-							alert('신고')
 							obj.siblings().children('a').attr('style','color: rgb(112, 112, 112);');
 							obj.children('a').attr('style','color: rgb(206, 3, 3);');
 						}else if(result == 'GUEST'){
-							alert('추천/비추천을 하려면 로그인을 하세요.');
+							alert('추천/신고는 로그인이 필요한 서비스 입니다');
+							
 						}else if(result == 'CANCEL'){
 							if(state == 1){
-								alert('추천을 취소했습니다.')
 								obj.children('a').attr('style','color: rgb(112, 112, 112);');
 							}else{
-								alert('신고를 취소했습니다.');
 								obj.children('a').attr('style','color: rgb(112, 112, 112);');
 							}
 						}
+					},
+					error : function(xhr, status, e){
+						console.log('에러 발생');
+					}
+				})
+			})
+			
+			//즐겨찾기 기능
+			$(document).on('click', '.favorites-btn', function() {
+				var state = 1;
+				//alert(state)
+				var rt_num = '${rt.rt_num}'
+				//alert(rt_num)
+				var obj = $(this);
+				
+				$.ajax({
+					type: 'get',
+					url: contextPath + '/restaurant/favorites/' + state + '/' + rt_num,
+					success : function(result, status, xhr){
+						if(result == 'OK'){
+							alert('즐겨찾기');
+							obj.attr('style','color:rgb(255, 165, 0);');
+						}else if(result == 'GUEST'){
+							alert('즐겨찾기는 로그인이 필요한 서비스입니다.');
+						}else if(result == 'CANCEL'){
+							alert('취소')
+							obj.attr('style','color: rgb(112, 112, 112);');
+						}else if(result == 'FAIL'){
+							alert('즐겨찾기 등록 실패')
 					},
 					error : function(xhr, status, e){
 						console.log('에러 발생');
