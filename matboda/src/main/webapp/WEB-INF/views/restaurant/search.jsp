@@ -5,6 +5,29 @@
 <html>
 <head>
 <style>
+	*{
+		margin: 0;
+		padding: 0;
+		text-decoration: none;
+		list-style: none;
+	}
+	.search-container .notSearch-container{
+		height: 700px;
+		width: 800px;
+		margin: 0 auto;
+		margin-top: 200px;
+	}
+	.search-container .notSearch-container h1{
+		margin-bottom: 30px;
+	}
+	.search-container .register-link{
+		font-size: 50px;
+		color: black;
+	}
+	.search-container .register-link:hover{
+		text-decoration: none;
+		color: rgb(255, 165, 0);
+	}
 	.item-list{
 		list-style: none;	margin: 20px 0;	padding: 0;
 	}
@@ -19,10 +42,14 @@
 </head>
 <body>
 	<c:if test="${list.size() == 0}">
-		<div>
-			<h2>'${cri.search}'에 대한 검색 결과가 없습니다.</h2>
-			<div>검색한 식당이 없다면?</div>
-			<a class="nav-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록</a>
+		<div class="search-container">
+			<div class="inner-container">
+				<div class="notSearch-container">
+					<h1>'${cri.search}'에 대한 검색 결과가 없습니다.</h1>
+					<h1>검색한 식당이 없다면?🤔</h1>
+					<a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a>
+				</div>
+			</div>
 		</div>
 	</c:if>
 	<c:forEach items="${list}" var="rt">
