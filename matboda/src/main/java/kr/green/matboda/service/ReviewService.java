@@ -27,7 +27,7 @@ public interface ReviewService {
 
 	ArrayList<ImageVO> getTopImageList(Integer num);
 
-	int getTotalCount( Integer num, Criteria cri);
+	int getTotalCount(Integer num, Criteria cri);
 
 	String updateRecommend(Integer re_num, MemberVO user, int state);
 

@@ -353,7 +353,7 @@
 						</div>
 						<div class="inf-box">
 							<span id="views"><i class="far fa-eye"></i>${rt.rt_view}</span> 
-							<span id="reviewNum"><i class="fas fa-pen"></i>리뷰수</span> 
+							<span id="reviewNum"><i class="fas fa-pen"></i>${rt.rt_reNum}</span> 
 							<span id="favoritesNum"><i class="fas fa-star"></i>즐겨찾기수</span>
 						</div>
 					</div>
