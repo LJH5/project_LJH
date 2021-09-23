@@ -37,4 +37,6 @@ public interface MemberService {
 
 	MemberVO updateMember(MemberVO user, MemberVO loginUser, MultipartFile file) throws Exception;
 
+	void deleteMember(MemberVO user);
+
 }

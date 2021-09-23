@@ -49,7 +49,10 @@
 		<button type="button" class="btn btn-outline-success col-4">프로필 수정</button>
 	</a>
 	<button type="button" class="btn btn-outline-success col-4">비밀번호 번경</button>
-	<button type="button" class="btn btn-outline-danger col-3 ml-4">회원탈퇴</button>
+	<a href="<%= request.getContextPath() %>/member/delete">
+		<button type="button" class="btn btn-outline-danger col-3 ml-4">회원탈퇴</button>
+		<input type="hidden" name="me_id" value="${user.me_id}">
+	</a>
 </form>
 </body>
 </html>

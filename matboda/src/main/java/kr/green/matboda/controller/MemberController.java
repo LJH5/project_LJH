@@ -85,4 +85,12 @@ public class MemberController {
 		mv.setViewName("redirect:/member/mypage");
 		return mv;
 	}
+	@GetMapping("/delete")
+	public ModelAndView deleteGet(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		memberService.deleteMember(user);
+		memberService.signout(request, response);
+		mv.setViewName("redirect:/");
+		return mv;
+	}
 }

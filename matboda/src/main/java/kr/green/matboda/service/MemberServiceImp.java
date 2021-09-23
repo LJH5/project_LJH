@@ -174,4 +174,11 @@ public class MemberServiceImp implements MemberService{
 		memberDao.updateUser(dbUser);
 		return dbUser;
 	}
+	@Override
+	public void deleteMember(MemberVO user) {
+		if(user == null)
+			return;
+		memberDao.deleteMember(user.getMe_id());
+		return;
+	}
 }
