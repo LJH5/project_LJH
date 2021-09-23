@@ -166,7 +166,11 @@
 	line-height: 48px;
 	padding-left: 10px;
 }
-
+.report-box .content a{
+	color: black;
+	display: block;
+	width: 100%;
+}
 .report-box .content li {
 	height: 100%;
 }
@@ -274,10 +278,9 @@
 				<div class="report-box after">
 					<div class="report">공지사항</div>
 					<ul class="content">
-						<li>공지1</li>
-						<li>공지2</li>
-						<li>공지3</li>
-						<li>공지4</li>
+						<c:forEach items="${boardList}" var="board" varStatus="status">
+							<li><a href="<%=request.getContextPath()%>/board${type}/detail?num=${board.bo_num}">${board.bo_title}</a></li>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>

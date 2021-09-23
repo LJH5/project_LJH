@@ -174,4 +174,9 @@ public class BoardServiceImp implements BoardService{
 		System.out.println(name);
 		return UploadFileUtils.uploadFile(uploadThumbnailPath, name , file.getBytes());
 	}
+
+	@Override
+	public ArrayList<BoardVO> getMainBoardList() {
+		return boardDao.selectMainBoardList();
+	}
 }

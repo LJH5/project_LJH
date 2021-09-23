@@ -33,5 +33,7 @@ public interface BoardService {
 
 	String uploadImg(MultipartFile file) throws Exception;
 
+	ArrayList<BoardVO> getMainBoardList();
+
 
 }

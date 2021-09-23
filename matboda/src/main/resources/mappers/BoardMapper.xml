@@ -53,4 +53,10 @@
 	<select id="selectFile" resultType="kr.green.matboda.vo.ImageVO">
 		select * from image where im_num = #{tmp}
 	</select>
+	<select id="selectMainBoardList" resultType="kr.green.matboda.vo.BoardVO">
+		select * from board
+			where bo_type = 'NOTICE'
+			order by bo_num desc
+			limit 5
+	</select>
 </mapper>

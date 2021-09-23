@@ -36,4 +36,6 @@ public interface BoardDAO {
 
 	ImageVO selectFile(Integer tmp);
 
+	ArrayList<BoardVO> selectMainBoardList();
+
 }
