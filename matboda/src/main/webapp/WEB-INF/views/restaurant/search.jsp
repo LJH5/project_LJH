@@ -82,7 +82,6 @@
 		line-height: 40px;
 	}
 	.onSearch-container .shopInf-top .title{
-		min-width: 100px;
 		max-width: 220px;
 		margin-right: 10px;
 		white-space: nowrap;
