@@ -84,7 +84,6 @@
 }
 
 .rank .img-box {
-	background-color: aqua;
 	width: 100%;
 	height: 310px;
 	display: block;
