@@ -10,64 +10,155 @@
 		padding: 0;
 		text-decoration: none;
 		list-style: none;
+		color: black;
 	}
 	.search-container .notSearch-container{
 		height: 700px;
 		width: 800px;
 		margin: 0 auto;
-		margin-top: 200px;
+		margin-top: 70px;
 	}
 	.search-container .notSearch-container h1{
 		margin-bottom: 30px;
 	}
 	.search-container .register-link{
 		font-size: 50px;
-		color: black;
 	}
 	.search-container .register-link:hover{
-		text-decoration: none;
 		color: rgb(255, 165, 0);
 	}
-	.item-list{
-		list-style: none;	margin: 20px 0;	padding: 0;
+	.search-container .onSearch-container{
+		min-height: 400px;
+		width: 920px;
+		margin: 0 auto;
+		margin-top: 200px;
+		padding: 10px;
 	}
-	.item-list::after{
-		clear: both; content: ''; display: block;
+	.search-container .onSearch-container h2{
+		color: rgb(255, 165, 0);
+		margin-bottom: 20px;
 	}
-	.item-list .item{
+	.onSearch-container .shop-container{
+		width: 930px;
+	}
+	.onSearch-container .shop-box{
 		width: 300px;
-		
+		height: 400px;
+		margin-right: 10px;
+		float: left;
+		margin-bottom: 30px;
+	}
+	.search-container .shop-box:hover img{
+		transform: scale(1.1);
+	}
+	.search-container .shop-box:hover a{
+		text-decoration: none;
+	}
+	.onSearch-container a span{
+		display: block;
+	}
+	.onSearch-container .img-box {
+		width: 300px;
+		height: 300px;
+		overflow: hidden;
+	}
+	.onSearch-container .img-box img{
+		width: 100%;
+		height: 100%;
+		display: block;
+      	transition: transform 1s;
+	}
+	.onSearch-container .shopInf-container{
+		width: 290px;
+		height: 100px;
+		padding: 0 5px;
+	}
+	.onSearch-container .shopInf-top{
+		height: 40px;
+	}
+	.onSearch-container .shopInf-top span{
+		float: left;
+		font-size: 30px;
+		line-height: 40px;
+	}
+	.onSearch-container .shopInf-top .title{
+		min-width: 100px;
+		max-width: 220px;
+		margin-right: 10px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.onSearch-container .shopInf-top .score{
+		color: rgb(255, 165, 0);
+		font-weight: bold;
+	}
+	.onSearch-container .shopInf-mid{
+		height: 20px;
+		line-height: 20px;
+	}
+	.onSearch-container .shopInf-mid .address,
+	.onSearch-container .shopInf-bot .type{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: rgb(112, 112, 112);
+	}
+	.onSearch-container .shopInf-bot{
+		height: 20px;
+		line-height: 20px;
+	}
+	/* after */
+	.onSearch-container .shopInf-top::after,
+	.onSearch-container .shop-container::after{
+		display: block;
+		content: '';
+		clear: both;
 	}
 </style>
 </head>
 <body>
-	<c:if test="${list.size() == 0}">
-		<div class="search-container">
-			<div class="inner-container">
+	<div class="search-container">
+		<div class="inner-container">
+			<c:if test="${list.size() == 0}">
 				<div class="notSearch-container">
 					<h1>'${cri.search}'에 대한 검색 결과가 없습니다.</h1>
 					<h1>검색한 식당이 없다면?🤔</h1>
 					<a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a>
 				</div>
+			</c:if> 
+			<div class="onSearch-container">
+				<h2>'${cri.search}'에 대한 검색 결과</h2>
+				<div class="shop-container">
+					<c:forEach items="${list}" var="rt">
+						<div class="shop-box">
+							<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+								<span class="img-container">
+									<span class="img-box">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300px" height="300px"></c:when>
+											<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG" width="300px" height="300px"></c:otherwise>
+										</c:choose>
+									</span>
+								</span>
+								<span class="shopInf-container">
+									<span class="shopInf-top">
+										<span class="title">${rt.rt_name}</span>
+										<span class="score">${rt.rt_score}</span> <br>
+									</span>
+									<span class="shopInf-mid">
+										<span class="address">${rt.rt_address}</span>
+									</span>
+									<span class="shopInf-bot">
+										<span class="type">${rt.rt_type}</span>
+									</span>
+								</span>
+							</a>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
-	</c:if>
-	<c:forEach items="${list}" var="rt">
-		<div class="container">
-			<ul class="item-list">
-				<li class="item">
-					<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-						<c:choose>
-							<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300px" height="300px"></c:when>
-							<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG" width="300px" height="300px"></c:otherwise>
-						</c:choose>
-						<span class="title">${rt.rt_name}</span>
-						<span class="score">${rt.rt_score}</span> <br>
-						<span class="address">${rt.rt_address}</span>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</c:forEach>
+	</div>
 </body>
 </html>
