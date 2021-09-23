@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+a<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
@@ -637,6 +637,7 @@
 							obj.attr('style','color: rgb(112, 112, 112);');
 						}else if(result == 'FAIL'){
 							alert('즐겨찾기 등록 실패')
+						}
 					},
 					error : function(xhr, status, e){
 						console.log('에러 발생');

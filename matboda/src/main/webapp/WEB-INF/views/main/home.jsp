@@ -13,7 +13,7 @@
 }
 
 .home-container {
-	padding: 10px;
+	padding: 20px;
 }
 
 .body-container {
@@ -30,8 +30,11 @@
 	text-align: center;
 	color: rgb(255, 165, 0);
 	box-sizing: border-box;
-}
 
+}
+.top3-box .rank1 {
+	position: relative;
+}
 .top3-box .top3 {
 	margin-top: 20px;
 	display: flex;
@@ -47,7 +50,13 @@
 .top3-box .top3 :nth-child(3) {
 	margin-right: 0;
 }
-
+.top3-box .fa-crown {
+    position: absolute;
+    font-size: 45px;
+    top: -5px;
+    left: calc(50% - 25px);
+    z-index: 2;
+}
 .top3 .rank {
 	overflow: hidden;
 	border: 2px solid rgb(255, 165, 0);
@@ -60,17 +69,6 @@
 	height: 100%;
 }
 
-.top3 .rank1 {
-	position: relative;
-}
-
-.top3 .rank1 .fa-crown {
-	position: absolute;
-	font-size: 45px;
-	top: 5px;
-	left: 5px;
-	z-index: 2;
-}
 
 .top3 .rank  img {
 	display: block;
@@ -88,7 +86,7 @@
 .rank .img-box {
 	background-color: aqua;
 	width: 100%;
-	height: 320px;
+	height: 310px;
 	display: block;
 	overflow: hidden;
 }
@@ -130,9 +128,10 @@
 	font-weight: bold;
 	color: rgb(255, 165, 0);
 }
-.rt-content .content-bottom {
+.rt-content .content-mid,
+.rt-content .content-bot {
 	display: block;
-	height: 26px;
+	font-size: 15px;
 }
 
 .body .report-box {
@@ -241,9 +240,10 @@
 			<div class="top3-container">
 				<div class="top3-box">
 					<div>명예의 전당 TOP3</div>
+					<div class="rank1"><i class="fas fa-crown"></i></div>
 					<div class="top3">
 						<c:forEach items="${list}" var="rt">
-							<div class="rank rank2 after">
+							<div class="rank">
 	                           <a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
 	                               <span class="rank-content">
 	                                    <span class="img-box">
@@ -252,32 +252,22 @@
 												<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
 											</c:choose>
 	                                    </span>
-	                                    <span class="rt-content after">
-	                                        <span class="content-top">
+	                                    <span class="rt-content">
+	                                        <span class="content-top after">
 	                                            <span class="rt_name">${rt.rt_name}</span>
 	                                            <span class="rt_score">${rt.rt_score}</span>
 	                                        </span>
-	                                        <span class="content-bottom">
-	                                            <span class="rt_address">상대동</span>
-	                                            <span> - </span>
-	                                            <span class="rt_type">한식</span>
+	                                        <span class="content-mid">
+	                                            <span class="rt_address">${rt.rt_address}</span>
+	                                        </span>
+	                                        <span class="content-bot">
+	                                            <span class="rt_type">${rt.rt_type}</span>
 	                                        </span>
 	                                    </span>
 	                                </span>
 	                            </a>
 	                        </div>
 						</c:forEach>
-						<div class="rank rank1">
-							<i class="fas fa-crown"></i> <img src="../JS수업/img/cat.jfif"
-								alt="고양이">
-							<div class="title">상호명 점수</div>
-							<span class="content">주소</span><span> 음식종류</span>
-						</div>
-						<div class="rank rank3">
-							<img src="../JS수업/img/cat.jfif" alt="고양이">
-							<div class="title">상호명 점수</div>
-							<div class="content">주소 - 음식종류</div>
-						</div>
 					</div>
 				</div>
 			</div>

@@ -27,7 +27,8 @@
 			left join review on rt_num = re_rt_num
 			left join image on re_num = im_where 
 			group by rt_num
-			order by rt_score desc
+			order by rt_reNum desc, rt_score desc
+			limit 3
  	</select>
 	<delete id="deleteRt">
  		delete from restaurant
