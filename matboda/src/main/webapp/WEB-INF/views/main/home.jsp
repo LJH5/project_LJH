@@ -294,10 +294,12 @@
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
 								<c:forEach items="${korTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-									</c:choose>
+									 <a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
@@ -305,10 +307,12 @@
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
 								<c:forEach items="${japTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-									</c:choose>
+									<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
@@ -318,10 +322,12 @@
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
 								<c:forEach items="${chickenTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-									</c:choose>
+									<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
@@ -329,10 +335,12 @@
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
 								<c:forEach items="${snackTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-									</c:choose>
+									<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
@@ -342,10 +350,12 @@
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
 								<c:forEach items="${wesTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-									</c:choose>
+									<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
@@ -353,10 +363,12 @@
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
 								<c:forEach items="${cafeTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-									</c:choose>
+									<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
@@ -366,10 +378,12 @@
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
 								<c:forEach items="${chiTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-									</c:choose>
+									<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
@@ -377,10 +391,12 @@
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
 								<c:forEach items="${brunchTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-									</c:choose>
+									<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
