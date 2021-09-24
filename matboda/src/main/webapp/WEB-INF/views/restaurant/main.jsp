@@ -332,8 +332,8 @@ a<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 					<div class="top-container">
 						<div class="title">
 							<div class="shop-box">
-								<span class="rt_name">${rt.rt_name}</span> <span
-									class="rt_score">${rt.rt_score}</span>
+								<span class="rt_name">${rt.rt_name}</span> 
+								<span class="rt_score">${rt.rt_score}</span>
 							</div>
 							<div class="btn-box after">
 								<div class="favorites-btn">
