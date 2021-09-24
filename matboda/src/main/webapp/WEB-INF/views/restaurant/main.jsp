@@ -335,10 +335,20 @@
 								<span class="rt_score">${rt.rt_score}</span>
 							</div>
 							<div class="btn-box after">
-								<div class="favorites-btn">
-									<i class="far fa-star"></i>
-									<div class="favorites-text">즐겨찾기</div>
-								</div>
+								<c:choose>
+									<c:when test="${fvo.fa_state == 1}">
+										<div class="favorites-btn" style="color: rgb(255,165,0);">
+											<i class="far fa-star"></i>
+											<div class="favorites-text">즐겨찾기</div>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="favorites-btn">
+											<i class="far fa-star"></i>
+											<div class="favorites-text">즐겨찾기</div>
+										</div>
+									</c:otherwise>
+								</c:choose>
 								<form method="GET"
 									action="<%=request.getContextPath()%>/review/register">
 									<div class="review-btn">

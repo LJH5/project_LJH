@@ -18,6 +18,7 @@ import kr.green.matboda.pagination.PageMaker;
 import kr.green.matboda.service.MemberService;
 import kr.green.matboda.service.RestaurantService;
 import kr.green.matboda.service.ReviewService;
+import kr.green.matboda.vo.FavoritesVO;
 import kr.green.matboda.vo.ImageVO;
 import kr.green.matboda.vo.MemberVO;
 import kr.green.matboda.vo.RestaurantVO;
@@ -54,6 +55,9 @@ public class RestaurantController {
 		
 		MemberVO user = memberService.getMemberByRequest(request);
 		
+		//즐겨찾기 정보 가져오기
+		FavoritesVO fvo = restaurantService.getFavority(num, user);
+		
 		cri.setPerPageNum(5);
 		ArrayList<ReviewVO> review = reviewService.getReviewList(num, cri, user);
 		int totalCount = reviewService.getTotalCount(num, cri);
@@ -69,6 +73,7 @@ public class RestaurantController {
 		mv.addObject("rt", rt);
 		mv.addObject("reviews", review);
 		mv.addObject("imageList", imageList);
+		mv.addObject("fvo", fvo);
 		mv.setViewName("/template/restaurant/main");
 		return mv;
 	}
@@ -109,9 +114,6 @@ public class RestaurantController {
 	@GetMapping("favorites/{state}/{rt_num}")
 	public String recommendGet(@PathVariable("state") int state, @PathVariable("rt_num") Integer rt_num, HttpServletRequest request) {
 		MemberVO user = memberService.getMemberByRequest(request);
-//		System.out.println(state);
-//		System.out.println(rt_num);
-//		System.out.println(user);
 		return restaurantService.updateFaverites(rt_num, user, state);
 	}
 } 
