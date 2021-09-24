@@ -26,5 +26,7 @@ public interface RestaurantService {
 
 	ArrayList<RestaurantVO> getCaTop3Restaurant(String type);
 
+	void updateReCount(Integer num, int totalCount);
+
 
 }

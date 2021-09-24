@@ -106,4 +106,14 @@ public class RestaurantServiceImp implements RestaurantService{
 		return restaurantDao.selectCaTop3Restaurant(type);
 	}
 
+	@Override
+	public void updateReCount(Integer num, int totalCount) {
+		RestaurantVO rt = restaurantDao.selectRt(num);
+		if(rt != null) {
+			rt.setRt_reNum(totalCount);
+			restaurantDao.updateRt(rt);
+		}
+		return;
+	}
+
 }

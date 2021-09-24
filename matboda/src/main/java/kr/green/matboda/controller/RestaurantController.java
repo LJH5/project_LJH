@@ -59,7 +59,7 @@ public class RestaurantController {
 		int totalCount = reviewService.getTotalCount(num, cri);
 		PageMaker pm = new PageMaker(totalCount, 5, cri);
 		
-		rt.setRt_reNum(totalCount);
+		restaurantService.updateReCount(num, totalCount);
 		
 		reviewService.getImageList(review);
 		ArrayList<ImageVO> imageList = reviewService.getTopImageList(num);
