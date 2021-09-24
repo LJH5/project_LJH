@@ -24,4 +24,7 @@ public interface RestaurantService {
 
 	String updateFaverites(Integer rt_num, MemberVO user, int state);
 
+	ArrayList<RestaurantVO> getCaTop3Restaurant(String type);
+
+
 }

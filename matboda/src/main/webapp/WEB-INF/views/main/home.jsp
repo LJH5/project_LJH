@@ -293,17 +293,23 @@
 						<div class="category-title">한식</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+								<c:forEach items="${korTop3}" var="rt">
+									<c:choose>
+										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="category-title">일식</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+								<c:forEach items="${japTop3}" var="rt">
+									<c:choose>
+										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
@@ -311,17 +317,23 @@
 						<div class="category-title">치킨</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+								<c:forEach items="${chickenTop3}" var="rt">
+									<c:choose>
+										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="category-title">분식</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+								<c:forEach items="${snackTop3}" var="rt">
+									<c:choose>
+										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
@@ -329,17 +341,23 @@
 						<div class="category-title">양식/피자</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+								<c:forEach items="${wesTop3}" var="rt">
+									<c:choose>
+										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="category-title">카페/디저트</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+								<c:forEach items="${cafeTop3}" var="rt">
+									<c:choose>
+										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
@@ -347,17 +365,23 @@
 						<div class="category-title">중식</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+								<c:forEach items="${chiTop3}" var="rt">
+									<c:choose>
+										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="category-title">브런치/버거/샌드위치</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
-								<img class="swiper-slide" src="../JS수업/img/cat.jfif" alt="고양이">
+								<c:forEach items="${brunchTop3}" var="rt">
+									<c:choose>
+										<c:when test="${rt.rt_im_name != null}"><img class="swiper-slide" src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+										<c:otherwise><img class="swiper-slide" src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
@@ -384,6 +408,9 @@
 		var swiper = new Swiper(".mySwiper", {
 			spaceBetween : 10,
 			centeredSlides : true,
+			grabCursor: true,
+			loop: true,
+			loopFillGroupWithBlank: false,
 			autoplay : {
 				delay : 5000,
 				disableOnInteraction : false,

@@ -56,4 +56,9 @@
  		update favorites set fa_state = #{fvo.fa_state} 
  			where fa_me_id = #{fvo.fa_me_id} and fa_rt_num = #{fvo.fa_rt_num}
  	</update>
+ 	<select id="selectCaTop3Restaurant" resultType="kr.green.matboda.vo.RestaurantVO">
+ 		select * from restaurant where rt_type = #{type}
+ 		order by rt_reNum desc, rt_score desc, rt_view desc
+ 		limit 3
+ 	</select>
 </mapper>

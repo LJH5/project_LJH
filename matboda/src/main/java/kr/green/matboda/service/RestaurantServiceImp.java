@@ -3,6 +3,7 @@ package kr.green.matboda.service;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 import org.springframework.stereotype.Service;
 
 import kr.green.matboda.dao.RestaurantDAO;
@@ -10,7 +11,6 @@ import kr.green.matboda.dao.ReviewDAO;
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.FavoritesVO;
 import kr.green.matboda.vo.MemberVO;
-import kr.green.matboda.vo.RecommendVO;
 import kr.green.matboda.vo.RestaurantVO;
 import lombok.AllArgsConstructor;
 
@@ -100,4 +100,10 @@ public class RestaurantServiceImp implements RestaurantService{
 		restaurantDao.updateFavorites(fvo);
 		return state == 0 ? "CANCEL": (state == 1 ? "OK" : "FAIL");
 	}
+
+	@Override
+	public ArrayList<RestaurantVO> getCaTop3Restaurant(String type) {
+		return restaurantDao.selectCaTop3Restaurant(type);
+	}
+
 }

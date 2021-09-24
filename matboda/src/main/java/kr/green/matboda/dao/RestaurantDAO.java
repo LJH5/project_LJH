@@ -29,4 +29,7 @@ public interface RestaurantDAO {
 	void insertFavorites(@Param("rt_num")Integer rt_num, @Param("me_id")String me_id, @Param("state")int state);
 
 	void updateFavorites(@Param("fvo")FavoritesVO fvo);
+
+	ArrayList<RestaurantVO> selectCaTop3Restaurant(String type);
+
 }
