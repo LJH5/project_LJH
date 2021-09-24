@@ -1,4 +1,4 @@
-a<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
@@ -19,7 +19,6 @@ a<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
             box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
         }
         .swiper-slide {
-            background: rgb(130, 130, 130);
             /* Center slide text vertically */
             display: -webkit-box;
             display: -ms-flexbox;
