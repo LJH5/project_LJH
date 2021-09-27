@@ -69,6 +69,7 @@ public class RestaurantController {
 		
 		reviewService.getImageList(review);
 		ArrayList<ImageVO> imageList = reviewService.getTopImageList(num);
+	
 		
 		mv.addObject("pm", pm);
 		mv.addObject("title", rt.getRt_name());

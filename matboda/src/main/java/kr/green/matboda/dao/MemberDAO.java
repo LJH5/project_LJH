@@ -26,5 +26,8 @@ public interface MemberDAO {
 
 	void updateUser(MemberVO dbUser);
 
+	int selectReviewCountById(@Param("user")MemberVO user);
+
+	int selectFavoritesCountById(@Param("user")MemberVO user);
 
 }

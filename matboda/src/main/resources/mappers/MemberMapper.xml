@@ -58,4 +58,10 @@
 		delete from member
 			where me_id = #{me_id}
 	</delete>
+	<select id="selectReviewCountById" resultType="int">
+		select count(*) from review where re_me_id = #{user.me_id}
+	</select>
+	<select id="selectFavoritesCountById" resultType="int">
+		select count(*) from favorites where fa_me_id = #{user.me_id}
+	</select>
 </mapper>

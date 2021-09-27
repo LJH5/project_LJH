@@ -9,14 +9,58 @@
 			width: 800px;
 			padding: 20px;
 			margin: 0 auto;
+			position: relative;
 		}
 		.me_picture{
 			margin-bottom: 20px;
 		}
 		.me_picture img{
+			background-color: rosybrown;
 			width: 200px;
 			height: 200px;
 			border-radius: 100%;
+		}
+		.user-activity{
+			width: 400px;
+			height: 200px;
+			position: absolute;
+			top: 75px;
+			right: 30px;
+			display: flex;
+			border: 2px solid rgb(255, 165,0);
+			padding: 10px;
+			box-sizing: border-box;
+		}
+		
+		.user-activity .review,
+		.user-activity .favorites{
+			width: 50%;
+			text-align: center;
+
+		}
+		.user-activity .title{
+			margin-bottom: 10px;
+			font-size: 20px;
+			font-weight: bold;
+		}
+		.user-activity .review-num,
+		.user-activity .favorites-num{
+			width: 100px;
+			height: 100px;
+			margin: 0 auto;
+			line-height: 100px;
+			font-size: 30px;
+			border-radius: 100%;
+			background-color: #ffc107;
+			margin-bottom: 10px;
+			color: white;
+
+		}
+		.user-activity .favorites{
+			border-left: 1px solid rgb(223, 217, 217);
+		}
+		.user-activity a{
+			color: black;
 		}
 		.userInf-box{
 			margin-bottom: 10px;
@@ -51,6 +95,18 @@
 						<img src="<%=request.getContextPath()%>/img/${user.me_picture}">
 					</c:otherwise>
 				</c:choose>
+			</div>
+			<div class="user-activity">
+				<div class="review">
+					<div class="title">리뷰</div>
+					<div class="review-num">${reNum}</div>
+					<a href="">리뷰 목록</a>
+				</div>
+				<div class="favorites">
+					<div class="title">즐겨찾기</div>
+					<div class="favorites-num">${faNum}</div>
+					<a href="">즐겨찾기 목록</a>
+				</div>
 			</div>
 			<div class="userInf-box">
 				<div class="userInf-title">

@@ -181,4 +181,16 @@ public class MemberServiceImp implements MemberService{
 		memberDao.deleteMember(user.getMe_id());
 		return;
 	}
+	@Override
+	public int getReviewCountById(MemberVO user) {
+		if(user == null)
+			return 0;
+		return memberDao.selectReviewCountById(user);
+	}
+	@Override
+	public int getFavoritesCountById(MemberVO user) {
+		if(user == null)
+			return 0;
+		return memberDao.selectFavoritesCountById(user);
+	}
 }

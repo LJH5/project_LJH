@@ -39,4 +39,8 @@ public interface MemberService {
 
 	void deleteMember(MemberVO user);
 
+	int getReviewCountById(MemberVO user);
+	
+	int getFavoritesCountById(MemberVO user);
+
 }

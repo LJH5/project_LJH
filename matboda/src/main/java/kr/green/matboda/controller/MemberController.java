@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.matboda.service.MemberService;
+import kr.green.matboda.service.RestaurantService;
+import kr.green.matboda.service.ReviewService;
 import kr.green.matboda.vo.MemberVO;
 import lombok.AllArgsConstructor;
 
@@ -21,6 +23,7 @@ import lombok.AllArgsConstructor;
 public class MemberController {
 	
 	MemberService memberService;
+	ReviewService reviewSevice;
 	
 	@GetMapping("/signup")
 	public ModelAndView memberSignupGet(ModelAndView mv) {
@@ -65,7 +68,16 @@ public class MemberController {
 	@GetMapping("/mypage")
 	public ModelAndView memberMypageGet(ModelAndView mv, HttpServletRequest request) {
 		MemberVO user = memberService.getMemberByRequest(request);
+		
+		//리뷰 수
+		int reNum = memberService.getReviewCountById(user);
+		
+		//즐겨찾기 수
+		int faNum = memberService.getFavoritesCountById(user); 
+		
 		mv.addObject("user", user);
+		mv.addObject("reNum", reNum);
+		mv.addObject("faNum", faNum);
 		mv.setViewName("/template/member/mypage");
 		return mv;
 	}
@@ -93,4 +105,4 @@ public class MemberController {
 		mv.setViewName("redirect:/");
 		return mv;
 	}
-}
+}	
