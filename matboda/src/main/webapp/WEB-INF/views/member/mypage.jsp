@@ -54,7 +54,11 @@
 			background-color: #ffc107;
 			margin-bottom: 10px;
 			color: white;
-
+			display: block;
+		}
+		.user-activity .review-num a:hover,
+		.user-activity .favorites-num a:hover{
+			text-decoration: none;
 		}
 		.user-activity .favorites{
 			border-left: 1px solid rgb(223, 217, 217);
@@ -99,13 +103,17 @@
 			<div class="user-activity">
 				<div class="review">
 					<div class="title">리뷰</div>
-					<div class="review-num">${reNum}</div>
-					<a href="">리뷰 목록</a>
+					<a href="">
+						<span class="review-num">${reNum}</span>
+						<span>리뷰 목록</span>
+					</a>
 				</div>
 				<div class="favorites">
 					<div class="title">즐겨찾기</div>
-					<div class="favorites-num">${faNum}</div>
-					<a href="">즐겨찾기 목록</a>
+					<a href="">
+						<span class="favorites-num">${faNum}</span>
+						<span>즐겨찾기 목록</span>
+					</a>
 				</div>
 			</div>
 			<div class="userInf-box">
