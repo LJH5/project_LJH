@@ -72,6 +72,29 @@
             width: 200px;
             height: 200px;
             border-radius: 1px;
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+        .image-box img{
+       	    width: 100%;
+    		height: 100%;
+        }
+       	.image-box .del-btn{
+            position: absolute;
+		    width: 40px;
+		    height: 40px;
+        	top: 4px;
+   		 	right: 6px;
+		    text-align: center;
+		    line-height: 40px;
+		    font-size: 40px;
+		    box-sizing: border-box;
+		    color: gray;
+
+        }
+        .image-box .del-btn:hover{
+            color: rgb(255, 165, 0);
         }
         .btn-container{
             height: 100px;
@@ -172,8 +195,8 @@
                 <div class="image-container">
                     <c:forEach items="${imageList}" var="image">
                         <span class="image-box">
-                            <img name="imageList" src="<%=request.getContextPath() %>/img/${image.im_name}" style="width: 100px" height="100px">
-                            <button type="button" class="del-btn">X</button>
+                            <img name="imageList" src="<%=request.getContextPath() %>/img/${image.im_name}">
+                           <span class="del-btn"><i class="far fa-window-close"></i></span>
                             <input type="hidden"name="imageNum" value="${image.im_num}">
                         </span>
                     </c:forEach>
