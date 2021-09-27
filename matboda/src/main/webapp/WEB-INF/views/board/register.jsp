@@ -6,6 +6,12 @@
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+	
+	<style type="text/css">
+		input{
+			margin-bottom: 5px;
+		}
+	</style>
 </head>
 <body>
 	<form class="container" method="post" enctype="multipart/form-data">
@@ -19,8 +25,8 @@
 		</div>
 		<div class="form-group">
 			<label>첨부파일</label>
-			<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="setThumbnail(event)">
 			<div id="image_container"></div>
+			<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="setThumbnail(event)">
 
 		</div>
 		<button type="submit" class="btn btn-outline-success">등록</button>

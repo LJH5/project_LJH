@@ -41,7 +41,9 @@
 			re_mood = #{re_mood}, 
 			re_tasty = #{re_tasty}, 
 			re_quantity = #{re_quantity}, 
-			re_clean = #{re_clean}
+			re_clean = #{re_clean},
+			re_recommend = #{re_recommend},
+			re_report = #{re_report}
 		where re_num = #{re_num}
 	</update>
 	<delete id="deleteFile">
@@ -71,4 +73,10 @@
 	<delete id="deleteRtReview">
 		delete from review where re_rt_num = #{num}
 	</delete>
+	<select id="selectRecommendCount" resultType="int">
+		select count(*) from recommend where rc_re_num = #{re_num} and rc_state = 1
+	</select>
+	<select id="selectReportCount" resultType="int">
+		select count(*) from recommend where rc_re_num = #{re_num} and rc_state = -1
+	</select>
 </mapper>

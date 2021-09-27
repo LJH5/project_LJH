@@ -160,15 +160,47 @@ public class ReviewServiceImp implements ReviewService {
 		if(user == null)
 			return "GUEST";
 		RecommendVO rvo = reviewDao.selectRecommend(re_num, user.getMe_id());
-
+		ReviewVO review = reviewDao.selectRe(re_num);		
+		
+		int recNum = reviewDao.selectRecommendCount(re_num);
+		int repNum = reviewDao.selectReportCount(re_num);
 		if(rvo == null) {
 			reviewDao.insertRecommend(re_num, user.getMe_id(), state);
-			return state == 1 ? "RECOMMEND" : "REPORT";
+			if(state == 1) {
+				review.setRe_recommend(recNum + 1);
+				reviewDao.updateReview(review);
+				
+				return "RECOMMEND";
+			}else {
+				review.setRe_report(repNum + 1);
+				reviewDao.updateReview(review);
+				return "REPORT";
+			}
 		}
 		state = state == rvo.getRc_state() ? 0 : state;
 		rvo.setRc_state(state);
+		
 		reviewDao.updateRecommend(rvo);
-		return state == 0 ? "CANCEL": (state == 1 ? "RECOMMEND" : "REPORT");
+		
+		if(state == 0) {
+			review.setRe_recommend(reviewDao.selectRecommendCount(re_num));
+			review.setRe_report(reviewDao.selectReportCount(re_num));
+			reviewDao.updateReview(review);
+			return "CANCEL";
+		}else {
+			if(state == 1) {
+				review.setRe_recommend(recNum + 1);
+				review.setRe_report(repNum - 1);
+				reviewDao.updateReview(review);
+				return "RECOMMEND";
+			}else {
+				review.setRe_recommend(recNum - 1);
+				review.setRe_report(repNum + 1);
+				reviewDao.updateReview(review);
+				return "REPORT";
+			}
+		}
+		
 	}
 
 }
