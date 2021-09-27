@@ -58,6 +58,8 @@ public class RestaurantController {
 		//즐겨찾기 정보 가져오기
 		FavoritesVO fvo = restaurantService.getFavority(num, user);
 		
+		restaurantService.getFavorityCount(num);
+		
 		cri.setPerPageNum(5);
 		ArrayList<ReviewVO> review = reviewService.getReviewList(num, cri, user);
 		int totalCount = reviewService.getTotalCount(num, cri);

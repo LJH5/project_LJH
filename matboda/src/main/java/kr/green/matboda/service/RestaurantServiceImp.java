@@ -123,4 +123,14 @@ public class RestaurantServiceImp implements RestaurantService{
 		return restaurantDao.selectFavorites(num, user.getMe_id());
 	}
 
+	@Override
+	public void getFavorityCount(Integer num) {
+		RestaurantVO rt = restaurantDao.selectRt(num);
+		Integer fa = restaurantDao.selectFavoritesCount(num);
+		if(rt != null && fa != null) {
+			rt.setRt_faNum(fa);
+			restaurantDao.updateRt(rt);
+		}
+	}
+
 }

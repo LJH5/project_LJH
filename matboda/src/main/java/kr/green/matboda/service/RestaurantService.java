@@ -31,4 +31,6 @@ public interface RestaurantService {
 
 	FavoritesVO getFavority(Integer num, MemberVO user);
 
+	void getFavorityCount(Integer num);
+
 }

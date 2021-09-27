@@ -362,7 +362,7 @@
 						<div class="inf-box">
 							<span id="views"><i class="far fa-eye"></i>${rt.rt_view}</span> 
 							<span id="reviewNum"><i class="fas fa-pen"></i>${rt.rt_reNum}</span> 
-							<span id="favoritesNum"><i class="fas fa-star"></i>즐겨찾기수</span>
+							<span id="favoritesNum"><i class="fas fa-star"></i>${rt.rt_faNum}</span>
 						</div>
 					</div>
 					<div class="middle-container">
@@ -637,12 +637,10 @@
 					url: contextPath + '/restaurant/favorites/' + state + '/' + rt_num,
 					success : function(result, status, xhr){
 						if(result == 'OK'){
-							alert('즐겨찾기');
 							obj.attr('style','color:rgb(255, 165, 0);');
 						}else if(result == 'GUEST'){
 							alert('즐겨찾기는 로그인이 필요한 서비스입니다.');
 						}else if(result == 'CANCEL'){
-							alert('취소')
 							obj.attr('style','color: rgb(112, 112, 112);');
 						}else if(result == 'FAIL'){
 							alert('즐겨찾기 등록 실패')

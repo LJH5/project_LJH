@@ -20,6 +20,7 @@ public class RestaurantVO {
 	private String rt_im_name; 
 	private int rt_reNum;
 	private int rt_view;
+	private int rt_faNum;
 	
 	public String getDate(Date date) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

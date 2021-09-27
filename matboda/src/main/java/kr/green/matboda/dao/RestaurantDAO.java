@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.FavoritesVO;
-import kr.green.matboda.vo.MemberVO;
 import kr.green.matboda.vo.RestaurantVO;
 
 public interface RestaurantDAO {
@@ -32,4 +31,6 @@ public interface RestaurantDAO {
 	void updateFavorites(@Param("fvo")FavoritesVO fvo);
 
 	ArrayList<RestaurantVO> selectCaTop3Restaurant(String type);
+
+	Integer selectFavoritesCount(Integer num);
 }

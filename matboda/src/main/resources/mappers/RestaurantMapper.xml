@@ -20,13 +20,14 @@
  			rt_openTime = #{rt_openTime},
  			rt_upDate = #{rt_upDate},
  			rt_view = #{rt_view},
- 			rt_reNum = #{rt_reNum}
+ 			rt_reNum = #{rt_reNum},
+ 			rt_faNum = #{rt_faNum}
  			where rt_num = #{rt_num}
  	</update>
  	<select id="selectRestaurant" resultType="kr.green.matboda.vo.RestaurantVO">
  		select restaurant.*, im_name as rt_im_name  from restaurant 
 			left join review on rt_num = re_rt_num
-			left join image on re_num = im_where 
+			left join image on re_num = im_where and im_type = 'REVIEW'
 			group by rt_num
 			order by rt_reNum desc, rt_score desc
 			limit 3
@@ -58,8 +59,14 @@
  			where fa_me_id = #{fvo.fa_me_id} and fa_rt_num = #{fvo.fa_rt_num}
  	</update>
  	<select id="selectCaTop3Restaurant" resultType="kr.green.matboda.vo.RestaurantVO">
- 		select * from restaurant where rt_type = #{type}
- 		order by rt_reNum desc, rt_score desc, rt_view desc
- 		limit 3
+ 		select restaurant.*, max(im_name) as rt_im_name from restaurant 
+			left join review on rt_num = re_rt_num
+			left join image on re_num = im_where
+			where rt_type = #{type}
+			order by rt_reNum desc, rt_score desc, rt_view desc
+			limit 3
+ 	</select>
+ 	<select id="selectFavoritesCount" resultType="int">
+ 		select count(*) from favorites where fa_rt_num = #{num}
  	</select>
 </mapper>
