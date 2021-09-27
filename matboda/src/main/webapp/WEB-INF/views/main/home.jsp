@@ -305,46 +305,38 @@
 						<div class="category-title">한식</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
+								<c:if test="${korTop3.size() == 0}">
+									<div class="rtNull">
+										<div>음식점이 없습니다.</div>
+										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+									</div>
+								</c:if>
 								<c:forEach items="${korTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt != null }">
-											<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-												<c:choose>
-													<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-													<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-												</c:choose>
-											</a>
-										</c:when>
-										<c:otherwise>
-											<div class="rtNull">
-												<div>음식점이 없습니다.</div>
-												<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
-											</div>
-										</c:otherwise>
-									</c:choose>
+									<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
 						<div class="category-title">일식</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
+								<c:if test="${japTop3.size() == 0}">
+									<div class="rtNull">
+										<div>음식점이 없습니다.</div>
+										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+									</div>
+								</c:if>
 								<c:forEach items="${japTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt != null }">
-											<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-												<c:choose>
-													<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-													<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-												</c:choose>
-											</a>
-										</c:when>
-										<c:otherwise>
-											<div class="rtNull">
-												<div>음식점이 없습니다.</div>
-												<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
-											</div>
-										</c:otherwise>
-									</c:choose>
+									<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
@@ -353,46 +345,38 @@
 						<div class="category-title">치킨</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
+								<c:if test="${chickenTop3.size() == 0}">
+									<div class="rtNull">
+										<div>음식점이 없습니다.</div>
+										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+									</div>
+								</c:if>
 								<c:forEach items="${chickenTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt != null }">
-											<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-												<c:choose>
-													<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-													<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-												</c:choose>
-											</a>
-										</c:when>
-										<c:otherwise>
-											<div class="rtNull">
-												<div>음식점이 없습니다.</div>
-												<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
-											</div>
-										</c:otherwise>
-									</c:choose>
+									<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
 						<div class="category-title">분식</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
+								<c:if test="${snackTop3.size() == 0}">
+									<div class="rtNull">
+										<div>음식점이 없습니다.</div>
+										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+									</div>
+								</c:if>
 								<c:forEach items="${snackTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt != null }">
-											<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-												<c:choose>
-													<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-													<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-												</c:choose>
-											</a>
-										</c:when>
-										<c:otherwise>
-											<div class="rtNull">
-												<div>음식점이 없습니다.</div>
-												<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
-											</div>
-										</c:otherwise>
-									</c:choose>
+									<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
@@ -401,46 +385,38 @@
 						<div class="category-title">양식/피자</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
+								<c:if test="${wesTop3.size() == 0}">
+									<div class="rtNull">
+										<div>음식점이 없습니다.</div>
+										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+									</div>
+								</c:if>
 								<c:forEach items="${wesTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt != null }">
-											<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-												<c:choose>
-													<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-													<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-												</c:choose>
-											</a>
-										</c:when>
-										<c:otherwise>
-											<div class="rtNull">
-												<div>음식점이 없습니다.</div>
-												<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
-											</div>
-										</c:otherwise>
-									</c:choose>
+									<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
 						<div class="category-title">카페/디저트</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
+								<c:if test="${cafeTop3.size() == 0}">
+									<div class="rtNull">
+										<div>음식점이 없습니다.</div>
+										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+									</div>
+								</c:if>
 								<c:forEach items="${cafeTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt != null }">
-											<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-												<c:choose>
-													<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-													<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-												</c:choose>
-											</a>
-										</c:when>
-										<c:otherwise>
-											<div class="rtNull">
-												<div>음식점이 없습니다.</div>
-												<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
-											</div>
-										</c:otherwise>
-									</c:choose>
+									<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
@@ -449,46 +425,38 @@
 						<div class="category-title">중식</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
+								<c:if test="${chiTop3.size() == 0}">
+									<div class="rtNull">
+										<div>음식점이 없습니다.</div>
+										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+									</div>
+								</c:if>
 								<c:forEach items="${chiTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt != null }">
-											<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-												<c:choose>
-													<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-													<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-												</c:choose>
-											</a>
-										</c:when>
-										<c:otherwise>
-											<div class="rtNull">
-												<div>음식점이 없습니다.</div>
-												<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
-											</div>
-										</c:otherwise>
-									</c:choose>
+									<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
 						<div class="category-title">브런치/버거/샌드위치</div>
 						<div class="swiper-container mySwiper">
 							<div class="swiper-wrapper">
+								<c:if test="${brunchTop3.size() == 0}">
+									<div class="rtNull">
+										<div>음식점이 없습니다.</div>
+										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+									</div>
+								</c:if>
 								<c:forEach items="${brunchTop3}" var="rt">
-									<c:choose>
-										<c:when test="${rt != null }">
-											<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-												<c:choose>
-													<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-													<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-												</c:choose>
-											</a>
-										</c:when>
-										<c:otherwise>
-											<div class="rtNull">
-												<div>음식점이 없습니다.</div>
-												<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
-											</div>
-										</c:otherwise>
-									</c:choose>
+									<a class="swiper-slide" href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img  src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose>
+									</a>
 								</c:forEach>
 							</div>
 						</div>
