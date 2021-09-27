@@ -67,6 +67,6 @@
 			limit 3
  	</select>
  	<select id="selectFavoritesCount" resultType="int">
- 		select count(*) from favorites where fa_rt_num = #{num}
+ 		select count(*) from favorites where fa_rt_num = #{num} and fa_state = 1
  	</select>
 </mapper>
