@@ -41,7 +41,6 @@
             object-fit: cover;
         }
         
-        /* 상단 */
         .inner-container{
             min-width: 900px;
             display: flex;
@@ -54,6 +53,8 @@
             max-width: 900px;
             margin: 0 auto;
         }
+        
+        /* 상단 */
         .left-container .top-container{
             padding: 10px;
             border-bottom: 1px solid rgba(160, 160, 160, 0.3);
@@ -145,7 +146,7 @@
         }
         
         /* 하단 */
-         .left-container .bottom-container{
+        .left-container .bottom-container{
             padding: 10px;
         }
         .bottom-container .review-container{

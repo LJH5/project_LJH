@@ -18,6 +18,8 @@ public class MemberVO {
 	private String me_authority;
 	private Boolean useCookie;
 	private Date me_signupDate;
+	private int me_reNum;
+	private int me_faNum;
 	
 	public String getDate() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

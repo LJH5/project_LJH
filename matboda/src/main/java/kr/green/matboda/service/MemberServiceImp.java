@@ -19,6 +19,7 @@ import kr.green.matboda.dao.MemberDAO;
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.utils.UploadFileUtils;
 import kr.green.matboda.vo.MemberVO;
+import kr.green.matboda.vo.ReviewVO;
 
 @Service
 public class MemberServiceImp implements MemberService{
@@ -182,15 +183,21 @@ public class MemberServiceImp implements MemberService{
 		return;
 	}
 	@Override
-	public int getReviewCountById(MemberVO user) {
+	public int getReviewCountById(MemberVO user, Criteria cri) {
 		if(user == null)
 			return 0;
-		return memberDao.selectReviewCountById(user);
+		return memberDao.selectReviewCountById(user, cri);
 	}
 	@Override
-	public int getFavoritesCountById(MemberVO user) {
+	public int getFavoritesCountById(MemberVO user, Criteria cri) {
 		if(user == null)
 			return 0;
-		return memberDao.selectFavoritesCountById(user);
+		return memberDao.selectFavoritesCountById(user, cri);
+	}
+	@Override
+	public ArrayList<ReviewVO> getReviewById(MemberVO user, Criteria cri) {
+		if(user == null)
+			return null;
+		return memberDao.selectReviewById(user, cri);
 	}
 }

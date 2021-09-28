@@ -1,20 +1,21 @@
 package kr.green.matboda.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.matboda.pagination.Criteria;
+import kr.green.matboda.pagination.PageMaker;
 import kr.green.matboda.service.MemberService;
-import kr.green.matboda.service.RestaurantService;
 import kr.green.matboda.service.ReviewService;
 import kr.green.matboda.vo.MemberVO;
+import kr.green.matboda.vo.ReviewVO;
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -66,14 +67,14 @@ public class MemberController {
 		return mv;
 	}
 	@GetMapping("/mypage")
-	public ModelAndView memberMypageGet(ModelAndView mv, HttpServletRequest request) {
+	public ModelAndView memberMypageGet(ModelAndView mv, HttpServletRequest request, Criteria cri) {
 		MemberVO user = memberService.getMemberByRequest(request);
 		
 		//리뷰 수
-		int reNum = memberService.getReviewCountById(user);
+		int reNum = memberService.getReviewCountById(user, cri);
 		
 		//즐겨찾기 수
-		int faNum = memberService.getFavoritesCountById(user); 
+		int faNum = memberService.getFavoritesCountById(user, cri); 
 		
 		mv.addObject("user", user);
 		mv.addObject("reNum", reNum);
@@ -103,6 +104,21 @@ public class MemberController {
 		memberService.deleteMember(user);
 		memberService.signout(request, response);
 		mv.setViewName("redirect:/");
+		return mv;
+	}
+	@GetMapping("/reviewList")
+	public ModelAndView reviewListGet(ModelAndView mv, HttpServletRequest request, Criteria cri) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		
+		cri.setPerPageNum(5);
+		ArrayList<ReviewVO> reviews = memberService.getReviewById(user, cri);
+		int totalCount = memberService.getReviewCountById(user, cri);
+		PageMaker pm = new PageMaker(totalCount, 5, cri);
+		
+		mv.addObject("user", user);
+		mv.addObject("reviews", reviews);
+		mv.addObject("pm", pm);
+		mv.setViewName("/template/member/reviewList");
 		return mv;
 	}
 }	

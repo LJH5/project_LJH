@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.MemberVO;
+import kr.green.matboda.vo.ReviewVO;
 
 public interface MemberService {
 
@@ -39,8 +40,10 @@ public interface MemberService {
 
 	void deleteMember(MemberVO user);
 
-	int getReviewCountById(MemberVO user);
+	int getReviewCountById(MemberVO user, Criteria cri);
 	
-	int getFavoritesCountById(MemberVO user);
+	int getFavoritesCountById(MemberVO user, Criteria cri);
+
+	ArrayList<ReviewVO> getReviewById(MemberVO user, Criteria cri);
 
 }

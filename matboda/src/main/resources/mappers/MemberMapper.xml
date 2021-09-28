@@ -64,4 +64,9 @@
 	<select id="selectFavoritesCountById" resultType="int">
 		select count(*) from favorites where fa_me_id = #{user.me_id}
 	</select>
+	<select id="selectReviewById" resultType="kr.green.matboda.vo.ReviewVO">
+		select * from review where re_me_id = #{user.me_id} 
+		order by re_num desc
+		limit #{cri.pageStart},#{cri.perPageNum}
+	</select>
 </mapper>

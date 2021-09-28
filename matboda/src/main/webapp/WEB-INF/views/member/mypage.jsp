@@ -56,8 +56,8 @@
 			color: white;
 			display: block;
 		}
-		.user-activity .review-num a:hover,
-		.user-activity .favorites-num a:hover{
+		.user-activity .review:hover a,
+		.user-activity .favorites:hover a{
 			text-decoration: none;
 		}
 		.user-activity .favorites{
@@ -103,7 +103,7 @@
 			<div class="user-activity">
 				<div class="review">
 					<div class="title">리뷰</div>
-					<a href="">
+					<a href="<%=request.getContextPath()%>/member/reviewList">
 						<span class="review-num">${reNum}</span>
 						<span>리뷰 목록</span>
 					</a>
