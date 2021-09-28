@@ -67,8 +67,10 @@
 			color: black;
 		}
 		.userInf-box{
-			margin-bottom: 10px;
-			display: flex;
+		    margin-bottom: 10px;
+		    display: flex;
+		    color: #747070;
+		    font-size: 18px;
 		}
 		.userInf-title{
 			margin-right: 20px;
