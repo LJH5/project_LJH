@@ -15,10 +15,10 @@
 			margin-bottom: 20px;
 		}
 		.me_picture img{
-			background-color: rosybrown;
 			width: 200px;
 			height: 200px;
 			border-radius: 100%;
+			box-shadow: 1px 1px 1px 2px #d9cece;
 		}
 		.user-activity{
 			width: 400px;

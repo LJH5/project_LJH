@@ -162,16 +162,22 @@
         .review-container .user-box{
             width: 150px;
         }
-        .review-container .user-box .img-box{
+       .review-container .user-box .img-container{
             width: 110px;
             height: 110px;
             padding: 20px;
     		margin: 0 auto;
         }
-        .review-container .user-box .img-box img{
+        .review-container .user-box .img-box{
             width: 100%;
             height: 100%;
             border-radius: 100%;
+    		box-shadow: 0px 1px 1px 1px #d9cece;
+    		overflow: hidden;
+        }
+        .review-container .user-box .img-box img{
+            width: 100%;
+            height: 100%;
         }
         .review-container .user-box .user-nickname{
             text-overflow: ellipsis;
@@ -406,15 +412,17 @@
 							<div class="review-container">
 								<div class="review-inner">
 									<div class="user-box">
-										<div class="img-box">
-										<c:choose>
-											<c:when test="${review.re_me_picture == null || review.re_me_picture == ''}">
-												<img src="<%=request.getContextPath()%>/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png">
-											</c:when>
-											<c:otherwise>
-												<img src="<%=request.getContextPath() %>/img/${review.re_me_picture}">
-											</c:otherwise>
-										</c:choose>
+										<div class="img-container">
+											<div class="img-box">
+												<c:choose>
+													<c:when test="${review.re_me_picture == null || review.re_me_picture == ''}">
+														<img src="<%=request.getContextPath()%>/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png">
+													</c:when>
+													<c:otherwise>
+														<img src="<%=request.getContextPath() %>/img/${review.re_me_picture}">
+													</c:otherwise>
+												</c:choose>
+											</div>
 										</div>
 										<div class="user-nickname">${review.re_me_nickname}</div>
 										<div class="user-inf">
