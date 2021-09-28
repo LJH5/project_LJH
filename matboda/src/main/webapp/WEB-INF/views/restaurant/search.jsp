@@ -5,13 +5,6 @@
 <html>
 <head>
 <style>
-	*{
-		margin: 0;
-		padding: 0;
-		text-decoration: none;
-		list-style: none;
-		color: black;
-	}
 	.search-container .notSearch-container{
 		height: 700px;
 		width: 800px;
@@ -31,7 +24,6 @@
 		min-height: 400px;
 		width: 920px;
 		margin: 0 auto;
-		margin-top: 200px;
 		padding: 10px;
 	}
 	.search-container .onSearch-container h2{
@@ -87,6 +79,7 @@
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		color: black;
 	}
 	.onSearch-container .shopInf-top .score{
 		color: rgb(255, 165, 0);

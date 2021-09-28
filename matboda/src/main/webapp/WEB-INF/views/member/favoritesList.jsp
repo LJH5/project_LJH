@@ -5,28 +5,31 @@
 <html>
 <head>
 <style>
-	.search-container .notSearch-container{
+	.faList-container .inner-container{
+		display: flex;
+	    padding-top: 50px;
+	}
+	.faList-container .notSearch-container{
 		height: 700px;
 		width: 800px;
 		margin: 0 auto;
 		margin-top: 70px;
 	}
-	.search-container .notSearch-container h1{
+	.faList-container .notSearch-container h1{
 		margin-bottom: 30px;
 	}
-	.search-container .register-link{
+	.faList-container .register-link{
 		font-size: 50px;
 	}
-	.search-container .register-link:hover{
+	.faList-container .register-link:hover{
 		color: rgb(255, 165, 0);
 	}
-	.search-container .onSearch-container{
+	.faList-container .onSearch-container{
 		min-height: 400px;
 		width: 950px;
 		margin: 0 auto;
-		padding: 10px;
 	}
-	.search-container .onSearch-container h2{
+	.faList-container .onSearch-container h2{
 		color: rgb(255, 165, 0);
 		margin-bottom: 20px;
 	}
@@ -40,10 +43,10 @@
 		float: left;
 		margin-bottom: 30px;
 	}
-	.search-container .shop-box:hover img{
+	.faList-container .shop-box:hover img{
 		transform: scale(1.1);
 	}
-	.search-container .shop-box:hover a{
+	.faList-container .shop-box:hover a{
 		text-decoration: none;
 	}
 	.onSearch-container a span{
@@ -79,6 +82,7 @@
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		color: black;
 	}
 	.onSearch-container .shopInf-top .score{
 		color: rgb(255, 165, 0);
@@ -99,8 +103,10 @@
 		height: 20px;
 		line-height: 20px;
 	}
-	.onSearch-container .map-container{
-		
+	.inner-container .map-container{
+		width: 450px;
+		height: 450px;
+		background-color: aqua;
 	}
 
 
@@ -114,7 +120,7 @@
 </style>
 </head>
 <body>
-	<div class="search-container">
+	<div class="faList-container">
 		<div class="inner-container">
 			<c:if test="${list.size() == 0}">
 				<div class="notSearch-container">
@@ -123,56 +129,54 @@
 					<a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a>
 				</div>
 			</c:if>
-			<div>
-				<div class="onSearch-container">
-					<div class="shop-container">
-						<c:forEach items="${list}" var="rt">
-							<div class="shop-box">
-								<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-									<span class="img-container">
-										<span class="img-box">
-											<c:choose>
-												<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300px" height="300px"></c:when>
-												<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG" width="300px" height="300px"></c:otherwise>
-											</c:choose>
-										</span>
+			<div class="onSearch-container">
+				<div class="shop-container">
+					<c:forEach items="${list}" var="rt">
+						<div class="shop-box">
+							<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+								<span class="img-container">
+									<span class="img-box">
+										<c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300px" height="300px"></c:when>
+											<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG" width="300px" height="300px"></c:otherwise>
+										</c:choose>
 									</span>
-									<span class="shopInf-container">
-										<span class="shopInf-top">
-											<span class="title">${rt.rt_name}</span>
-											<span class="score">${rt.rt_score}</span> <br>
-										</span>
-										<span class="shopInf-mid">
-											<span class="address">${rt.rt_address}</span>
-										</span>
-										<span class="shopInf-bot">
-											<span class="type">${rt.rt_type}</span>
-										</span>
+								</span>
+								<span class="shopInf-container">
+									<span class="shopInf-top">
+										<span class="title">${rt.rt_name}</span>
+										<span class="score">${rt.rt_score}</span> <br>
 									</span>
-								</a>
-							</div>
-						</c:forEach>
-					</div>
-					<ul class="pagination justify-content-center">
-						<c:if test="${pm.prev}">
-							<li class="page-item"><a class="page-link"
-								href="<%=request.getContextPath()%>/member/favoritesList/?page=${pm.startPage-1}">이전</a></li>
-						</c:if>
-						<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="index">
-							<li
-								class="page-item <c:if test="${pm.criteria.page == index }">active</c:if>">
-								<a class="page-link"
-								href="<%=request.getContextPath()%>/member/favoritesList/?page=${index}">${index}</a>
-							</li>
-						</c:forEach>
-						<c:if test="${pm.next}">
-							<li class="page-item"><a class="page-link"
-								href="<%=request.getContextPath()%>/member/favoritesList/?page=${pm.endPage+1}">다음</a></li>
-						</c:if>
-					</ul>
-				</div> 
-				<div class="map-container">
+									<span class="shopInf-mid">
+										<span class="address">${rt.rt_address}</span>
+									</span>
+									<span class="shopInf-bot">
+										<span class="type">${rt.rt_type}</span>
+									</span>
+								</span>
+							</a>
+						</div>
+					</c:forEach>
 				</div>
+				<ul class="pagination justify-content-center">
+					<c:if test="${pm.prev}">
+						<li class="page-item"><a class="page-link"
+							href="<%=request.getContextPath()%>/member/favoritesList/?page=${pm.startPage-1}">이전</a></li>
+					</c:if>
+					<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="index">
+						<li
+							class="page-item <c:if test="${pm.criteria.page == index }">active</c:if>">
+							<a class="page-link"
+							href="<%=request.getContextPath()%>/member/favoritesList/?page=${index}">${index}</a>
+						</li>
+					</c:forEach>
+					<c:if test="${pm.next}">
+						<li class="page-item"><a class="page-link"
+							href="<%=request.getContextPath()%>/member/favoritesList/?page=${pm.endPage+1}">다음</a></li>
+					</c:if>
+				</ul>
+			</div> 
+			<div class="map-container">
 			</div>
 		</div>
 	</div>
