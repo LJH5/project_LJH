@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="../JS수업/JS/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../JS수업/JS/rolling.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+</head>
+<style>
+	.faList-container .inner-container{
+		display: flex;
+	    padding-top: 50px;
+	}
+	.faList-container .left-container{
+		background-color: rgb(29, 29, 24);
+		width: calc(75% - 20px);
+		min-width: 940px;
+	}
+	/* 즐겨찾기 없음 */
+	.faList-container .notSearch-container{
+		height: 700px;
+		width: 800px;
+		margin: 0 auto;
+		margin-top: 70px;
+	}
+	.faList-container .notSearch-container h1{
+		margin-bottom: 30px;
+	}
+	.faList-container .register-link{
+		font-size: 50px;
+	}
+	.faList-container .register-link:hover{
+		color: rgb(255, 165, 0);
+	}
+
+	/* 즐겨찾기 음식점 리스트 */
+	.faList-container .onSearch-container{
+		max-width: 940px;
+		margin: 0 auto;
+		background-color: rgb(107, 107, 95);
+	}
+	.faList-container .shop-container{
+		width: 940px;
+		background-color: rgb(13, 80, 80);
+		padding-left: 10px;
+	}
+	.faList-container .shop-box{
+		background-color: rgb(163, 199, 5);
+		width: 300px;
+		height: 400px;
+		margin-right: 10px;
+		float: left;
+		margin-bottom: 30px;
+	}
+	.faList-container .shop-box:hover img{
+		transform: scale(1.1);
+	}
+	.faList-container .shop-box:hover a{
+		text-decoration: none;
+	}
+	.onSearch-container a span{
+		display: block;
+	}
+	.onSearch-container .img-box {
+		width: 300px;
+		height: 300px;
+		overflow: hidden;
+	}
+	.onSearch-container .img-box img{
+		width: 100%;
+		height: 100%;
+		display: block;
+      	transition: transform 1s;
+	}
+	.onSearch-container .shopInf-container{
+		width: 290px;
+		height: 100px;
+		padding: 0 5px;
+	}
+	.onSearch-container .shopInf-top{
+		height: 40px;
+	}
+	.onSearch-container .shopInf-top span{
+		float: left;
+		font-size: 30px;
+		line-height: 40px;
+	}
+	.onSearch-container .shopInf-top .title{
+		max-width: 220px;
+		margin-right: 10px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: black;
+	}
+	.onSearch-container .shopInf-top .score{
+		color: rgb(255, 165, 0);
+		font-weight: bold;
+	}
+	.onSearch-container .shopInf-mid{
+		height: 20px;
+		line-height: 20px;
+	}
+	.onSearch-container .shopInf-mid .address,
+	.onSearch-container .shopInf-bot .type{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: rgb(112, 112, 112);
+	}
+	.onSearch-container .shopInf-bot{
+		height: 20px;
+		line-height: 20px;
+	}
+	.faList-container .right-container{
+		width: 450px;
+	}
+	.faList-container .map-container{
+		width: 450px;
+		height: 450px;
+		background-color: aqua;
+	}
+
+
+	/* after */
+	.onSearch-container .shopInf-top::after,
+	.onSearch-container .shop-container::after{
+		display: block;
+		content: '';
+		clear: both;
+	}
+</style>
+</head>
+<body>
+	<div class="faList-container">
+		<div class="inner-container">
+			<div class="left-container">
+				<!-- <c:if test="${list.size() == 0}">
+					<div class="notSearch-container">
+						<h1>'${cri.search}'에 대한 검색 결과가 없습니다.</h1>
+						<h1>검색한 식당이 없다면?🤔</h1>
+						<a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a>
+					</div>
+				</c:if> -->
+				<div class="onSearch-container">
+					<div class="shop-container">
+						<!-- <c:forEach items="${list}" var="rt">
+							<div class="shop-box">
+								<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+									<span class="img-container">
+										<span class="img-box">
+											<c:choose>
+												<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300px" height="300px"></c:when>
+												<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG" width="300px" height="300px"></c:otherwise>
+											</c:choose>
+										</span>
+									</span>
+									<span class="shopInf-container">
+										<span class="shopInf-top">
+											<span class="title">${rt.rt_name}</span>
+											<span class="score">${rt.rt_score}</span> <br>
+										</span>
+										<span class="shopInf-mid">
+											<span class="address">${rt.rt_address}</span>
+										</span>
+										<span class="shopInf-bot">
+											<span class="type">${rt.rt_type}</span>
+										</span>
+									</span>
+								</a>
+							</div>
+						</c:forEach> -->
+						<div class="shop-box">
+							<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+								<span class="img-container">
+									<span class="img-box">
+										<!-- <c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose> -->
+										<img src="../JS수업/img/cat.jfif" alt="">
+									</span>
+								</span>
+								<span class="shopInf-container">
+									<span class="shopInf-top">
+										<!-- <span class="title">${rt.rt_name}</span> -->
+										<!-- <span class="score">${rt.rt_score}</span> <br> -->
+										<span class="title">음식점 이름</span>
+										<span class="score">4.5</span> <br>
+									</span>
+									<span class="shopInf-mid">
+										<!-- <span class="address">${rt.rt_address}</span> -->
+										<span class="address">충북 청주시 서원구 원흥로100번길 27-22 (산남동)</span>
+									</span>
+									<span class="shopInf-bot">
+										<!-- <span class="type">${rt.rt_type}</span> -->
+										<span class="type">한식</span>
+									</span>
+								</span>
+							</a>
+						</div>
+						<div class="shop-box">
+							<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+								<span class="img-container">
+									<span class="img-box">
+										<!-- <c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose> -->
+										<img src="../JS수업/img/cat.jfif" alt="">
+									</span>
+								</span>
+								<span class="shopInf-container">
+									<span class="shopInf-top">
+										<!-- <span class="title">${rt.rt_name}</span> -->
+										<!-- <span class="score">${rt.rt_score}</span> <br> -->
+										<span class="title">음식점 이름</span>
+										<span class="score">4.5</span> <br>
+									</span>
+									<span class="shopInf-mid">
+										<!-- <span class="address">${rt.rt_address}</span> -->
+										<span class="address">충북 청주시 서원구 원흥로100번길 27-22 (산남동)</span>
+									</span>
+									<span class="shopInf-bot">
+										<!-- <span class="type">${rt.rt_type}</span> -->
+										<span class="type">한식</span>
+									</span>
+								</span>
+							</a>
+						</div>
+						<div class="shop-box">
+							<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+								<span class="img-container">
+									<span class="img-box">
+										<!-- <c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose> -->
+										<img src="../JS수업/img/cat.jfif" alt="">
+									</span>
+								</span>
+								<span class="shopInf-container">
+									<span class="shopInf-top">
+										<!-- <span class="title">${rt.rt_name}</span> -->
+										<!-- <span class="score">${rt.rt_score}</span> <br> -->
+										<span class="title">음식점 이름</span>
+										<span class="score">4.5</span> <br>
+									</span>
+									<span class="shopInf-mid">
+										<!-- <span class="address">${rt.rt_address}</span> -->
+										<span class="address">충북 청주시 서원구 원흥로100번길 27-22 (산남동)</span>
+									</span>
+									<span class="shopInf-bot">
+										<!-- <span class="type">${rt.rt_type}</span> -->
+										<span class="type">한식</span>
+									</span>
+								</span>
+							</a>
+						</div>
+						<div class="shop-box">
+							<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+								<span class="img-container">
+									<span class="img-box">
+										<!-- <c:choose>
+											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
+											<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
+										</c:choose> -->
+										<img src="../JS수업/img/cat.jfif" alt="">
+									</span>
+								</span>
+								<span class="shopInf-container">
+									<span class="shopInf-top">
+										<!-- <span class="title">${rt.rt_name}</span> -->
+										<!-- <span class="score">${rt.rt_score}</span> <br> -->
+										<span class="title">음식점 이름</span>
+										<span class="score">4.5</span> <br>
+									</span>
+									<span class="shopInf-mid">
+										<!-- <span class="address">${rt.rt_address}</span> -->
+										<span class="address">충북 청주시 서원구 원흥로100번길 27-22 (산남동)</span>
+									</span>
+									<span class="shopInf-bot">
+										<!-- <span class="type">${rt.rt_type}</span> -->
+										<span class="type">한식</span>
+									</span>
+								</span>
+							</a>
+						</div>
+					</div>
+					<ul class="pagination justify-content-center">
+						<!-- <c:if test="${pm.prev}">
+							<li class="page-item"><a class="page-link"
+								href="<%=request.getContextPath()%>/member/favoritesList/?page=${pm.startPage-1}">이전</a></li>
+						</c:if>
+						<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="index">
+							<li
+								class="page-item <c:if test="${pm.criteria.page == index }">active</c:if>">
+								<a class="page-link"
+								href="<%=request.getContextPath()%>/member/favoritesList/?page=${index}">${index}</a>
+							</li>
+						</c:forEach>
+						<c:if test="${pm.next}">
+							<li class="page-item"><a class="page-link"
+								href="<%=request.getContextPath()%>/member/favoritesList/?page=${pm.endPage+1}">다음</a></li>
+						</c:if> -->
+						<li class="page-item"><a class="page-link"
+							href="<%=request.getContextPath()%>/member/favoritesList/?page=${pm.startPage-1}">이전</a></li>
+						<li class="page-item"><a class="page-link"
+							href="<%=request.getContextPath()%>/member/favoritesList/?page=${index}">1</a></li>
+						<li class="page-item"><a class="page-link"
+							href="<%=request.getContextPath()%>/member/favoritesList/?page=${pm.endPage+1}">다음</a></li>
+					</ul>
+				</div> 
+			</div>
+			<div class="right-container">
+				<div class="map-container">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
