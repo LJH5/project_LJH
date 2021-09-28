@@ -19,6 +19,7 @@ import kr.green.matboda.dao.MemberDAO;
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.utils.UploadFileUtils;
 import kr.green.matboda.vo.MemberVO;
+import kr.green.matboda.vo.RestaurantVO;
 import kr.green.matboda.vo.ReviewVO;
 
 @Service
@@ -199,5 +200,11 @@ public class MemberServiceImp implements MemberService{
 		if(user == null)
 			return null;
 		return memberDao.selectReviewById(user, cri);
+	}
+	@Override
+	public ArrayList<RestaurantVO> getRestaurantByFavorites(MemberVO user, Criteria cri) {
+		if(user == null)
+			return null;
+		return memberDao.selectRestaurantByFavorites(user, cri);
 	}
 }

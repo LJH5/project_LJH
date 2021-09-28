@@ -301,7 +301,7 @@
           	display: block;
         }
         .right-container{
-            width: 25%;
+            width: 450px;
         }
         .right-container .map{
             width: 450px;

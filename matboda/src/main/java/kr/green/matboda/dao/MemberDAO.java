@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.vo.MemberVO;
+import kr.green.matboda.vo.RestaurantVO;
 import kr.green.matboda.vo.ReviewVO;
 
 public interface MemberDAO {
@@ -32,5 +33,7 @@ public interface MemberDAO {
 	int selectFavoritesCountById(@Param("user")MemberVO user, @Param("cri")Criteria cri);
 
 	ArrayList<ReviewVO> selectReviewById(@Param("user")MemberVO user, @Param("cri")Criteria cri);
+
+	ArrayList<RestaurantVO> selectRestaurantByFavorites(@Param("user")MemberVO user, @Param("cri")Criteria cri);
 
 }

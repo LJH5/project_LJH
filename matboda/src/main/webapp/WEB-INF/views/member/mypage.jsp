@@ -112,7 +112,7 @@
 				</div>
 				<div class="favorites">
 					<div class="title">즐겨찾기</div>
-					<a href="">
+					<a href="<%=request.getContextPath()%>/member/favoritesList">
 						<span class="favorites-num">${faNum}</span>
 						<span>즐겨찾기 목록</span>
 					</a>

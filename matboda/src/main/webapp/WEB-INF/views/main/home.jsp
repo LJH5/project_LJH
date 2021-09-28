@@ -42,7 +42,7 @@
 
 .top3-box .top3 .rank {
 	width: calc(100%/ 3);
-	height: 400px;
+	height: 430px;
 	margin-right: 20px;
 	font-size: 20px;
 }
@@ -85,7 +85,7 @@
 
 .rank .img-box {
 	width: 100%;
-	height: 310px;
+	height: 330px;
 	display: block;
 	overflow: hidden;
 }
@@ -99,8 +99,8 @@
 
 .rank .rt-content {
 	display: block;
-	height: 76px;
 	padding: 0 10px;
+	border-top: 2px solid #ffa500
 }
 
 .rt-content .content-top {
@@ -131,6 +131,13 @@
 .rt-content .content-bot {
 	display: block;
 	font-size: 15px;
+    height: 20px;
+    overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
 }
 
 .body .report-box {

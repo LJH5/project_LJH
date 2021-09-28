@@ -32,10 +32,10 @@ public class BoardController {
 	
 	@GetMapping("/list")
 	public ModelAndView listGet(ModelAndView mv, Criteria cri) {
-		cri.setPerPageNum(5);
+		cri.setPerPageNum(10);
 		ArrayList<BoardVO> list = boardService.getBoardList(cri);
 		int totalCount = boardService.getTotalCount(cri);
-		PageMaker pm = new PageMaker(totalCount, 10, cri);
+		PageMaker pm = new PageMaker(totalCount, 5, cri);
 		
 		mv.addObject("title", "Q&A");
 		mv.addObject("list", list);

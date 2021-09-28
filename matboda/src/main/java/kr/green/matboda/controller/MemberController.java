@@ -13,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.pagination.PageMaker;
 import kr.green.matboda.service.MemberService;
+import kr.green.matboda.service.RestaurantService;
 import kr.green.matboda.service.ReviewService;
 import kr.green.matboda.vo.MemberVO;
+import kr.green.matboda.vo.RestaurantVO;
 import kr.green.matboda.vo.ReviewVO;
 import lombok.AllArgsConstructor;
 
@@ -115,10 +117,26 @@ public class MemberController {
 		int totalCount = memberService.getReviewCountById(user, cri);
 		PageMaker pm = new PageMaker(totalCount, 5, cri);
 		
+		mv.addObject("title", "리뷰's");
 		mv.addObject("user", user);
 		mv.addObject("reviews", reviews);
 		mv.addObject("pm", pm);
 		mv.setViewName("/template/member/reviewList");
+		return mv;
+	}
+	@GetMapping("favoritesList")
+	public ModelAndView favoritesListGet(ModelAndView mv, HttpServletRequest request, Criteria cri) {
+		MemberVO user = memberService.getMemberByRequest(request);
+		ArrayList<RestaurantVO> list = memberService.getRestaurantByFavorites(user, cri);
+		
+		cri.setPerPageNum(9);
+		int totalCount = memberService.getFavoritesCountById(user, cri);
+		PageMaker pm = new PageMaker(totalCount, 5, cri);
+		
+		mv.addObject("title", "즐겨찾기's");
+		mv.addObject("list", list);
+		mv.addObject("pm", pm);
+		mv.setViewName("/template/member/favoritesList");
 		return mv;
 	}
 }	
