@@ -20,7 +20,6 @@
 	    padding-top: 50px;
 	}
 	.faList-container .left-container{
-		background-color: rgb(29, 29, 24);
 		width: calc(75% - 20px);
 		min-width: 940px;
 	}
@@ -38,14 +37,18 @@
 		font-size: 50px;
 	}
 	.faList-container .register-link:hover{
-		color: rgb(255, 165, 0);
+		color: #ffa500;
 	}
 
 	/* 즐겨찾기 음식점 리스트 */
 	.faList-container .onSearch-container{
 		max-width: 940px;
 		margin: 0 auto;
-		background-color: rgb(107, 107, 95);
+	}
+	.faList-container .title-box{
+		font-size: 50px;
+		text-align: center;		
+		color: #ffa500;
 	}
 	.faList-container .shop-container{
 		width: 940px;
@@ -66,34 +69,34 @@
 	.faList-container .shop-box:hover a{
 		text-decoration: none;
 	}
-	.onSearch-container a span{
+	.faList-container .onSearch-container a span{
 		display: block;
 	}
-	.onSearch-container .img-box {
+	.faList-container .onSearch-container .img-box {
 		width: 300px;
 		height: 300px;
 		overflow: hidden;
 	}
-	.onSearch-container .img-box img{
+	.faList-container .onSearch-container .img-box img{
 		width: 100%;
 		height: 100%;
 		display: block;
       	transition: transform 1s;
 	}
-	.onSearch-container .shopInf-container{
+	.faList-container .onSearch-container .shopInf-container{
 		width: 290px;
 		height: 100px;
 		padding: 0 5px;
 	}
-	.onSearch-container .shopInf-top{
+	.faList-container .onSearch-container .shopInf-top{
 		height: 40px;
 	}
-	.onSearch-container .shopInf-top span{
+	.faList-container .onSearch-container .shopInf-top span{
 		float: left;
 		font-size: 30px;
 		line-height: 40px;
 	}
-	.onSearch-container .shopInf-top .title{
+	.faList-container .onSearch-container .shopInf-top .title{
 		max-width: 220px;
 		margin-right: 10px;
 		white-space: nowrap;
@@ -101,27 +104,28 @@
 		text-overflow: ellipsis;
 		color: black;
 	}
-	.onSearch-container .shopInf-top .score{
+	.faList-container .onSearch-container .shopInf-top .score{
 		color: rgb(255, 165, 0);
 		font-weight: bold;
 	}
-	.onSearch-container .shopInf-mid{
+	.faList-container .onSearch-container .shopInf-mid{
 		height: 20px;
 		line-height: 20px;
 	}
-	.onSearch-container .shopInf-mid .address,
-	.onSearch-container .shopInf-bot .type{
+	.faList-container .onSearch-container .shopInf-mid .address,
+	.faList-container .onSearch-container .shopInf-bot .type{
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		color: rgb(112, 112, 112);
 	}
-	.onSearch-container .shopInf-bot{
+	.faList-container .onSearch-container .shopInf-bot{
 		height: 20px;
 		line-height: 20px;
 	}
 	.faList-container .right-container{
 		width: 450px;
+		padding-top: 75px;
 	}
 	.faList-container .map-container{
 		width: 450px;
@@ -142,15 +146,17 @@
 <body>
 	<div class="faList-container">
 		<div class="inner-container">
+			<!-- <c:if test="${list.size() == 0}">
+				<div class="notSearch-container">
+					<h1>'${cri.search}'에 대한 검색 결과가 없습니다.</h1>
+					<h1>검색한 식당이 없다면?🤔</h1>
+					<a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a>
+				</div>
+			</c:if> -->
 			<div class="left-container">
-				<!-- <c:if test="${list.size() == 0}">
-					<div class="notSearch-container">
-						<h1>'${cri.search}'에 대한 검색 결과가 없습니다.</h1>
-						<h1>검색한 식당이 없다면?🤔</h1>
-						<a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a>
-					</div>
-				</c:if> -->
 				<div class="onSearch-container">
+					<!-- <div class="title-box">'${user.me_nickname}'님의 즐겨찾기's</div> -->
+					<div class="title-box">'이네'님의 즐겨찾기's</div>
 					<div class="shop-container">
 						<!-- <c:forEach items="${list}" var="rt">
 							<div class="shop-box">
