@@ -192,10 +192,37 @@
 				</div> 
 			</div>
 			<div class="right-container">
-				<div class="map-container">
+				<div class="map-container" id="map">
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		var mapOptions = {
+		    center: new naver.maps.LatLng(37.3595704, 127.105399),
+		    zoom: 10
+		};		
+		var map = new naver.maps.Map('map', mapOptions);
+		
+		var markerOptions = {
+		    position: new naver.maps.LatLng(37.3595704, 127.105399),
+		    map: map
+		};		
+		var marker = new naver.maps.Marker(markerOptions);
+		
+		//네이버 주소 -> 좌표
+		naver.maps.Service.geocode({
+	        address: '불정로 6'
+	    }, function(status, response) {
+	        if (status !== naver.maps.Service.Status.OK) {
+	            return alert('Something wrong!');
+	        }
+	
+	        var result = response.result, // 검색 결과의 컨테이너
+	            items = result.items; // 검색 결과의 배열
+	
+	        // do Something
+	    });
+	</script>
 </body>
 </html>
