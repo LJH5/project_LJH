@@ -118,6 +118,7 @@
 	.faList-container .map-container{
 		width: 450px;
 		height: 450px;
+		background-color: aqua;
 	}
 
 
@@ -170,103 +171,6 @@
 								</a>
 							</div>
 						</c:forEach>
-						<div class="shop-box">
-							<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-								<span class="img-container">
-									<span class="img-box">
-										<c:choose>
-											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-											<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-										</c:choose>
-									</span>
-								</span>
-								<span class="shopInf-container">
-									<span class="shopInf-top">
-										<span class="title">${rt.rt_name}</span>
-										<span class="score">${rt.rt_score}</span> <br>
-									</span>
-									<span class="shopInf-mid">
-										<span class="address">${rt.rt_address}</span>
-									</span>
-									<span class="shopInf-bot">
-										<span class="type">${rt.rt_type}</span>
-									</span>
-								</span>
-							</a>
-						</div>
-						<div class="shop-box">
-							<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-								<span class="img-container">
-									<span class="img-box">
-										<c:choose>
-											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-											<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-										</c:choose>
-									</span>
-								</span>
-								<span class="shopInf-container">
-									<span class="shopInf-top">
-										<span class="title">${rt.rt_name}</span>
-										<span class="score">${rt.rt_score}</span> <br>
-									</span>
-									<span class="shopInf-mid">
-										<span class="address">${rt.rt_address}</span>
-									</span>
-									<span class="shopInf-bot">
-										<span class="type">${rt.rt_type}</span>
-										<span class="type">한식</span>
-									</span>
-								</span>
-							</a>
-						</div>
-						<div class="shop-box">
-							<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-								<span class="img-container">
-									<span class="img-box">
-										<c:choose>
-											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-											<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-										</c:choose>
-									</span>
-								</span>
-								<span class="shopInf-container">
-									<span class="shopInf-top">
-										<span class="title">${rt.rt_name}</span>
-										<span class="score">${rt.rt_score}</span> <br>
-									</span>
-									<span class="shopInf-mid">
-										<span class="address">${rt.rt_address}</span>
-									</span>
-									<span class="shopInf-bot">
-										<span class="type">${rt.rt_type}</span>
-									</span>
-								</span>
-							</a>
-						</div>
-						<div class="shop-box">
-							<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-								<span class="img-container">
-									<span class="img-box">
-										<c:choose>
-											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}"></c:when>
-											<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG"></c:otherwise>
-										</c:choose>
-									</span>
-								</span>
-								<span class="shopInf-container">
-									<span class="shopInf-top">
-										<span class="title">${rt.rt_name}</span>
-										<span class="score">${rt.rt_score}</span> <br>
-									</span>
-									<span class="shopInf-mid">
-										<span class="address">${rt.rt_address}</span>
-									</span>
-									<span class="shopInf-bot">
-										<span class="type">${rt.rt_type}</span>
-									</span>
-								</span>
-							</a>
-						</div>
 					</div>
 					<ul class="pagination justify-content-center">
 						<c:if test="${pm.prev}">
