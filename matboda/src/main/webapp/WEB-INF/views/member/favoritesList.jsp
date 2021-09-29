@@ -42,11 +42,9 @@
 	}
 	.faList-container .shop-container{
 		width: 940px;
-		background-color: rgb(13, 80, 80);
 		padding-left: 10px;
 	}
 	.faList-container .shop-box{
-		background-color: rgb(163, 199, 5);
 		width: 300px;
 		height: 400px;
 		margin-right: 10px;
@@ -120,7 +118,6 @@
 	.faList-container .map-container{
 		width: 450px;
 		height: 450px;
-		background-color: aqua;
 	}
 
 
