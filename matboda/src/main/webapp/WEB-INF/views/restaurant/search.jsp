@@ -21,19 +21,23 @@
 		color: rgb(255, 165, 0);
 	}
 	.search-container .onSearch-container{
+		display: flex;
+		margin-bottom: 20px;
+	}
+	.search-container .left-container{
 		min-height: 400px;
-		width: 920px;
+		width: 930px;
 		margin: 0 auto;
 		padding: 10px;
 	}
-	.search-container .onSearch-container h2{
+	.search-container .left-container h2{
 		color: rgb(255, 165, 0);
 		margin-bottom: 20px;
 	}
-	.onSearch-container .shop-container{
+	.left-container .shop-container{
 		width: 930px;
 	}
-	.onSearch-container .shop-box{
+	.left-container .shop-box{
 		width: 300px;
 		height: 400px;
 		margin-right: 10px;
@@ -100,6 +104,14 @@
 		height: 20px;
 		line-height: 20px;
 	}
+	.right-container{
+        width: 450px;
+        padding-top: 65px;
+    }
+    .right-container .map{
+        width: 450px;
+        height: 450px;
+    }
 	/* after */
 	.onSearch-container .shopInf-top::after,
 	.onSearch-container .shop-container::after{
@@ -120,37 +132,71 @@
 				</div>
 			</c:if> 
 			<div class="onSearch-container">
-				<h2>'${cri.search}'에 대한 검색 결과</h2>
-				<div class="shop-container">
-					<c:forEach items="${list}" var="rt">
-						<div class="shop-box">
-							<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-								<span class="img-container">
-									<span class="img-box">
-										<c:choose>
-											<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300px" height="300px"></c:when>
-											<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG" width="300px" height="300px"></c:otherwise>
-										</c:choose>
+				<div class="left-container">
+					<h2>'${cri.search}'에 대한 검색 결과</h2>
+					<div class="shop-container">
+						<c:forEach items="${list}" var="rt">
+							<div class="shop-box">
+								<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+									<span class="img-container">
+										<span class="img-box">
+											<c:choose>
+												<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300px" height="300px"></c:when>
+												<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG" width="300px" height="300px"></c:otherwise>
+											</c:choose>
+										</span>
 									</span>
-								</span>
-								<span class="shopInf-container">
-									<span class="shopInf-top">
-										<span class="title">${rt.rt_name}</span>
-										<span class="score">${rt.rt_score}</span> <br>
+									<span class="shopInf-container">
+										<span class="shopInf-top">
+											<span class="title">${rt.rt_name}</span>
+											<span class="score">${rt.rt_score}</span> <br>
+										</span>
+										<span class="shopInf-mid">
+											<span class="address">${rt.rt_address}</span>
+										</span>
+										<span class="shopInf-bot">
+											<span class="type">${rt.rt_type}</span>
+										</span>
 									</span>
-									<span class="shopInf-mid">
-										<span class="address">${rt.rt_address}</span>
-									</span>
-									<span class="shopInf-bot">
-										<span class="type">${rt.rt_type}</span>
-									</span>
-								</span>
-							</a>
-						</div>
-					</c:forEach>
+								</a>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+				<div class="right-container">
+					<div class="map" id="map"></div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+			var mapOptions = {
+			    center: new naver.maps.LatLng(37.3595704, 127.105399),
+			    zoom: 10
+			};		
+			var map = new naver.maps.Map('map', mapOptions);
+			
+			var markerOptions = {
+			    position: new naver.maps.LatLng(37.3595704, 127.105399),
+			    map: map
+			};		
+			var marker = new naver.maps.Marker(markerOptions);
+			
+			
+			//네이버 주소 -> 좌표
+			naver.maps.Service.fromAddrToCoord({
+		        address: '불정로 6'
+		    }, function(status, response) {
+		    	console.log(status)
+		        if (status !== naver.maps.Service.Status.OK) {
+		            return alert('Something wrong!');
+		        }
+		
+		        var result = response.result; // 검색 결과의 컨테이너
+		            items = result.items; // 검색 결과의 배열
+		console.log(result)
+		        // do Something
+		    });
+		</script>
 </body>
 </html>

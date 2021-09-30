@@ -19,8 +19,7 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <!-- 네이버 지도 -->
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=4d1km9s776&callback=initMap"></script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=4d1km9s776&submodules=geocoder"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=4d1km9s776&callback=initMap&submodules=geocoder"></script>
 <style>
 	*{
 		font-family: "고딕", "굴림" ,"돋움", sans-serif;

@@ -306,7 +306,6 @@
         .right-container .map{
             width: 450px;
             height: 450px;
-            background-color: lime;
         }
         .after::after{
             display: block;
@@ -571,6 +570,38 @@
 			</div>
 			<div class="right-container">
 				<div class="map" id="map"></div>
+				<div id="inputAddr">
+			      <table>
+			        <colgroup>
+			          <col width="110" />
+			          <col width="*" />
+			        </colgroup>
+			        <tbody>
+			          <tr>
+			            <th>변환할 주소</th>
+			            <td>
+			              <input type="text" id="address" placeholder="예)송파대로 100" value="" onkeyup="if(window.event.keyCode == 13){sendAddr();}">
+			              <input type="button" id="submit" value="변환" onClick="sendAddr()">
+			            </td>
+			          </tr>
+			          <tr>
+			            <th>검색수</th>
+			            <td id="resultNum"></td>
+			          </tr>
+			        </tbody>
+			      </table>
+			    </div>
+			    <div id="result">
+			      <table>
+			      <colgroup>
+			          <col width="30" />
+			          <col width="80" />
+			          <col width="*" />
+			        </colgroup>
+			        <tbody>
+			        </tbody>    
+			      </table>
+			    </div>
 			</div>
 		</div>
 	</div>
@@ -615,9 +646,7 @@
 			// 추천/신고 기능
 			$(document).on('click', '.re-btn', function() {
 				var state = $(this).hasClass('up') ? 1 : -1;
-				//alert(state)
 				var re_num = $(this).children('input[name=re_num]').val();
-				//alert(re_num) 확인
 				var obj = $(this);
 				
 				$.ajax({
@@ -640,6 +669,7 @@
 								obj.children('a').attr('style','color: rgb(112, 112, 112);');
 							}
 						}
+						location.reload();
 					},
 					error : function(xhr, status, e){
 						console.log('에러 발생');
@@ -699,30 +729,62 @@
 	</script>
 	<script>
 		var mapOptions = {
-		    center: new naver.maps.LatLng(37.3595704, 127.105399),
+		    center: new naver.maps.LatLng(37.576013, 126.976853),
 		    zoom: 10
 		};		
 		var map = new naver.maps.Map('map', mapOptions);
 		
 		var markerOptions = {
-		    position: new naver.maps.LatLng(37.3595704, 127.105399),
+		    position: new naver.maps.LatLng(37.576013, 126.976853),
 		    map: map
 		};		
 		var marker = new naver.maps.Marker(markerOptions);
+		
 		
 		//네이버 주소 -> 좌표
 		naver.maps.Service.geocode({
 	        address: '불정로 6'
 	    }, function(status, response) {
-	        if (status != naver.maps.Service.Status.OK) {
-	            /* return alert('Something wrong!'); */
+	        if (status !== naver.maps.Service.Status.OK) {
+	            return alert('Something wrong!');
 	        }
 	
-	        var result = response.result, // 검색 결과의 컨테이너
+	        var result = response.result; // 검색 결과의 컨테이너
 	            items = result.items; // 검색 결과의 배열
-	
 	        // do Something
 	    });
+		
+		
+		function searchAddressToCoordinate(address) {
+	        naver.maps.Service.geocode({
+	          address: address
+	        }, function(status, response) {
+	          if (status === naver.maps.Service.Status.ERROR) {
+	            return alert('주소를 확인후 다시 시도 바랍니다.');
+	          }
+	          $("#resultNum").text(response.result.items.length+"개");
+	          for(i=0;i<response.result.items.length;i++){
+	            var item=response.result.items[i];
+	            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]';
+	            str = "<tr><th rowspan=2>"+(i+1)+"</th><th>변환주소</th><td>"+addrType+item.address+"</td></tr><tr><th>좌표</th><td>lat-"+item.point.y+", lng-"+item.point.x+"</td></tr>";
+	            $("#result table tbody").append(str);
+	          }     
+	        });
+	      }
+	      function sendAddr(){
+	        if(!$('#address').val()){
+	          alert("변환할 주소를 입력해주세요.");
+	          $("#address").focus();
+	        }else{
+	          $("#result table tbody, #resultNum").html("");
+	          searchAddressToCoordinate($('#address').val());
+	        }
+	      }
+	      $(function(){
+	        $("#address").focus();
+	      });
+		
+		
 	</script>
 </body>
 </html>
