@@ -166,7 +166,7 @@ public class MemberServiceImp implements MemberService{
 		MemberVO dbUser = memberDao.selectUser(user.getMe_id());
 		String imageName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
 		if(file.getOriginalFilename().equals("") ) {
-			dbUser.setMe_picture("");
+			dbUser.setMe_picture(dbUser.getMe_picture());
 		}else {
 			dbUser.setMe_picture(imageName);
 		}

@@ -57,7 +57,7 @@
 				</c:otherwise>
 			</c:choose>
 		</label>
-		<input type="file" name="file" id="me_picture" value="${user.me_picture}" accept="image/*" onchange="setThumbnail(event);"/>
+		<input type="file" name="file" id="me_picture" style="display: none;" accept="image/*" onchange="setThumbnail(event);"/>
 	</div>
 	<div class="form-group">
 		<label>별명</label>
@@ -72,7 +72,7 @@
 		<input type="text" class="form-control" name="me_phoneNum" value="${user.me_phoneNum}">
 	</div>
 	<input type="hidden" name="me_id" value="${user.me_id}">
-	<button class="btn btn-outline-success col-12">수정하기</button>
+	<button class="mod-btn btn btn-outline-success col-12">수정하기</button>
 </form>
 <script type="text/javascript">
 	$(function(){
@@ -135,14 +135,8 @@
 			$('#image-container').hide();
 			$('#image-container img').remove();
 			$('input[name=file]').val("");
-		})
-		
-		$('button').click(function() {
-			if($('input[name=file]').val() == ''){
-				$('input[name=file]').val("프로필사진(기본).png")
-			}
-		})
-	})
+		});
+	});
 </script>
 </body>
 </html>
