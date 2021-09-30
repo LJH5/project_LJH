@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.service.MemberService;
 import kr.green.matboda.service.ReviewService;
 import kr.green.matboda.vo.ImageVO;
@@ -36,17 +37,17 @@ public class ReviewController {
 		return mv;
 	}
 	@PostMapping("/register")
-	public ModelAndView registerPost(ModelAndView mv, ReviewVO review, MultipartFile [] imageList, HttpServletRequest request) throws Exception {
+	public ModelAndView registerPost(ModelAndView mv, ReviewVO review, MultipartFile [] imageList, HttpServletRequest request, Criteria cri) throws Exception {
 		MemberVO user = memberService.getMemberByRequest(request);
-		reviewService.insertReview(review, imageList, user);
+		reviewService.insertReview(review, imageList, user, cri);
 		mv.setViewName("redirect:/restaurant/main?num="+review.getRe_rt_num());
 		return mv;
 	}
 	@ResponseBody
 	@PostMapping("/delete")
-	public String deletePost(Integer re_num, HttpServletRequest request) {
+	public String deletePost(Integer re_num, HttpServletRequest request, Criteria cri) {
 		MemberVO user = memberService.getMemberByRequest(request);
-		return reviewService.deleteReview(re_num, user);
+		return reviewService.deleteReview(re_num, user, cri);
 	}
 	@GetMapping("/modify")
 	public ModelAndView modifyGet(ModelAndView mv, Integer num) {

@@ -196,7 +196,7 @@
                     <c:forEach items="${imageList}" var="image">
                         <span class="image-box">
                             <img name="imageList" src="<%=request.getContextPath() %>/img/${image.im_name}">
-                           <span class="del-btn"><i class="far fa-window-close"></i></span>
+                           	<span class="del-btn"><i class="far fa-window-close"></i></span>
                             <input type="hidden"name="imageNum" value="${image.im_num}">
                         </span>
                     </c:forEach>

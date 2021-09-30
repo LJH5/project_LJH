@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.green.matboda.pagination.Criteria;
 import kr.green.matboda.pagination.PageMaker;
 import kr.green.matboda.service.MemberService;
-import kr.green.matboda.service.RestaurantService;
 import kr.green.matboda.service.ReviewService;
 import kr.green.matboda.vo.MemberVO;
 import kr.green.matboda.vo.RestaurantVO;
@@ -93,6 +92,7 @@ public class MemberController {
 	}
 	@PostMapping("/modify")
 	public ModelAndView memberModifyPost(ModelAndView mv, MemberVO user, HttpServletRequest request, MultipartFile file)throws Exception {
+		System.out.println(file.getOriginalFilename());
 		MemberVO loginUser = memberService.getMemberByRequest(request);
 		MemberVO uUser = memberService.updateMember(user, loginUser, file);
 		if(loginUser != null)

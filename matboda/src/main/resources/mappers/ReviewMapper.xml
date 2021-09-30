@@ -8,7 +8,7 @@
 			values(#{review.re_me_id}, #{review.re_me_nickname}, #{review.re_rt_num}, #{review.re_content}, #{review.re_totalSc}, #{review.re_service}, #{review.re_mood}, #{review.re_tasty}, #{review.re_quantity}, #{review.re_clean});
 	</insert>
 	<select id="selectReview" resultType="kr.green.matboda.vo.ReviewVO">
-		select review.*, me_picture as re_me_picture, rc_state as re_rc_state from review
+		select review.*, me_picture as re_me_picture, rc_state as re_rc_state, me_reviewNum as re_me_reviewNum, me_recommendNum as re_me_recommendNum from review
 			join member on re_me_id = me_id
 			left join recommend on re_num = rc_re_num and rc_me_id = #{user.me_id}
 			where re_rt_num = #{num}

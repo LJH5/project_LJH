@@ -20,6 +20,8 @@ public class MemberVO {
 	private Date me_signupDate;
 	private int me_reNum;
 	private int me_faNum;
+	private int me_reviewNum;
+	private int me_recommendNum;
 	
 	public String getDate() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

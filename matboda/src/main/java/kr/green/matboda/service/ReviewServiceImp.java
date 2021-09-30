@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.green.matboda.dao.MemberDAO;
 import kr.green.matboda.dao.RestaurantDAO;
 import kr.green.matboda.dao.ReviewDAO;
 import kr.green.matboda.pagination.Criteria;
@@ -22,11 +23,13 @@ public class ReviewServiceImp implements ReviewService {
 	private ReviewDAO reviewDao;
 	@Autowired
 	private RestaurantDAO restaurantDao;
+	@Autowired
+	private MemberDAO memberDao;
 	
 	private String uploadPath = "D:\\JAVA_LJH\\img";
 
 	@Override
-	public void insertReview(ReviewVO review, MultipartFile[] imageList, MemberVO user) throws Exception {
+	public void insertReview(ReviewVO review, MultipartFile[] imageList, MemberVO user, Criteria cri) throws Exception {
 		if(user == null || review == null || review.getRe_content().length() == 0)
 			return;
 		review.setRe_me_nickname(user.getMe_nickname());
@@ -41,6 +44,11 @@ public class ReviewServiceImp implements ReviewService {
 		for(int i = 0; i<size; i++) {
 			insertFile(imageList[i], "REVIEW", review.getRe_num());
 		}
+		
+		// 유저의 총 리뷰 수
+		int reviewNum = memberDao.selectReviewCountById(user, cri);
+		user.setMe_reviewNum(reviewNum);
+		memberDao.updateUser(user);
 	}
 
 	@Override
@@ -51,7 +59,7 @@ public class ReviewServiceImp implements ReviewService {
 	}
 
 	@Override
-	public String deleteReview(Integer re_num, MemberVO user) {
+	public String deleteReview(Integer re_num, MemberVO user, Criteria cri) {
 		if(re_num == null)
 			return "FAIL";
 		ReviewVO review = reviewDao.selectRe(re_num);
@@ -66,6 +74,12 @@ public class ReviewServiceImp implements ReviewService {
 				reviewDao.deleteFile(tmp.getIm_num());
 			}
 		}
+		// 유저의 총 리뷰 수
+		int reviewNum = memberDao.selectReviewCountById(user, cri);
+		user.setMe_reviewNum(reviewNum);
+		System.out.println(user);
+		memberDao.updateUser(user);
+		
 		return "OK";	
 	}
 

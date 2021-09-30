@@ -46,6 +46,7 @@
 <form class="container" method="post" action="<%=request.getContextPath()%>/member/modify" enctype="multipart/form-data">
 	<h1>프로필 수정</h1>
 	<div class="form-group img-box">
+		<div id="image-container"><i class="far fa-window-close"></i></div>
 		<label class="me_picture" for="me_picture">
 			<c:choose>
 				<c:when test="${user.me_picture == null || user.me_picture == ''}">
@@ -56,8 +57,7 @@
 				</c:otherwise>
 			</c:choose>
 		</label>
-		<div id="image-container"><i class="far fa-window-close"></i></div>
-		<input type="file" name="file" id="me_picture" style="display: none;" accept="image/*" onchange="setThumbnail(event);"/>
+		<input type="file" name="file" id="me_picture" value="${user.me_picture}" style="display: none;" accept="image/*" onchange="setThumbnail(event);"/>
 	</div>
 	<div class="form-group">
 		<label>별명</label>

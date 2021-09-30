@@ -428,7 +428,14 @@
 										<div class="user-inf">
 											<div class="review-num">
 												<i class="fas fa-pen"></i>
-												<div>999+</div>
+												<c:choose>
+													<c:when test="${review.re_me_reviewNum > 999}">
+														<div>999+</div>
+													</c:when>
+													<c:otherwise>
+														<div>${review.re_me_reviewNum}</div>
+													</c:otherwise>
+												</c:choose>
 											</div>
 											<div class="recommend-num">
 												<i class="fas fa-thumbs-up"></i>

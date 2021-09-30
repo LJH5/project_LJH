@@ -26,6 +26,8 @@ public class ReviewVO {
 	private String re_me_picture;
 	ArrayList<ImageVO> re_image;
 	private int re_rc_state;
+	private int re_me_reviewNum;
+	private int re_me_recommendNum;
 	
 	public String getRe_regDateStr() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
