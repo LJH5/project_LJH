@@ -57,7 +57,7 @@
 				</c:otherwise>
 			</c:choose>
 		</label>
-		<input type="file" name="file" id="me_picture" value="${user.me_picture}" style="display: none;" accept="image/*" onchange="setThumbnail(event);"/>
+		<input type="file" name="file" id="me_picture" value="${user.me_picture}" accept="image/*" onchange="setThumbnail(event);"/>
 	</div>
 	<div class="form-group">
 		<label>별명</label>

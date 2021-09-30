@@ -77,7 +77,6 @@ public class ReviewServiceImp implements ReviewService {
 		// 유저의 총 리뷰 수
 		int reviewNum = memberDao.selectReviewCountById(user, cri);
 		user.setMe_reviewNum(reviewNum);
-		System.out.println(user);
 		memberDao.updateUser(user);
 		
 		return "OK";	
@@ -178,14 +177,25 @@ public class ReviewServiceImp implements ReviewService {
 		
 		int recNum = reviewDao.selectRecommendCount(re_num);
 		int repNum = reviewDao.selectReportCount(re_num);
+		
+		//리뷰 작성자의 총 추천 수
+		int recommendNum = reviewDao.selectRcommendCountById(review.getRe_me_id());
+		MemberVO dbUser = memberDao.selectUser(review.getRe_me_id());
+		
+		
 		if(rvo == null) {
 			reviewDao.insertRecommend(re_num, user.getMe_id(), state);
 			if(state == 1) {
+				//리뷰 추천 수 +1
 				review.setRe_recommend(recNum + 1);
 				reviewDao.updateReview(review);
 				
+				//작성자 추천 수 +1
+				dbUser.setMe_recommendNum(recommendNum+1);
+				memberDao.updateUser(dbUser);
 				return "RECOMMEND";
 			}else {
+				//리뷰 신고 수 + 1
 				review.setRe_report(repNum + 1);
 				reviewDao.updateReview(review);
 				return "REPORT";
@@ -197,20 +207,37 @@ public class ReviewServiceImp implements ReviewService {
 		reviewDao.updateRecommend(rvo);
 		
 		if(state == 0) {
+			
+			//리뷰 추천/신고 수 초기화
 			review.setRe_recommend(reviewDao.selectRecommendCount(re_num));
 			review.setRe_report(reviewDao.selectReportCount(re_num));
 			reviewDao.updateReview(review);
+			
+			//리뷰 작성자 추천 수 초기화
+			dbUser.setMe_recommendNum(reviewDao.selectRcommendCountById(review.getRe_me_id()));
+			memberDao.updateUser(dbUser);
+			
 			return "CANCEL";
 		}else {
 			if(state == 1) {
 				review.setRe_recommend(recNum + 1);
 				review.setRe_report(repNum - 1);
 				reviewDao.updateReview(review);
+				
+				//작성자 추천 수 +1
+				dbUser.setMe_recommendNum(recommendNum+1);
+				memberDao.updateUser(dbUser);
+				
 				return "RECOMMEND";
 			}else {
 				review.setRe_recommend(recNum - 1);
 				review.setRe_report(repNum + 1);
 				reviewDao.updateReview(review);
+				
+				//작성자 추천 수 -1
+				dbUser.setMe_recommendNum(recommendNum-1);
+				memberDao.updateUser(dbUser);
+				
 				return "REPORT";
 			}
 		}

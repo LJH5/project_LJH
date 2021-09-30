@@ -60,6 +60,7 @@ public class RestaurantController {
 		
 		restaurantService.getFavorityCount(num);
 		
+		//리뷰들 가져오기
 		cri.setPerPageNum(5);
 		ArrayList<ReviewVO> review = reviewService.getReviewList(num, cri, user);
 		int totalCount = reviewService.getTotalCount(num, cri);

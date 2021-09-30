@@ -92,7 +92,9 @@ public class MemberController {
 	}
 	@PostMapping("/modify")
 	public ModelAndView memberModifyPost(ModelAndView mv, MemberVO user, HttpServletRequest request, MultipartFile file)throws Exception {
+		System.out.println(file.getName());
 		System.out.println(file.getOriginalFilename());
+		System.out.println(file);
 		MemberVO loginUser = memberService.getMemberByRequest(request);
 		MemberVO uUser = memberService.updateMember(user, loginUser, file);
 		if(loginUser != null)

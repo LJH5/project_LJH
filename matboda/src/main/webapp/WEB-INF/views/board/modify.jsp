@@ -25,7 +25,7 @@
 		<div class="form-group file-box">
 			<label>첨부파일</label>
 			<c:choose>
-				<c:when test="${image.im_num != null }">
+				<c:when test="${fList.size() == 1}">
 					<c:forEach items="${fList}" var="image">
 						<div class="form-control">
 							<span>${image.im_oriName}</span>

@@ -79,4 +79,7 @@
 	<select id="selectReportCount" resultType="int">
 		select count(*) from recommend where rc_re_num = #{re_num} and rc_state = -1
 	</select>
+	<select id="selectRcommendCountById" resultType="int">
+		select sum(re_recommend) from review where re_me_id = #{re_me_id}
+	</select>
 </mapper>

@@ -439,7 +439,14 @@
 											</div>
 											<div class="recommend-num">
 												<i class="fas fa-thumbs-up"></i>
-												<div>999+</div>
+												<c:choose>
+													<c:when test="${review.re_me_recommendNum > 999}">
+														<div>999+</div>
+													</c:when>
+													<c:otherwise>
+														<div>${review.re_me_recommendNum}</div>
+													</c:otherwise>
+												</c:choose>
 											</div>
 										</div>
 									</div>
@@ -563,7 +570,7 @@
 				</ul>
 			</div>
 			<div class="right-container">
-				<div class="map"></div>
+				<div class="map" id="map"></div>
 			</div>
 		</div>
 	</div>
@@ -643,9 +650,7 @@
 			//즐겨찾기 기능
 			$(document).on('click', '.favorites-btn', function() {
 				var state = 1;
-				//alert(state)
 				var rt_num = '${rt.rt_num}'
-				//alert(rt_num)
 				var obj = $(this);
 				
 				$.ajax({
@@ -691,6 +696,33 @@
 		    return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
 		};
 		$('.star').generateStars();
+	</script>
+	<script>
+		var mapOptions = {
+		    center: new naver.maps.LatLng(37.3595704, 127.105399),
+		    zoom: 10
+		};		
+		var map = new naver.maps.Map('map', mapOptions);
+		
+		var markerOptions = {
+		    position: new naver.maps.LatLng(37.3595704, 127.105399),
+		    map: map
+		};		
+		var marker = new naver.maps.Marker(markerOptions);
+		
+		//네이버 주소 -> 좌표
+		naver.maps.Service.geocode({
+	        address: '불정로 6'
+	    }, function(status, response) {
+	        if (status != naver.maps.Service.Status.OK) {
+	            /* return alert('Something wrong!'); */
+	        }
+	
+	        var result = response.result, // 검색 결과의 컨테이너
+	            items = result.items; // 검색 결과의 배열
+	
+	        // do Something
+	    });
 	</script>
 </body>
 </html>
