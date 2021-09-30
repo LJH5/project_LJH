@@ -18,6 +18,15 @@
 			height: 200px;
 			border-radius: 100%;
 		}
+		.img-icon{
+			position: absolute;
+		    font-size: 30px;
+		    bottom: 0;
+		    left: 33%;
+		}
+		.me_picture:hover{
+			cursor: pointer;
+		}
 		#image-container{
 			background: white;
 			width: 210px;
@@ -56,6 +65,7 @@
 					<img src="/matboda/img/${user.me_picture}">
 				</c:otherwise>
 			</c:choose>
+			<span class="img-icon"><i class="far fa-image"></i></span>
 		</label>
 		<input type="file" name="file" id="me_picture" style="display: none;" accept="image/*" onchange="setThumbnail(event);"/>
 	</div>
