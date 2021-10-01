@@ -118,9 +118,7 @@
 	.faList-container .map-container{
 		width: 450px;
 		height: 450px;
-		background-color: aqua;
 	}
-
 
 	/* after */
 	.onSearch-container .shopInf-top::after,
@@ -198,31 +196,86 @@
 		</div>
 	</div>
 	<script>
-		var mapOptions = {
-		    center: new naver.maps.LatLng(37.3595704, 127.105399),
-		    zoom: 10
-		};		
-		var map = new naver.maps.Map('map', mapOptions);
-		
-		var markerOptions = {
-		    position: new naver.maps.LatLng(37.3595704, 127.105399),
-		    map: map
-		};		
-		var marker = new naver.maps.Marker(markerOptions);
+		// 지도에 좌표 여러개 가져오기
+		var address = []
+		var areaArr = new Array();  // 지역을 담는 배열 ( 지역명/위도경도 )
+		$('.address').each(function() {
+			address.push($(this).text());
+			var name = $(this).parent().siblings().children().first().text();
+			getxy(name, $(this).text());
+		})
 		
 		//네이버 주소 -> 좌표
-		naver.maps.Service.geocode({
-	        address: '불정로 6'
-	    }, function(status, response) {
-	        if (status !== naver.maps.Service.Status.OK) {
-	            return alert('Something wrong!');
-	        }
-	
-	        var result = response.result, // 검색 결과의 컨테이너
-	            items = result.items; // 검색 결과의 배열
-	
-	        // do Something
+		function getxy(name, address) {
+			var x, y;
+			naver.maps.Service.geocode({
+		        address: address
+		    }, function(status, response) {
+		        if (status !== naver.maps.Service.Status.OK) {
+		            return alert('Something wrong!');
+		        }
+		        var item=response.result.items[1]; // 도로명 주소
+		        x = item.point.x;
+		        y = item.point.y;
+		        initMap([{location : name , lat : y , lng : x}]);
+		    });
+		}
+		$(function() {
+			
+			initMap(areaArr);
+			
+		});
+
+		var map = new naver.maps.Map('map', {
+	        center: new naver.maps.LatLng(36.503929, 127.267907), //지도 시작 지점
+	        zoom: 7
 	    });
+		// 다중 마커
+		function initMap(areaArr) { 
+			
+			let markers = new Array(); // 마커 정보를 담는 배열
+			let infoWindows = new Array(); // 정보창을 담는 배열
+			
+			
+			if(typeof areaArr == "undefined" )
+				return;
+			for (var i = 0; i < areaArr.length; i++) {
+				// 지역을 담은 배열의 길이만큼 for문으로 마커와 정보창을 채워주자 !
+
+			    var marker = new naver.maps.Marker({
+			        map: map,
+			        title: areaArr[i].location, // 지역구 이름 
+			        position: new naver.maps.LatLng(areaArr[i].lat , areaArr[i].lng) // 지역구의 위도 경도 넣기 
+			    });
+			    
+			    /* 정보창 */
+				 var infoWindow = new naver.maps.InfoWindow({
+				     content: '<div style="width:200px;text-align:center;padding:10px;"><b>' + areaArr[i].location + '</b><br></div>'
+				 }); // 클릭했을 때 띄워줄 정보 HTML 작성
+			    
+				 markers.push(marker); // 생성한 마커를 배열에 담는다.
+				 infoWindows.push(infoWindow); // 생성한 정보창을 배열에 담는다.
+			}
+		    
+			 
+		    function getClickHandler(seq) {
+				
+		            return function(e) {  // 마커를 클릭하는 부분
+		                var marker = markers[seq], // 클릭한 마커의 시퀀스로 찾는다.
+		                    infoWindow = infoWindows[seq]; // 클릭한 마커의 시퀀스로 찾는다
+
+		                if (infoWindow.getMap()) {
+		                    infoWindow.close();
+		                } else {
+		                    infoWindow.open(map, marker); // 표출
+		                }
+		    		}
+		    	}
+		    
+		    for (var i=0, ii=markers.length; i<ii; i++) {
+		        naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i)); // 클릭한 마커 핸들러
+		    }
+		}
 	</script>
 </body>
 </html>

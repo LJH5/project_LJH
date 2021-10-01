@@ -30,4 +30,5 @@ public class RestaurantVO {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		return format.format(date);
 	}
+	
 }
