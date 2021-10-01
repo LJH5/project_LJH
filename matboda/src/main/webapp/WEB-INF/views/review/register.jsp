@@ -5,89 +5,97 @@
 <html>
 <head>
 	<style type="text/css">
-		*{
-			margin: 0;
-			padding: 0;
-			text-decoration: none;
-			list-style: none;
-        }
-        .inner-container{
+        .review-container .inner-container{
             width: 700px;
             margin: 50px auto;
         }
-        .text-container{
+        .review-container .text-container{
             margin-bottom: 10px;
             text-align: center;
             font-size: 35px;
             color: rgb(255, 165, 0);
         }
-        .middle-container{
+        .review-container .middle-container{
             border: 1px solid #dee2e6;
             padding: 10px;
             box-sizing: border-box;
         }
-        .score-container{
+        .review-container .score-container{
             height: 100px; 
             text-align: center;
         }
-        #star a{ 
+       .review-container  #star a{ 
 			text-decoration: none; color: gray; 
 		} 
-		#star a.on{
+		.review-container #star a.on{
 			color: rgb(255, 165, 0); 
 		}
-        .score-container table{
+        .review-container .score-container table{
             width: 100%;
             color: rgb(255, 165, 0);
             box-shadow: 0px 2px 1px #dee2e6;
         }
-        .content-container{
+        .review-container .content-container{
             width: 620px;
             margin: 0 auto;
             padding: 0 10px;
         }
-        .content-container textarea{
+        .review-container .content-container textarea{
             width: 600px;
             border: none;
             overflow: hidden; 
             resize: none;
             min-height: 300px;
         }
-        .content-container textarea:focus{
+        .review-container .content-container textarea:focus{
             outline: none;
         }
-        .text-length{
+        .review-container .text-length{
             position: relative;
             height: 30px;
           
         }
-        .text-length #counter{
+        .review-container .text-length #counter{
             position: absolute;
             right: 0;
         }
-        .image-container{
+        .review-container .image-container{
             margin-bottom: 30px;
         }
-        .image-box{
+        .review-container #pre-image{
+        	position: relative;
+        	width: 200px;
+        	height: 200px;
+        }
+        .review-container #pre-image img{
+        	width: 100%;
+        	height: 100%;
+        	
+        }
+        .review-container #pre-image .fa-window-close{
+        	position: absolute;
+        }
+        .review-container .image-box{
             width: 200px;
             height: 200px;
             border-radius: 1px;
+            display: inline-block;
             background-color: aquamarine;
         }
-        .btn-container{
+        .review-container .btn-container{
             height: 100px;
             margin-bottom: 10px;
             position: relative;
         }
-        .btn-box{
+        .review-container .btn-box{
             position: absolute;
             right: 0;
         }
 	</style>
 </head>
 <body>
-	<form name="insertFrm" class="contanier" method="post" enctype="multipart/form-data">
-        <div class="container">
+	<form name="insertFrm" method="post" enctype="multipart/form-data">
+        <div class="review-container">
             <div class="inner-container">
                 <div class="text-container">
                     <div class="text-box">
@@ -167,9 +175,10 @@
                 </div>
                 <div class="text-length"><span style="color:#aaa;" id="counter">(0 / 1000)</span></div>
                 <div class="image-container">
-                    <div class="image-box"></div>
+                	<!-- <div id="pre-image"><i class="far fa-window-close"></i></div> -->
+                    <label class="image-box" for="image"></label>
                     <div class="form-group files">
-                        <input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)"/>
+                        <input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="setThumbnail(event);"/>
                     </div>
                 </div>
                 <div class="btn-container">
@@ -231,7 +240,8 @@
 			$(document).on('change', 'input[name=imageList]', function(){
 				var val = $(this).val();
 				var length = $('input[name=imageList]').length;
-				var str = '<input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="chk_file_type(this)">';
+				var i = 2;
+				var str = ' <input type="file" name="imageList" class="form-control" id="image'+i+'" accept="image/*" onchange="setThumbnail(event);"/>';
 				
 				if(val == ''){
 					$(this).remove();
@@ -272,6 +282,26 @@
 				$(this).siblings().last().val(sp);
 			});
 		})	
+	</script>
+	<script>
+		/* 이미지를 클릭해서 이미지 변경하는 기능 */
+		function setThumbnail(event) { 
+			var reader = new FileReader(); 
+			reader.onload = function(event) { 
+				var img = document.createElement("img"); 
+				img.setAttribute("src", event.target.result); 
+				document.querySelector("div#pre-image").appendChild(img); 
+			};
+			reader.readAsDataURL(event.target.files[0]);
+			$('#pre-image').show();
+		}
+		$(function() {
+			$('.fa-window-close').click(function(){
+				$('#pre-image').hide();
+				$('#pre-image img').remove();
+				$('input[name=file]').val('');
+			});
+		});
 	</script>
 </body>
 </html>

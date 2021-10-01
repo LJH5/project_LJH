@@ -15,10 +15,10 @@
 		.error{
 			color : red
 		}
-		.userMod-container .img-box{
+		.userMod-container .image-container{
 			position: relative;
 		}
-		.userMod-container .img-box img{
+		.userMod-container .image-container img{
 			width: 200px;
 			height: 200px;
 			border-radius: 100%;
@@ -32,7 +32,7 @@
 		.userMod-container .me_picture:hover{
 			cursor: pointer;
 		}
-		.userMod-container #image-container{
+		.userMod-container #pre-image{
 			background: white;
 			width: 210px;
 			height: 210px;
@@ -42,14 +42,14 @@
 			z-index: 2;
 			display: none;
 		}
-		.userMod-container #image-container i{
+		.userMod-container #pre-image i{
 			position: absolute;
 		    top: 0;
 		    right: 0;
 		    font-size: 30px;
 		    color: rgb(110,110,110);
 		}
-		.userMod-container #image-container i:hover{
+		.userMod-container #pre-image i:hover{
 			 color: rgb(250,160,110);
 			 cursor: pointer;
 		}
@@ -61,8 +61,8 @@
 	<div class="userMod-container">
 		<div class="inner-container">
 			<h1>프로필 수정</h1>
-			<div class="img-box">
-				<div id="image-container"><i class="far fa-window-close"></i></div>
+			<div class="image-container">
+				<div id="pre-image"><i class="far fa-window-close"></i></div>
 				<label class="me_picture" for="me_picture">
 					<c:choose>
 						<c:when test="${user.me_picture == null || user.me_picture == ''}">
@@ -144,15 +144,15 @@
 		reader.onload = function(event) { 
 			var img = document.createElement("img"); 
 			img.setAttribute("src", event.target.result); 
-			document.querySelector("div#image-container").appendChild(img); 
+			document.querySelector("div#pre-image").appendChild(img); 
 		};
 		reader.readAsDataURL(event.target.files[0]);
-		$('#image-container').show();
+		$('#pre-image').show();
 	}
 	$(function() {
 		$('.fa-window-close').click(function(){
-			$('#image-container').hide();
-			$('#image-container img').remove();
+			$('#pre-image').hide();
+			$('#pre-image img').remove();
 			$('input[name=file]').val("");
 		});
 	});
