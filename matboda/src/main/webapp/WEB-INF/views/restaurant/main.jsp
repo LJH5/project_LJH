@@ -718,8 +718,6 @@
 				var marker = new naver.maps.Marker(markerOptions);
 	    	}
 	    );
-		
-		
 	</script>
 </body>
 </html>
