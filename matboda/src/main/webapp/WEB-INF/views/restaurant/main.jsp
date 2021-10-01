@@ -700,25 +700,24 @@
 		naver.maps.Service.geocode({
 	        address: '${rt.rt_address}'
 	    }, function(status, response) {
-	        if (status !== naver.maps.Service.Status.OK) {
-	            return alert('Something wrong!');
-	        }
-            var item=response.result.items[1];
-        	console.log(item.point.x)
-        	console.log(item.point.y)
-			//맵
-			var mapOptions = {
-			    center: new naver.maps.LatLng(item.point.y, item.point.x),
-			    zoom: 17
-			};		
-			var map = new naver.maps.Map('map', mapOptions);
-			//좌표
-			var markerOptions = {
-			    position: new naver.maps.LatLng(item.point.y, item.point.x),
-			    map: map
-			};		
-			var marker = new naver.maps.Marker(markerOptions);
-	    });
+				if (status !== naver.maps.Service.Status.OK) {
+				    return alert('Something wrong!');
+				}
+			   	var item=response.result.items[1];
+				//맵
+				var mapOptions = {
+				    center: new naver.maps.LatLng(item.point.y, item.point.x),
+				    zoom: 17
+				};		
+				var map = new naver.maps.Map('map', mapOptions);
+				//좌표
+				var markerOptions = {
+				    position: new naver.maps.LatLng(item.point.y, item.point.x),
+				    map: map
+				};		
+				var marker = new naver.maps.Marker(markerOptions);
+	    	}
+	    );
 		
 		
 	</script>
