@@ -7,27 +7,32 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/additional-methods.min.js"></script>
 	<style>
+		.userMod-container .inner-container{
+			margin: 0 auto;		
+			width: 800px;
+			padding: 20px;
+		}
 		.error{
 			color : red
 		}
-		.img-box{
+		.userMod-container .img-box{
 			position: relative;
 		}
-		.img-box img{
+		.userMod-container .img-box img{
 			width: 200px;
 			height: 200px;
 			border-radius: 100%;
 		}
-		.img-icon{
+		.userMod-container .img-icon{
 			position: absolute;
 		    font-size: 30px;
 		    bottom: 0;
-		    left: 33%;
+	       left: calc(25% - 20px)
 		}
-		.me_picture:hover{
+		.userMod-container .me_picture:hover{
 			cursor: pointer;
 		}
-		#image-container{
+		.userMod-container #image-container{
 			background: white;
 			width: 210px;
 			height: 210px;
@@ -37,14 +42,14 @@
 			z-index: 2;
 			display: none;
 		}
-		#image-container i{
+		.userMod-container #image-container i{
 			position: absolute;
 		    top: 0;
 		    right: 0;
 		    font-size: 30px;
 		    color: rgb(110,110,110);
 		}
-		#image-container i:hover{
+		.userMod-container #image-container i:hover{
 			 color: rgb(250,160,110);
 			 cursor: pointer;
 		}
@@ -52,37 +57,41 @@
 </head>
 <body>
 
-<form class="container" method="post" action="<%=request.getContextPath()%>/member/modify" enctype="multipart/form-data">
-	<h1>프로필 수정</h1>
-	<div class="form-group img-box">
-		<div id="image-container"><i class="far fa-window-close"></i></div>
-		<label class="me_picture" for="me_picture">
-			<c:choose>
-				<c:when test="${user.me_picture == null || user.me_picture == ''}">
-					<img src="/matboda/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png" style="width: 180px;">
-				</c:when>
-				<c:otherwise>
-					<img src="/matboda/img/${user.me_picture}">
-				</c:otherwise>
-			</c:choose>
-			<span class="img-icon"><i class="far fa-image"></i></span>
-		</label>
-		<input type="file" name="file" id="me_picture" style="display: none;" accept="image/*" onchange="setThumbnail(event);"/>
+<form method="post" action="<%=request.getContextPath()%>/member/modify" enctype="multipart/form-data">
+	<div class="userMod-container">
+		<div class="inner-container">
+			<h1>프로필 수정</h1>
+			<div class="img-box">
+				<div id="image-container"><i class="far fa-window-close"></i></div>
+				<label class="me_picture" for="me_picture">
+					<c:choose>
+						<c:when test="${user.me_picture == null || user.me_picture == ''}">
+							<img src="/matboda/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png" style="width: 180px;">
+						</c:when>
+						<c:otherwise>
+							<img src="/matboda/img/${user.me_picture}">
+						</c:otherwise>
+					</c:choose>
+					<span class="img-icon"><i class="far fa-image"></i></span>
+				</label>
+				<input type="file" name="file" id="me_picture" style="display: none;" accept="image/*" onchange="setThumbnail(event);"/>
+			</div>
+			<div class="form-group">
+				<label>별명</label>
+				<input type="text" class="form-control" name="me_nickname" value="${user.me_nickname}">
+			</div>
+			<div class="form-group">
+				<label>이메일</label>
+				<input type="text" class="form-control" name="me_email" value="${user.me_email}">
+			</div>
+			<div class="form-group">
+				<label>전화번호</label>
+				<input type="text" class="form-control" name="me_phoneNum" value="${user.me_phoneNum}">
+			</div>
+			<input type="hidden" name="me_id" value="${user.me_id}">
+			<button class="mod-btn btn btn-outline-success col-12">수정하기</button>
+		</div>
 	</div>
-	<div class="form-group">
-		<label>별명</label>
-		<input type="text" class="form-control" name="me_nickname" value="${user.me_nickname}">
-	</div>
-	<div class="form-group">
-		<label>이메일</label>
-		<input type="text" class="form-control" name="me_email" value="${user.me_email}">
-	</div>
-	<div class="form-group">
-		<label>전화번호</label>
-		<input type="text" class="form-control" name="me_phoneNum" value="${user.me_phoneNum}">
-	</div>
-	<input type="hidden" name="me_id" value="${user.me_id}">
-	<button class="mod-btn btn btn-outline-success col-12">수정하기</button>
 </form>
 <script type="text/javascript">
 	$(function(){
