@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="../JS수업/JS/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../JS수업/JS/rolling.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+	<style type="text/css">
+		.board-container .inner-container{
+			margin: 0 auto;
+			width: 800px;
+			padding-top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<form method="post" enctype="multipart/form-data">
+		<div class="board-container">
+			<div class="inner-container">
+				<div class="form-group">
+					<input type="text" class="form-control" name="bo_title" placeholder="제목을 입력해주세요.">
+				</div>
+				<div class="form-group">
+					<textarea id="summernote" name="bo_content" rows="10"></textarea>
+				</div>
+				<div class="form-group">
+					<label>첨부파일</label>
+					<label id="" for="image"></label>
+					<div id="image_container"></div>
+					<input type="file" name="fileList" class="form-control" id="image" accept="image/*" onchange="setThumbnail(event)">
+					
+				</div>
+				<button type="submit" class="btn btn-outline-success">등록</button>
+				<a href="<%=request.getContextPath()%>/board${type}/list"><button type="button" class="btn btn-outline-success">목록</button></a>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+		function setThumbnail(event) { 
+			var reader = new FileReader(); 
+			reader.onload = function(event) { 
+				var img = document.createElement("img"); 
+				img.setAttribute("src", event.target.result); 
+				document.querySelector("div#image_container").appendChild(img); 
+			}; 
+			reader.readAsDataURL(event.target.files[0]); 
+		}
+
+		$(function(){
+			$('form').submit(function(){
+				return true;
+			})
+		})
+	</script>
+	<script charset="utf-8">
+		$(function(){
+			$('#summernote').summernote({
+				height: 600,
+				fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
+				fontNamesIgnoreCheck : [ '맑은고딕' ],
+				focus: true,
+				placeholder: '내용을 입력하세요.',
+				callbacks: {
+					onImageUpload: function(files, editor, welEditable) {
+			            for (var i = files.length - 1; i >= 0; i--) {
+			            	sendFile(files[i], this);
+			            }
+			        }
+				}
+				
+			});
+		})
+		function sendFile(file, el) {
+			var form_data = new FormData();
+	      	form_data.append('file', file);
+	      	$.ajax({
+	        	data: form_data,
+	        	type: "POST",
+	        	url: '<%=request.getContextPath()%>/board/img/upload',
+	        	cache: false,
+	        	contentType: false,
+	        	enctype: 'multipart/form-data',
+	        	processData: false,
+	        	success: function(img_name) {
+	          		$(el).summernote('editor.insertImage', '<%=request.getContextPath()%>/img'+ img_name);
+	        	}
+	      	});
+	    }
+	</script>
+</body>
+</html>
