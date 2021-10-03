@@ -23,6 +23,10 @@
 <style>
 	*{
 		font-family: "고딕", "굴림" ,"돋움", sans-serif;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		text-decoration: none;
 	}
 	.body{
 		min-height: calc(100vh - 200px - 56px);
