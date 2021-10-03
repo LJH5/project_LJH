@@ -178,6 +178,13 @@ public class ReviewServiceImp implements ReviewService {
 		int recNum = reviewDao.selectRecommendCount(re_num);
 		int repNum = reviewDao.selectReportCount(re_num);
 		
+		if(recNum < 0) {
+			recNum = 0;
+		}
+		if (repNum < 0) {
+			repNum = 0;
+		}
+		
 		//리뷰 작성자의 총 추천 수
 		int recommendNum = reviewDao.selectRcommendCountById(review.getRe_me_id());
 		MemberVO dbUser = memberDao.selectUser(review.getRe_me_id());
