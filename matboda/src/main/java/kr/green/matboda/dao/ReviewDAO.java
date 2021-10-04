@@ -40,9 +40,9 @@ public interface ReviewDAO {
 
 	void deleteRtReview(Integer num);
 
-	int selectRecommendCount(Integer re_num);
+	Integer selectRecommendCount(Integer re_num);
 
-	int selectReportCount(Integer re_num);
+	Integer selectReportCount(Integer re_num);
 
 	int selectRcommendCountById(String re_me_id);
 }
