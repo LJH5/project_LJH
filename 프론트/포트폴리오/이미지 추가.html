@@ -186,7 +186,7 @@
                 </div>
                 <div class="text-length"><span style="color:#aaa;" id="counter">(0 / 1000)</span></div>
                 <div class="image-container">
-                	<!-- <div id="pre-image"><i class="far fa-window-close"></i></div> -->
+                	<div id="pre-image"><i class="far fa-window-close"></i></div>
                     <div class="labels">
 						<label class="image-box image1" for="image1">1</label>
 					</div>
@@ -252,16 +252,16 @@
 			// 이미지 input 개수 제한 5개
 			var i = 2;
 			var num;
+            var str = ' <input type="file" name="imageList" class="form-control" id="image'+i+'" accept="image/*" onchange="setThumbnail(event);"/>';
+            var str2 = ' <label class="image-box image'+i+'" for="image'+i+'">'+i+'</label>'	
 			$(document).on('change', 'input[name=imageList]', function(){
 				var val = $(this).val();
 				var length = $('input[name=imageList]').length;
-				var str = ' <input type="file" name="imageList" class="form-control" id="image'+i+'" accept="image/*" onchange="setThumbnail(event);"/>';
-				var str2 = ' <label class="image-box image'+i+'" for="image'+i+'">'+i+'</label>'	
 				console.log(i)
 				if(val == ''){
 					$(this).remove();
 					num = $(this).attr('id');
-					$('.'+image1+'').remove();
+					$('.image'+i+'').remove();
 
 					if(length == 5 && $('input[name=imageList]').last().val() != ''){
 						$('.files').append(str);
@@ -318,9 +318,10 @@
 		}
 		$(function() {
 			$('.fa-window-close').click(function(){
-				$('#pre-image').hide();
-				$('#pre-image img').remove();
-				$('input[name=file]').val('');
+				$(this).parent().remove();
+				if(('.files').length == 4)
+                    $('.files').append(str);
+                    $('.labels').append(str2);
 			});
 		});
 	</script>
