@@ -3,6 +3,8 @@ package kr.green.matboda.vo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -13,6 +15,8 @@ public class MemberVO {
 	private String me_picture;
 	private String me_name;
 	private String me_email;
+	@DateTimeFormat(pattern="yyyyMMdd")
+	private Date me_birthday;
 	private String me_phoneNum;
 	private String me_gender;
 	private String me_authority;

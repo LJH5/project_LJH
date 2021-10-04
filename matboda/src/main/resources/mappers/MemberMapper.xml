@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.green.matboda.dao.MemberDAO">
  	<insert id="insertMember">
-		insert into member(me_id, me_pw, me_nickname, me_picture, me_name, me_email, me_phoneNum, me_gender)
-			values(#{me_id}, #{me_pw}, #{me_nickname}, #{me_picture}, #{me_name}, #{me_email}, #{me_phoneNum}, #{me_gender})
+		insert into member(me_id, me_pw, me_nickname, me_picture, me_name, me_email, me_phoneNum, me_gender, me_birthday)
+			values(#{me_id}, #{me_pw}, #{me_nickname}, #{me_picture}, #{me_name}, #{me_email}, #{me_phoneNum}, #{me_gender}, #{me_birthday})
 	</insert>
 	<select id="selectUser" resultType="kr.green.matboda.vo.MemberVO">
 		select * from member where me_id = #{me_id}

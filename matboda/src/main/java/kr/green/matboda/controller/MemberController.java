@@ -37,6 +37,7 @@ public class MemberController {
 	@PostMapping("/signup")
 	public ModelAndView memberSignupPost(ModelAndView mv, MemberVO user) {
 		memberService.signup(user);
+		System.out.println(user);
 		mv.setViewName("redirect:/");
 		return mv;
 	}

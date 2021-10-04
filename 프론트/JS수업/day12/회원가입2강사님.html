@@ -11,70 +11,178 @@
 	<script src="../js/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<style>
+		.signup-container .inner-container{
+			width: 500px;
+			margin: 0 auto;
+			padding-top: 50px;
+		}
+		.signup-container .id-dup-btn{
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<form method="post" action="<%=request.getContextPath()%>/member/signup">
+		<div class="signup-container">
+			<div class="inner-container">
+				<div class="form-group">
+					<label for="id">아이디</label>
+					<input type="text" class="form-control common" id="id" name="me_id">
+					<div id="me_id-error" style="color: red;"></div>
+					<button type="button" class="id-dup-btn btn btn-outline-success col-12">아이디 중복 검사</button>
+					<input type="hidden" name="idDup">
+				</div>
+				<div class="form-group">
+					<label for="pw">비밀번호</label>
+					<input type="password" class="form-control common" id="pw" name="me_pw">
+					<div id="me_pw-error" style="color: red;"></div>
+				</div>
+				<div class="form-group">
+					<label for="pwCheck">비밀번호 재확인</label>
+					<input type="password" class="form-control" id="pwCheck" name="pwCheck">
+					<div id="pwCheck-error" style="color: red;"></div>
+				</div>
+				<div class="form-group">
+					<label for="name">이름</label>
+					<input type="text" class="form-control common" id="name" name="me_name">
+					<div id="me_name-error" style="color: red;"></div>
+				</div>
+				<div class="form-group">
+					<label for="phoneNum">휴대전화</label>
+					<input type="text" class="form-control common" id="phoneNum" name="me_phoneNum">
+					<div id="me_phoneNum-error" style="color: red;"></div>
+				</div>
+				<div class="form-group">
+					<label>생년월일</label>
+					<div class="input-group">
+						<input type="text" class="form-control col-4 mr-1" id="year" name="year" maxlength="4">
+						<select name="month" id="month" class="form-control col-4 mr-1">
+							<option value="">월</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+						</select>
+						<input type="text" class="form-control col-4" id="day" name="day" maxlength="2">
+					</div>
+					<div id="birthday-error" style="color: red;"></div>
+					<input type="hidden" name="me_birthday">
+				</div>
+					
+				<div class="form-group">
+					<label for="gender">성별</label>
+					<select class="form-control common" id="gender" name="me_gender">
+						<option>선택안함</option>
+						<option>남자</option>
+						<option>여자</option>
+					</select>
+					<div id="me_gender-error" style="color: red;"></div>
+				</div>
+				<div class="form-group">
+					<label for="email">본인 확인 이메일<span style="color:gray;font-size:10px">(선택)</span></label>
+					<input type="text" class="form-control" id="email" name="me_email">
+					<div id="me_email-error" style="color: red;"></div>
+				</div>
+				<button class="signup-btn btn btn-outline-success col-12">가입하기</button>
+			</div>
+		</div>
+		
+	</form>
 	<script>
+		var emptyMessage = '필수 정보입니다.';
 		var idRegex = /^[a-z0-9_-]{5,20}$/;
 		var idRegexMessage = '5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.';
-		var emptyMessage = '필수 정보입니다.';
-		var pwRegex = /^[a-z0-9!@#]{8,16}$/i;
+		var pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
 		var pwRegexMessage = '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.';
-		var nameRegex = /^[^ㄱ-ㅎㅏ-ㅣ!@#\s]+$/;
-		var nameRegexMessage = '한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)'
 		var differentMessage = '비밀번호가 일치하지 않습니다.';
+		var nameRegex = /^[가-힣a-zA-Z]+$/;
+		var nameRegexMessage = '한글이나 영문 대ㆍ소문자만 사용 가능합니다.';
+		var phoneNumRegex = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+		var phoneNumRegexMessage = '올바른 전화번호가 아닙니다.';
 
 		var regex = {
-			'id':  /^[a-z0-9_-]{5,20}$/,
-			'pw': /^[a-z0-9!@#]{8,16}$/i,
-			'name': /^[^ㄱ-ㅎㅏ-ㅣ!@#\s]+$/,
-			'gender': null
+			'me_id':  /^[a-z0-9_-]{5,20}$/,
+			'me_pw': /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/,
+			'me_name': /^[가-힣a-zA-Z]+$/,
+			'me_phoneNum' : /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/,
+			'me_gender': null
 		}
 		var regexMessage = {
-			'id': '5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.',
-			'pw': '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.',
-			'name': '한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)',
-			'gender': null
+			'me_id': '5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.',
+			'me_pw': '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.',
+			'me_name': '한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)',
+			'me_phoneNum' : '올바른 전화번호가 아닙니다.',
+			'me_gender': null
 		}
 		$(function(){
-			$('form .btn').on('click',function(e){
+			$('.common').on('change',function(){
+				var name = $(this).attr('name');
+				printRegexMessage(name,emptyMessage,regex[name],regexMessage[name]);
+			})
+			$('[name=pwCheck]').on('change',function(){
+				pwConfirmCheck('me_pw','pwCheck',emptyMessage, differentMessage);
+			})
+			$('[name=year],[name=month],[name=day]').on('change',function(){
+				birthdayCheck('year','month','day','birthday-error');
+			})
+			$('.signup-btn').on('click',function(e){
 				//가입하기 버튼 클릭 시 form태그의 submit()이 동작하지 않도록 하기 위해서 추가
 				var flag = true;
-				if(!printRegexMessage('id',emptyMessage,idRegex,idRegexMessage)){
+				if(!printRegexMessage('me_id',emptyMessage,idRegex,idRegexMessage)){
 					flag = false;
 				}
-				if(!printRegexMessage('pw',emptyMessage,pwRegex,pwRegexMessage)){
+				if(!printRegexMessage('me_pw',emptyMessage,pwRegex,pwRegexMessage)){
 					flag = false;
 				}
-				if(!printRegexMessage('name',emptyMessage,nameRegex,nameRegexMessage)){
+				if(!pwConfirmCheck('me_pw','pwCheck',emptyMessage, differentMessage)){
 					flag = false;
 				}
-				if(!printRegexMessage('gender',emptyMessage,null,null)){
+				if(!printRegexMessage('me_name',emptyMessage,nameRegex,nameRegexMessage)){
 					flag = false;
 				}
-				if(!pwConfirmCheck('pw','pw2',emptyMessage, differentMessage)){
+				if(!printRegexMessage('me_phoneNum',emptyMessage,phoneNumRegex,phoneNumRegexMessage)){
+					flag = false;
+				}
+				if(!printRegexMessage('me_gender',emptyMessage,null,null)){
 					flag = false;
 				}
 				if(!birthdayCheck('year','month','day','birthday-error')){
 					flag = false;
 				}
 				return flag;
+				
+				//생일 합치기
+				var year = $('[name='+yearName+']').val();
+				var month = $('[name='+monthName+']').val();
+				var day = $('[name='+dayName+']').val();
+				var birthday = year + month + day;
+				$('[name=me_birthday]').val(birthday);
+				alert(birthday)
 			})
-			// 내 방법
-			$('input').on('change',function(){
-				var flag = true;
-				var key = $(this).attr('name');
-				if(key == 'id'){
-					regex = idRegex;
-					regexMessage = idRegexMessage;
-				}else if(key == 'pw'){
-					regex = pwRegex;
-					regexMessage = pwRegexMessage;
-				}else if(key == 'name'){
-					regex = nameRegex;
-					regexMessage = nameRegexMessage;
+			//아이디 중복확인 버튼
+			$(document).on('click', '.id-dup-btn', function(){
+				var id = $('[name=me_id]').val();
+				console.log(id)
+				if(id == ''){
+					alert('아이디를 입력하세요.');
+					return;
 				}
-				if(!printRegexMessage(key,emptyMessage,regex,regexMessage)){ 
-					flag = false;
-				}
+				var res = memberService.idCheck(contextPath, id);
+				if(res)
+					alert('사용 가능한 아이디입니다.')
+				else
+					alert('이미 가입된 아이디입니다.')
 			})
+		
 		})
 		/* 
 		- 비밀번호 확인에 비어 있는지 또는 비밀번호와 일치하는지 확인 한 후 에러 메세지를
@@ -178,70 +286,33 @@
 			}
 			return '';
 		}
+
+		//아이디 중복 확인
+		var contextPath = '<%=request.getContextPath()%>';
+		var memberService = (function(){
+			function idCheck(contextPath, id){
+				var flag = false;
+				$.ajax({
+					async: false,
+					type : 'post',
+					url  : contextPath + '/member/id/check',
+					data : {id : id},
+					success : function (res){
+						if(res == 'OK'){
+							flag = true;
+						}else{
+							flag = false;
+						}
+					}
+				})
+				return flag;
+			}
+			return {
+				name : 'memberService',
+				idCheck : idCheck
+			}
+		})
 	</script>
-</head>
-<body>
-	<form action="" class="container">
-		<div class="form-group">
-			<label for="id">아이디</label>
-			<input type="text" class="form-control common" id="id" name="id">
-			<div id="id-error" style="color: red;"></div>
-		</div>
-		<div class="form-group">
-			<label for="pw">비밀번호</label>
-			<input type="password" class="form-control common" id="pw" name="pw">
-			<div id="pw-error" style="color: red;"></div>
-		</div>
-		<div class="form-group">
-			<label for="pw2">비밀번호 재확인</label>
-			<input type="password" class="form-control" id="pw2" name="pw2">
-			<div id="pw2-error" style="color: red;"></div>
-		</div>
-		<div class="form-group">
-			<label for="name">이름</label>
-			<input type="text" class="form-control common" id="name" name="name">
-			<div id="name-error" style="color: red;"></div>
-		</div>
-		<div class="form-group">
-			<label>생년월일</label>
-			<div class="input-group">
-				<input type="text" class="form-control col-4 mr-1" id="year" name="year" maxlength="4">
-				<select name="month" id="month" class="form-control col-4 mr-1">
-					<option value="">월</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-					<option>8</option>
-					<option>9</option>
-					<option>10</option>
-					<option>11</option>
-					<option>12</option>
-				</select>
-				<input type="text" class="form-control col-4" id="day" name="day" maxlength="2">
-			</div>
-			<div id="birthday-error" style="color: red;"></div>
-		</div>
-			
-		<div class="form-group">
-			<label for="gender">성별</label>
-			<select name="gender" id="gender" class="form-control common">
-				<option value="">성별</option>
-				<option>여자</option>
-				<option>남자</option>
-				<option>선택안함</option>
-			</select>
-			<div id="gender-error" style="color: red;"></div>
-		</div>
-		<div class="form-group">
-			<label for="email">본인 확인 이메일<span style="color:gray;font-size:10px">(선택)</span></label>
-			<input type="text" class="form-control" id="email" name="email">
-		</div>
-		<button class="btn btn-outline-success col-12">가입하기</button>
-	</form>
 </body>
 </html>
 </html>

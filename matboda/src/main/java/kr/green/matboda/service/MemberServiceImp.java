@@ -33,33 +33,11 @@ public class MemberServiceImp implements MemberService{
 	
 	@Override
 	public boolean signup(MemberVO user) {
+		System.out.println(user);
 		if(user == null)
 			return false;
-		//아이디 유효성 검사
-		String idRegex = "^[a-z0-9_-]{5,20}$";
-		if(user.getMe_id() == null || !Pattern.matches(idRegex, user.getMe_id()))
-			return false;
-		//비밀번호 유효성 검사
-		String pwRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,16}$";
-		if(user.getMe_pw() == null || !Pattern.matches(pwRegex, user.getMe_pw()))
-			return false;
-		//이름 유효성 검사
-		String nameRegex = "^[가-힣a-zA-Z]+$";
-		if(user.getMe_name() == null || !Pattern.matches(nameRegex, user.getMe_name()))
-			return false;
-		//이메일 유효성 검사
-		String emailRegex = "^([0-9a-zA-Z_\\.-]+)@([0-9a-zA-Z_-]+)(\\.[0-9a-zA-Z_-]+){1,2}$";
-		if(user.getMe_email() == null || !Pattern.matches(emailRegex, user.getMe_email()))
-			return false;
-		//전화번호 유효성 검사
-		String phoneNumRegex = "^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$";
-		if(user.getMe_phoneNum() == null || !Pattern.matches(phoneNumRegex, user.getMe_phoneNum()))
-			return false;
-		//성별 유효성 검사
-		if(user.getMe_gender() == null)
-			return false;
 		//별명
-		if(user.getMe_nickname() == "")
+		if(user.getMe_nickname() == null)
 			user.setMe_nickname(user.getMe_name());
 		//비밀번호 암호화
 		String encPw = passwordEncoder.encode(user.getMe_pw());
