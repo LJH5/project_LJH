@@ -175,8 +175,8 @@ public class ReviewServiceImp implements ReviewService {
 		RecommendVO rvo = reviewDao.selectRecommend(re_num, user.getMe_id());
 		ReviewVO review = reviewDao.selectRe(re_num);		
 		
-		int recNum = reviewDao.selectRecommendCount(re_num);
-		int repNum = reviewDao.selectReportCount(re_num);
+		Integer recNum = reviewDao.selectRecommendCount(re_num);
+		Integer repNum = reviewDao.selectReportCount(re_num);
 		
 		if(recNum < 0) {
 			recNum = 0;

@@ -30,7 +30,7 @@
 	background: wheat;
 	height: 70px;
 	padding: 10px;
-	 box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
 	
 }
 

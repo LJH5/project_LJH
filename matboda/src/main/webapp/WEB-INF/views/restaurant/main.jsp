@@ -406,148 +406,150 @@
 							</div>
 						</div>
 					</div>
-					<div class="bottom-container" id="bottom-container">
-						<c:forEach items="${reviews}" var="review">
-							<div class="review-container">
-								<div class="review-inner">
-									<div class="user-box">
-										<div class="img-container">
-											<div class="img-box">
-												<c:choose>
-													<c:when test="${review.re_me_picture == null || review.re_me_picture == ''}">
-														<img src="<%=request.getContextPath()%>/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png">
-													</c:when>
-													<c:otherwise>
-														<img src="<%=request.getContextPath() %>/img/${review.re_me_picture}">
-													</c:otherwise>
-												</c:choose>
+					<div class="bottom-container">
+						<div id="bottom-box">
+							<c:forEach items="${reviews}" var="review">
+								<div class="review-container">
+									<div class="review-inner">
+										<div class="user-box">
+											<div class="img-container">
+												<div class="img-box">
+													<c:choose>
+														<c:when test="${review.re_me_picture == null || review.re_me_picture == ''}">
+															<img src="<%=request.getContextPath()%>/img/2021/08/30/b085dc96-3945-40fb-b974-eeed6408cf27_img.png">
+														</c:when>
+														<c:otherwise>
+															<img src="<%=request.getContextPath() %>/img/${review.re_me_picture}">
+														</c:otherwise>
+													</c:choose>
+												</div>
+											</div>
+											<div class="user-nickname">${review.re_me_nickname}</div>
+											<div class="user-inf">
+												<div class="review-num">
+													<i class="fas fa-pen"></i>
+													<c:choose>
+														<c:when test="${review.re_me_reviewNum > 999}">
+															<div>999+</div>
+														</c:when>
+														<c:otherwise>
+															<div>${review.re_me_reviewNum}</div>
+														</c:otherwise>
+													</c:choose>
+												</div>
+												<div class="recommend-num">
+													<i class="fas fa-thumbs-up"></i>
+													<c:choose>
+														<c:when test="${review.re_me_recommendNum > 999}">
+															<div>999+</div>
+														</c:when>
+														<c:otherwise>
+															<div>${review.re_me_recommendNum}</div>
+														</c:otherwise>
+													</c:choose>
+												</div>
 											</div>
 										</div>
-										<div class="user-nickname">${review.re_me_nickname}</div>
-										<div class="user-inf">
-											<div class="review-num">
-												<i class="fas fa-pen"></i>
-												<c:choose>
-													<c:when test="${review.re_me_reviewNum > 999}">
-														<div>999+</div>
-													</c:when>
-													<c:otherwise>
-														<div>${review.re_me_reviewNum}</div>
-													</c:otherwise>
-												</c:choose>
-											</div>
-											<div class="recommend-num">
-												<i class="fas fa-thumbs-up"></i>
-												<c:choose>
-													<c:when test="${review.re_me_recommendNum > 999}">
-														<div>999+</div>
-													</c:when>
-													<c:otherwise>
-														<div>${review.re_me_recommendNum}</div>
-													</c:otherwise>
-												</c:choose>
+										<div class="review-box">
+											<div class="update">${review.re_upDateStr}</div>
+											<pre class="content">${review.re_content}</pre>
+											<div class="image-box">
+												<c:forEach items="${review.re_image}" var="img">
+													<img src="<%=request.getContextPath() %>/img/${img.im_name}"
+														style="width: 100px" height="100px">
+												</c:forEach>
 											</div>
 										</div>
-									</div>
-									<div class="review-box">
-										<div class="update">${review.re_upDateStr}</div>
-										<pre class="content">${review.re_content}</pre>
-										<div class="image-box">
-											<c:forEach items="${review.re_image}" var="img">
-												<img src="<%=request.getContextPath() %>/img/${img.im_name}"
-													style="width: 100px" height="100px">
-											</c:forEach>
-										</div>
-									</div>
-									<div class="side-box">
-										<div class="sc-box aPrevent">
-											<div class="sc-total ">
-												<a href="#">
-													<span class="totalSc block">${review.re_totalSc}</span>
-													<span class="detail-btn block">상세<i class="fas fa-caret-down"></i></span>
+										<div class="side-box">
+											<div class="sc-box aPrevent">
+												<div class="sc-total ">
+													<a href="#">
+														<span class="totalSc block">${review.re_totalSc}</span>
+														<span class="detail-btn block">상세<i class="fas fa-caret-down"></i></span>
+													</a>
+												</div>
+												<a href="#"> 
+													<span class="sc-detail after"> 
+														<span class="detail-box">
+															<span>친절함</span>
+															<span class="star service">${review.re_service}</span> <br>
+														</span>
+														 <span class="detail-box"> 
+														 	<span>분위기</span> 
+														 	<span class="star mood">${review.re_mood}</span> <br>
+														</span> 
+														<span class="detail-box"> 
+															<span>깨끗함</span> 
+															<span class="star clean">${review.re_clean}</span> <br>
+														</span> 
+														<span class="detail-box"> 
+															<span>음식맛</span> 
+															<span class="star tasty">${review.re_tasty}</span> <br>
+														</span> 
+														<span class="detail-box"> 
+															<span>음식량</span> 
+															<span class="star quantity">${review.re_quantity}</span> <br>
+														</span>
+													</span>
 												</a>
 											</div>
-											<a href="#"> 
-												<span class="sc-detail after"> 
-													<span class="detail-box">
-														<span>친절함</span>
-														<span class="star service">${review.re_service}</span> <br>
-													</span>
-													 <span class="detail-box"> 
-													 	<span>분위기</span> 
-													 	<span class="star mood">${review.re_mood}</span> <br>
-													</span> 
-													<span class="detail-box"> 
-														<span>깨끗함</span> 
-														<span class="star clean">${review.re_clean}</span> <br>
-													</span> 
-													<span class="detail-box"> 
-														<span>음식맛</span> 
-														<span class="star tasty">${review.re_tasty}</span> <br>
-													</span> 
-													<span class="detail-box"> 
-														<span>음식량</span> 
-														<span class="star quantity">${review.re_quantity}</span> <br>
-													</span>
-												</span>
-											</a>
+											<c:choose>
+												<c:when test="${user.me_id != review.re_me_id}">
+													<div class="recommend-btn re-btn up aPrevent">
+														<c:choose>
+															<c:when test="${review.re_rc_state == 1 }">
+																<a href="javascript:click()" style="color: rgb(255,165,0);"> 
+																	<i class="far fa-thumbs-up"></i>
+																	<span class="">맛잘알</span>
+																</a>
+															</c:when>
+															<c:otherwise>
+																<a href="javascript:click()"> 
+																	<i class="far fa-thumbs-up"></i>
+																	<span class="">맛잘알</span>
+																</a>
+															</c:otherwise>
+														</c:choose>
+														<input type="hidden" name="re_num" value="${review.re_num}">
+													</div>
+													<div class="report-btn re-btn aPrevent">
+														<c:choose>
+															<c:when test="${review.re_rc_state == -1 }">
+																<a href="javascript:click()" style="color: rgb(206, 3, 3);"> 
+																	<i class="fas fa-bullhorn"></i>
+																	<span>신고</span>
+																</a>
+															</c:when>
+															<c:otherwise>
+																<a href="javascript:click()"> 
+																	<i class="fas fa-bullhorn"></i>
+																	<span>신고</span>
+																</a>
+															</c:otherwise>
+														</c:choose>
+														<input type="hidden" name="re_num" value="${review.re_num}">
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="btn-box">
+														<div class="modify-box" onclick="location.href='<%= request.getContextPath() %>/review/modify?num=${review.re_num}'" style="cursor: pointer;">
+															<i class="fas fa-pen"></i>
+															<div>수정</div>
+														</div>
+														<div class="delete-box">
+															<i class="fas fa-trash-alt"></i>
+															<div>삭제</div>
+															<input class="re_num" type="hidden"value="${review.re_num}"> 
+															<input class="rt_num" type="hidden" value="${rt.rt_num}">
+														</div>
+													</div>
+												</c:otherwise>
+											</c:choose>
 										</div>
-										<c:choose>
-											<c:when test="${user.me_id != review.re_me_id}">
-												<div class="recommend-btn re-btn up aPrevent">
-													<c:choose>
-														<c:when test="${review.re_rc_state == 1 }">
-															<a href="#" style="color: rgb(255,165,0);"> 
-																<i class="far fa-thumbs-up"></i>
-																<span class="">맛잘알</span>
-															</a>
-														</c:when>
-														<c:otherwise>
-															<a href="#"> 
-																<i class="far fa-thumbs-up"></i>
-																<span class="">맛잘알</span>
-															</a>
-														</c:otherwise>
-													</c:choose>
-													<input type="hidden" name="re_num" value="${review.re_num}">
-												</div>
-												<div class="report-btn re-btn aPrevent">
-													<c:choose>
-														<c:when test="${review.re_rc_state == -1 }">
-															<a href="#" style="color: rgb(206, 3, 3);"> 
-																<i class="fas fa-bullhorn"></i>
-																<span>신고</span>
-															</a>
-														</c:when>
-														<c:otherwise>
-															<a href="#"> 
-																<i class="fas fa-bullhorn"></i>
-																<span>신고</span>
-															</a>
-														</c:otherwise>
-													</c:choose>
-													<input type="hidden" name="re_num" value="${review.re_num}">
-												</div>
-											</c:when>
-											<c:otherwise>
-												<div class="btn-box">
-													<div class="modify-box" onclick="location.href='<%= request.getContextPath() %>/review/modify?num=${review.re_num}'" style="cursor: pointer;">
-														<i class="fas fa-pen"></i>
-														<div>수정</div>
-													</div>
-													<div class="delete-box">
-														<i class="fas fa-trash-alt"></i>
-														<div>삭제</div>
-														<input class="re_num" type="hidden"value="${review.re_num}"> 
-														<input class="rt_num" type="hidden" value="${rt.rt_num}">
-													</div>
-												</div>
-											</c:otherwise>
-										</c:choose>
 									</div>
 								</div>
-							</div>
-						</c:forEach>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 				<ul class="pagination justify-content-center">
@@ -575,6 +577,12 @@
 	</div>
 	<script type="text/javascript">
 		$(function() {
+			<!--
+		    function click() {
+		         return;
+		    }
+			//-->
+
 			
 			$('.sc-total').click(function(){
 			    $(this).next().children().toggle();
@@ -613,6 +621,7 @@
 			
 			// 추천/신고 기능
 			$(document).on('click', '.re-btn', function() {
+				
 				var state = $(this).hasClass('up') ? 1 : -1;
 				var re_num = $(this).children('input[name=re_num]').val();
 				var obj = $(this);
@@ -621,6 +630,7 @@
 					type: 'get',
 					url: contextPath + '/review/recommend/' + state + '/' + re_num,
 					success : function(result, status, xhr){
+						
 						if(result == 'RECOMMEND'){
 							obj.siblings().children('a').attr('style','color: rgb(112, 112, 112);');
 							obj.children('a').attr('style','color:rgb(255, 165, 0);');
@@ -637,7 +647,7 @@
 								obj.children('a').attr('style','color: rgb(112, 112, 112);');
 							}
 						}
-						location.reload();
+						$('#bottom-box').load(location.href+' #bottom-box');
 					},
 					error : function(xhr, status, e){
 						console.log('에러 발생');
