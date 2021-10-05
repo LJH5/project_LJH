@@ -175,8 +175,6 @@
                 </div>
                 <div class="text-length"><span style="color:#aaa;" id="counter">(0 / 1000)</span></div>
                 <div class="image-container">
-                	<!-- <div id="pre-image"><i class="far fa-window-close"></i></div> -->
-                    <label class="image-box" for="image"></label>
                     <div class="form-group files">
                         <input type="file" name="imageList" class="form-control" id="image" accept="image/*" onchange="setThumbnail(event);"/>
                     </div>
