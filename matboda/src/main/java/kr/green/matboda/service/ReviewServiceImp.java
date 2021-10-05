@@ -228,21 +228,25 @@ public class ReviewServiceImp implements ReviewService {
 		}else {
 			if(state == 1) {
 				review.setRe_recommend(recNum + 1);
-				review.setRe_report(repNum - 1);
+				if(repNum != 0) {
+					review.setRe_report(repNum - 1);
+				}
 				reviewDao.updateReview(review);
 				
-				//작성자 추천 수 +1
-				dbUser.setMe_recommendNum(recommendNum+1);
+				
+				dbUser.setMe_recommendNum(reviewDao.selectRcommendCountById(review.getRe_me_id()));
 				memberDao.updateUser(dbUser);
 				
 				return "RECOMMEND";
 			}else {
-				review.setRe_recommend(recNum - 1);
+				if(recNum != 0) {
+					review.setRe_recommend(recNum - 1);
+				}
 				review.setRe_report(repNum + 1);
 				reviewDao.updateReview(review);
 				
-				//작성자 추천 수 -1
-				dbUser.setMe_recommendNum(recommendNum-1);
+		
+				dbUser.setMe_recommendNum(reviewDao.selectRcommendCountById(review.getRe_me_id()));
 				memberDao.updateUser(dbUser);
 				
 				return "REPORT";
