@@ -25,11 +25,12 @@
  			where rt_num = #{rt_num}
  	</update>
  	<select id="selectRestaurant" resultType="kr.green.matboda.vo.RestaurantVO">
- 		select restaurant.*, im_name as rt_im_name  from restaurant 
-			left join review on rt_num = re_rt_num
-			left join image on re_num = im_where and im_type = 'REVIEW'
-			group by rt_num
-			order by rt_reNum desc, rt_score desc
+ 		select restaurant.*, im_name as rt_im_name from restaurant
+			left join review on rt_num = re_rt_num 
+			left join (select * from image where im_type = 'REVIEW' group by im_where) as t on re_num = im_where
+			where im_name is not null
+			group by re_rt_num
+			order by rt_reNum desc, rt_score desc, rt_view desc
 			limit 3
  	</select>
 	<delete id="deleteRt">
