@@ -60,12 +60,13 @@
  			where fa_me_id = #{fvo.fa_me_id} and fa_rt_num = #{fvo.fa_rt_num}
  	</update>
  	<select id="selectCaTop3Restaurant" resultType="kr.green.matboda.vo.RestaurantVO">
- 		select restaurant.*, im_name as rt_im_name from restaurant 
-			left join (select * from review group by re_rt_num order by re_num desc) as t on rt_num = re_rt_num
-			left join (select * from image group by im_where order by im_num desc) as a on re_num = im_where and im_type = 'REVIEW'
-			where rt_type = #{type}
-			order by rt_reNum desc, rt_score desc, rt_view desc 
-			limit 3	
+ 		select restaurant.*, im_name as rt_im_name from restaurant
+			left join review on rt_num = re_rt_num 
+			left join (select * from image where im_type = 'REVIEW' group by im_where) as t on re_num = im_where
+			where im_name is not null and rt_type = #{type}
+			group by re_rt_num
+			order by rt_reNum desc, rt_score desc, rt_view desc
+			limit 3
  	</select>
  	<select id="selectFavoritesCount" resultType="int">
  		select count(*) from favorites where fa_rt_num = #{num} and fa_state = 1

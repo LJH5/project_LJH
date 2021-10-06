@@ -124,49 +124,53 @@
 <body>
 	<div class="search-container">
 		<div class="inner-container">
-			<c:if test="${list.size() == 0}">
-				<div class="notSearch-container">
+			<c:choose>
+				<c:when test="${list.size() == 0}">
+					<div class="notSearch-container">
 					<h1>'${cri.search}'에 대한 검색 결과가 없습니다.</h1>
 					<h1>검색한 식당이 없다면?🤔</h1>
 					<a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a>
 				</div>
-			</c:if> 
-			<div class="onSearch-container">
-				<div class="left-container">
-					<h2>'${cri.search}'에 대한 검색 결과</h2>
-					<div class="shop-container">
-						<c:forEach items="${list}" var="rt">
-							<div class="shop-box">
-								<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
-									<span class="img-container">
-										<span class="img-box">
-											<c:choose>
-												<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300px" height="300px"></c:when>
-												<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG" width="300px" height="300px"></c:otherwise>
-											</c:choose>
-										</span>
-									</span>
-									<span class="shopInf-container">
-										<span class="shopInf-top">
-											<span class="title">${rt.rt_name}</span>
-											<span class="score">${rt.rt_score}</span> <br>
-										</span>
-										<span class="shopInf-mid">
-											<span class="address">${rt.rt_address}</span>
-										</span>
-										<span class="shopInf-bot">
-											<span class="type">${rt.rt_type}</span>
-										</span>
-									</span>
-								</a>
+				</c:when>
+				<c:otherwise>
+					<div class="onSearch-container">
+						<div class="left-container">
+							<h2>'${cri.search}'에 대한 검색 결과</h2>
+							<div class="shop-container">
+								<c:forEach items="${list}" var="rt">
+									<div class="shop-box">
+										<a href="<%=request.getContextPath()%>/restaurant/main/?num=${rt.rt_num}">
+											<span class="img-container">
+												<span class="img-box">
+													<c:choose>
+														<c:when test="${rt.rt_im_name != null}"><img src="<%=request.getContextPath()%>/img/${rt.rt_im_name}" width="300px" height="300px"></c:when>
+														<c:otherwise><img src="<%=request.getContextPath()%>/img/2021/08/23/5b251657-3c99-483d-bb10-0ffb33a45bbd_음식점 기본 이미지.PNG" width="300px" height="300px"></c:otherwise>
+													</c:choose>
+												</span>
+											</span>
+											<span class="shopInf-container">
+												<span class="shopInf-top">
+													<span class="title">${rt.rt_name}</span>
+													<span class="score">${rt.rt_score}</span> <br>
+												</span>
+												<span class="shopInf-mid">
+													<span class="address">${rt.rt_address}</span>
+												</span>
+												<span class="shopInf-bot">
+													<span class="type">${rt.rt_type}</span>
+												</span>
+											</span>
+										</a>
+									</div>
+								</c:forEach>
 							</div>
-						</c:forEach>
+						</div>
 					</div>
-				</div>
-				<div class="right-container">
-					<div class="map" id="map"></div>
-				</div>
-			</div>
+					<div class="right-container">
+						<div class="map" id="map"></div>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	<script>

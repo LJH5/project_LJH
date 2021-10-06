@@ -33,6 +33,7 @@ public class HomeController {
 		ArrayList<RestaurantVO> chickenTop3 = restaurantService.getCaTop3Restaurant("치킨");
 		ArrayList<RestaurantVO> snackTop3 = restaurantService.getCaTop3Restaurant("분식");
 		ArrayList<RestaurantVO> wesTop3 = restaurantService.getCaTop3Restaurant("양식/피자");
+		System.out.println(wesTop3);
 		ArrayList<RestaurantVO> cafeTop3 = restaurantService.getCaTop3Restaurant("카페/디저트");
 		ArrayList<RestaurantVO> chiTop3 = restaurantService.getCaTop3Restaurant("중식");
 		ArrayList<RestaurantVO> brunchTop3 = restaurantService.getCaTop3Restaurant("브런치/버거/샌드위치");

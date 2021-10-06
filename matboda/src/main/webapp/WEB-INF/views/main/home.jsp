@@ -314,8 +314,8 @@
 							<div class="swiper-wrapper">
 								<c:if test="${korTop3.size() == 0}">
 									<div class="rtNull">
-										<div>음식점이 없습니다.</div>
-										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+										<div>top3에 만족하는</div>
+										<div>음식점이 없습니다.😥</div>
 									</div>
 								</c:if>
 								<c:forEach items="${korTop3}" var="rt">
@@ -333,8 +333,8 @@
 							<div class="swiper-wrapper">
 								<c:if test="${japTop3.size() == 0}">
 									<div class="rtNull">
-										<div>음식점이 없습니다.</div>
-										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+										<div>top3에 만족하는</div>
+										<div>음식점이 없습니다.😥</div>
 									</div>
 								</c:if>
 								<c:forEach items="${japTop3}" var="rt">
@@ -354,8 +354,8 @@
 							<div class="swiper-wrapper">
 								<c:if test="${chickenTop3.size() == 0}">
 									<div class="rtNull">
-										<div>음식점이 없습니다.</div>
-										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+										<div>top3에 만족하는</div>
+										<div>음식점이 없습니다.😥</div>
 									</div>
 								</c:if>
 								<c:forEach items="${chickenTop3}" var="rt">
@@ -373,8 +373,8 @@
 							<div class="swiper-wrapper">
 								<c:if test="${snackTop3.size() == 0}">
 									<div class="rtNull">
-										<div>음식점이 없습니다.</div>
-										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+										<div>top3에 만족하는</div>
+										<div>음식점이 없습니다.😥</div>
 									</div>
 								</c:if>
 								<c:forEach items="${snackTop3}" var="rt">
@@ -394,8 +394,8 @@
 							<div class="swiper-wrapper">
 								<c:if test="${wesTop3.size() == 0}">
 									<div class="rtNull">
-										<div>음식점이 없습니다.</div>
-										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+										<div>top3에 만족하는</div>
+										<div>음식점이 없습니다.😥</div>
 									</div>
 								</c:if>
 								<c:forEach items="${wesTop3}" var="rt">
@@ -413,8 +413,8 @@
 							<div class="swiper-wrapper">
 								<c:if test="${cafeTop3.size() == 0}">
 									<div class="rtNull">
-										<div>음식점이 없습니다.</div>
-										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+										<div>top3에 만족하는</div>
+										<div>음식점이 없습니다.😥</div>
 									</div>
 								</c:if>
 								<c:forEach items="${cafeTop3}" var="rt">
@@ -434,8 +434,8 @@
 							<div class="swiper-wrapper">
 								<c:if test="${chiTop3.size() == 0}">
 									<div class="rtNull">
-										<div>음식점이 없습니다.</div>
-										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+										<div>top3에 만족하는</div>
+										<div>음식점이 없습니다.😥</div>
 									</div>
 								</c:if>
 								<c:forEach items="${chiTop3}" var="rt">
@@ -453,8 +453,8 @@
 							<div class="swiper-wrapper">
 								<c:if test="${brunchTop3.size() == 0}">
 									<div class="rtNull">
-										<div>음식점이 없습니다.</div>
-										<div><a class="register-link" href="<%= request.getContextPath() %>/restaurant/register">음식점 등록👈😉</a></div>
+										<div>top3에 만족하는</div>
+										<div>음식점이 없습니다.😥</div>
 									</div>
 								</c:if>
 								<c:forEach items="${brunchTop3}" var="rt">
