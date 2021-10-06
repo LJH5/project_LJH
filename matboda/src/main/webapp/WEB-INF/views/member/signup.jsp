@@ -11,6 +11,7 @@
 		width: 500px;
 		margin: 0 auto;
 		padding-top: 50px;
+		padding-bottom: 20px;
 	}
 	.signup-container .id-dup-btn{
 		margin-top: 10px;
