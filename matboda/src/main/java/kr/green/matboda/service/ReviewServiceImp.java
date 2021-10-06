@@ -63,7 +63,7 @@ public class ReviewServiceImp implements ReviewService {
 		if(re_num == null)
 			return "FAIL";
 		ReviewVO review = reviewDao.selectRe(re_num);
-		if(review == null || !review.getRe_me_id().equals(user.getMe_id()))
+		if(review == null || !(review.getRe_me_id().equals(user.getMe_id()) || user.getMe_authority().equals("ADMIN") || user.getMe_authority().equals("SUPER ADMIN")))
 			return "FAIL";
 		reviewDao.deleteReview(re_num);
 		restaurantDao.updateSc(review.getRe_rt_num());

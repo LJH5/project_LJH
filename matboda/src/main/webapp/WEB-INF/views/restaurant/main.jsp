@@ -514,17 +514,29 @@
 													</div>
 													<div class="report-btn re-btn aPrevent">
 														<c:choose>
-															<c:when test="${review.re_rc_state == -1 }">
-																<a href="javascript:click()" style="color: rgb(206, 3, 3);"> 
-																	<i class="fas fa-bullhorn"></i>
-																	<span>신고</span>
-																</a>
+															<c:when test="${user.me_authority == 'ADMIN' || user.me_authority == 'SUPER ADMIN'}">
+																<div class="delete-box">
+																	<i class="fas fa-trash-alt"></i>
+																	<div>삭제</div>
+																	<input class="re_num" type="hidden"value="${review.re_num}"> 
+																	<input class="rt_num" type="hidden" value="${rt.rt_num}">
+																</div>
 															</c:when>
 															<c:otherwise>
-																<a href="javascript:click()"> 
-																	<i class="fas fa-bullhorn"></i>
-																	<span>신고</span>
-																</a>
+																<c:choose>
+																	<c:when test="${review.re_rc_state == -1 }">
+																		<a href="javascript:click()" style="color: rgb(206, 3, 3);"> 
+																			<i class="fas fa-bullhorn"></i>
+																			<span>신고</span>
+																		</a>
+																	</c:when>
+																	<c:otherwise>
+																		<a href="javascript:click()"> 
+																			<i class="fas fa-bullhorn"></i>
+																			<span>신고</span>
+																		</a>
+																	</c:otherwise>
+																</c:choose>
 															</c:otherwise>
 														</c:choose>
 														<input type="hidden" name="re_num" value="${review.re_num}">
